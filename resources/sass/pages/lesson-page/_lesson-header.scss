@@ -1,0 +1,88 @@
+.lesson-header {
+  border-bottom: 1px solid $col-border-op;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: $col-lesson-main;
+  color: #ffffff;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+
+  &__user {
+    
+    display: flex;
+    align-items: center;
+    position: relative;
+    @include media-max($M) {
+      font-size: 16px;
+    }
+
+    @include media-max($S) {
+      font-size: 14px;
+    }
+    
+    .drop-down {
+      padding: 10px 20px;
+      position: absolute;
+      top: 100%;
+      width: max-content;
+      right: 0;
+      background-color: $col-lesson-main;
+      display: none;
+      a {
+        color: #ffffff;
+        font-size: 14px;
+
+        &:hover{
+          color: $col-active;
+        }
+      }
+
+      &__item {
+        margin-top: 10px;
+
+        &:first-child {
+          margin-top: 0;
+        }
+      }
+    }
+  }
+
+  &__name {
+    margin-right: 10px;
+    cursor: pointer;
+  }
+
+  &__logo a {
+    color: #ffffff;
+  }
+
+  .lesson-header-inner {
+    display: flex;
+    align-items: center;
+  }
+
+  .lastname {
+    &::after {
+      content: " ";
+    }
+
+    @include media-max($S) {
+      display: none;
+    }
+  }
+
+  .btn-gamburger {
+    color: #ffffff;
+    display: none;
+    margin-right: 10px;
+
+    @include media-max($S) {
+      display: block;
+    }
+  }
+}

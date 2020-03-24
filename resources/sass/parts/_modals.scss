@@ -1,0 +1,69 @@
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: $col-modal-bg;
+  z-index: 10;
+  transition: all 0.3s;
+
+  &--hidden{
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .modal-wrap {
+    position: relative;
+  }
+
+  .modal-window {
+    padding: 20px;
+    background-color: #ffffff;
+    position: absolute;
+    left: 50%;
+    top: 20%;
+    transform: translate(-50%, 0);
+
+    @include media-max($S) {
+      width: 80%;
+    }
+
+    .title {
+      margin-bottom: 20px;
+
+      @include media-max($S) {
+        margin-bottom: 10px;
+      }
+    }
+  }
+
+  .step {
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.3s;
+    padding: 10px;
+
+    &:hover {
+      background-color: $col-border-op;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+    }
+  }
+
+
+  .modal-close {
+    cursor: pointer;
+    background: none;
+    font-size: 18px;
+    position: absolute;
+    top: 4px;
+    right: 4px;
+  }
+}

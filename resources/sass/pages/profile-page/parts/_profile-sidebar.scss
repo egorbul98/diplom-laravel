@@ -1,0 +1,37 @@
+.profile-sidebar{
+  width: 250px;
+  flex-shrink: 0;
+
+  @include media-max($M){
+    width: 100%;
+  }
+}
+
+.profile-sidebar-links{
+  padding-bottom: 20px;
+  border-bottom: 1px solid $col-border;
+  
+  @include media-max($M){
+    display: flex;
+    flex-wrap: wrap;
+    padding-bottom: 0px;
+  }
+
+  &__item{
+    margin-bottom: 10px;
+    @include media-max($M){
+      margin-right: 10px;
+    }
+    a{
+      color: $col-btn;
+      @include media-max($S){
+        font-size: 14px;
+      }
+      &:hover{
+        color: $col-active;
+      }
+    }
+  }
+ 
+
+}

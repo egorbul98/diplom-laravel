@@ -1,0 +1,21 @@
+.step-editor{
+ background-color: $col-border-op;
+
+}
+.step-editor-header{
+  padding: 10px 10px;
+  &__btn-del{
+    // background: none;
+    .icon{
+      margin-right: 10px;
+    }
+  }
+}
+.step-editor-content{
+  // min-height: 300px;
+padding-bottom: 20px;
+  // form, textarea{
+  //   height: 300px;
+  // }
+  
+}

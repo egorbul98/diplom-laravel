@@ -1,0 +1,142 @@
+.lesson-sidebar {
+  display: flex;
+  flex-direction: column;
+  background-color: $col-lesson-main;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 266px;
+  padding-top: 66px;
+  padding-left: 14px;
+  padding-right: 14px;
+  padding-bottom: 20px;
+  color: #ffffff;
+  z-index: 1;
+  
+  @include media-max($S){
+    // display: none;
+    transition: all 0.3s;
+    width: 100%;
+    left: -100%;
+    &--active{
+      left: 0;
+    }
+  }
+
+  &__header {
+    .lesson-progress {
+      font-size: 14px;
+      margin-top: 14px;
+    }
+
+    
+  }
+  
+  &__content {
+    flex-basis: 60%;
+    margin-top: 20px;
+    margin-bottom: 12px;
+    @include scroolbar;
+    overflow-y: auto;
+    overflow-x: visible;
+    padding-right: 6px;
+
+    .section {
+      cursor: pointer;
+      position: relative;
+      background-color: $col-grays;
+      padding: 8px 8px;
+      margin-bottom: 10px;
+      transition: all 0.3s;
+      &.completed{
+        background-color: $col-active-op;
+      }
+      &:hover {
+        background-color: $col-btn;
+        .tooltip {
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+      .num{
+        width: 20px;
+        flex-shrink: 0;
+      }
+      .text {
+        // @include text-cut(1);
+        display: flex;
+        // margin-top: 10px;
+      }
+
+      .tooltip {
+        display: none;
+        clear: both;
+        z-index: 10;
+        padding: 10px 16px;
+        background-color: $col-lesson-main;
+        color: #ffffff;
+        position: absolute;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s;
+        border-radius: 6px;
+
+        width: max-content;
+        max-width: 270px;
+        left: 240px;
+        top: -180%;
+
+        &::before{
+          content: '';
+          right: 100%;
+          top: 34px;
+          position: absolute;
+          display: inline-block;
+          border-right: 10px solid $col-lesson-main;
+          border-left: 10px solid transparent;
+          border-bottom: 10px solid transparent;
+          border-top: 10px solid transparent;
+        }
+        .desc {
+          font-size: 14px;
+          margin-top: 10px;
+        }
+      }
+
+      .num {
+        margin-right: 4px;
+
+        &::after {
+          content: ".";
+        }
+      }
+    }
+  }
+
+  &__competences{
+    flex-basis: 22%;
+    // flex-shrink: 1;
+    // flex-grow: 4;
+    @include scroolbar;
+    overflow-y: auto;
+    overflow-x: visible;
+    padding-right: 6px;
+    
+    .competence{
+      font-size: 14px;
+      margin-top: 4px;
+      border-bottom: 1px solid $col-border;
+    }
+
+  }
+  .lesson-title{
+    a{
+      color: #ffffff;
+
+      &:hover{
+        color: $col-active;
+      }
+    }
+  }
+}

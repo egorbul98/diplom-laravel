@@ -1,0 +1,10 @@
+.step-answer{
+  margin-top: 20px;
+
+  .form-row__left{
+    @include media-max($S) {
+      margin-bottom: 10px;
+    }
+  }
+  
+}

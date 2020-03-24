@@ -1,0 +1,151 @@
+.course-sections {
+  margin-top: 20px;
+}
+
+.course-sections-item {
+  margin-bottom: 36px;
+  @include media-max($S){
+    margin-bottom: 26px;
+  }
+  &__inner {
+    border: 1px solid $col-border;
+    padding: 20px;
+
+    @include media-max($S){
+      padding: 14px;
+    }
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__title {
+
+    max-width: 70%;
+    padding-right: 16px;
+
+  }
+
+  &__desc {
+    margin-top: 10px;
+    @include scroolbar;
+    max-height: 100px;
+    overflow: auto;
+  }
+
+  .num {
+    &::after {
+      content: ". ";
+    }
+  }
+}
+
+.list-modules {
+
+  border-right: 1px solid $col-border;
+  width: 95%;
+  margin-left: auto;
+  @include scroolbar;
+  max-height: 468px;
+  overflow: auto;
+
+  @include media-max($S){
+    max-height: 300px;
+  }
+
+  .list-modules-item {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid $col-border;
+    padding: 20px;
+
+    @include media-max($S){
+      flex-wrap: wrap;
+      padding: 14px;
+    }
+
+    &__inner{
+      display: flex;
+      align-items: center;
+      width: 100%;
+      padding-right: 10px;
+      .num{
+        padding-right: 10px;
+      }
+
+      
+    }
+    &__title {
+      width: 100%;
+      padding-right: 16px;
+
+      @include media-max($S){
+        width: 85%;
+      }
+    }
+
+    &__steps {
+      width: 90px;
+      flex-shrink: 0;
+      @include media-max($S){
+        width: 15%;
+        text-align: right;
+      }
+    }
+    &__btns{
+      text-align: center;
+      display: flex;
+      justify-content: space-between;
+      @include media-max($S){
+        width: 100%;
+        
+        margin-top: 10px;
+      }
+
+      .btn{
+        min-width: 180px;
+
+        @include media-max($S){
+          min-width: auto;
+        }
+      }
+    }
+
+    .btn-delete{
+      margin-left: 10px;
+      background-color: transparent;
+      font-size: 18px;
+    }
+
+    input{
+      font-size: 14px;
+    }
+  }
+}
+
+
+
+.section-edit-wrap{
+  width: 100%;
+  display: flex;
+  &__num{
+    font-weight: bold;
+  }
+  &__inputs{
+    width: 100%;
+    padding-left: 30px;
+  }
+}
+
+.editor{
+
+  .list-modules-item__steps{
+    @include media-max($S){
+      width: auto;
+    }
+    
+  }
+}

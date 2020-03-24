@@ -1,0 +1,26 @@
+.pagination{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .page-link{
+    background-color: $col-border;
+    margin-right: 10px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 14px;
+    
+    &:hover{
+      background-color: $col-btn;
+    }
+  }
+
+  .page-item.active{
+    .page-link{
+      background-color: $col-btn;
+      color: $col-active;
+    }
+  }
+}

@@ -1,0 +1,14 @@
+@import "parts/profile-header";
+@import "parts/profile-sidebar";
+@import "parts/profile-content";
+
+.profile-wrapper{
+  margin-top: 30px;
+  display: flex;
+
+
+  @include media-max($M){
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+}

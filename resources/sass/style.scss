@@ -1,0 +1,62 @@
+@import "reset";
+@import "settings";
+@import "mixins";
+@import "base";
+
+// slick slider
+@import "~slick-carousel/slick/slick"; 
+@import "slick-fix";
+// @import "~slick-carousel/slick/slick-theme.scss"; 
+//editor
+@import "/src/libs/editor/summernote-lite.css";
+
+//index
+@import "./parts/forms";
+@import "./parts/modals";
+@import "parts/header";
+@import "parts/title-outer";
+@import "parts/recommend";
+@import "parts/courses";
+@import "parts/news";
+@import "parts/footer";
+
+@import "parts/paginate";
+
+// PAGE ITEM
+@import "./pages/item-page/base";
+
+@import "./pages/item-page/item-header";
+@import "./pages/item-page/item-content";
+@import "./pages/item-page/sidebar";
+// PAGE LIST
+@import "./pages/list-page/filter";
+
+// PAGE LESSON 
+@import "./pages/lesson-page/base";
+
+@import "./pages/lesson-page/lesson-header";
+@import "./pages/lesson-page/lesson-sidebar";
+@import "./pages/lesson-page/lesson-content";
+
+@import "./pages/lesson-page/module/base";
+@import "./pages/lesson-page/module/module-answer";
+@import "./pages/lesson-page/module/module-test";
+
+// Profile page
+
+@import "./pages/profile-page/profile";
+
+// Edit course form
+@import "./pages/edit-course-form/new-course";
+// Edit course content
+@import "./pages/edit-course-content/course-header";
+@import "./pages/edit-course-content/course-sections";
+@import "./pages/edit-course-content/footer-editor";
+
+//edit module
+@import "./pages/edit-module/base";
+
+@import "./pages/edit-module/module-header";
+@import "./pages/edit-module/steps-block";
+@import "./pages/edit-module/step-editor";
+@import "./pages/edit-module/step-answer";

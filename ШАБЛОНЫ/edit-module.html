@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800&display=swap" rel="stylesheet">
+
+
+  <title>Личный кабинет</title>
+
+<link href="main.css" rel="stylesheet"></head>
+
+<body class="edit-module">
+  <header class="header">
+
+    <div class="main-wrap">
+      <div class="header-mobile">
+
+        <div class="title">
+          <h2><a href="index.html">Онлайн курсы</a></h2>
+        </div>
+        <button class="btn-gamburger" type="button"><i class="fas fa-bars"></i></button>
+      </div>
+    </div>
+
+    <div class="header-wrap">
+      <div class="main-wrap">
+        <div class="btn-close"><i class="fas fa-times"></i></div>
+        <div class="header-top">
+          <div class="left-block">
+            <div class="title">
+              <h2><a href="index.html">Онлайн курсы</a></h2>
+            </div>
+          </div>
+          <div class="right-block">
+            <a class="tel" href="#">8 800 555 35 35</a>
+            <select name="language" id="language">
+              <option value="rus" selected>Русский</option>
+              <option value="en">Английский</option>
+            </select>
+            <div class="auth">
+              <button class="btn">Войти</button>
+              <button class="btn">Регистрация</button>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="header-middle">
+          <nav class="nav">
+            <div class="nav__item"><a href="#">Каталог</a>
+              <div class="nav__item-drop drop">
+                <div class="drop__item"><a href="item-page.html">Программирование</a></div>
+                <div class="drop__item"><a href="#">Web-разработка</a></div>
+                <div class="drop__item"><a href="#">Дизайн</a></div>
+                <div class="drop__item"><a href="#">Фото</a></div>
+              </div>
+            </div>
+            <div class="nav__item"><a href="#">Новости</a></div>
+            <div class="nav__item"><a href="#">О нас</a></div>
+          </nav>
+          <form class="form" action="" method="GET">
+            <div class="form-field">
+              <input type="text" class="search" placeholder="Поиск по каталогу">
+              <button class="btn btn-search" type="submit">Искать</button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+
+  <div class="main-wrap">
+    <section class="module-header-wrap">
+      <div class="section-title">Раздел 1. Про что-то там</div>
+      <form class="form">
+        <div class="module-header">
+          <div class="module-header-item">
+            <h2 class="title">Модуль <input type="text" value="Сетевые технологии"></h2>
+          </div>
+          <div class="module-header-inner">
+            <div class="module-header-item module-header-item__in-competence">
+
+              <div class="form-field">
+                <input type="checkbox" id="in-competences" checked>
+                <h2 class="title"><label for="in-competences">Есть входные компетенции</label></h2>
+              </div>
+
+              <div class="select-wrap">
+                <div class="select-custom select-competences">
+                  <div class="select-competences__left">
+                    <div class="select-competences-item">
+                      <p class="text"><input type="text" name="competencestitles[]" value="Lorem wqd wqd wq"
+                          class="input-bg" readonly></p>
+                    </div>
+
+                  </div>
+                  <div class="select-competences__right">
+                    <div class="checkboxes checkboxes--active">
+
+                      <p>
+                        <label>
+                          <input type="checkbox" name="complex" value="2">
+                          <span class="check"></span>
+                          <span class="text">Lorem, ipsum dolor.</span></label>
+                      </p>
+
+                    </div>
+                    <div class="form-row">
+                      <input type="text" class="input-control">
+                      <button class="btn btn-add" type="button"><i class="fas fa-plus"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="module-header-item">
+
+              <div class="form-field">
+                <input type="checkbox" id="out-competences" checked>
+                <h2 class="title"><label for="out-competences">Есть выходные компетенции</label></h2>
+              </div>
+
+              <div class="select-wrap">
+                <div class="select-custom select-competences">
+                  <div class="select-competences__left">
+                    <div class="select-competences-item">
+                      <p class="text"><input type="text" value="Lorem wqd wqd wq" class="input-bg" readonly></p>
+                      <div class="icon"><i class="fas fa-times"></i></div>
+                    </div>
+                  </div>
+                  <div class="select-competences__right">
+                    <div class="checkboxes shadow-light checkboxes--active">
+                      <p>
+                        <label>
+                          <input type="checkbox" name="complex" value="2"><span class="check"></span><span
+                            class="text">ЖК "Среднее Мурино"</span></label>
+                      </p>
+                      <p>
+                        <label>
+                          <input type="checkbox" name="complex" value="2"><span class="check"></span><span
+                            class="text">ЖК "Среднее Мурино"</span></label>
+                      </p>
+                      <p>
+                        <label>
+                          <input type="checkbox" name="complex" value="2"><span class="check"></span><span
+                            class="text">ЖК "Среднее Мурино"</span></label>
+                      </p>
+                      <p>
+                        <label>
+                          <input type="checkbox" name="complex" value="2"><span class="check"></span><span
+                            class="text">ЖК "Среднее Мурино"</span></label>
+                      </p>
+                      <p>
+                        <label>
+                          <input type="checkbox" name="complex" value="2"><span class="check"></span><span
+                            class="text">ЖК "Среднее Мурино"</span></label>
+                      </p>
+                      <p>
+                        <label>
+                          <input type="checkbox" name="complex" value="2"><span class="check"></span><span
+                            class="text">ЖК "Среднее Мурино"</span></label>
+                      </p>
+                    </div>
+                    <div class="form-row">
+                      <input type="text" class="input-control">
+                      <button class="btn btn-add" type="button"><i class="fas fa-plus"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </form>
+
+    </section>
+  </div>
+
+
+  <div class="main-wrap">
+    <section class="steps-block">
+      <div class="steps-block-inner">
+        <div class="step-list">
+          <div class="step-list__item"><a href="#"></a></div>
+          <div class="step-list__item step-list__item--active"><a href="#"></a></div>
+          <div class="step-list__item "><a href="#"><i class="fas fa-question"></i></a></div>
+          <div class="step-list__item"><a href="#"></a></div>
+          <div class="step-list__item"><a href="#"></a></div>
+          <div class="step-list__item step-list__item--add"><i class="fas fa-plus"></i></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="main-wrap">
+    <section class="step-editor">
+      <div class="step-editor-header flex-b">
+        <div class="step-editor-header__title"><span class="step-text">Шаг 11</span>|<span class="step-type">Текст</span></div>
+        <button class="step-editor-header__btn-del btn"><span class="icon"><i class="fas fa-times"></i></span>Удалить</button>
+      </div>
+      <div class="step-editor-content">
+        <form action="">
+          <textarea id="summernote" name="content"></textarea>
+        </form>
+      </div>
+    </section>
+  </div>
+
+  <div class="main-wrap">
+    <section class="step-answer">
+      <form action="" class="form">
+        <div class="form-row">
+          <div class="form-row__left"><p>Правильнйы ответ</p></div>
+          <div class="form-row__right"><input type="text"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-row__left"><p>Допустимая погрешность</p></div>
+          <div class="form-row__right"><input type="text"></div>
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <footer class="footer-editor">
+    <div class="main-wrap">
+      <div class="footer-editor-wrap">
+        <a href="#" class="btn btn-gray">Вернуться</a>
+        <a href="#" class="btn ">Сохранить</a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="modal modal--hidden">
+    <div class="modal-window">
+        <div class="modal-inner">
+          <h2 class="title center">Выберите тип шага</h2>
+          <div class="steps">
+            <div class="step">
+              <h4>Текст</h4>
+              <p>Текст с форматированием, изображениями</p>
+              <a href="#" class="overlay"></a>
+            </div>
+            <div class="step">
+              <h4>Задача</h4>
+              <p>Как текст, только еще добавлено поле для ввода ответа</p>
+              <a href="#" class="overlay"></a>
+            </div>
+          </div>
+          <button class="modal-close" type="button"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+  </div>
+
+  <script src="https://kit.fontawesome.com/8dc48f921c.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="index.js"></script></body>
+
+</html>

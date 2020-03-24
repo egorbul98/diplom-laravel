@@ -1,0 +1,147 @@
+.news-list {
+  display: flex;
+  justify-content: space-around;
+
+  flex-wrap: wrap;
+  // margin: 0 -1.6%;
+  @include media-max($XS) {
+    margin: 0;
+  }
+}
+
+.news-item {
+  margin-bottom: 40px;
+  cursor: pointer;
+  width: 48%;
+  height: 300px;
+  // margin-right: 1.6%;
+  // margin-left: 1.6%;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid $col-border;
+  box-shadow: 0 0px 24px -10px $col-shadow;
+  position: relative;
+
+  @include media-max($XS) {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  @include media-max($XS) {
+  }
+
+  &:hover &__overlay {
+    top: 0;
+  }
+
+  &__img {
+    height: 78%;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    @include media-max($S) {
+      height: 55%;
+    }
+  }
+
+  &__info {
+    padding: 10px 20px;
+    margin: auto;
+    z-index: 10;
+    position: absolute;
+    bottom: 0;
+
+    @include media-max($S) {
+      position: static;
+      height: 45%;
+    }
+  }
+  &__ellipse{
+    border-radius: 50%;
+    position: absolute;
+    width: 168%;
+    background-color: #fff;
+    top: 172px;
+    left: -50%;
+    height: 100%;
+    z-index: 1;
+    @include media-max($S) {
+      display: none;
+    }
+  }
+  &__title {
+    font-size: 18px;
+    // font-weight: bold;
+    overflow: hidden;
+    width: 85%;
+    margin-bottom: 4px;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+
+    @include media-max($M) {
+      font-size: 16px;
+      height: 68px;
+      width: 75%;
+      -webkit-line-clamp: 3;
+    }
+    @include media-max($S) {
+      width: 100%;
+    }
+
+  }
+
+  &__time {
+    font-size: 16px;
+    margin-top: 10px;
+    color: $col-grays;
+    
+    .time {
+      margin-left: 10px;
+    }
+
+    @include media-max($S) {
+      font-size: 14px;
+      position: absolute;
+      bottom: 10px;
+     
+    }
+
+  }
+
+  &__overlay {
+    transition: all 0.3s;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: -100%;
+    background-color: $col-border-op;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+
+
+    h1 {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -80%);
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      font-weight: bold;
+    }
+
+    .ovelay-link {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+  }
+}

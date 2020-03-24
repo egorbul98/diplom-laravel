@@ -1,0 +1,59 @@
+.steps-block {
+  padding: 20px 0;
+
+  .steps-block-inner{
+    @include scroolbar;
+    overflow-x: auto;
+    width: 100%;
+    padding-bottom: 20px;
+  }
+  .step-list {
+    display: flex;
+    
+    width: 100%;
+    &__item {
+      flex-shrink: 0;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 20px;
+      width: 58px;
+      height: 58px;
+      margin-right: 10px;
+      background-color: $col-border-op;
+      position: relative;
+      transition: all 0.3s;
+      &:hover{
+        background-color: $col-active;
+        a{
+          color: #ffffff;
+        }
+      }
+      &--active {
+        background-color: $col-active;
+
+        a:hover {
+          color: #ffffff;
+        }
+      }
+
+      &--add {
+        background-color: $col-btn;
+        color: #ffffff;
+      }
+
+      a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+      }
+    }
+  }
+}

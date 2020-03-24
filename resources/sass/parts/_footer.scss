@@ -1,0 +1,55 @@
+footer{
+  margin-top: 40px;
+  padding: 30px 20px 20px;
+  background-color:$col-active;
+
+  a:hover{
+    color: $col-btn;
+  }
+ 
+  .btn:hover{
+    background-color: $col-main;
+  }
+
+  #language{
+    width: 100%;
+    margin-top: 20px;
+    display: block;
+    font-size: 18px;
+    background-color: $col-active;
+  }
+
+  .social-list{
+    display: flex;
+    font-size: 24px;
+
+    &__item{
+      margin-right: 14px;
+    }
+  }
+
+  .form-field{
+    padding-left: 0;
+  }
+}
+
+.footer-top{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.footer-item{
+  margin: 0 10px 16px;
+
+  &__years{
+    font-size: 15px;
+  }
+
+  @include media-max($S){
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}

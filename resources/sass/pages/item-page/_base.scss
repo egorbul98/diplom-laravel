@@ -1,0 +1,9 @@
+.content{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 36px;
+
+  @include media-max($S){
+    display: block;
+  }
+}

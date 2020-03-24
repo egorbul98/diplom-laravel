@@ -1,0 +1,24 @@
+.profile-content{
+  width: 100%;
+  padding-left: 20px;
+  @include media-max($M){
+    padding-left: 0;
+    margin-top: 10px;
+  }
+  .table{
+    margin-top: 20px;
+  }
+
+  .btn-add{
+    margin-top: 10px;
+    display: inline-block;
+  }
+}
+
+.profile-content-table-course{
+
+  
+  &__title{
+    max-width: 403px;
+  }
+}

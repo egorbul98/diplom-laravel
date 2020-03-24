@@ -1,0 +1,29 @@
+.module-test{
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  @include media-max($XS){
+    margin-top: 20px;
+  }
+  &__item{
+    width: 32%;
+    margin: 0 0.6% 10px;
+
+    @include media-max($M){
+      width: 48%;
+      margin: 0 1% 10px;
+    }
+    @include media-max($XS){
+      width: 100%;
+      margin: 0 0 10px;
+    }
+  }
+  
+  &__question-num{
+    font-weight: 600;
+    &::after{
+      content: ". ";
+    }
+  }
+}

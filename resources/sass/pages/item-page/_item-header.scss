@@ -1,0 +1,70 @@
+.item-header-wrap {
+  display: flex;
+  justify-content: space-between;
+  z-index: 1;
+  background-color: $col-border-op;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 210px;
+
+  @include media-max($S){
+    height: auto;
+  }
+}
+
+.item-header {
+  margin-top: 10px;
+  background-color: $col-active-op;
+  padding: 60px 0;
+  position: relative;
+  &__author {
+    margin-top: 10px;
+    @include media-max($S){
+      font-size: 16px;
+    }
+    .name{
+      margin-left: 10px;
+    }
+  }
+
+  &__info {
+    padding: 10px 20px;
+  }
+
+  &__desc {
+    margin-top: 10px;
+    height: 99px;
+    overflow: auto;
+    @include scroolbar;
+
+    @include media-max($S){
+      font-size: 16px;
+      height: 110px;
+    }
+  }
+
+  &__img{
+    width: 29%;
+    height: 100%;
+    flex-shrink: 0;
+
+    @include media-max($S){
+      display: none;
+    }
+    img{
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+  .background {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: url(./../img/header-bg.jpg);
+    background-size: cover;
+    z-index: -1;
+  }
+}

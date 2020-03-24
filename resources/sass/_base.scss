@@ -1,0 +1,297 @@
+*{
+  font-family: 'Open Sans', sans-serif;
+  box-sizing: border-box;
+}
+
+.main-wrap{
+  max-width: 1170px;
+  width: 100%;
+  padding: 0 20px;
+  margin: 0 auto;
+  height: 100%;
+
+
+  @include media-max($S){
+    padding: 0 14px;
+  }
+}
+
+body{
+  background-color: #ffffff;
+  font-family: 'Open Sans', sans-serif;
+  color: $col-main;
+  font-size: 18px;
+}
+
+h1{
+  font-size: 32px;
+  font-weight: bold;
+  @include media-max($M){
+    font-size: 28px;
+  }
+  @include media-max($S){
+    font-size: 22px;
+  }
+  @include media-max($XS){
+    font-size: 18px;
+  }
+}
+
+h2{
+  font-size: 22px;
+  font-weight: bold;
+  @include media-max($S) {
+    font-size: 18px;
+  }
+}
+
+h3{
+  font-size: 20px;
+  font-weight: bold;
+
+  @include media-max($M){
+    font-size: 18px;
+  }
+
+  @include media-max($S) {
+    font-size: 16px;
+  }
+}
+h4{
+  font-size: 16px;
+  font-weight: bold;
+  @include media-max($S) {
+    font-size: 14px;
+  }
+}
+h5{
+  font-size: 14px;
+  font-weight: bold;
+  @include media-max($S) {
+    font-size: 12px;
+  }
+}
+
+p{
+  font-size: 18px;
+
+  &.paragraph{
+    margin-bottom: 10px;
+  }
+  @include media-max($M) {
+    font-size: 16px;
+  }
+  @include media-max($S) {
+    font-size: 14px;
+  }
+}
+a, button{
+  cursor: pointer;
+  transition: all 0.3s;
+}
+a{
+  text-decoration: none;
+  color: $col-main;
+
+  &:hover{
+    color:$col-active;
+  }
+
+  @include media-max($S){
+    font-size: 16px;
+  }
+  @include media-max($XS){
+    font-size: 15px;
+  }
+
+}
+button{
+  border: none;
+  outline: none;
+}
+
+.btn{
+  background-color:$col-btn;
+  padding: 10px 20px;
+  color: #ffffff;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 13px;
+  &:hover{
+    background-color: $col-active;
+    color: #ffffff;
+  }
+  @include media-max($M){
+    // width: 100%;
+    padding: 6px 14px;
+    font-size: 12px;
+  }
+}
+.btn-gray{
+  background-color: $col-grays;
+}
+.btn-more{
+  margin: auto;
+  width: max-content;
+  display: block;
+  font-size: 16px;
+
+  @include media-max($S){
+    font-size: 14px;
+  }
+}
+.btn-next-step{
+  font-size: 13px;
+
+  @include media-max($M){
+    // width: 100%;
+    padding: 6px 14px;
+    font-size: 12px;
+  }
+}
+.btn-close{
+  cursor: pointer;
+}
+.btn-gamburger {
+  background-color: transparent;
+  font-size: 20px;
+
+  &:hover {
+    color: $col-active;
+  }
+}
+
+
+.shadow{
+  box-shadow:0 8px 20px -7px $col-shadow;
+}
+.shadow-light{
+  box-shadow:0 0px 20px -10px $col-shadow;
+}
+#language{
+  border: none;
+  font-size: 14px;
+  
+}
+
+.assessments{
+  display: flex;
+  align-items: center;
+
+  .assessment{
+    margin-right: 10px;
+    margin-top: 2px;
+    &::after{
+      content: ":";
+    }
+  }
+}
+
+.notifications{
+  display: none;
+  width: 100%;
+  color: #ffffff;
+  font-size: 18px;
+
+  @include media-max($M){
+    font-size: 16px;
+  }
+  @include media-max($S){
+    font-size: 14px;
+  }
+
+  &--active{
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+    display: block;
+  }
+  
+  &__item{
+    padding: 14px;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $col-btn;
+    &--error{
+      background-color: $col-error;
+    }
+    &--success{
+      background-color: $col-active;
+    }
+    .text{
+      margin-right: 14px;
+    }
+  }
+  
+}
+
+.center{
+  text-align: center;
+}
+
+.table-responsive{
+  display: block;
+  width: 100%;
+  overflow-y: auto;
+
+}
+.table{
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 16px;
+  @include media-max($M){
+    font-size: 14px;
+  }
+  tr:nth-child(even){
+    background-color: $col-border-op;
+  }
+  th{
+    font-weight: bold;
+    background-color: $col-border-op;
+  }
+  td, th{
+    padding: 10px 8px;
+    text-align: left;
+  }
+
+  .table-btn{
+    width: 1px;
+  }
+  .table-img{
+    width: 100px;
+    height: 80px;
+    min-width: 80px;
+    // height: 100px;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+    position: relative;
+    overflow: hidden;
+    img{
+      left: 0;
+      right: 0;bottom: 10px;top: 10px;
+      position: absolute;
+      width: 100%;
+      // height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+.flex-b{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-c{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.margin-bottom-50{
+  margin-bottom: 50px;
+}

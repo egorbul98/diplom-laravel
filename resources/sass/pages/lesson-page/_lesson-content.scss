@@ -1,0 +1,318 @@
+.lesson-content {
+  height: 100%;
+  color: $col-main;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1800px;
+  padding-left: 282px;
+  padding-right: 16px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  @include scroolbar;
+  overflow-y: auto;
+
+  @include media-max($S) {
+    padding-left: 16px;
+  }
+
+  &__header {
+    .title {
+      text-align: center;
+      border-bottom: 1px solid $col-border;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+
+    .desc {
+      text-align: justify;
+      text-align-last: center;
+    }
+  }
+
+
+  &__tests{
+    margin-top: 20px;
+    margin-right: 20px;
+
+    @include media-max($M){
+      margin: 14px auto 0;
+    }
+    .test{
+      cursor: pointer;
+      max-width: 900px;
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 16px 20px;
+      border: 1px solid #dcdacb;
+      border-radius: 10px;
+      margin-top: 20px;
+      position: relative;
+      transition: background-color 0.3s;
+      &:hover{
+        background-color: #dcdacb88;
+      }
+
+      &__module{
+        border-bottom: 1px solid $col-border-op;
+        padding: 6px 0;
+      }
+      &__link{
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+      .section{
+        font-size: 14px;
+      }
+    }
+  }
+
+  
+  
+  &__module-wrap,
+  &__learned-modules {
+    margin-top: 20px;
+  }
+
+  &__module-wrap{
+    @include media-max($M){
+      margin: 14px auto 0;
+    }
+  }
+  .title {
+    text-align: center;
+  }
+
+  .module-list-steps {
+    display: flex;
+
+    &__item {
+      border: 1px solid $col-border;
+      border-radius: 10px;
+      margin-right: 10px;
+      padding: 4px 8px;
+    }
+  }
+
+  .module {
+    cursor: pointer;
+    max-width: 900px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 16px 20px;
+    border: 1px solid $col-border;
+    border-radius: 10px;
+    margin-top: 20px;
+    position: relative;
+    transition: background-color 0.3s;
+
+    
+    &:hover {
+      background-color: $col-border-op;
+    }
+
+
+    &__link {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+
+    .btn {
+      position: absolute;
+      bottom: 16px;
+      right: 20px;
+    }
+
+    .module-inner {
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+
+      @include media-max($XS) {
+        display: block;
+      }
+
+      .left{
+        margin-right: 10px;
+        margin-bottom: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+    }
+
+    .competencies {
+      margin-top: 10px;
+
+      .competencie {
+        font-style: italic;
+
+        &::after {
+          content: ";";
+        }
+      }
+    }
+  }
+
+  &__learned-modules {
+    margin-bottom: 88px;
+
+    .module-inner {
+      flex-wrap: wrap;
+    }
+
+    .slide {
+      padding: 0 10px
+    }
+
+    .slick-slider .slick-list {
+      padding-bottom: 20px;
+    }
+
+    .slick-arrow {
+      position: absolute;
+      bottom: -50px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 20px;
+      padding: 4px 10px;
+      background-color: $col-border;
+
+      @include media-max($S) {
+        font-size: 16px;
+        padding: 2px 5px;
+        bottom: -30px;
+      }
+
+      &:hover {
+        background-color: $col-active;
+      }
+    }
+
+    .slick-next {
+      margin-left: 40px;
+
+      @include media-max($S) {
+        margin-left: 25px;
+      }
+    }
+
+    .slick-prev {
+      margin-right: 40px;
+
+      @include media-max($S) {
+        margin-right: 25px;
+      }
+    }
+  }
+
+  .info-wrap {
+    margin-top: 36px;
+    display: flex;
+    justify-content: space-around;
+
+    @include media-max($M) {
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    &__left,
+    &__middle {
+      border: 1px solid $col-border;
+      padding: 16px;
+      padding-right: 0;
+      padding-bottom: 0;
+      margin-right: 16px;
+      flex-basis: 39%;
+
+      @include media-max($M) {
+        flex-basis: 48%;
+        margin-right: 0;
+        margin-bottom: 20px;
+      }
+
+      @include media-max($S) {
+        flex-basis: 100%;
+      }
+    }
+
+    &__right {
+      text-align: center;
+
+      .btn {
+        display: block;
+        text-align: center;
+
+        @include media-max($M) {
+          max-width: 300px;
+          margin: auto;
+        }
+      }
+
+      @include media-max($M) {
+        width: 100%;
+      }
+    }
+
+    .title {
+      padding-right: 10px;
+    }
+
+    .competences-list {
+      margin-top: 10px;
+      @include scroolbar;
+      height: max-content;
+      max-height: 250px;
+      overflow-y: auto;
+      padding-right: 10px;
+      margin-bottom: 10px;
+
+     
+      @include media-max($S) {
+        height: 110px;
+      }
+    }
+
+    .competence {
+      margin-bottom: 10px;
+      border-bottom: 1px solid $col-border;
+      font-size: 16px;
+
+      &:last-child {
+        border: none;
+        margin-bottom: 0;
+      }
+
+      @include media-max($M) {
+        font-size: 14px;
+      }
+    }
+  }
+
+  .step{
+    text-align: right;
+    margin-bottom: 6px;
+  }
+  .necessary{
+    @include media-max($M){
+      margin-bottom: 10px;
+    }
+  }
+}
+.lesson-content-wrapper{
+  display: flex;
+  justify-content: space-between;
+
+  @include media-max($M){
+    flex-wrap: wrap;
+  }
+}

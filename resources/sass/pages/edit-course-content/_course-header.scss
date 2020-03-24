@@ -1,0 +1,75 @@
+.course-header {
+  padding: 20px;
+  display: flex;
+  margin-top: 20px;
+  
+  @include media-max($S){
+    flex-direction: column;
+    padding: 0;
+  }
+  .course-header-title{
+    margin-left: 20px;
+    border-bottom: 1px solid #dcdacb;
+    width: 100%;
+    padding-right: 20px;
+    
+    @include media-max($S){
+      padding: 0;
+      margin-left: 0;
+      margin-top: 20px;
+      border: none;
+    }
+    .status{
+      color: $col-grays;
+      margin-top: 10px;
+    }
+  }
+  .course-header-menu{
+    border-bottom: 1px solid #dcdacb;
+    position: relative;
+    @include media-max($S){
+      margin-top: 12px;
+      margin-bottom: 12px;
+      border: none;
+    }
+  }
+
+  .drop-down{
+      padding: 20px;
+      width: 320px;
+      position: absolute;
+      top: 50px;
+      right:  0;
+      z-index: 100;
+      background-color: #fff;
+      display: none;
+      @include media-max($S){
+        width: 100%;
+        max-width: 320px;
+        right:  auto;
+        left: 0;
+        height: max-content;
+      }
+
+      &__item{
+        margin-bottom: 10px;
+        padding-bottom: 6px;
+        border-bottom: 1px solid $col-border;
+        &:last-child{
+          margin-bottom: 0;
+        }
+      }
+  }
+  .profile-header__img {
+    width: 250px;
+    height: 200px;
+
+    @include media-max($S){
+      padding-bottom: 50%;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  
+}

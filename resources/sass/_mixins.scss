@@ -1,0 +1,64 @@
+@mixin scroolbar {
+  &::-webkit-scrollbar {
+    display: block;
+    width: 4px;
+    height: 4px;
+    border-radius: 40px;
+    margin-right: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    display: block;
+    background-color: $col-border;
+    border-radius: 40px;
+    margin-right: 10px;
+    height: 16px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    display: block;
+    background-color: $col-grays;
+    border-radius: 40px;
+    margin-right: 10px;
+    height: 16px;
+  }
+
+  &::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  &::-webkit-scrollbar-corner {
+    display: none;
+  }
+}
+
+@mixin text-cut($line) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: $line;
+  -webkit-box-orient: vertical;
+}
+
+@mixin media-min($val) {
+  @media (min-width: #{$val}px) {
+    @content;
+  }
+}
+
+@mixin media-max($val) {
+  @media (max-width: #{$val}px) {
+    @content;
+  }
+}
+
+@mixin media-max-height($val) {
+  @media (max-height: #{$val}px) {
+    @content;
+  }
+}
+@mixin media-min-height($val) {
+  @media (min-height: #{$val}px) {
+    @content;
+  }
+}

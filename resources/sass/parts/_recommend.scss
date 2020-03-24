@@ -1,0 +1,171 @@
+.recommend-outer {
+  background-image: url(./../img/header-bg.jpg);
+  background-size: cover;
+  background-position: center;
+  margin-top: 10px;
+  height: 480px;
+
+  @include media-max($S) {
+    height: 600px;
+  }
+
+}
+
+.recommend {
+  background-color: $col-active-op;
+  height: 100%;
+}
+
+.recommend-wrap {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 10px;
+  .title {
+    margin-bottom: 16px;
+  }
+
+}
+
+.recommend-list {
+  height: 65%;
+  width: 100%;
+  position: relative;
+
+  @include media-max($S) {
+    height: 86%;
+  }
+
+  .slick-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    z-index: 1;
+    background-color: transparent;
+    font-size: 24px;
+    color: $col-main;
+    @include media-max($S) {
+      font-size: 18px;
+    }
+  }
+
+  .slick-next {
+
+    left: 100%;
+  }
+
+  .slick-prev {
+    right: 100%;
+  }
+
+  .slide {
+    height: 100%;
+  }
+}
+
+.recommend-item {
+  // width: 1130px;
+  // height: 312px;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: $col-border-op;
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+
+  @include media-max($S) {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  &__img {
+    width: 50%;
+    flex-shrink: 0;
+    height: 100%;
+
+    img {
+      width: 100%;
+      object-fit: cover;
+      height: 100%;
+    }
+
+    @include media-max($S) {
+      width: 100%;
+      height: 250px;
+    }
+
+  }
+
+  &__info {
+    margin-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 4px;
+    position: relative;
+    height: 100%;
+    width: 100%;
+  }
+
+  &__title {
+    overflow: hidden;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+
+  }
+
+  &__category {
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  &__btn {
+    border-top-left-radius: 10px;
+    font-size: 13px;
+  }
+
+  &__author {
+    font-size: 16px;
+    color: $col-grays;
+
+    .name {
+      margin-left: 14px;
+    }
+
+    @include media-max($S) {
+      font-size: 14px;
+    }
+  }
+
+  .recommend-item-bottom {
+    // margin-top: 14px;
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 0;
+    align-items: center;
+    width: 100%;
+    left: 0;
+  }
+
+  &__desc {
+    max-height: 134px;
+    overflow: auto;
+    font-size: 16px;
+
+    @include media-max($S) {
+      max-height: 110px;
+      font-size: 14px;
+    }
+
+    @include media-max($XS) {
+      max-height: 98px;
+    }
+
+    @include scroolbar;
+  }
+}

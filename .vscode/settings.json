@@ -1,0 +1,26 @@
+{
+    "files.exclude": {
+        "node_modules": true,
+        "vendor": true,
+        "README*": true,
+        "server.php": true,
+        // "database":true,
+        // "resources":true,
+        // "public/":true,
+        "tests/":true,
+        "config/":true,
+        "bootstrap":true,
+        "artisan": true,
+        // "package*": true,
+        "phpunit*": true,
+        // ".git*": true,
+        "composer*":true,
+        ".editorconfig":true,
+        ".styleci.yml":true,
+        "app/Console":true,
+        "functions":true,
+        // ".env*":true,
+        // "webpack*":true,
+
+    }
+}
