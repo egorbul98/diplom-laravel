@@ -13759,15 +13759,13 @@ module.exports = function(module) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var slick_carousel__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! slick-carousel */ "./node_modules/slick-carousel/slick/slick.js");
-/* harmony import */ var slick_carousel__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(slick_carousel__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _libs_editor_summernote_lite__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../libs/editor/summernote-lite */ "./resources/libs/editor/summernote-lite.js");
-/* harmony import */ var _libs_editor_summernote_lite__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_libs_editor_summernote_lite__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _modules_gamburger__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/gamburger */ "./resources/js/modules/gamburger.js");
-/* harmony import */ var _modules_gamburger__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_modules_gamburger__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _modules_slick__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/slick */ "./resources/js/modules/slick.js");
-/* harmony import */ var _modules_select__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/select */ "./resources/js/modules/select.js");
-/* harmony import */ var _modules_modal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/modal */ "./resources/js/modules/modal.js");
+/* harmony import */ var _modules_gamburger__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/gamburger */ "./resources/js/modules/gamburger.js");
+/* harmony import */ var _modules_gamburger__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_modules_gamburger__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _modules_slick__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/slick */ "./resources/js/modules/slick.js");
+/* harmony import */ var _modules_select__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/select */ "./resources/js/modules/select.js");
+/* harmony import */ var _modules_modal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/modal */ "./resources/js/modules/modal.js");
+/* harmony import */ var _modules_editor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/editor */ "./resources/js/modules/editor.js");
+/* harmony import */ var _modules_course_sections_edit__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/course-sections-edit */ "./resources/js/modules/course-sections-edit.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_6__);
 
@@ -13778,9 +13776,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 jquery__WEBPACK_IMPORTED_MODULE_6___default()(document).ready(function () {
-  //editor
-  jquery__WEBPACK_IMPORTED_MODULE_6___default()('#summernote').summernote({
-    toolbar: [['style', ['style']], ['font', ['bold', 'underline', 'clear']], ['fontname', ['fontname']], ['color', ['color']], ['para', ['ul', 'ol', 'paragraph']], ['table', ['table']], ['insert', ['link', 'picture']], ['view', ['fullscreen', 'codeview', 'help']]]
+  // FORM DELETE COURSE course-header in profile
+  jquery__WEBPACK_IMPORTED_MODULE_6___default()("#delete-course").on("click", function (e) {
+    event.preventDefault();
+    var del = confirm("Вы точно хотите удалить курс?");
+
+    if (del) {
+      document.getElementById('form-delete').submit();
+    }
   }); //
 
   jquery__WEBPACK_IMPORTED_MODULE_6___default()(".btn-gamburger").on("click", function () {
@@ -13800,7 +13803,6 @@ jquery__WEBPACK_IMPORTED_MODULE_6___default()(document).ready(function () {
     jquery__WEBPACK_IMPORTED_MODULE_6___default()(this).siblings(".drop-down").slideToggle();
   });
   jquery__WEBPACK_IMPORTED_MODULE_6___default()('.lesson-page .section').on("click", function () {
-    // $('.notifications').toggleClass("notifications--active");
     jquery__WEBPACK_IMPORTED_MODULE_6___default()(".lesson-sidebar").removeClass("lesson-sidebar--active");
   }); //course-edit
 
@@ -13812,16 +13814,6 @@ jquery__WEBPACK_IMPORTED_MODULE_6___default()(document).ready(function () {
 
     if (del) {
       jquery__WEBPACK_IMPORTED_MODULE_6___default()(this).closest(".list-modules-item").remove();
-    }
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_6___default()(".list-modules .btn-create-module").on('click', function () {
-    var text = jquery__WEBPACK_IMPORTED_MODULE_6___default()(this).closest(".list-modules-item").children(".list-modules-item__inner").children(".input-create-module").val();
-    var $result = jquery__WEBPACK_IMPORTED_MODULE_6___default()(this).closest(".list-modules-item").siblings(".list-modules-inner");
-    var str = '';
-
-    if (text != "") {
-      str += "\n      <div class=\"list-modules-item\">\n        <h4 class=\"list-modules-item__inner\">\n         \n          <input type=\"text\" class=\"input-control input-bg\" placeholder=\"\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u043C\u043E\u0434\u0443\u043B\u044F\" value=\"".concat(text, "\">\n        </h4>\n        \n        <p class=\"list-modules-item__steps\"><span>0</span> \u0448\u0430\u0433\u043E\u0432</p>\n        <div class=\"list-modules-item__btns\">\n          <a href=\"#\" class=\"btn \">\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C</a>\n          <button type=\"button\" class=\"btn-delete\"><i class=\"fas fa-times\"></i></button>\n        </div>\n      </div>\n      ");
-      $result.append(str);
     }
   });
 
@@ -13847,12 +13839,65 @@ jquery__WEBPACK_IMPORTED_MODULE_6___default()(document).ready(function () {
   });
   jquery__WEBPACK_IMPORTED_MODULE_6___default()('.item-page .item-sections-item').on("click", function () {
     jquery__WEBPACK_IMPORTED_MODULE_6___default()(this).toggleClass("active").children(".item-sections-item__cometencies").slideToggle();
-  }); //NOTIFICATION
-  // $('.section').on("click", function () {
-  //   // $('.notifications').toggleClass("notifications--active");
-  //   $('.notifications').slideToggle();
-  // });
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_6___default()('.notifications .btn-close').on("click", function () {
+    // $('.notifications').toggleClass("notifications--active");
+    jquery__WEBPACK_IMPORTED_MODULE_6___default()(this).closest(".notifications__item").slideToggle();
+  });
 }); // import "./../sass/style.scss"
+
+/***/ }),
+
+/***/ "./resources/js/modules/course-sections-edit.js":
+/*!******************************************************!*\
+  !*** ./resources/js/modules/course-sections-edit.js ***!
+  \******************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+ //Создание раздела
+
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(".course-sections #btn-create-section").on('click', function () {
+  var $wrap = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).siblings(".course-sections-list");
+  var str = "\n  <div class=\"course-sections-item \">\n  <div class=\"course-sections-item__inner section-edit shadow-light\">\n    <div class=\"section-edit-wrap\">\n      <div class=\"section-edit-wrap__num\">1</div>\n      <div class=\"section-edit-wrap__inputs\">\n        <div class=\"form-row\">\n          <div class=\"form-row__left\">\n            <p><label class=\"\" for=\"title\">\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435<span class=\"required-input\">*</span></label></p>\n          </div>\n          <div class=\"form-row__right form-field\">\n            <input class=\"input-control\" maxlength=\"64\" id=\"title\" type=\"text\">\n          </div>\n        </div>\n        <div class=\"form-row\">\n          <div class=\"form-row__left\">\n            <p><label class=\"\" for=\"title\">\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435</p>\n          </div>\n          <div class=\"form-row__right form-field\">\n            <textarea name=\"\" id=\"\" cols=\"30\" rows=\"5\"></textarea>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n  <div class=\"list-modules shadow-light\">\n    <div class=\"list-modules-item\">\n      <h4 class=\"list-modules-item__inner\">\n        <input type=\"text\" class=\"input-control input-create-module\" placeholder=\"\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u043C\u043E\u0434\u0443\u043B\u044F\">\n      </h4>\n      <div class=\"list-modules-item__btns\">\n        <button type=\"button\" class=\"btn btn-create-module  list-modules-item__btn\">\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u043C\u043E\u0434\u0443\u043B\u044C</button>\n      </div>\n    </div>\n  </div>\n</div>\n  ";
+  $wrap.append(str);
+}); //Создание модуля
+
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(".list-modules").on('click', '.btn-create-module', function () {
+  var text = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest(".list-modules-item").children(".list-modules-item__inner").children(".input-create-module").val();
+  var $wrap = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest(".list-modules-item").siblings(".list-modules-inner");
+  var str = '';
+
+  if (text != "") {
+    str += "\n    <div class=\"list-modules-item\">\n      <h4 class=\"list-modules-item__inner\">\n       \n        <input type=\"text\" class=\"input-control input-bg\" placeholder=\"\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u043C\u043E\u0434\u0443\u043B\u044F\" value=\"".concat(text, "\">\n      </h4>\n      \n      <p class=\"list-modules-item__steps\"><span>0</span> \u0448\u0430\u0433\u043E\u0432</p>\n      <div class=\"list-modules-item__btns\">\n        <a href=\"#\" class=\"btn \">\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C</a>\n        <button type=\"button\" class=\"btn-delete\"><i class=\"fas fa-times\"></i></button>\n      </div>\n    </div>\n    ");
+    $wrap.append(str);
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/modules/editor.js":
+/*!****************************************!*\
+  !*** ./resources/js/modules/editor.js ***!
+  \****************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _libs_editor_summernote_lite__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../libs/editor/summernote-lite */ "./resources/libs/editor/summernote-lite.js");
+/* harmony import */ var _libs_editor_summernote_lite__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_libs_editor_summernote_lite__WEBPACK_IMPORTED_MODULE_1__);
+
+
+jquery__WEBPACK_IMPORTED_MODULE_0___default()('#summernote').summernote({
+  toolbar: [['style', ['style']], ['font', ['bold', 'underline', 'clear']], ['fontname', ['fontname']], ['color', ['color']], ['para', ['ul', 'ol', 'paragraph']], ['table', ['table']], ['insert', ['link', 'picture']], ['view', ['fullscreen', 'codeview', 'help']]]
+});
 
 /***/ }),
 
@@ -13960,6 +14005,9 @@ function renderCompetences($parent, arr) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var slick_carousel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! slick-carousel */ "./node_modules/slick-carousel/slick/slick.js");
+/* harmony import */ var slick_carousel__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(slick_carousel__WEBPACK_IMPORTED_MODULE_1__);
+
 
 jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(".recommend-list").slick({

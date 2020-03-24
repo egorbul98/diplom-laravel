@@ -1,4 +1,5 @@
 import $ from "jquery"
+import "slick-carousel"
 $(document).ready(function () {
 
   $(".recommend-list").slick({

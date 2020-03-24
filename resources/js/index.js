@@ -1,29 +1,23 @@
 
-import "slick-carousel"
-import "./../libs/editor/summernote-lite"
-
 import "./modules/gamburger"
 import "./modules/slick"
 import "./modules/select"
 import "./modules/modal"
+import "./modules/editor"
+import "./modules/course-sections-edit"
+
 import $ from "jquery"
 
 
 $(document).ready(function () {
-  //editor
-  $('#summernote').summernote({
-    toolbar: [
-      ['style', ['style']],
-      ['font', ['bold', 'underline', 'clear']],
-      ['fontname', ['fontname']],
-      ['color', ['color']],
-      ['para', ['ul', 'ol', 'paragraph']],
-      ['table', ['table']],
-      ['insert', ['link', 'picture']],
-      ['view', ['fullscreen', 'codeview', 'help']],
-    ]
-});
-
+  // FORM DELETE COURSE course-header in profile
+  $("#delete-course").on("click", function (e) {
+    event.preventDefault();
+    let del = confirm("Вы точно хотите удалить курс?");
+    if (del) {
+      document.getElementById('form-delete').submit();
+    }
+  });
 
   //
   $(".btn-gamburger").on("click", function () {
@@ -46,7 +40,6 @@ $(document).ready(function () {
   });
 
   $('.lesson-page .section').on("click", function () {
-    // $('.notifications').toggleClass("notifications--active");
     $(".lesson-sidebar").removeClass("lesson-sidebar--active");
   });
 
@@ -64,31 +57,6 @@ $(document).ready(function () {
   });
 
 
-  $(".list-modules .btn-create-module").on('click', function () {
-    let text = $(this).closest(".list-modules-item").children(".list-modules-item__inner").children(".input-create-module").val();
-    let $result = $(this).closest(".list-modules-item").siblings(".list-modules-inner");
-    let str = '';
-    if (text != "") {
-      str += `
-      <div class="list-modules-item">
-        <h4 class="list-modules-item__inner">
-         
-          <input type="text" class="input-control input-bg" placeholder="Название модуля" value="${text}">
-        </h4>
-        
-        <p class="list-modules-item__steps"><span>0</span> шагов</p>
-        <div class="list-modules-item__btns">
-          <a href="#" class="btn ">Редактировать</a>
-          <button type="button" class="btn-delete"><i class="fas fa-times"></i></button>
-        </div>
-      </div>
-      `;
-
-      $result.append(str);
-    }
-
-  });
-
   if ($("body").hasClass("editor")) {
     window.onbeforeunload = function (evt) {
       var message = "вйцв";
@@ -102,7 +70,6 @@ $(document).ready(function () {
     }
   }
   
-
   //------------
 
   $(".btn-close").on("click", function () {
@@ -116,11 +83,11 @@ $(document).ready(function () {
       .slideToggle();
   });
 
-  //NOTIFICATION
-  // $('.section').on("click", function () {
-  //   // $('.notifications').toggleClass("notifications--active");
-  //   $('.notifications').slideToggle();
-  // });
+  
+  $('.notifications .btn-close').on("click", function () {
+    // $('.notifications').toggleClass("notifications--active");
+    $(this).closest(".notifications__item").slideToggle();
+  });
 });
 
 

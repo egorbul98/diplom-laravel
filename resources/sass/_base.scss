@@ -188,7 +188,7 @@ button{
 }
 
 .notifications{
-  display: none;
+  // display: none;
   width: 100%;
   color: #ffffff;
   font-size: 18px;
@@ -255,9 +255,12 @@ button{
     padding: 10px 8px;
     text-align: left;
   }
-
+  .vertical-m{
+    vertical-align: middle;
+  }
   .table-btn{
     width: 1px;
+    
   }
   .table-img{
     width: 100px;
@@ -294,4 +297,7 @@ button{
 
 .margin-bottom-50{
   margin-bottom: 50px;
+}
+.margin-bottom-100{
+  margin-bottom: 100px;
 }

@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Profile;
 
 use App\Models\Course;
-use App\Http\Controllers\Controller;
+use App\Http\Requests\CourseRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+
 class CourseController extends BaseController
 {
     /**
@@ -16,6 +17,7 @@ class CourseController extends BaseController
      */
     public function index()
     {
+      
         return view("profile.edit-course.index");
     }
 
@@ -26,7 +28,8 @@ class CourseController extends BaseController
      */
     public function create()
     {
-        return view("profile.edit-course.create");
+        $course = new Course();
+        return view("profile.edit-course.create", compact("course"));
     }
 
     /**
@@ -35,7 +38,7 @@ class CourseController extends BaseController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CourseRequest $request)
     {
         $data = $request->all();
         $data["author_id"] = Auth::user()->id;
@@ -54,9 +57,10 @@ class CourseController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Course $course)
     {
-        //
+       
+        return view("profile.edit-course.show", compact("course"));
     }
 
     /**
@@ -65,9 +69,9 @@ class CourseController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Course $course)
     {
-        //
+        return view("profile.edit-course.create", compact("course"));
     }
 
     /**
@@ -77,9 +81,22 @@ class CourseController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CourseRequest $request, $id)
     {
-        //
+       
+       $course = Course::find($id);
+      
+       if(empty($course)){
+           return back()->withErrors(["error"=>"Запись id='{$id}' не найдена"]);
+       }
+      
+       $data = $request->all();
+       
+       $result = $course->update($data);
+      
+       if($result){
+            return back()->with(["success"=>"Успешно сохранено"]);
+       }
     }
 
     /**
@@ -90,6 +107,6 @@ class CourseController extends BaseController
      */
     public function destroy($id)
     {
-        //
+        dd(__METHOD__,$id);
     }
 }

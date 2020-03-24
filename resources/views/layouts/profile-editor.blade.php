@@ -12,7 +12,7 @@
 
 </head>
 
-<body class="@yield('class-body')">
+<body class="@yield('class-body') editor">
    <div class="main-wrap">
         <div class="notifications ">
             @if (session("success"))
@@ -33,7 +33,7 @@
 
     @yield('content')
     
-    @include('parts.footer')
+    @include('parts.profile.footer-editor')
 
     <script src="https://kit.fontawesome.com/8dc48f921c.js" crossorigin="anonymous"></script>
 

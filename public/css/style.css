@@ -379,7 +379,6 @@ button {
 }
 
 .notifications {
-  display: none;
   width: 100%;
   color: #ffffff;
   font-size: 18px;
@@ -465,6 +464,10 @@ button {
   text-align: left;
 }
 
+.table .vertical-m {
+  vertical-align: middle;
+}
+
 .table .table-btn {
   width: 1px;
 }
@@ -508,6 +511,10 @@ button {
 
 .margin-bottom-50 {
   margin-bottom: 50px;
+}
+
+.margin-bottom-100 {
+  margin-bottom: 100px;
 }
 
 /* Slider */
@@ -3503,6 +3510,7 @@ footer .form-field {
 
 .course-sections-item {
   margin-bottom: 36px;
+  position: relative;
 }
 
 @media (max-width: 768px) {
@@ -3576,6 +3584,13 @@ footer .form-field {
 
 .course-sections-item .num::after {
   content: ". ";
+}
+
+.course-sections-item .btn-delete-course {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: transparent;
 }
 
 .list-modules {
@@ -3707,7 +3722,6 @@ footer .form-field {
 .list-modules .list-modules-item .btn-delete {
   margin-left: 10px;
   background-color: transparent;
-  font-size: 18px;
 }
 
 .list-modules .list-modules-item input {
@@ -3715,11 +3729,17 @@ footer .form-field {
 }
 
 .section-edit-wrap {
-  width: 100%;
+  width: 90%;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+}
+
+@media (max-width: 576px) {
+  .section-edit-wrap {
+    width: 85%;
+  }
 }
 
 .section-edit-wrap__num {

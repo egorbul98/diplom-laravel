@@ -4,6 +4,7 @@
 
 .course-sections-item {
   margin-bottom: 36px;
+  position: relative;
   @include media-max($S){
     margin-bottom: 26px;
   }
@@ -40,6 +41,13 @@
     &::after {
       content: ". ";
     }
+  }
+
+  .btn-delete-course{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: transparent;
   }
 }
 
@@ -117,7 +125,7 @@
     .btn-delete{
       margin-left: 10px;
       background-color: transparent;
-      font-size: 18px;
+      // font-size: 18px;
     }
 
     input{
@@ -129,8 +137,12 @@
 
 
 .section-edit-wrap{
-  width: 100%;
+  width: 90%;
   display: flex;
+
+  @include media-max($XS){
+    width: 85%;
+  }
   &__num{
     font-weight: bold;
   }

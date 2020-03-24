@@ -28,9 +28,9 @@ Route::resource('course', 'CourseController')->only(["index", "show"])->names("c
 
 Route::group(['prefix' => 'profile', "namespace"=>"Profile"], function () {
     Route::get('', "ProfileController@index")->name("profile");
-    Route::get('teaching', "ProfileController@teaching")->name("profile.teaching");
-
     Route::resource('course', 'CourseController')->names("profile.course");
+
+    Route::get('course/{course}/sections', "EditorSectionController@edit")->name("profile.course.sections.edit");
 });
 
 Auth::routes();

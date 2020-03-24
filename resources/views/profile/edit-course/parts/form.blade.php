@@ -1,11 +1,16 @@
+@if ($course->exists)
+  <form class="form" action="{{route("profile.course.update", $course->id)}}" method="POST">
+  @method("PUT")
+@else
 <form class="form" action="{{route("profile.course.store")}}" method="POST">
+@endif
   @csrf
   <div class="form-row">
     <div class="form-row__left">
       <p><label class="" for="title">Название<span class="required-input">*</span></label></p>
     </div>
     <div class="form-row__right form-field">
-      <input class="input-control" maxlength="64" id="title" name="title" type="text">
+      <input class="input-control" maxlength="64" id="title" name="title" type="text" value="{{old("title", $course->title)}}">
       <div class="form-field__tooltip">
         <span class="text">Не более 64 символов</span>
       </div>
@@ -18,7 +23,7 @@
       <p><label class="" for="description">Краткое описание<span class="required-input">*</span></label></p>
     </div>
     <div class="form-row__right form-field">
-      <textarea name="description" id="description" rows="10"></textarea>
+      <textarea name="description" id="description" rows="10">{{old("description", $course->description)}}</textarea>
       <div class="form-field__tooltip">
         <span class="text">Не более 200 символов</span>
       </div>
@@ -30,8 +35,7 @@
       <p><label class="" for="content">О курсе<span class="required-input">*</span></label></p>
     </div>
     <div class="form-row__right form-field">
-      <textarea name="content" id="content" rows="10"></textarea>
-
+      <textarea name="content" id="content" rows="10">{{old("content", $course->content)}}</textarea>
     </div>
   </div>
   <div class="form-row">
@@ -39,6 +43,10 @@
       <p><label class="" for="content">Выберите категорию<span class="required-input">*</span></label></p>
     </div>
     <div class="form-row__right form-field">
+      {{-- @foreach ($categories as $categoryOption)
+        <option value="{{$categoryOption->id}}" @if ($categoryOption->id == $category->parent_id) selected
+            @endif>id = "{{$categoryOption->id}}". {{$categoryOption->name}}</option>
+        @endforeach --}}
       <select name="category_id" class="section-categories">
         <option value="1">Программирование</option>
         <option value="2">Web-разработка</option>
@@ -66,8 +74,13 @@
   </div>
 
   <div class="form-btns-wrap">
-    <button class="btn" type="submit">Создать</button>
-    <a href="{{ url()->previous() }}" class="btn">Отмена</a>
+    @if ($course->exists)
+      <button class="btn" type="submit">Сохранить</button>
+    @else
+      <button class="btn" type="submit">Создать</button>
+    @endif
+    
+    <a href="{{ route("profile.course.index") }}" class="btn">Отмена</a>
   </div>
 
 </form>

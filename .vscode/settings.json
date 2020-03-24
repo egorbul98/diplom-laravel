@@ -13,7 +13,7 @@
         "artisan": true,
         // "package*": true,
         "phpunit*": true,
-        // ".git*": true,
+        ".git*": true,
         "composer*":true,
         ".editorconfig":true,
         ".styleci.yml":true,

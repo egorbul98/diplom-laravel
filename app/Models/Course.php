@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
+use App\Models\Section;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str;
 class Course extends Model
@@ -15,5 +16,9 @@ class Course extends Model
     public function author()
     {
         return $this->belongsTo(User::class);
+    }
+    public function sections()
+    {
+        return $this->hasMany(Section::class);
     }
 }
