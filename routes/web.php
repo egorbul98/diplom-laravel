@@ -31,6 +31,15 @@ Route::group(['prefix' => 'profile', "namespace"=>"Profile"], function () {
     Route::resource('course', 'CourseController')->names("profile.course");
 
     Route::get('course/{course}/sections', "EditorSectionController@edit")->name("profile.course.sections.edit");
+    Route::post('course/{course}/sections', "EditorSectionController@save")->name("profile.course.sections.save");
+    
+
+    Route::post('/ajax-add-section', "AjaxSectionController@add");
+    Route::post('/ajax-del-section', "AjaxSectionController@delete");
+
+    Route::post('/ajax-add-module', "AjaxModuleController@add");
+    Route::post('/ajax-del-module', "AjaxModuleController@delete");
 });
+
 
 Auth::routes();

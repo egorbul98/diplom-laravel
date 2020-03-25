@@ -13,8 +13,8 @@ class CoursesSeeder extends Seeder
     {
         $courses= [];
 
-        for ($i=1; $i < 11; $i++) { 
-            $categoryId = ($i>4) ? rand(1,4) : 1;
+        for ($i=1; $i < 20; $i++) { 
+            $categoryId = rand(1,5);
             $authorId = ($i>4) ? rand(1,11) : 1;
             $title = 'Курс '.$i;
             

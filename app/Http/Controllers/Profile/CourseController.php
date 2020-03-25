@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Profile;
 
 use App\Models\Course;
+use App\Models\Category;
 use App\Http\Requests\CourseRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,8 +29,9 @@ class CourseController extends BaseController
      */
     public function create()
     {
+        $categories = Category::all();
         $course = new Course();
-        return view("profile.edit-course.create", compact("course"));
+        return view("profile.edit-course.create", compact("course", "categories"));
     }
 
     /**
@@ -71,7 +73,9 @@ class CourseController extends BaseController
      */
     public function edit(Course $course)
     {
-        return view("profile.edit-course.create", compact("course"));
+        $categories = Category::all();
+
+        return view("profile.edit-course.create", compact("course", "categories"));
     }
 
     /**
@@ -107,6 +111,8 @@ class CourseController extends BaseController
      */
     public function destroy($id)
     {
-        dd(__METHOD__,$id);
+        $course = Course::find($id);
+        $course->delete();
+        return redirect()->route("profile.course.index")->with(["success"=>"Курс успешно удален"]);
     }
 }

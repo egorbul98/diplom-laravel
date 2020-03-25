@@ -1,7 +1,7 @@
 <div class="main-wrap">
   <section class="course-header">
     <div class="profile-header__img">
-      <img src="img/course.jpg" alt=""><span class="icon"><i class="fas fa-user"></i></span>
+      <img src="img/course.jpg" alt=""><span class="icon"><i class="fas fa-camera"></i></span>
 
       <form action="">
         <input type="file" id="edit-foto" style="visibility: hidden;">
@@ -10,6 +10,7 @@
     </div>
     <div class="course-header-title">
       <h2 class="title">{{$course->title}}</h2>
+      <p class="category">{{$course->category->title}}</p>
       <p class="status">Курс в разработке</p>
     </div>
     <div class="course-header-menu">

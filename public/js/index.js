@@ -13777,13 +13777,19 @@ __webpack_require__.r(__webpack_exports__);
 
 jquery__WEBPACK_IMPORTED_MODULE_6___default()(document).ready(function () {
   // FORM DELETE COURSE course-header in profile
-  jquery__WEBPACK_IMPORTED_MODULE_6___default()("#delete-course").on("click", function (e) {
+  jquery__WEBPACK_IMPORTED_MODULE_6___default()("#delete-course").on("click", function (event) {
     event.preventDefault();
     var del = confirm("Вы точно хотите удалить курс?");
 
     if (del) {
       document.getElementById('form-delete').submit();
     }
+  }); //FORM SAVE ALL SECTIONS AND MODULES
+
+  jquery__WEBPACK_IMPORTED_MODULE_6___default()("#btn-save-sections").on("click", function (event) {
+    event.preventDefault(); // alert("sad")
+
+    document.getElementById('form-save-sections').submit();
   }); //
 
   jquery__WEBPACK_IMPORTED_MODULE_6___default()(".btn-gamburger").on("click", function () {
@@ -13809,13 +13815,6 @@ jquery__WEBPACK_IMPORTED_MODULE_6___default()(document).ready(function () {
   jquery__WEBPACK_IMPORTED_MODULE_6___default()(".course-header-menu .btn").on('click', function () {
     jquery__WEBPACK_IMPORTED_MODULE_6___default()(this).siblings(".drop-down").slideToggle();
   });
-  jquery__WEBPACK_IMPORTED_MODULE_6___default()(".list-modules-inner").on('click', ".btn-delete", function () {
-    var del = confirm("Вы точно хотите удалить модуль?");
-
-    if (del) {
-      jquery__WEBPACK_IMPORTED_MODULE_6___default()(this).closest(".list-modules-item").remove();
-    }
-  });
 
   if (jquery__WEBPACK_IMPORTED_MODULE_6___default()("body").hasClass("editor")) {
     window.onbeforeunload = function (evt) {
@@ -13840,7 +13839,7 @@ jquery__WEBPACK_IMPORTED_MODULE_6___default()(document).ready(function () {
   jquery__WEBPACK_IMPORTED_MODULE_6___default()('.item-page .item-sections-item').on("click", function () {
     jquery__WEBPACK_IMPORTED_MODULE_6___default()(this).toggleClass("active").children(".item-sections-item__cometencies").slideToggle();
   });
-  jquery__WEBPACK_IMPORTED_MODULE_6___default()('.notifications .btn-close').on("click", function () {
+  jquery__WEBPACK_IMPORTED_MODULE_6___default()('.notifications').on("click", ".btn-close", function () {
     // $('.notifications').toggleClass("notifications--active");
     jquery__WEBPACK_IMPORTED_MODULE_6___default()(this).closest(".notifications__item").slideToggle();
   });
@@ -13862,21 +13861,136 @@ __webpack_require__.r(__webpack_exports__);
  //Создание раздела
 
 jquery__WEBPACK_IMPORTED_MODULE_0___default()(".course-sections #btn-create-section").on('click', function () {
-  var $wrap = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).siblings(".course-sections-list");
-  var str = "\n  <div class=\"course-sections-item \">\n  <div class=\"course-sections-item__inner section-edit shadow-light\">\n    <div class=\"section-edit-wrap\">\n      <div class=\"section-edit-wrap__num\">1</div>\n      <div class=\"section-edit-wrap__inputs\">\n        <div class=\"form-row\">\n          <div class=\"form-row__left\">\n            <p><label class=\"\" for=\"title\">\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435<span class=\"required-input\">*</span></label></p>\n          </div>\n          <div class=\"form-row__right form-field\">\n            <input class=\"input-control\" maxlength=\"64\" id=\"title\" type=\"text\">\n          </div>\n        </div>\n        <div class=\"form-row\">\n          <div class=\"form-row__left\">\n            <p><label class=\"\" for=\"title\">\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435</p>\n          </div>\n          <div class=\"form-row__right form-field\">\n            <textarea name=\"\" id=\"\" cols=\"30\" rows=\"5\"></textarea>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n  <div class=\"list-modules shadow-light\">\n    <div class=\"list-modules-item\">\n      <h4 class=\"list-modules-item__inner\">\n        <input type=\"text\" class=\"input-control input-create-module\" placeholder=\"\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u043C\u043E\u0434\u0443\u043B\u044F\">\n      </h4>\n      <div class=\"list-modules-item__btns\">\n        <button type=\"button\" class=\"btn btn-create-module  list-modules-item__btn\">\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u043C\u043E\u0434\u0443\u043B\u044C</button>\n      </div>\n    </div>\n  </div>\n</div>\n  ";
-  $wrap.append(str);
+  var $wrap = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest(".course-sections").find(".course-sections-list");
+  var title = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).siblings(".section-edit-wrap").find("#title").val();
+  var description = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).siblings(".section-edit-wrap").find(" #description").val();
+  var courseId = +jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr("data-id-course");
+
+  if (title != "" && description != "" && courseId != "") {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default.a.ajax({
+      headers: {
+        'X-CSRF-TOKEN': jquery__WEBPACK_IMPORTED_MODULE_0___default()('meta[name="csrf-token"]').attr('content')
+      },
+      type: "POST",
+      url: "/profile/ajax-add-section",
+      data: {
+        "title": title,
+        "description": description,
+        "course_id": courseId
+      },
+      success: function success(response, status) {
+        notificationMessage("Раздел успешно создан");
+        var lengthItems = $wrap.children().length;
+        var str = "\n                <div class=\"course-sections-item \">\n                <div class=\"course-sections-item__inner section-edit shadow-light\">\n                  <div class=\"section-edit-wrap\">\n                    <div class=\"section-edit-wrap__num\">".concat(++lengthItems, "</div>\n                    <div class=\"section-edit-wrap__inputs\">\n                      <div class=\"\">\n                       \n                        <div class=\"form-field\">\n                          <input class=\"input-control  input-title\" name=\"title[").concat(response.id, "]\" id=\"title\" type=\"text\" maxlength=\"128\" value=\"").concat(title, "\">\n                        </div>\n                      </div>\n              \n                      <div class=\"\">\n                        <div class=\"form-field\">\n                        <textarea name=\"description[").concat(response.id, "]\" id=\"\" cols=\"30\" rows=\"5\" class=\"description\">").concat(description, "</textarea>\n                        </div>\n                      </div>\n                    </div>\n                  </div>\n                </div>\n                <div class=\"list-modules shadow-light\">\n                  <div class=\"list-modules-item\">\n                    <h4 class=\"list-modules-item__inner\">\n                      <input type=\"text\" class=\"input-control input-create-module\" placeholder=\"\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u043C\u043E\u0434\u0443\u043B\u044F\">\n                    </h4>\n                    <div class=\"list-modules-item__btns\">\n                      <button type=\"button\" class=\"btn btn-create-module  list-modules-item__btn\"  data-section-id=\"").concat(response.id, "\">\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u043C\u043E\u0434\u0443\u043B\u044C</button>\n                    </div>\n                  </div>\n                  <div class=\"list-modules-inner\">\n                    \n                  </div>\n                </div>\n                <button type=\"button\" class=\"btn-delete-section\" data-section-id=\"").concat(response.id, "\"><i class=\"fas fa-times\"></i></button>\n              </div>\n              \n                  ");
+        $wrap.append(str);
+      },
+      error: function error(response, status) {
+        notificationMessage("Неверно введены данные формы", "error");
+      }
+    });
+  }
+}); //Удалить раздел
+
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(".course-sections").on("click", ".btn-delete-section", function () {
+  var id = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr("data-section-id");
+  var $item = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest(".course-sections-item");
+  var del = confirm("Вы точно хотите удалить раздел?");
+
+  if (del) {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default.a.ajax({
+      headers: {
+        'X-CSRF-TOKEN': jquery__WEBPACK_IMPORTED_MODULE_0___default()('meta[name="csrf-token"]').attr('content')
+      },
+      type: "POST",
+      url: "/profile/ajax-del-section",
+      data: {
+        "id": id
+      },
+      success: function success(response, status) {
+        notificationMessage(response);
+        $item.remove();
+        jquery__WEBPACK_IMPORTED_MODULE_0___default()(".course-sections-item .section-edit-wrap__num").each(function (index, element) {
+          jquery__WEBPACK_IMPORTED_MODULE_0___default()(element).html(++index);
+        });
+      },
+      error: function error(response, status) {
+        notificationMessage("Ошибка удаления", "error");
+      }
+    });
+  }
 }); //Создание модуля
 
-jquery__WEBPACK_IMPORTED_MODULE_0___default()(".list-modules").on('click', '.btn-create-module', function () {
-  var text = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest(".list-modules-item").children(".list-modules-item__inner").children(".input-create-module").val();
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(".course-sections").on('click', '.btn-create-module', function () {
   var $wrap = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest(".list-modules-item").siblings(".list-modules-inner");
+  var title = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest(".list-modules-item").find(".input-create-module").val();
+  var sectionId = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr("data-section-id");
+  var sectionNum = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest(".course-sections-item ").find(".section-edit-wrap__num").text();
   var str = '';
 
-  if (text != "") {
-    str += "\n    <div class=\"list-modules-item\">\n      <h4 class=\"list-modules-item__inner\">\n       \n        <input type=\"text\" class=\"input-control input-bg\" placeholder=\"\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u043C\u043E\u0434\u0443\u043B\u044F\" value=\"".concat(text, "\">\n      </h4>\n      \n      <p class=\"list-modules-item__steps\"><span>0</span> \u0448\u0430\u0433\u043E\u0432</p>\n      <div class=\"list-modules-item__btns\">\n        <a href=\"#\" class=\"btn \">\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C</a>\n        <button type=\"button\" class=\"btn-delete\"><i class=\"fas fa-times\"></i></button>\n      </div>\n    </div>\n    ");
+  if (title != "") {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default.a.ajax({
+      headers: {
+        'X-CSRF-TOKEN': jquery__WEBPACK_IMPORTED_MODULE_0___default()('meta[name="csrf-token"]').attr('content')
+      },
+      type: "POST",
+      url: "/profile/ajax-add-module",
+      data: {
+        "title": title,
+        "section_id": sectionId
+      },
+      success: function success(response, status) {
+        notificationMessage("Модуль успешно добавлен");
+        var lengthItems = $wrap.children().length;
+        var str = "\n              <div class=\"list-modules-item\">\n                <h4 class=\"list-modules-item__inner\">\n                  <span class=\"num\">".concat(sectionNum, ".").concat(++lengthItems, "</span>\n                  <input type=\"text\" class=\"input-control input-bg\" name=\"module-title[").concat(response.id, "]\" value=\"").concat(title, "\" placeholder=\"\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u043C\u043E\u0434\u0443\u043B\u044F\">\n                </h4>\n                <p class=\"list-modules-item__steps\"><span>11</span> \u0448\u0430\u0433\u043E\u0432</p>\n                <div class=\"list-modules-item__btns\">\n                  <a href=\"#\" class=\"btn \">\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C</a>\n                  <button type=\"button\" class=\"btn-delete-module\" data-module-id=\"").concat(response.id, "\"><i class=\"fas fa-times\"></i></button>\n                </div>\n              </div>\n            ");
+        $wrap.append(str);
+      },
+      error: function error(response, status) {
+        notificationMessage("Неверно введено название формы, либо название слишком динное", "error");
+      }
+    });
     $wrap.append(str);
   }
+}); //Удалить модуль
+
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(".course-sections").on("click", ".btn-delete-module", function () {
+  var id = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr("data-module-id");
+  var $item = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest(".list-modules-item");
+  var del = confirm("Вы точно хотите удалить модуль?");
+  var $section = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest(".course-sections-item");
+  var sectionNum = $section.find(".section-edit-wrap__num").text();
+
+  if (del) {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default.a.ajax({
+      headers: {
+        'X-CSRF-TOKEN': jquery__WEBPACK_IMPORTED_MODULE_0___default()('meta[name="csrf-token"]').attr('content')
+      },
+      type: "POST",
+      url: "/profile/ajax-del-module",
+      data: {
+        "id": id
+      },
+      success: function success(response, status) {
+        console.log("suc");
+        notificationMessage(response);
+        console.log("response");
+        $item.remove();
+        $section.find(".list-modules-item .num").each(function (index, element) {
+          jquery__WEBPACK_IMPORTED_MODULE_0___default()(element).html("".concat(sectionNum, ".").concat(++index));
+        });
+      },
+      error: function error(response, status) {
+        console.log("asddasd");
+        notificationMessage("Ошибка удаления", "error");
+      }
+    });
+  }
 });
+
+function notificationMessage(msg) {
+  var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "success";
+  var str = "\n    <div class=\"notifications__item notifications__item--".concat(type, "\"><span class=\"text\">").concat(msg, "</span><span class=\"btn-close\"><i class=\"fas fa-times\"></i></span></div>\n  ");
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(".notifications").append(str);
+}
 
 /***/ }),
 

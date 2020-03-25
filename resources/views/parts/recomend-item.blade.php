@@ -8,7 +8,7 @@
             {{$course->title}}
           </h3>
           <div class="recommend-item__category">
-            {{$course->category_id}}
+            {{$course->category->title}}
           </div>
           <div class="recommend-item__desc">
             {{$course->description}}

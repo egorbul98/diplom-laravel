@@ -1,23 +1,20 @@
 <div class="course-sections-item ">
   <div class="course-sections-item__inner section-edit shadow-light">
     <div class="section-edit-wrap">
-      <div class="section-edit-wrap__num">1</div>
+      <div class="section-edit-wrap__num">{{$i}}</div>
       <div class="section-edit-wrap__inputs">
-        <div class="form-row">
-          <div class="form-row__left">
-            <p><label class="" for="title">Название<span class="required-input">*</span></label></p>
-          </div>
-          <div class="form-row__right form-field">
-            <input class="input-control" maxlength="64" id="title" type="text">
+        <div class="">
+         
+          <div class="form-field">
+            <input class="input-control  input-title" name="title[{{$section->id}}]" id="title" type="text" maxlength="128" value="{{ $section->title}}">
+            
           </div>
         </div>
 
-        <div class="form-row">
-          <div class="form-row__left">
-            <p><label class="" for="title">Описание</p>
-          </div>
-          <div class="form-row__right form-field">
-            <textarea name="" id="" cols="30" rows="5"></textarea>
+        <div class="">
+          <div class="form-field">
+          <textarea name="description[{{$section->id}}]" id="" cols="30" rows="5" class="description">{{ $section->description}}</textarea>
+          
           </div>
         </div>
       </div>
@@ -31,26 +28,27 @@
         <input type="text" class="input-control input-create-module" placeholder="Название модуля">
       </h4>
       <div class="list-modules-item__btns">
-        <button type="button" class="btn btn-create-module  list-modules-item__btn">Создать модуль</button>
+        <button type="button" class="btn btn-create-module  list-modules-item__btn" data-section-id="{{$section->id}}">Создать модуль</button>
       </div>
       
     </div>
     <div class="list-modules-inner">
-   
-      <div class="list-modules-item">
-        <h4 class="list-modules-item__inner">
-          <!-- <span class="num">1.1</span> -->
-          <input type="text" class="input-control input-bg" placeholder="Название модуля">
-        </h4>
-        
-        <p class="list-modules-item__steps"><span>11</span> шагов</p>
-        <div class="list-modules-item__btns">
-          <a href="#" class="btn ">Редактировать</a>
-          <button type="button" class="btn-delete"><i class="fas fa-times"></i></button>
+      @php  $j = 0; @endphp
+      @foreach ($section->modules as $module)
+        <div class="list-modules-item">
+          <h4 class="list-modules-item__inner">
+            <span class="num">{{$i}}.{{++$j}}</span>
+            <input type="text" name="module-title[{{$module->id}}]" class="input-control input-bg" value="{{$module->title}}" placeholder="Название модуля">
+          </h4>
+          <p class="list-modules-item__steps"><span>11</span> шагов</p>
+          <div class="list-modules-item__btns">
+            <a href="#" class="btn ">Редактировать</a>
+            <button type="button" class="btn-delete-module" data-module-id="{{$module->id}}"><i class="fas fa-times"></i></button>
+          </div>
         </div>
-      </div>
+      @endforeach
 
     </div>
   </div>
-  <button type="button" class="btn-delete-course"><i class="fas fa-times"></i></button>
+  <button type="button" class="btn-delete-section" data-section-id="{{$section->id}}"><i class="fas fa-times"></i></button>
 </div>

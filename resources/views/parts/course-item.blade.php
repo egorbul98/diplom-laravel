@@ -7,12 +7,10 @@
           {{$course->title}}
       </h3>
 
-      <div class="courses-item__category">
-          Программирование {{$course->category_id}}
-      </div>
+      <div class="courses-item__category">{{$course->category->title}}</div>
 
       <div class="courses-item__author">
-          <span class="icon"><i class="fas fa-user"></i></span><span class="name">{{$course->author->name}}</span>
+          <span class="icon"><i class="fas fa-user"></i></span><span class="name">{{$course->author->name}} {{$course->author->lastname}}</span>
       </div>
   </div>
   <div class="courses-item__overlay">

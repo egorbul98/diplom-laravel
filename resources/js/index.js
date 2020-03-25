@@ -11,7 +11,7 @@ import $ from "jquery"
 
 $(document).ready(function () {
   // FORM DELETE COURSE course-header in profile
-  $("#delete-course").on("click", function (e) {
+  $("#delete-course").on("click", function (event) {
     event.preventDefault();
     let del = confirm("Вы точно хотите удалить курс?");
     if (del) {
@@ -19,6 +19,13 @@ $(document).ready(function () {
     }
   });
 
+  //FORM SAVE ALL SECTIONS AND MODULES
+  $("#btn-save-sections").on("click", function (event) {
+    event.preventDefault();
+    // alert("sad")
+    document.getElementById('form-save-sections').submit();
+
+  });
   //
   $(".btn-gamburger").on("click", function () {
     $(".header-wrap").toggleClass("active");
@@ -49,14 +56,6 @@ $(document).ready(function () {
   });
 
 
-  $(".list-modules-inner").on('click', ".btn-delete", function () {
-    let del = confirm("Вы точно хотите удалить модуль?");
-    if (del) {
-      $(this).closest(".list-modules-item").remove();
-    }
-  });
-
-
   if ($("body").hasClass("editor")) {
     window.onbeforeunload = function (evt) {
       var message = "вйцв";
@@ -84,7 +83,7 @@ $(document).ready(function () {
   });
 
   
-  $('.notifications .btn-close').on("click", function () {
+  $('.notifications').on("click", ".btn-close", function () {
     // $('.notifications').toggleClass("notifications--active");
     $(this).closest(".notifications__item").slideToggle();
   });

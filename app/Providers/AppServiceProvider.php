@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Models\Section;
+use App\Models\Course;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +25,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Section::deleted(function ($section) {
+            $section->modules()->delete();
+        });
+
+        Course::deleted(function ($course) {
+            $course->sections()->delete();
+        });
     }
 }

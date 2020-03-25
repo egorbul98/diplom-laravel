@@ -43,15 +43,11 @@
       <p><label class="" for="content">Выберите категорию<span class="required-input">*</span></label></p>
     </div>
     <div class="form-row__right form-field">
-      {{-- @foreach ($categories as $categoryOption)
-        <option value="{{$categoryOption->id}}" @if ($categoryOption->id == $category->parent_id) selected
-            @endif>id = "{{$categoryOption->id}}". {{$categoryOption->name}}</option>
-        @endforeach --}}
+      
       <select name="category_id" class="section-categories">
-        <option value="1">Программирование</option>
-        <option value="2">Web-разработка</option>
-        <option value="3">Фотография</option>
-        <option value="4">Дизайн</option>
+        @foreach ($categories as $category)
+          <option value="{{$category->id}}" @if ($category->id == $course->category_id) selected @endif>{{$category->title}}</option>
+        @endforeach
       </select>
 
     </div>

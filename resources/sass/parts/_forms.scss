@@ -4,8 +4,7 @@ textarea {
   border-radius: 4px;
   padding: 9px 20px 6px 12px;
   font-size: 14px;
-
-
+  transition: background-color 0.3s;
   @include media-max($M) {
     padding: 3px 20px 3px 12px;
   }
@@ -16,10 +15,17 @@ textarea {
 
     font-size: 12px;
   }
+
+  &:focus{
+    background-color: $col-border-op;
+  }
+
 }
 
 textarea {
   width: 100%;
+  @include scroolbar;
+  overflow-y: auto;
 }
 
 form {
@@ -132,7 +138,10 @@ select {
   &__tooltip {
     position: absolute;
     top: 100%;
-
+    @include media-max($S) {
+      top: auto;
+      bottom: -16px;
+    }
     .text {
       font-size: 13px;
       color: $col-grays;

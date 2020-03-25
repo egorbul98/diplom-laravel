@@ -6,7 +6,7 @@
     <div class="course-sections-item__inner shadow-light">
       <div class="course-sections-item__header">
         <h3 class="course-sections-item__title"><span class="num">{{++$i}}</span>{{$section->title}}</h3>
-        <p class="course-sections-item__count-models"><span>10</span> модулей</p>
+        <p class="course-sections-item__count-models"><span>{{$section->modules->count()}}</span> модулей</p>
       </div>
       <p class="course-sections-item__desc">{{$section->description}}</p>
     </div>
@@ -19,6 +19,9 @@
     </div>
   </div>
   @endforeach
-
+  
+  @if (!isset($course->sections[0]))
+      Здесь ничего нет
+  @endif
   
 </section>
