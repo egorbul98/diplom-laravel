@@ -1,10 +1,24 @@
-.step-answer{
-  margin-top: 20px;
+.wrap-step-answer {
+    border-top: 1px solid $col-active;
+    padding-top: 20px;
 
-  .form-row__left{
-    @include media-max($S) {
-      margin-bottom: 10px;
+    #btn-add-answer {
+        margin-top: 10px;
     }
-  }
-  
+}
+
+.step-answer {
+    margin-bottom: 20px;
+    border-bottom: 1px solid $col-active;
+    padding-bottom: 10px;
+
+    .form-row {
+        margin-bottom: 10px;
+
+        &__left {
+            @include media-max($S) {
+                margin-bottom: 3px;
+            }
+        }
+    }
 }

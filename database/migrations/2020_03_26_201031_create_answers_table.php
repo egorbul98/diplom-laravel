@@ -15,7 +15,7 @@ class CreateAnswersTable extends Migration
     {
         Schema::create('answers', function (Blueprint $table) {
             $table->id();
-            $table->integer("module_id");
+            $table->integer("step_id");
             $table->string("value");
             $table->integer("error")->nulluble;
             $table->string("type");

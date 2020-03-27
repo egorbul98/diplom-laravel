@@ -1,4 +1,6 @@
 import $ from "jquery"
+import "./module-edit-page/answers"
+import "./module-edit-page/type-steps"
 
 
 let competencesIn = [];

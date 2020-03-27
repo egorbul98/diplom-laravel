@@ -28,13 +28,13 @@ class Module extends Model
         return $this->belongsToMany(Competence::class, "competence_module")->wherePivot('type', "out");
     }
 
-    public function answers()
-    {
-        return $this->hasMany(Answer::class);
-    }
     public function steps()
     {
-        return $this->hasMany(Step::class);
+        return $this->belongsToMany(Step::class, 'module_step');
     }
+    // public function steps()
+    // {
+    //     return $this->hasMany(Step::class);
+    // }
     
 }

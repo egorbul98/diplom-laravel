@@ -17,10 +17,14 @@
     @include('parts.notifications')
    
     @include('parts.header')
-
+@auth
     @yield('content')
-    
+        
     @include('profile.parts.footer-editor')
+@else
+<h1 class="no-entry"><a href="{{route("login")}}">Необходимо авторизоваться</a></h1>
+@endauth
+    
 
    
     <script src="{{asset("js/index.js")}}"></script>

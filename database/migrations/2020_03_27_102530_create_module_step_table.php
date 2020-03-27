@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStepsTable extends Migration
+class CreateModuleStepTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateStepsTable extends Migration
      */
     public function up()
     {
-        Schema::create('steps', function (Blueprint $table) {
-            $table->id();
-            $table->integer("step_type_id");
-            $table->longText("content")->nulluble()->default("");
-            
-            $table->timestamps();
+        Schema::create('module_step', function (Blueprint $table) {
+            $table->integer("module_id");
+            $table->integer("step_id");
         });
     }
 
@@ -29,6 +26,6 @@ class CreateStepsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('steps');
+        Schema::dropIfExists('module_step');
     }
 }

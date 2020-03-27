@@ -6,7 +6,7 @@
 
 @include('profile.edit-module.parts.modal', $step_types)
 
-<div class="main-wrap margin-bottom-100">
+<div class="margin-bottom-100">
     
     <div class="main-wrap">
         <section class="module-header-wrap">
@@ -27,6 +27,7 @@
                                 <h2 class="title"><label for="in-competences">Есть входные компетенции</label></h2>
                             </div>
                             @include('profile.edit-module.parts.select-competences', ["module_competences"=> $module->competences_in])
+                            
                         </div>
 
                         <div class="module-header-item">
@@ -45,61 +46,12 @@
         </section>
     </div>
 
+    @include('profile.edit-module.parts.steps-block')
+    @include('profile.edit-module.parts.step-editor')
 
-    <div class="main-wrap">
-        <section class="steps-block">
-            <div class="steps-block-inner">
-                <div class="step-list">
-                    <div class="step-list__item"><a href="#"></a></div>
-                    <div class="step-list__item step-list__item--active"><a href="#"></a></div>
-                    <div class="step-list__item "><a href="#"><i class="fas fa-question"></i></a></div>
-                    <div class="step-list__item"><a href="#"></a></div>
-                    <div class="step-list__item"><a href="#"></a></div>
-                    <div class="step-list__item step-list__item--add"><i class="fas fa-plus"></i></div>
-                </div>
-            </div>
-        </section>
-    </div>
+    
 
-    <div class="main-wrap">
-        <section class="step-editor">
-            <div class="step-editor-header flex-b">
-                <div class="step-editor-header__title"><span class="step-text">Шаг 11</span>|<span
-                        class="step-type">Текст</span></div>
-                <button class="step-editor-header__btn-del btn"><span class="icon"><i
-                            class="fas fa-times"></i></span>Удалить</button>
-            </div>
-            <div class="step-editor-content">
-                <form action="">
-                    <textarea id="summernote" name="content"></textarea>
-                </form>
-            </div>
-        </section>
-    </div>
 
-    <div class="main-wrap">
-        <section class="step-answer">
-            <form action="" class="form">
-                <div class="form-row">
-                    <div class="form-row__left">
-                        <p>Правильный ответ</p>
-                    </div>
-                    <div class="form-row__right">
-                        <input type="text">
-                        <div class="form-field__tooltip">
-                            <span class="text">Не более 64 символов</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-row__left">
-                        <p>Допустимая погрешность</p>
-                    </div>
-                    <div class="form-row__right"><input type="text"></div>
-                </div>
-            </form>
-        </section>
-    </div>
 </div>
 
 @endsection

@@ -14045,9 +14045,46 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(".modal-close").on("click", function () {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest(".modal").addClass("modal--hidden");
   });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()(".step-list__item--add").on("click", function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()("#btn-add-step").on("click", function () {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(".modal").removeClass("modal--hidden");
   });
+});
+
+/***/ }),
+
+/***/ "./resources/js/modules/module-edit-page/answers.js":
+/*!**********************************************************!*\
+  !*** ./resources/js/modules/module-edit-page/answers.js ***!
+  \**********************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+
+jquery__WEBPACK_IMPORTED_MODULE_0___default()("#btn-add-answer").on("click", function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(".wrap-step-answer").append("\n  <div class=\"step-answer\">\n  <div class=\"form\">\n      <div class=\"form-row\">\n          <div class=\"form-row__left\">\n              <p>\u041F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u044B\u0439 \u043E\u0442\u0432\u0435\u0442</p>\n          </div>\n          <div class=\"form-row__right\">\n              <input type=\"text\" name=\"answer[]\">\n          </div>\n      </div>\n      <div class=\"form-row\">\n          <div class=\"form-row__left\">\n              <p>\u0414\u043E\u043F\u0443\u0441\u0442\u0438\u043C\u0430\u044F \u043F\u043E\u0433\u0440\u0435\u0448\u043D\u043E\u0441\u0442\u044C</p>\n          </div>\n          <div class=\"form-row__right\"><input type=\"text\" name=\"error[]\"></div>\n      </div>\n  </div>\n</div>\n\n  ");
+});
+
+/***/ }),
+
+/***/ "./resources/js/modules/module-edit-page/type-steps.js":
+/*!*************************************************************!*\
+  !*** ./resources/js/modules/module-edit-page/type-steps.js ***!
+  \*************************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(".modal").on("click", ".overlay", function (e) {
+  e.preventDefault();
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().submit();
 });
 
 /***/ }),
@@ -14063,6 +14100,10 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _module_edit_page_answers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./module-edit-page/answers */ "./resources/js/modules/module-edit-page/answers.js");
+/* harmony import */ var _module_edit_page_type_steps__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./module-edit-page/type-steps */ "./resources/js/modules/module-edit-page/type-steps.js");
+
+
 
 var competencesIn = [];
 var competencesOut = [];

@@ -43,8 +43,11 @@ Route::group(['prefix' => 'profile', "namespace"=>"Profile"], function () {
     Route::post('/ajax-add-competence', "AjaxCompetenceController@add");
     Route::post('/ajax-del-competence', "AjaxCompetenceController@delete");
 
-    Route::get('course/module/{module}', "EditorModuleController@edit")->name("profile.course.module.edit");
+    Route::get('course/module/{module}/{step_id?}', "EditorModuleController@edit")->name("profile.course.module.edit");
     Route::post('course/module/{module}', "EditorModuleController@save")->name("profile.course.module.save");
+
+    // Route::resource('course/module/{module}/step/', 'StepController')->only("store", "destroy")->names("profile.module.step");;
+    Route::resource('course/module/{id_module}/step_type/{id_step_type}', 'StepController')->only("store", "destroy")->names("profile.module.step");;
 });
 
 

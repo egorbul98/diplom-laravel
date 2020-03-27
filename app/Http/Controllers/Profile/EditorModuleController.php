@@ -3,19 +3,20 @@
 namespace App\Http\Controllers\Profile;
 
 use Illuminate\Http\Request;
-use App\Models\Course;
 use App\Models\Module;
-use App\Models\Section;
+use App\Models\Step;
 use App\Models\StepType;
 // use App\Http\Requests\EditorSectionRequest;
 
 
 class EditorModuleController extends BaseController
 {
-    public function edit(Module $module)
+    public function edit(Module $module, $id_step = 1)
     {
         $step_types = StepType::all();
-        return view("profile.edit-module.module", compact("module", "step_types"));
+        $step = Step::find($id_step);
+        
+        return view("profile.edit-module.module", compact("module", "step_types", "step"));
     }
     public function save($id, Request $request)
     {

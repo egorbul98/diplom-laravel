@@ -18,7 +18,6 @@ class CourseController extends BaseController
      */
     public function index()
     {
-      
         return view("profile.edit-course.index");
     }
 

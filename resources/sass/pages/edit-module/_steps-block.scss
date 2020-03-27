@@ -1,16 +1,24 @@
 .steps-block {
-  padding: 20px 0;
-
+  padding: 26px 0;
+  @include media-max($S){
+    padding: 18px 0;
+  }
   .steps-block-inner{
     @include scroolbar;
     overflow-x: auto;
     width: 100%;
     // padding-bottom: 20px;
   }
+  .wrap-step-list{
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+  }
   .step-list {
     display: flex;
-    
-    width: 100%;
+    align-items: center;
+    justify-content: start;
     &__item {
       flex-shrink: 0;
       cursor: pointer;
@@ -24,6 +32,15 @@
       background-color: $col-border-op;
       position: relative;
       transition: all 0.3s;
+      
+      @include media-max($M){
+        width: 42px;
+        height: 42px;
+      }
+      @include media-max($S){
+        width: 32px;
+        height: 32px;
+      }
       &:hover{
         background-color: $col-active;
         a{
@@ -37,7 +54,12 @@
           color: #ffffff;
         }
       }
-
+      &--fullsize{
+        width: auto;
+        
+        padding-left: 10px;
+        padding-right: 10px;
+      }
       &--add {
         background-color: $col-btn;
         color: #ffffff;

@@ -597,6 +597,15 @@ button {
   outline: none;
 }
 
+.hr {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #CFB986;
+  border: none;
+}
+
 .btn {
   background-color: #767fcf;
   padding: 10px 20px;
@@ -832,6 +841,15 @@ button {
 
 .margin-bottom-100 {
   margin-bottom: 100px;
+}
+
+.no-entry {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
 }
 
 /* Slider */
@@ -4393,7 +4411,13 @@ footer .form-field {
 }
 
 .steps-block {
-  padding: 20px 0;
+  padding: 26px 0;
+}
+
+@media (max-width: 768px) {
+  .steps-block {
+    padding: 18px 0;
+  }
 }
 
 .steps-block .steps-block-inner {
@@ -4433,12 +4457,23 @@ footer .form-field {
   display: none;
 }
 
+.steps-block .wrap-step-list {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
 .steps-block .step-list {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  width: 100%;
+  align-items: center;
+  justify-content: start;
 }
 
 .steps-block .step-list__item {
@@ -4459,6 +4494,20 @@ footer .form-field {
   transition: all 0.3s;
 }
 
+@media (max-width: 1024px) {
+  .steps-block .step-list__item {
+    width: 42px;
+    height: 42px;
+  }
+}
+
+@media (max-width: 768px) {
+  .steps-block .step-list__item {
+    width: 32px;
+    height: 32px;
+  }
+}
+
 .steps-block .step-list__item:hover {
   background-color: #CFB986;
 }
@@ -4473,6 +4522,12 @@ footer .form-field {
 
 .steps-block .step-list__item--active a:hover {
   color: #ffffff;
+}
+
+.steps-block .step-list__item--fullsize {
+  width: auto;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .steps-block .step-list__item--add {
@@ -4511,13 +4566,28 @@ footer .form-field {
   padding-bottom: 20px;
 }
 
+.wrap-step-answer {
+  border-top: 1px solid #CFB986;
+  padding-top: 20px;
+}
+
+.wrap-step-answer #btn-add-answer {
+  margin-top: 10px;
+}
+
 .step-answer {
-  margin-top: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #CFB986;
+  padding-bottom: 10px;
+}
+
+.step-answer .form-row {
+  margin-bottom: 10px;
 }
 
 @media (max-width: 768px) {
   .step-answer .form-row__left {
-    margin-bottom: 10px;
+    margin-bottom: 3px;
   }
 }
 
