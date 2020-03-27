@@ -6,9 +6,10 @@
 // slick slider
 @import "~slick-carousel/slick/slick"; 
 @import "slick-fix";
-// @import "~slick-carousel/slick/slick-theme.scss"; 
+//fontawesome
+@import "../libs/fontawesome-free-5.13.0-web/css/all.min.css";
 //editor
-@import "/src/libs/editor/summernote-lite.css";
+@import "../libs/editor/summernote-lite.css";
 
 //index
 @import "./parts/forms";

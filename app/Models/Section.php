@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Course;
 use App\Models\Module;
+use App\Models\Competence;
 
 class Section extends Model
 {
@@ -19,5 +20,10 @@ class Section extends Model
     public function modules()
     {
         return $this->hasMany(Module::class);
+    }
+
+    public function competences()
+    {
+        return $this->hasMany(Competence::class);
     }
 }

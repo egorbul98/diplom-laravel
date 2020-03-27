@@ -22,7 +22,7 @@
     
     @include('parts.footer')
 
-    <script src="https://kit.fontawesome.com/8dc48f921c.js" crossorigin="anonymous"></script>
+    {{-- <script src="https://kit.fontawesome.com/8dc48f921c.js" crossorigin="anonymous"></script> --}}
 
     <script src="{{asset("js/index.js")}}"></script>
 </body>

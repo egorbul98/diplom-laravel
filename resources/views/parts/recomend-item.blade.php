@@ -18,7 +18,7 @@
               <div class="recommend-item__author">
                   <span class="icon"><i class="fas fa-user"></i></span><span class="name">{{$course->author->name}} {{$course->author->lastname}}</span>
               </div>
-              <a href="list-items-page.html" class="btn  recommend-item__btn">Перейти</a>
+              <a href="{{route("course.show", $course)}}" class="btn  recommend-item__btn">Перейти</a>
 
           </div>
       </div>

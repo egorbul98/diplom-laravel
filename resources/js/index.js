@@ -1,7 +1,7 @@
 
 import "./modules/gamburger"
 import "./modules/slick"
-import "./modules/select"
+import "./modules/module-edit-selections"
 import "./modules/modal"
 import "./modules/editor"
 import "./modules/course-sections-edit"
@@ -27,9 +27,7 @@ $(document).ready(function () {
 
   });
   //
-  $(".btn-gamburger").on("click", function () {
-    $(".header-wrap").toggleClass("active");
-  });
+  
   $(".filter-btn").on("click", function () {
     $(".filter .drop-down").slideToggle();
   });

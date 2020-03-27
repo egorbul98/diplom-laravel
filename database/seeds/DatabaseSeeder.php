@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Competence;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,6 +17,9 @@ class DatabaseSeeder extends Seeder
         $this->call(SectionsSeeder::class);
         $this->call(ModulesSeeder::class);
         $this->call(CategoriesSeeder::class);
+        $this->call(CompetencesSeeder::class);
+        $this->call(CompetenceModuleSeeder::class);
+        $this->call(StepTypesSeeder::class);
         // factory(\App\Post::class, 100)->create();
     }
 }

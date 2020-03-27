@@ -39,6 +39,12 @@ Route::group(['prefix' => 'profile', "namespace"=>"Profile"], function () {
 
     Route::post('/ajax-add-module', "AjaxModuleController@add");
     Route::post('/ajax-del-module', "AjaxModuleController@delete");
+
+    Route::post('/ajax-add-competence', "AjaxCompetenceController@add");
+    Route::post('/ajax-del-competence', "AjaxCompetenceController@delete");
+
+    Route::get('course/module/{module}', "EditorModuleController@edit")->name("profile.course.module.edit");
+    Route::post('course/module/{module}', "EditorModuleController@save")->name("profile.course.module.save");
 });
 
 

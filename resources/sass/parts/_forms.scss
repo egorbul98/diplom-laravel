@@ -97,7 +97,7 @@ select {
     align-items: flex-start;
     margin-bottom: 30px;
     width: 100%;
-
+    position: relative;
     @include media-max($S) {
       flex-direction: column;
       margin-bottom: 16px;

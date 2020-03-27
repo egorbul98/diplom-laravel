@@ -13760,9 +13760,8 @@ module.exports = function(module) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_gamburger__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/gamburger */ "./resources/js/modules/gamburger.js");
-/* harmony import */ var _modules_gamburger__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_modules_gamburger__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _modules_slick__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/slick */ "./resources/js/modules/slick.js");
-/* harmony import */ var _modules_select__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/select */ "./resources/js/modules/select.js");
+/* harmony import */ var _modules_module_edit_selections__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/module-edit-selections */ "./resources/js/modules/module-edit-selections.js");
 /* harmony import */ var _modules_modal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/modal */ "./resources/js/modules/modal.js");
 /* harmony import */ var _modules_editor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/editor */ "./resources/js/modules/editor.js");
 /* harmony import */ var _modules_course_sections_edit__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/course-sections-edit */ "./resources/js/modules/course-sections-edit.js");
@@ -13792,9 +13791,6 @@ jquery__WEBPACK_IMPORTED_MODULE_6___default()(document).ready(function () {
     document.getElementById('form-save-sections').submit();
   }); //
 
-  jquery__WEBPACK_IMPORTED_MODULE_6___default()(".btn-gamburger").on("click", function () {
-    jquery__WEBPACK_IMPORTED_MODULE_6___default()(".header-wrap").toggleClass("active");
-  });
   jquery__WEBPACK_IMPORTED_MODULE_6___default()(".filter-btn").on("click", function () {
     jquery__WEBPACK_IMPORTED_MODULE_6___default()(".filter .drop-down").slideToggle();
   });
@@ -13988,7 +13984,7 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(".course-sections").on("click", ".
 
 function notificationMessage(msg) {
   var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "success";
-  var str = "\n    <div class=\"notifications__item notifications__item--".concat(type, "\"><span class=\"text\">").concat(msg, "</span><span class=\"btn-close\"><i class=\"fas fa-times\"></i></span></div>\n  ");
+  var str = "\n  <div class=\"notifications__item notifications__item--".concat(type, "\"><span class=\"text\">").concat(msg, "</span><span class=\"btn-close\"><i class=\"fas fa-times\"></i></span></div>\n");
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(".notifications").append(str);
 }
 
@@ -14019,10 +14015,17 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()('#summernote').summernote({
 /*!*******************************************!*\
   !*** ./resources/js/modules/gamburger.js ***!
   \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
 
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(".btn-gamburger").on("click", function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(".header-wrap").toggleClass("active");
+});
 
 /***/ }),
 
@@ -14049,10 +14052,10 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
 
 /***/ }),
 
-/***/ "./resources/js/modules/select.js":
-/*!****************************************!*\
-  !*** ./resources/js/modules/select.js ***!
-  \****************************************/
+/***/ "./resources/js/modules/module-edit-selections.js":
+/*!********************************************************!*\
+  !*** ./resources/js/modules/module-edit-selections.js ***!
+  \********************************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -14061,12 +14064,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
 
-var competences = [];
-jquery__WEBPACK_IMPORTED_MODULE_0___default()('.checkboxes ').on('click', "input", function () {
-  // let $parent = $('.module-header-item__in-competence .select-competences__left');
-  var $parent = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest(".select-competences__right").siblings(".select-competences__left"); // let text = $(this).parent("label").text().replace(/\s+/g, " ");
+var competencesIn = [];
+var competencesOut = [];
+var competences = []; //Проверка на наличие нажатых checkboxes
 
-  var text = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).siblings(".text").text().replace(/\s+/g, " ");
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(".select-competences__right .checkboxes input").each(function (index, element) {
+    if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(element).attr("data-checked")) {
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()(element).trigger('click');
+    }
+  });
+});
+jquery__WEBPACK_IMPORTED_MODULE_0___default()('.edit-module .checkboxes').on('click', "input", function () {
+  var $parent = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest(".select-competences__right").siblings(".select-competences__left").children(".list"); // let text = $(this).siblings(".text").text().replace(/\s+/g, " ");
+
+  var text = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).siblings(".text").text();
+
+  if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest(".module-header-item").hasClass("module-header-item__in-competence")) {
+    competences = competencesIn;
+  } else {
+    competences = competencesOut;
+  }
 
   if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).prop('checked')) {
     competences[text] = text;
@@ -14075,16 +14093,68 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()('.checkboxes ').on('click', "input
   }
 
   renderCompetences($parent, competences);
-  console.log(competences);
-});
+}); //Добавление компетенции
+
 jquery__WEBPACK_IMPORTED_MODULE_0___default()(".select-competences__right .btn-add").on('click', function () {
   var val = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).siblings("input").val();
+  var sectionId = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr("data-section-id");
+  var $wrap = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().siblings(".checkboxes");
 
   if (val != '') {
-    var str = "\n      <p>\n        <label>\n          <input type=\"checkbox\" name=\"complex\" value=\"2\"><span class=\"check\"></span><span class=\"text\">".concat(val, "</span></label>\n      </p>\n  ");
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().siblings(".checkboxes").append(str);
+    jquery__WEBPACK_IMPORTED_MODULE_0___default.a.ajax({
+      headers: {
+        'X-CSRF-TOKEN': jquery__WEBPACK_IMPORTED_MODULE_0___default()('meta[name="csrf-token"]').attr('content')
+      },
+      type: "POST",
+      url: "/profile/ajax-add-competence",
+      data: {
+        "title": val,
+        "section_id": sectionId
+      },
+      success: function success(response, status) {
+        notificationMessage("Компетенция успешно добавлена");
+        var str = "<p class=\"flex-b\">\n                <label>\n                  <input type=\"checkbox\" name=\"complex\" value=\"2\"><span class=\"check\"></span><span class=\"text\">".concat(val, "</span></label>\n                  <button class=\"btn-delete-competence btn-bg\" type=\"button\"><span class=\"icon\"><i class=\"fas fa-times\"></i></span></button>\n              </p> ");
+        $wrap.append(str);
+      },
+      error: function error(response, status) {
+        notificationMessage("Неверно введено название, либо название слишком длинное", "error");
+      }
+    });
   }
-});
+}); //Удаление компетенции
+
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(".select-custom").on("click", ".btn-delete-competence", function () {
+  var del = confirm("Вы точно хотите удалить компетенцию?");
+  var id = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr("data-competence-id");
+  var $item = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent();
+  var $checkbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).siblings("label").find("input");
+
+  if (del) {
+    if ($checkbox.prop("checked")) {
+      $checkbox.trigger("click"); //Необходимо для удаления компетенций, входящих в данный модуль (чисто визуально)
+    }
+
+    jquery__WEBPACK_IMPORTED_MODULE_0___default.a.ajax({
+      headers: {
+        'X-CSRF-TOKEN': jquery__WEBPACK_IMPORTED_MODULE_0___default()('meta[name="csrf-token"]').attr('content')
+      },
+      type: "POST",
+      url: "/profile/ajax-del-competence",
+      data: {
+        "id": id
+      },
+      success: function success(response, status) {
+        notificationMessage(response);
+        console.log("response");
+        $item.remove();
+      },
+      error: function error(response, status) {
+        notificationMessage("Ошибка удаления", "error");
+      }
+    });
+  }
+}); //
+
 jquery__WEBPACK_IMPORTED_MODULE_0___default()(".module-header-item .form-field input").on('click', function () {
   if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).prop("checked")) {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().siblings(".select-wrap").slideDown();
@@ -14095,15 +14165,19 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(".module-header-item .form-field i
 
 function renderCompetences($parent, arr) {
   var str = '';
-  console.log("sadasd");
-  console.log(arr);
 
   for (var key in arr) {
-    console.log("внутри");
-    str += "\n    <div class=\"select-competences-item\">\n      <p class=\"text\"><input type=\"text\" name=\"competencestitles[]\" value=\"".concat(arr[key], "\" class=\"input-bg\" readonly></p>\n     \n    </div>\n    ");
+    // console.log("внутри");
+    str += "\n            <div class=\"select-competences-item\">\n            <p class=\"text\"><input type=\"text\" name=\"competencestitles[]\" value='".concat(arr[key], "' class=\"input-bg\" readonly></p>\n            </div>\n    ");
   }
 
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()($parent).addClass("asdasd").html(str);
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()($parent).html(str);
+}
+
+function notificationMessage(msg) {
+  var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "success";
+  var str = "\n    <div class=\"notifications__item notifications__item--".concat(type, "\"><span class=\"text\">").concat(msg, "</span><span class=\"btn-close\"><i class=\"fas fa-times\"></i></span></div>\n  ");
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(".notifications").append(str);
 }
 
 /***/ }),
