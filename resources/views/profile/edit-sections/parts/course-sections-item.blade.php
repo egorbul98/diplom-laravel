@@ -21,7 +21,7 @@
     </div>
   </div>
   
-  <div class="list-modules shadow-light">
+  <div class="list-modules shadow-light" data-section-id="{{$section->id}}" data-author-id="{{$user->id}}">
     <div class="list-modules-item">
 
       <h4 class="list-modules-item__inner">
@@ -40,9 +40,9 @@
             <span class="num">{{$i}}.{{++$j}}</span>
             <input type="text" name="module-title[{{$module->id}}]" class="input-control input-bg" value="{{$module->title}}" placeholder="Название модуля">
           </h4>
-          <p class="list-modules-item__steps"><span>11</span> шагов</p>
+        <p class="list-modules-item__steps"><span>{{$module->steps->count()}}</span> шагов</p>
           <div class="list-modules-item__btns">
-            <a href="{{route("profile.course.module.edit", [$module])}}" class="btn ">Редактировать</a>
+            <a href="{{route("profile.course.module.edit", [$module, $section])}}" class="btn ">Редактировать</a>
             <button type="button" class="btn-delete-module" data-module-id="{{$module->id}}"><i class="fas fa-times"></i></button>
           </div>
         </div>

@@ -1,5 +1,5 @@
 .steps-block {
-  padding: 26px 0;
+  padding: 26px 0 16px;
   @include media-max($S){
     padding: 18px 0;
   }
@@ -14,6 +14,7 @@
     display: flex;
     justify-content: start;
     align-items: center;
+    padding-bottom: 10px;
   }
   .step-list {
     display: flex;

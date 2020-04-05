@@ -7,18 +7,63 @@
     }
 }
 
+.step-answer-inner {
+    display: flex;
+    flex-wrap: wrap;
+
+    @include media-max($XS) {
+        width: 100%;
+    }
+}
+
 .step-answer {
-    margin-bottom: 20px;
     border-bottom: 1px solid $col-active;
-    padding-bottom: 10px;
+    padding-bottom: 8px;
+    padding-top: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+    &__item {
+        margin-right: 14px;
+        flex-shrink: 0;
+
+        @include media-max($S) {
+            margin-right: 8px;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.step-answer-form {
+    margin-bottom: 20px;
+    margin-top: 10px;
+
+    input {
+        width: 100%;
+        max-width: 360px;
+    }
+
+    .form-field__tooltip {
+        top: 89%;
+    }
 
     .form-row {
-        margin-bottom: 10px;
+        margin-bottom: 20px;
 
         &__left {
             @include media-max($S) {
                 margin-bottom: 3px;
             }
         }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
     }
+
 }

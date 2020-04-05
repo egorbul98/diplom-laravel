@@ -1,5 +1,7 @@
 import $ from "jquery"
 
+import { notificationMessage } from "./../fun"
+
 //Создание раздела
 $(".course-sections #btn-create-section").on('click', function () {
     let $wrap = $(this).closest(".course-sections").find(".course-sections-list");
@@ -107,10 +109,12 @@ $(".course-sections").on('click', '.btn-create-module', function () {
     let $wrap = $(this).closest(".list-modules-item").siblings(".list-modules-inner");
     let title = $(this).closest(".list-modules-item").find(".input-create-module").val();
     let sectionId = $(this).attr("data-section-id");
+    let authorId = $(this).closest(".course-sections-list").attr("data-author-id"); 
     let sectionNum = $(this).closest(".course-sections-item ").find(".section-edit-wrap__num").text();
     let str = '';
-
-    if (title != "") {
+  console.log(authorId, sectionId);
+  
+  if (title != "") {
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -119,7 +123,8 @@ $(".course-sections").on('click', '.btn-create-module', function () {
             url: "/profile/ajax-add-module",
             data: {
                 "title": title,
-                "section_id": sectionId
+                "section_id": sectionId,
+                "author_id": authorId,
             },
             success: function (response, status) {
                 notificationMessage("Модуль успешно добавлен");
@@ -131,9 +136,9 @@ $(".course-sections").on('click', '.btn-create-module', function () {
                   <span class="num">${sectionNum}.${++lengthItems}</span>
                   <input type="text" class="input-control input-bg" name="module-title[${response.id}]" value="${title}" placeholder="Название модуля">
                 </h4>
-                <p class="list-modules-item__steps"><span>11</span> шагов</p>
+                <p class="list-modules-item__steps"><span>0</span> шагов</p>
                 <div class="list-modules-item__btns">
-                  <a href="#" class="btn ">Редактировать</a>
+                  <a href="/profile/course/module/${response.id}" class="btn ">Редактировать</a>
                   <button type="button" class="btn-delete-module" data-module-id="${response.id}"><i class="fas fa-times"></i></button>
                 </div>
               </div>
@@ -155,13 +160,11 @@ $(".course-sections").on("click", ".btn-delete-module", function () {
     let id = $(this).attr("data-module-id");
     let $item = $(this).closest(".list-modules-item");
     let del = confirm("Вы точно хотите удалить модуль?");
-   
+    let sectionId = $(this).closest(".list-modules").attr("data-section-id"); 
     let $section = $(this).closest(".course-sections-item");
     let sectionNum = $section.find(".section-edit-wrap__num").text();
   
   if (del) {
-      
-      
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -170,6 +173,7 @@ $(".course-sections").on("click", ".btn-delete-module", function () {
             url: "/profile/ajax-del-module",
             data: {
                 "id": id,
+                "section_id": sectionId,
             },
           success: function (response, status) {
             console.log("suc");
@@ -194,10 +198,3 @@ $(".course-sections").on("click", ".btn-delete-module", function () {
 
 
 
-function notificationMessage(msg, type = "success") {
-  let str = `
-  <div class="notifications__item notifications__item--${type}"><span class="text">${msg}</span><span class="btn-close"><i class="fas fa-times"></i></span></div>
-`;
-
-  $(".notifications").append(str);
-}

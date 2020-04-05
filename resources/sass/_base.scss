@@ -213,7 +213,13 @@ button{
   width: 100%;
   color: #ffffff;
   font-size: 18px;
-
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  left: 0;
+  opacity: 0.9;
+  
   @include media-max($M){
     font-size: 16px;
   }
@@ -304,6 +310,13 @@ button{
   }
 }
 
+.flex{
+  display: flex;
+}
+.flex-wrap{
+  display: flex;
+  flex-wrap: wrap;
+}
 .flex-b{
   display: flex;
   align-items: center;
@@ -326,4 +339,15 @@ button{
   display: flex;
   justify-content: center;
   margin-top: 50px;
+}
+.inline-block{
+  display: inline-block;
+}
+
+.category-title{
+  padding: 30px 0;
+  text-align: center;
+  @include media-max($S){
+    padding: 20px 0;
+  }
 }

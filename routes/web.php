@@ -23,17 +23,17 @@ use Illuminate\Support\Facades\Route;
 Route::get("home", 'HomeController@index')->name("home");
 Route::get("/", 'HomeController@index');
 
-
+Route::get("category/{category_slug}", 'HomeController@category')->name("category");
 Route::resource('course', 'CourseController')->only(["index", "show"])->names("course");
 
-Route::group(['prefix' => 'profile', "namespace"=>"Profile"], function () {
+
+Route::group(['prefix' => 'profile', "namespace"=>"Profile", "middleware"=>"auth"], function () {
     Route::get('', "ProfileController@index")->name("profile");
     Route::resource('course', 'CourseController')->names("profile.course");
 
     Route::get('course/{course}/sections', "EditorSectionController@edit")->name("profile.course.sections.edit");
     Route::post('course/{course}/sections', "EditorSectionController@save")->name("profile.course.sections.save");
     
-
     Route::post('/ajax-add-section', "AjaxSectionController@add");
     Route::post('/ajax-del-section', "AjaxSectionController@delete");
 
@@ -43,11 +43,30 @@ Route::group(['prefix' => 'profile', "namespace"=>"Profile"], function () {
     Route::post('/ajax-add-competence', "AjaxCompetenceController@add");
     Route::post('/ajax-del-competence', "AjaxCompetenceController@delete");
 
-    Route::get('course/module/{module}/{step_id?}', "EditorModuleController@edit")->name("profile.course.module.edit");
-    Route::post('course/module/{module}', "EditorModuleController@save")->name("profile.course.module.save");
+    Route::post('/ajax-add-answer-num', "AjaxAnswersController@addAnswerNum");
+    Route::post('/ajax-add-answer-string', "AjaxAnswersController@addAnswerString");
+    Route::post('/ajax-del-answer-num', "AjaxAnswersController@deleteAnswerNum");
+    Route::post('/ajax-del-answer-string', "AjaxAnswersController@deleteAnswerString");
 
-    // Route::resource('course/module/{module}/step/', 'StepController')->only("store", "destroy")->names("profile.module.step");;
-    Route::resource('course/module/{id_module}/step_type/{id_step_type}', 'StepController')->only("store", "destroy")->names("profile.module.step");;
+    Route::post('/ajax-update-module-data', "AjaxModuleDataController@update");
+    
+
+    Route::group(['prefix' => 'course/module'], function () {
+        Route::get('{module}/{section}/{step_id?}', "EditorModuleController@edit")->name("profile.course.module.edit");
+        Route::post('{module}', "EditorModuleController@save")->name("profile.course.module.save");
+
+        Route::post('{module_id}/{section}/step_type/{step_type_id}', 'StepController@store')->name("profile.module.step.store");;
+        Route::post('{module_id}/{step_id}', 'StepController@update')->name("profile.module.step.update");;
+        Route::get('{module_id}/{section}/destroy-step/{step_id}', 'StepController@destroy')->name("profile.module.step.destroy");;
+    });
+   
+});
+
+
+view()->composer(['*'], function ($view) {
+    $categories = \App\Models\Category::all();
+    $user = Auth::user();
+    $view->with(["categories"=>$categories, "user"=>$user]);
 });
 
 

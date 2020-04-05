@@ -60,7 +60,7 @@
     </div>
     <div class="form-row__right form-field">
       <div class="new-course__img">
-        <img src="img/course.jpg" alt=""><span class="icon"><i class="fas fa-user"></i></span>
+        <img src="img/course.jpg" alt=""><span class="icon"><i class="fas fa-camera"></i></span>
         <input type="file" id="image" name="image" style="visibility: hidden;">
         <label for="image" class="edit-foto"><i class="fas fa-edit"></i></label>
       </div>
@@ -76,7 +76,7 @@
       <button class="btn" type="submit">Создать</button>
     @endif
     
-    <a href="{{ route("profile.course.index") }}" class="btn">Отмена</a>
+    <a href="{{URL::previous()}}" class="btn">Отмена</a>
   </div>
 
 </form>

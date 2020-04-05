@@ -23,9 +23,11 @@ list
 </section>
 
 
-@include('parts.filter');
-
-
+<section class="title-outer">
+  <h1 class="title">{{$category->title}}</h1>
+  <div class="line"></div>
+</section>
+{{-- <h1 class="category-title"></h1> --}}
 <section class="courses">
   <div class="main-wrap">
       <div class="courses-list">

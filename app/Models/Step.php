@@ -10,9 +10,13 @@ class Step extends Model
         'content', 'step_type_id'
     ];
     
-    public function answers()
+    public function answersNum()
     {
-        return $this->hasMany(Answer::class);
+        return $this->hasMany(AnswerNum::class);
+    }
+    public function answersString()
+    {
+        return $this->hasMany(AnswerString::class);
     }
     public function modules()
     {

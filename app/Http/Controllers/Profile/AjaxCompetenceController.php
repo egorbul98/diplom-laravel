@@ -28,24 +28,6 @@ class AjaxCompetenceController extends Controller
 
         return response()->json("Компетенция успешно удалена", 200);
     }
-    // public function add(SectionRequest $request)
-    // {
-    //     $data = $request->validated();
-
-    //     $section = new Section($data);
-    //     $section->save();
-
-    //     return response()->json(["id"=>$section->id], 200);
-    // }
-
-    // public function delete(Request $request)
-    // {
-    //     $id = $request->all()["id"];
-
-    //     $section = Section::find($id);
-    //     $section->delete();
-
-    //     return response()->json("Раздел успешно удален", 200);
-    // }
+  
 
 }

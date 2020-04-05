@@ -1,7 +1,12 @@
 import $ from "jquery"
 import "./module-edit-page/answers"
 import "./module-edit-page/type-steps"
-
+import {
+    notificationMessage,
+    MsgError,
+    MsgSuccess,
+    MsgErrorInputFill
+} from "./../fun"
 
 let competencesIn = [];
 let competencesOut = [];
@@ -14,6 +19,21 @@ $(document).ready(function () {
             $(element).trigger('click');
         }
     });
+    $(".module-header-item .form-field input").on('click', function () {
+        if ($(this).prop("checked")) {
+            $(this).parent().siblings(".select-wrap").slideDown();
+        } else {
+            $(this).parent().siblings(".select-wrap").slideUp();
+        }
+    });
+
+    if (!$("#in-competences").prop("checked")) {
+        $("#in-competences").parent().siblings(".select-wrap").slideUp();
+    } 
+    if (!$("#out-competences").prop("checked")) {
+        $("#out-competences").parent().siblings(".select-wrap").slideUp();
+    } 
+
 });
 
 
@@ -40,7 +60,8 @@ $('.edit-module .checkboxes').on('click', "input", function () {
 $(".select-competences__right .btn-add").on('click', function () {
     let val = $(this).siblings("input").val();
     let sectionId = $(this).attr("data-section-id");
-    let $wrap = $(this).parent().siblings(".checkboxes");
+    // let $wrap = $(this).parent().siblings(".checkboxes");
+    let $wrap = $(this).closest(".module-header-inner").find(".checkboxes");
     if (val != '') {
         $.ajax({
             headers: {
@@ -56,8 +77,8 @@ $(".select-competences__right .btn-add").on('click', function () {
                 notificationMessage("Компетенция успешно добавлена");
                 let str = `<p class="flex-b">
                 <label>
-                  <input type="checkbox" name="complex" value="2"><span class="check"></span><span class="text">${val}</span></label>
-                  <button class="btn-delete-competence btn-bg" type="button"><span class="icon"><i class="fas fa-times"></i></span></button>
+                  <input type="checkbox" class="checkboxes__input" name="complex" value="${response.id}"><span class="check"></span><span class="text">${val}</span></label>
+                  <button class="btn-delete-competence btn-bg" type="button" data-competence-id="${response.id}"><span class="icon"><i class="fas fa-times"></i></span></button>
               </p> `;
                 $wrap.append(str);
             },
@@ -89,26 +110,74 @@ $(".select-custom").on("click", ".btn-delete-competence", function () {
             data: {
                 "id": id,
             },
-          success: function (response, status) {
+            success: function (response, status) {
                 notificationMessage(response);
                 console.log("response");
                 $item.remove();
             },
-          error: function (response, status) {
+            error: function (response, status) {
                 notificationMessage("Ошибка удаления", "error");
             },
         });
     }
 });
-//
-$(".module-header-item .form-field input").on('click', function () {
-    if ($(this).prop("checked")) {
-        $(this).parent().siblings(".select-wrap").slideDown();
-    } else {
-        $(this).parent().siblings(".select-wrap").slideUp();
-    }
 
-});
+
+//СОхранение данных модуля
+$(".module-header .btn-save-module").on("click", function () {
+    let $parent = $(this).closest('.module-header');
+    let moduleId = $parent.attr("data-module-id");
+    let moduleTitle = $parent.find(".module-header-item__title-input").val();
+
+    let competencesOutArr = [];
+    let competencesInArr = [];
+
+    if ($("#out-competences").prop("checked")) {
+        $($parent.find(".module-header-item__out-competence .checkboxes .checkboxes__input")).each(function (index, element) {
+            if ($(element).prop("checked")) {
+                competencesOutArr.push($(element).val())
+            }
+        }); //Получили все выходные компетенции
+    }
+    if ($("#in-competences").prop("checked")) {
+        $($parent.find(".module-header-item__in-competence .checkboxes .checkboxes__input")).each(function (index, element) {
+            if ($(element).prop("checked")) {
+                competencesInArr.push($(element).val())
+            }
+        }); //Получили все входные компетенции
+
+    }
+    console.log(moduleId, competencesInArr, competencesOutArr, moduleTitle);
+
+    let url = "/profile/ajax-update-module-data";
+    let type = "POST";
+    let data = {
+        "competences_out": competencesOutArr,
+        "competences_in": competencesInArr,
+        "title": moduleTitle,
+        "id": moduleId,
+    };
+
+    if (moduleTitle != '') {
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type: type,
+            url: url,
+            data: data,
+            success: function (response, status) {
+                notificationMessage(response.msg);
+            },
+            error: function (response, status) {
+                notificationMessage(response.msg, "error");
+            },
+        });
+    } else {
+        notificationMessage(MsgErrorInputFill, "error");
+    }
+})
+
 
 function renderCompetences($parent, arr) {
     let str = '';
@@ -123,12 +192,3 @@ function renderCompetences($parent, arr) {
     }
     $($parent).html(str);
 }
-
-
-function notificationMessage(msg, type = "success") {
-    let str = `
-    <div class="notifications__item notifications__item--${type}"><span class="text">${msg}</span><span class="btn-close"><i class="fas fa-times"></i></span></div>
-  `;
-  
-    $(".notifications").append(str);
-  }

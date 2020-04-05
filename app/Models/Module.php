@@ -11,14 +11,24 @@ use App\Models\Step;
 class Module extends Model
 {
     protected $fillable = [
-        'title', 'section_id'
+        // 'title', 'section_id'
+        'title', 'author_id'
     ];
 
-    public function section()
-    {
-        return $this->belongsTo(Section::class);
-    }
 
+    public function sections()
+    {
+        return $this->belongsToMany(Section::class, 'module_section');
+    }
+    // public function section()
+    // {
+    //     return $this->belongsTo(Section::class);
+    // }
+
+    public function competences()
+    {
+        return $this->belongsToMany(Competence::class, "competence_module");
+    }
     public function competences_in()
     {
         return $this->belongsToMany(Competence::class, "competence_module")->wherePivot('type', "in");

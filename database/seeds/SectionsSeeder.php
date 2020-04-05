@@ -13,7 +13,7 @@ class SectionsSeeder extends Seeder
     {
         $sections= [];
 
-        for ($i=1; $i < 30; $i++) { 
+        for ($i=1; $i < 50; $i++) { 
             $courseId = rand(1,11);
             $title = 'Раздел '.$i. " Lorem ipsum dolor sit amet consectetur adipisicing";
             

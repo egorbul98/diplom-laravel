@@ -4,13 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Answer extends Model
+class AnswerString extends Model
 {
     protected $fillable = [
-        'title', 'value', 'error', 'type', 'step_id'
+        'value', 'step_id'
     ];
 
-    public function steps()
+    public function step()
     {
         return $this->belongsTo(Step::class);
     }

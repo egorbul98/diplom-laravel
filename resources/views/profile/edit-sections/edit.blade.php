@@ -14,7 +14,7 @@
   <section class="course-sections">
     <form action="{{route("profile.course.sections.save", $course->id)}}" class="form" id="form-save-sections" method="POST">
       @csrf
-      <div class="course-sections-list">
+      <div class="course-sections-list" data-author-id="{{$user->id}}">
         @php  $i = 0  @endphp
         @foreach ($course->sections as $section)
             @php  $i++  @endphp
@@ -65,5 +65,5 @@
   </section>
 
 </div>
-
+@include('profile.parts.footer-editor', [$body = "sections"])
 @endsection

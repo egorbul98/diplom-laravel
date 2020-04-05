@@ -28,7 +28,7 @@
                     <div class="auth">
                         @auth
                         <div class="user">
-                            <div class="user__name"><span class="lastname"></span><span class="firstname">{{Auth::user()->name}}</span></div>
+                            <div class="user__name"><span class="lastname"></span><span class="firstname">{{$user->name}}</span></div>
                             <div class="icon"><i class="fas fa-chevron-down"></i></div>
                             <div class="drop-down shadow-light">
                             <div class="drop-down__item"><a href="{{route("profile")}}">Личный кабинет</a></div>
@@ -51,12 +51,11 @@
 
             <div class="header-middle">
                 <nav class="nav">
-                <div class="nav__item"><a href="{{route("course.index")}}">Каталог</a>
+                    <div class="nav__item"><a href="{{route("course.index")}}">Каталог</a>
                         <div class="nav__item-drop drop">
-                            <div class="drop__item"><a href="item-page.html">Программирование</a></div>
-                            <div class="drop__item"><a href="#">Web-разработка</a></div>
-                            <div class="drop__item"><a href="#">Дизайн</a></div>
-                            <div class="drop__item"><a href="#">Фото</a></div>
+                            @foreach ($categories as $category_item)
+                                <div class="drop__item"><a href="{{route("category", $category_item->slug)}}">{{$category_item->title}}</a></div>
+                             @endforeach
                         </div>
                     </div>
                     <div class="nav__item"><a href="#">Новости</a></div>

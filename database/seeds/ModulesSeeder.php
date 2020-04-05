@@ -13,13 +13,12 @@ class ModulesSeeder extends Seeder
     {
         $modules= [];
 
-        for ($i=1; $i < 60; $i++) { 
-            $sectionId = rand(1,30);
+        for ($i=1; $i < 80; $i++) { 
             $title = 'Модуль '.$i. " Lorem ipsum dolor sit cumque";
-            
+            $author_id = rand(1,12);
             $modules[] = [
                 'title' => $title,
-                "section_id"=> $sectionId,
+                'author_id' => $author_id,
             ];
         };
 

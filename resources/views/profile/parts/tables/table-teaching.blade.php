@@ -13,7 +13,7 @@
     </thead>
     <tbody>
 
-      @foreach (Auth::user()->courses as $course)
+      @foreach ($user->courses as $course)
         <tr>
           <td class="table-img"><img src="{{asset("img/course.jpg")}}" alt="img"></td>
         <td class="profile-content-table-course__title">{{$course->title}}</td>

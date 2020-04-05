@@ -14,13 +14,14 @@
     
     &:hover{
       background-color: $col-btn;
+      color: #ffffff;
     }
   }
 
   .page-item.active{
     .page-link{
       background-color: $col-btn;
-      color: $col-active;
+      color: #ffffff;
     }
   }
 }

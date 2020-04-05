@@ -13750,6 +13750,35 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./resources/js/fun.js":
+/*!*****************************!*\
+  !*** ./resources/js/fun.js ***!
+  \*****************************/
+/*! exports provided: MsgSuccess, MsgSuccessDel, MsgError, MsgErrorInputFill, notificationMessage */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MsgSuccess", function() { return MsgSuccess; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MsgSuccessDel", function() { return MsgSuccessDel; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MsgError", function() { return MsgError; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MsgErrorInputFill", function() { return MsgErrorInputFill; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "notificationMessage", function() { return notificationMessage; });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+
+var MsgSuccess = "Успешно сохранено";
+var MsgSuccessDel = "Удаление прошло успешно";
+var MsgError = "Ошибка ввода формы";
+var MsgErrorInputFill = "Заполните все поля";
+function notificationMessage(msg) {
+  var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "success";
+  var str = "\n      <div class=\"notifications__item notifications__item--".concat(type, "\" style=\"display:none\"><span class=\"text\">").concat(msg, "</span><span class=\"btn-close\"><i class=\"fas fa-times\"></i></span></div>\n    ");
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(str).appendTo(".notifications").slideDown();
+}
+
+/***/ }),
+
 /***/ "./resources/js/index.js":
 /*!*******************************!*\
   !*** ./resources/js/index.js ***!
@@ -13775,7 +13804,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 jquery__WEBPACK_IMPORTED_MODULE_6___default()(document).ready(function () {
-  // FORM DELETE COURSE course-header in profile
+  jquery__WEBPACK_IMPORTED_MODULE_6___default()(".num-only").on("input", function (event) {
+    this.value = this.value.replace(/^\./g, '').replace(/\d\-/g, '$1').replace(/\-\-/g, '$1').replace(/[^0-9-.]/g, '').replace(/(\..*)\./g, '$1');
+  }); // FORM DELETE COURSE course-header in profile
+
   jquery__WEBPACK_IMPORTED_MODULE_6___default()("#delete-course").on("click", function (event) {
     event.preventDefault();
     var del = confirm("Вы точно хотите удалить курс?");
@@ -13836,8 +13868,9 @@ jquery__WEBPACK_IMPORTED_MODULE_6___default()(document).ready(function () {
     jquery__WEBPACK_IMPORTED_MODULE_6___default()(this).toggleClass("active").children(".item-sections-item__cometencies").slideToggle();
   });
   jquery__WEBPACK_IMPORTED_MODULE_6___default()('.notifications').on("click", ".btn-close", function () {
-    // $('.notifications').toggleClass("notifications--active");
-    jquery__WEBPACK_IMPORTED_MODULE_6___default()(this).closest(".notifications__item").slideToggle();
+    jquery__WEBPACK_IMPORTED_MODULE_6___default()(this).closest(".notifications__item").slideUp(function () {
+      jquery__WEBPACK_IMPORTED_MODULE_6___default()(this).remove();
+    });
   });
 }); // import "./../sass/style.scss"
 
@@ -13854,6 +13887,8 @@ jquery__WEBPACK_IMPORTED_MODULE_6___default()(document).ready(function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _fun__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../fun */ "./resources/js/fun.js");
+
  //Создание раздела
 
 jquery__WEBPACK_IMPORTED_MODULE_0___default()(".course-sections #btn-create-section").on('click', function () {
@@ -13875,13 +13910,13 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(".course-sections #btn-create-sect
         "course_id": courseId
       },
       success: function success(response, status) {
-        notificationMessage("Раздел успешно создан");
+        Object(_fun__WEBPACK_IMPORTED_MODULE_1__["notificationMessage"])("Раздел успешно создан");
         var lengthItems = $wrap.children().length;
         var str = "\n                <div class=\"course-sections-item \">\n                <div class=\"course-sections-item__inner section-edit shadow-light\">\n                  <div class=\"section-edit-wrap\">\n                    <div class=\"section-edit-wrap__num\">".concat(++lengthItems, "</div>\n                    <div class=\"section-edit-wrap__inputs\">\n                      <div class=\"\">\n                       \n                        <div class=\"form-field\">\n                          <input class=\"input-control  input-title\" name=\"title[").concat(response.id, "]\" id=\"title\" type=\"text\" maxlength=\"128\" value=\"").concat(title, "\">\n                        </div>\n                      </div>\n              \n                      <div class=\"\">\n                        <div class=\"form-field\">\n                        <textarea name=\"description[").concat(response.id, "]\" id=\"\" cols=\"30\" rows=\"5\" class=\"description\">").concat(description, "</textarea>\n                        </div>\n                      </div>\n                    </div>\n                  </div>\n                </div>\n                <div class=\"list-modules shadow-light\">\n                  <div class=\"list-modules-item\">\n                    <h4 class=\"list-modules-item__inner\">\n                      <input type=\"text\" class=\"input-control input-create-module\" placeholder=\"\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u043C\u043E\u0434\u0443\u043B\u044F\">\n                    </h4>\n                    <div class=\"list-modules-item__btns\">\n                      <button type=\"button\" class=\"btn btn-create-module  list-modules-item__btn\"  data-section-id=\"").concat(response.id, "\">\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u043C\u043E\u0434\u0443\u043B\u044C</button>\n                    </div>\n                  </div>\n                  <div class=\"list-modules-inner\">\n                    \n                  </div>\n                </div>\n                <button type=\"button\" class=\"btn-delete-section\" data-section-id=\"").concat(response.id, "\"><i class=\"fas fa-times\"></i></button>\n              </div>\n              \n                  ");
         $wrap.append(str);
       },
       error: function error(response, status) {
-        notificationMessage("Неверно введены данные формы", "error");
+        Object(_fun__WEBPACK_IMPORTED_MODULE_1__["notificationMessage"])("Неверно введены данные формы", "error");
       }
     });
   }
@@ -13903,14 +13938,14 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(".course-sections").on("click", ".
         "id": id
       },
       success: function success(response, status) {
-        notificationMessage(response);
+        Object(_fun__WEBPACK_IMPORTED_MODULE_1__["notificationMessage"])(response);
         $item.remove();
         jquery__WEBPACK_IMPORTED_MODULE_0___default()(".course-sections-item .section-edit-wrap__num").each(function (index, element) {
           jquery__WEBPACK_IMPORTED_MODULE_0___default()(element).html(++index);
         });
       },
       error: function error(response, status) {
-        notificationMessage("Ошибка удаления", "error");
+        Object(_fun__WEBPACK_IMPORTED_MODULE_1__["notificationMessage"])("Ошибка удаления", "error");
       }
     });
   }
@@ -13920,8 +13955,10 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(".course-sections").on('click', '.
   var $wrap = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest(".list-modules-item").siblings(".list-modules-inner");
   var title = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest(".list-modules-item").find(".input-create-module").val();
   var sectionId = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr("data-section-id");
+  var authorId = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest(".course-sections-list").attr("data-author-id");
   var sectionNum = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest(".course-sections-item ").find(".section-edit-wrap__num").text();
   var str = '';
+  console.log(authorId, sectionId);
 
   if (title != "") {
     jquery__WEBPACK_IMPORTED_MODULE_0___default.a.ajax({
@@ -13932,16 +13969,17 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(".course-sections").on('click', '.
       url: "/profile/ajax-add-module",
       data: {
         "title": title,
-        "section_id": sectionId
+        "section_id": sectionId,
+        "author_id": authorId
       },
       success: function success(response, status) {
-        notificationMessage("Модуль успешно добавлен");
+        Object(_fun__WEBPACK_IMPORTED_MODULE_1__["notificationMessage"])("Модуль успешно добавлен");
         var lengthItems = $wrap.children().length;
-        var str = "\n              <div class=\"list-modules-item\">\n                <h4 class=\"list-modules-item__inner\">\n                  <span class=\"num\">".concat(sectionNum, ".").concat(++lengthItems, "</span>\n                  <input type=\"text\" class=\"input-control input-bg\" name=\"module-title[").concat(response.id, "]\" value=\"").concat(title, "\" placeholder=\"\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u043C\u043E\u0434\u0443\u043B\u044F\">\n                </h4>\n                <p class=\"list-modules-item__steps\"><span>11</span> \u0448\u0430\u0433\u043E\u0432</p>\n                <div class=\"list-modules-item__btns\">\n                  <a href=\"#\" class=\"btn \">\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C</a>\n                  <button type=\"button\" class=\"btn-delete-module\" data-module-id=\"").concat(response.id, "\"><i class=\"fas fa-times\"></i></button>\n                </div>\n              </div>\n            ");
+        var str = "\n              <div class=\"list-modules-item\">\n                <h4 class=\"list-modules-item__inner\">\n                  <span class=\"num\">".concat(sectionNum, ".").concat(++lengthItems, "</span>\n                  <input type=\"text\" class=\"input-control input-bg\" name=\"module-title[").concat(response.id, "]\" value=\"").concat(title, "\" placeholder=\"\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u043C\u043E\u0434\u0443\u043B\u044F\">\n                </h4>\n                <p class=\"list-modules-item__steps\"><span>0</span> \u0448\u0430\u0433\u043E\u0432</p>\n                <div class=\"list-modules-item__btns\">\n                  <a href=\"/profile/course/module/").concat(response.id, "\" class=\"btn \">\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C</a>\n                  <button type=\"button\" class=\"btn-delete-module\" data-module-id=\"").concat(response.id, "\"><i class=\"fas fa-times\"></i></button>\n                </div>\n              </div>\n            ");
         $wrap.append(str);
       },
       error: function error(response, status) {
-        notificationMessage("Неверно введено название формы, либо название слишком динное", "error");
+        Object(_fun__WEBPACK_IMPORTED_MODULE_1__["notificationMessage"])("Неверно введено название формы, либо название слишком динное", "error");
       }
     });
     $wrap.append(str);
@@ -13952,6 +13990,7 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(".course-sections").on("click", ".
   var id = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr("data-module-id");
   var $item = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest(".list-modules-item");
   var del = confirm("Вы точно хотите удалить модуль?");
+  var sectionId = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest(".list-modules").attr("data-section-id");
   var $section = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest(".course-sections-item");
   var sectionNum = $section.find(".section-edit-wrap__num").text();
 
@@ -13963,11 +14002,12 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(".course-sections").on("click", ".
       type: "POST",
       url: "/profile/ajax-del-module",
       data: {
-        "id": id
+        "id": id,
+        "section_id": sectionId
       },
       success: function success(response, status) {
         console.log("suc");
-        notificationMessage(response);
+        Object(_fun__WEBPACK_IMPORTED_MODULE_1__["notificationMessage"])(response);
         console.log("response");
         $item.remove();
         $section.find(".list-modules-item .num").each(function (index, element) {
@@ -13976,17 +14016,11 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(".course-sections").on("click", ".
       },
       error: function error(response, status) {
         console.log("asddasd");
-        notificationMessage("Ошибка удаления", "error");
+        Object(_fun__WEBPACK_IMPORTED_MODULE_1__["notificationMessage"])("Ошибка удаления", "error");
       }
     });
   }
 });
-
-function notificationMessage(msg) {
-  var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "success";
-  var str = "\n  <div class=\"notifications__item notifications__item--".concat(type, "\"><span class=\"text\">").concat(msg, "</span><span class=\"btn-close\"><i class=\"fas fa-times\"></i></span></div>\n");
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()(".notifications").append(str);
-}
 
 /***/ }),
 
@@ -14063,9 +14097,90 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _fun__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../fun */ "./resources/js/fun.js");
+
+ //Создание ответа
 
 jquery__WEBPACK_IMPORTED_MODULE_0___default()("#btn-add-answer").on("click", function () {
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()(".wrap-step-answer").append("\n  <div class=\"step-answer\">\n  <div class=\"form\">\n      <div class=\"form-row\">\n          <div class=\"form-row__left\">\n              <p>\u041F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u044B\u0439 \u043E\u0442\u0432\u0435\u0442</p>\n          </div>\n          <div class=\"form-row__right\">\n              <input type=\"text\" name=\"answer[]\">\n          </div>\n      </div>\n      <div class=\"form-row\">\n          <div class=\"form-row__left\">\n              <p>\u0414\u043E\u043F\u0443\u0441\u0442\u0438\u043C\u0430\u044F \u043F\u043E\u0433\u0440\u0435\u0448\u043D\u043E\u0441\u0442\u044C</p>\n          </div>\n          <div class=\"form-row__right\"><input type=\"text\" name=\"error[]\"></div>\n      </div>\n  </div>\n</div>\n\n  ");
+  var $wrap = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).siblings(".wrap-step-answer");
+  var stepId = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr("data-step-id");
+  var stepTypeId = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr("data-type-step-id");
+  var $parent = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).siblings(".step-answer-form");
+  var value = $parent.find(".value").val();
+  var error = $parent.find(".error").val();
+  var data = {};
+  var url;
+  data.value = value;
+  data.step_id = stepId;
+  var str = "";
+
+  if (stepTypeId == 2) {
+    //задача с текстовым ответом
+    url = "/profile/ajax-add-answer-string";
+  } else if (stepTypeId == 3) {
+    //Числовая задача
+    data.error = error;
+    url = "/profile/ajax-add-answer-num";
+  }
+
+  if (value != '' && error != '') {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default.a.ajax({
+      headers: {
+        'X-CSRF-TOKEN': jquery__WEBPACK_IMPORTED_MODULE_0___default()('meta[name="csrf-token"]').attr('content')
+      },
+      type: "POST",
+      url: url,
+      data: data,
+      success: function success(response, status) {
+        Object(_fun__WEBPACK_IMPORTED_MODULE_1__["notificationMessage"])(_fun__WEBPACK_IMPORTED_MODULE_1__["MsgSuccess"]);
+        str = "\n                    <div class=\"step-answer\">\n                        <div class=\"step-answer-inner\">\n                            <div class=\"step-answer__item\"><p>\u041F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u044B\u0439 \u043E\u0442\u0432\u0435\u0442: ".concat(value, "</p></div> ");
+
+        if (stepTypeId == 3) {
+          str += "<div class=\"step-answer__item\"><p>\u0414\u043E\u043F\u0443\u0441\u0442\u0438\u043C\u0430\u044F \u043F\u043E\u0433\u0440\u0435\u0448\u043D\u043E\u0441\u0442\u044C: ".concat(error, "</p></div>");
+        }
+
+        str += "</div>\n                            <button class=\"btn btn-del\" data-answer-id=\"".concat(response.id, "\">\u0423\u0434\u0430\u043B\u0438\u0442\u044C</button>\n                        </div>");
+        $wrap.append(str);
+      },
+      error: function error(response, status) {
+        Object(_fun__WEBPACK_IMPORTED_MODULE_1__["notificationMessage"])(_fun__WEBPACK_IMPORTED_MODULE_1__["MsgError"], "error");
+      }
+    });
+  }
+}); //Удалить ответ
+
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(".wrap-step-answer").on("click", ".btn-del", function () {
+  var $wrap = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest(".wrap-step-answer");
+  var id = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr("data-answer-id");
+  var $item = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest(".step-answer");
+  var stepTypeId = $wrap.siblings("#btn-add-answer").attr("data-type-step-id");
+  var url;
+
+  if (stepTypeId == 2) {
+    //задача с текстовым ответом
+    url = "/profile/ajax-del-answer-string";
+  } else if (stepTypeId == 3) {
+    //Числовая задача
+    url = "/profile/ajax-del-answer-num";
+  }
+
+  jquery__WEBPACK_IMPORTED_MODULE_0___default.a.ajax({
+    headers: {
+      'X-CSRF-TOKEN': jquery__WEBPACK_IMPORTED_MODULE_0___default()('meta[name="csrf-token"]').attr('content')
+    },
+    type: "POST",
+    url: url,
+    data: {
+      "id": id
+    },
+    success: function success(response, status) {
+      Object(_fun__WEBPACK_IMPORTED_MODULE_1__["notificationMessage"])(_fun__WEBPACK_IMPORTED_MODULE_1__["MsgSuccessDel"]);
+      $item.remove();
+    },
+    error: function error(response, status) {
+      Object(_fun__WEBPACK_IMPORTED_MODULE_1__["notificationMessage"])(_fun__WEBPACK_IMPORTED_MODULE_1__["MsgError"], "error");
+    }
+  });
 });
 
 /***/ }),
@@ -14101,7 +14216,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _module_edit_page_answers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./module-edit-page/answers */ "./resources/js/modules/module-edit-page/answers.js");
-/* harmony import */ var _module_edit_page_type_steps__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./module-edit-page/type-steps */ "./resources/js/modules/module-edit-page/type-steps.js");
+/* harmony import */ var _module_edit_page_type_steps__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./module-edit-page/type-steps */ "./resources/js/modules/module-edit-page/type-steps.js");
+/* harmony import */ var _fun__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../fun */ "./resources/js/fun.js");
+
 
 
 
@@ -14115,6 +14232,21 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()(element).trigger('click');
     }
   });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(".module-header-item .form-field input").on('click', function () {
+    if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).prop("checked")) {
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().siblings(".select-wrap").slideDown();
+    } else {
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().siblings(".select-wrap").slideUp();
+    }
+  });
+
+  if (!jquery__WEBPACK_IMPORTED_MODULE_0___default()("#in-competences").prop("checked")) {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()("#in-competences").parent().siblings(".select-wrap").slideUp();
+  }
+
+  if (!jquery__WEBPACK_IMPORTED_MODULE_0___default()("#out-competences").prop("checked")) {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()("#out-competences").parent().siblings(".select-wrap").slideUp();
+  }
 });
 jquery__WEBPACK_IMPORTED_MODULE_0___default()('.edit-module .checkboxes').on('click', "input", function () {
   var $parent = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest(".select-competences__right").siblings(".select-competences__left").children(".list"); // let text = $(this).siblings(".text").text().replace(/\s+/g, " ");
@@ -14138,8 +14270,9 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()('.edit-module .checkboxes').on('cl
 
 jquery__WEBPACK_IMPORTED_MODULE_0___default()(".select-competences__right .btn-add").on('click', function () {
   var val = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).siblings("input").val();
-  var sectionId = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr("data-section-id");
-  var $wrap = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().siblings(".checkboxes");
+  var sectionId = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr("data-section-id"); // let $wrap = $(this).parent().siblings(".checkboxes");
+
+  var $wrap = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest(".module-header-inner").find(".checkboxes");
 
   if (val != '') {
     jquery__WEBPACK_IMPORTED_MODULE_0___default.a.ajax({
@@ -14153,12 +14286,12 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(".select-competences__right .btn-a
         "section_id": sectionId
       },
       success: function success(response, status) {
-        notificationMessage("Компетенция успешно добавлена");
-        var str = "<p class=\"flex-b\">\n                <label>\n                  <input type=\"checkbox\" name=\"complex\" value=\"2\"><span class=\"check\"></span><span class=\"text\">".concat(val, "</span></label>\n                  <button class=\"btn-delete-competence btn-bg\" type=\"button\"><span class=\"icon\"><i class=\"fas fa-times\"></i></span></button>\n              </p> ");
+        Object(_fun__WEBPACK_IMPORTED_MODULE_3__["notificationMessage"])("Компетенция успешно добавлена");
+        var str = "<p class=\"flex-b\">\n                <label>\n                  <input type=\"checkbox\" class=\"checkboxes__input\" name=\"complex\" value=\"".concat(response.id, "\"><span class=\"check\"></span><span class=\"text\">").concat(val, "</span></label>\n                  <button class=\"btn-delete-competence btn-bg\" type=\"button\" data-competence-id=\"").concat(response.id, "\"><span class=\"icon\"><i class=\"fas fa-times\"></i></span></button>\n              </p> ");
         $wrap.append(str);
       },
       error: function error(response, status) {
-        notificationMessage("Неверно введено название, либо название слишком длинное", "error");
+        Object(_fun__WEBPACK_IMPORTED_MODULE_3__["notificationMessage"])("Неверно введено название, либо название слишком длинное", "error");
       }
     });
   }
@@ -14185,22 +14318,67 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(".select-custom").on("click", ".bt
         "id": id
       },
       success: function success(response, status) {
-        notificationMessage(response);
+        Object(_fun__WEBPACK_IMPORTED_MODULE_3__["notificationMessage"])(response);
         console.log("response");
         $item.remove();
       },
       error: function error(response, status) {
-        notificationMessage("Ошибка удаления", "error");
+        Object(_fun__WEBPACK_IMPORTED_MODULE_3__["notificationMessage"])("Ошибка удаления", "error");
       }
     });
   }
-}); //
+}); //СОхранение данных модуля
 
-jquery__WEBPACK_IMPORTED_MODULE_0___default()(".module-header-item .form-field input").on('click', function () {
-  if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).prop("checked")) {
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().siblings(".select-wrap").slideDown();
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(".module-header .btn-save-module").on("click", function () {
+  var $parent = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.module-header');
+  var moduleId = $parent.attr("data-module-id");
+  var moduleTitle = $parent.find(".module-header-item__title-input").val();
+  var competencesOutArr = [];
+  var competencesInArr = [];
+
+  if (jquery__WEBPACK_IMPORTED_MODULE_0___default()("#out-competences").prop("checked")) {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()($parent.find(".module-header-item__out-competence .checkboxes .checkboxes__input")).each(function (index, element) {
+      if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(element).prop("checked")) {
+        competencesOutArr.push(jquery__WEBPACK_IMPORTED_MODULE_0___default()(element).val());
+      }
+    }); //Получили все выходные компетенции
+  }
+
+  if (jquery__WEBPACK_IMPORTED_MODULE_0___default()("#in-competences").prop("checked")) {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()($parent.find(".module-header-item__in-competence .checkboxes .checkboxes__input")).each(function (index, element) {
+      if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(element).prop("checked")) {
+        competencesInArr.push(jquery__WEBPACK_IMPORTED_MODULE_0___default()(element).val());
+      }
+    }); //Получили все входные компетенции
+  }
+
+  console.log(moduleId, competencesInArr, competencesOutArr, moduleTitle);
+  var url = "/profile/ajax-update-module-data";
+  var type = "POST";
+  var data = {
+    "competences_out": competencesOutArr,
+    "competences_in": competencesInArr,
+    "title": moduleTitle,
+    "id": moduleId
+  };
+
+  if (moduleTitle != '') {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default.a.ajax({
+      headers: {
+        'X-CSRF-TOKEN': jquery__WEBPACK_IMPORTED_MODULE_0___default()('meta[name="csrf-token"]').attr('content')
+      },
+      type: type,
+      url: url,
+      data: data,
+      success: function success(response, status) {
+        Object(_fun__WEBPACK_IMPORTED_MODULE_3__["notificationMessage"])(response.msg);
+      },
+      error: function error(response, status) {
+        Object(_fun__WEBPACK_IMPORTED_MODULE_3__["notificationMessage"])(response.msg, "error");
+      }
+    });
   } else {
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().siblings(".select-wrap").slideUp();
+    Object(_fun__WEBPACK_IMPORTED_MODULE_3__["notificationMessage"])(_fun__WEBPACK_IMPORTED_MODULE_3__["MsgErrorInputFill"], "error");
   }
 });
 
@@ -14213,12 +14391,6 @@ function renderCompetences($parent, arr) {
   }
 
   jquery__WEBPACK_IMPORTED_MODULE_0___default()($parent).html(str);
-}
-
-function notificationMessage(msg) {
-  var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "success";
-  var str = "\n    <div class=\"notifications__item notifications__item--".concat(type, "\"><span class=\"text\">").concat(msg, "</span><span class=\"btn-close\"><i class=\"fas fa-times\"></i></span></div>\n  ");
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()(".notifications").append(str);
 }
 
 /***/ }),

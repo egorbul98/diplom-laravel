@@ -9,8 +9,8 @@
       </form>
     </div>
     <div class="profile-header__username">
-      <h2 class="name">{{Auth::user()->name}} {{Auth::user()->lastname}}</h2>
-      <div class="login">{{Auth::user()->email}}</div>
+      <h2 class="name">{{$user->name}} {{$user->lastname}}</h2>
+      <div class="login">{{$user->email}}</div>
     </div>
   </section>
 </div>

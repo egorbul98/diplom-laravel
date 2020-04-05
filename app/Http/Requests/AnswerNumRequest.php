@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ModelRequest extends FormRequest
+class AnswerNumRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,6 @@ class ModelRequest extends FormRequest
      */
     public function authorize()
     {
-        // return false;
         return true;
     }
 
@@ -25,8 +24,9 @@ class ModelRequest extends FormRequest
     public function rules()
     {
         return [
-            "title" => "required|min:5|max:128",
-            "section_id" => "required|integer",
+            "value" => "between:-2147483648.0,2147483647.0|required",
+            "error" => "between:-2147483648.0,2147483647.0",
+            "step_id" => "integer",
         ];
     }
 }

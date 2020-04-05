@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Http\Requests\CourseRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 
 class CourseController extends BaseController
@@ -28,9 +29,8 @@ class CourseController extends BaseController
      */
     public function create()
     {
-        $categories = Category::all();
         $course = new Course();
-        return view("profile.edit-course.create", compact("course", "categories"));
+        return view("profile.edit-course.create", compact("course"));
     }
 
     /**
@@ -60,7 +60,9 @@ class CourseController extends BaseController
      */
     public function show(Course $course)
     {
-       
+        if(Gate::denies('edit-course', $course)){
+            return redirect()->back()->withErrors(["error"=>"Недостаточно прав"]);
+        }
         return view("profile.edit-course.show", compact("course"));
     }
 
@@ -72,9 +74,10 @@ class CourseController extends BaseController
      */
     public function edit(Course $course)
     {
-        $categories = Category::all();
-
-        return view("profile.edit-course.create", compact("course", "categories"));
+        if(Gate::denies('edit-course', $course)){
+            return redirect()->back()->withErrors(["error"=>"Недостаточно прав"]);
+        }
+        return view("profile.edit-course.create", compact("course"));
     }
 
     /**

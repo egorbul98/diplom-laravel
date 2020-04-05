@@ -13,7 +13,8 @@
     <div class="list-modules shadow-light">
       @foreach ($section->modules as $module)
         @php  $j++; @endphp
-        @include('profile.edit-course.parts.modules-item', $module)
+       
+        @include('profile.edit-course.parts.modules-item', [$module, $section])
       @endforeach
      
     </div>

@@ -12,9 +12,16 @@ class CourseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $courses = Course::paginate(6);
+        $query = Course::query();
+        if ($request->all()) {
+            if (isset($request->all()["category"])) {
+                $query->whereIn("category_id", array_keys($request->all()["category"]));
+            }
+        }
+
+        $courses = $query->paginate(6)->withPath("?" . $request->getQueryString());
         return view("courses", compact("courses"));
     }
 
@@ -28,5 +35,4 @@ class CourseController extends Controller
     {
         return view("course", compact("course"));
     }
-
 }

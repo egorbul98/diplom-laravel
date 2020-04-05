@@ -11,7 +11,7 @@
                     <p class="text"><input type="text" value="{{$item->title}}" class="input-bg" readonly></p>
                 </div>
                 @empty
-                <p>Пока ничего нет</p>
+                <p>Пока ничего нет, но вы можете добавить новые компетенции</p>
                 @endforelse
 
             </div>
@@ -21,11 +21,11 @@
         <div class="select-competences__right">
             <div class="checkboxes">
               {{-- {{dump($id_competences)}} --}}
-                @forelse ($module->section->competences as $competence)
+                @foreach ($section->competences as $competence)
               {{-- {{dump($competence->id)}} --}}
                 <p class="flex-b">
                     <label>
-                        <input type="checkbox" name="complex" value="{{$competence->id}}" @if (in_array($competence->title, $id_competences)) data-checked="true" @endif>
+                        <input type="checkbox" class="checkboxes__input" name="complex" value="{{$competence->id}}" @if (in_array($competence->title, $id_competences)) data-checked="true" @endif>
                         <span class="check"></span>
                         <span class="text paragraph">{{$competence->title}}</span>
                     </label>
@@ -33,9 +33,7 @@
                         data-competence-id="{{$competence->id}}"><span class="icon"><i
                                 class="fas fa-times"></i></span></button>
                 </p>
-                @empty
-                <p>Пока ничего нет, но вы можете добавить новые компетенции</p>
-                @endforelse
+                @endforeach
 
             </div>
             <div class="form-row input-add-competences form-field">
@@ -44,7 +42,7 @@
                     <span class="text">Не более 128 символов</span>
                 </div>
                 
-                <button class="btn btn-add" data-section-id="{{$module->section_id}}" type="button"><i
+                <button class="btn btn-add" data-section-id="{{$section->id}}" type="button"><i
                         class="fas fa-plus"></i></button>
             </div>
             <div class="select-competences__desc">Выберите компетенции</div>
