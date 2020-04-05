@@ -20,10 +20,6 @@ class Module extends Model
     {
         return $this->belongsToMany(Section::class, 'module_section');
     }
-    // public function section()
-    // {
-    //     return $this->belongsTo(Section::class);
-    // }
 
     public function competences()
     {
@@ -42,9 +38,10 @@ class Module extends Model
     {
         return $this->belongsToMany(Step::class, 'module_step');
     }
-    // public function steps()
-    // {
-    //     return $this->hasMany(Step::class);
-    // }
+
+    public function tests()
+    {
+        return $this->belongsToMany(Test::class, 'test_module');
+    }
     
 }

@@ -29,7 +29,10 @@ class AppServiceProvider extends ServiceProvider
         Section::deleted(function ($section) {
             foreach ($section->modules as $module) {
                 $module->sections()->detach($section->id);
-                $module->delete();
+                // if($module->steps->count()==0){
+                //     $module->delete();
+                // }
+              
             }
         });
 
@@ -37,7 +40,9 @@ class AppServiceProvider extends ServiceProvider
             foreach ($course->sections as $section) {
                 foreach ($section->modules as $module) {
                     $module->sections()->detach($section->id);
-                    $module->delete();
+                    // if($module->steps->count()==0){
+                    //     $module->delete();
+                    // }
                 }
             }
             $course->sections()->delete();

@@ -1,4 +1,4 @@
-<div class="course-sections-item ">
+<div class="course-sections-item"  data-section-id="{{$section->id}}">
   <div class="course-sections-item__inner section-edit shadow-light">
     <div class="section-edit-wrap">
       <div class="section-edit-wrap__num">{{$i}}</div>
@@ -29,6 +29,7 @@
       </h4>
       <div class="list-modules-item__btns">
         <button type="button" class="btn btn-create-module  list-modules-item__btn" data-section-id="{{$section->id}}">Создать модуль</button>
+        <button type="button" class="btn btn-add-module  list-modules-item__btn" data-section-id="{{$section->id}}">Добавить существующий</button>
       </div>
       
     </div>

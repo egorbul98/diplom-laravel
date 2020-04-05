@@ -18,7 +18,8 @@
       <div class="drop-down shadow-light">
         <p class="drop-down__item"><a href="#">Редактировать разделы курса</a></p>
         <p class="drop-down__item"><a href="{{route("profile.course.edit", $course->id)}}">Редактировать описание</a></p>
-      <p class="drop-down__item"><a id="delete-course" href="{{route("profile.course.destroy", $course)}}" >Удалить</a></p>
+        <p class="drop-down__item"><a href="{{route("profile.course.edit", $course->id)}}">Создание тестов</a></p>
+      <p class="drop-down__item"><a id="delete-course" href="{{route("profile.course.destroy", $course)}}">Удалить</a></p>
       </div>
 
       <form action="{{route("profile.course.destroy", $course->id)}}" style="display:none" id="form-delete" method="POST">

@@ -1,69 +1,132 @@
 .modal {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  background-color: $col-modal-bg;
-  z-index: 10;
-  transition: all 0.3s;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: $col-modal-bg;
+    z-index: 10;
+    transition: all 0.3s;
 
-  &--hidden{
-    opacity: 0;
-    visibility: hidden;
-  }
-
-  .modal-wrap {
-    position: relative;
-  }
-
-  .modal-window {
-    padding: 20px;
-    background-color: #ffffff;
-    position: absolute;
-    left: 50%;
-    top: 20%;
-    transform: translate(-50%, 0);
-
-    @include media-max($S) {
-      width: 80%;
+    &--hidden {
+        opacity: 0;
+        visibility: hidden;
     }
 
-    .title {
-      margin-bottom: 20px;
-
-      @include media-max($S) {
-        margin-bottom: 10px;
-      }
-    }
-  }
-
-  .step {
-    cursor: pointer;
-    position: relative;
-    transition: background-color 0.3s;
-    padding: 10px;
-
-    &:hover {
-      background-color: $col-border-op;
+    .modal-wrap {
+        position: relative;
     }
 
-    .overlay {
-      position: absolute;
-      top: 0;
-      right: 0;
-      left: 0;
-      bottom: 0;
+    .modal-window {
+        padding: 20px;
+        background-color: #ffffff;
+        position: absolute;
+        left: 50%;
+        top: 20%;
+        transform: translate(-50%, 0);
+
+        @include media-max($S) {
+            width: 80%;
+        }
+
+        @include media-max($XS) {
+            width: 100%;
+            top: 0;
+            padding-left: 14px;
+            padding-right: 14px;
+        }
+
+        .title {
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            padding-right: 10px;
+            padding-left: 10px;
+            border-bottom: 1px solid $col-border-op;
+
+            @include media-max($S) {
+                margin-bottom: 10px;
+            }
+        }
     }
-  }
+
+    .step {
+        cursor: pointer;
+        position: relative;
+        transition: background-color 0.3s;
+        padding: 10px;
+
+        &:hover {
+            background-color: $col-border-op;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+        }
+    }
 
 
-  .modal-close {
-    cursor: pointer;
-    background: none;
-    font-size: 18px;
-    position: absolute;
-    top: 4px;
-    right: 4px;
-  }
+    .modal-close {
+        cursor: pointer;
+        background: none;
+        font-size: 18px;
+        position: absolute;
+        top: 4px;
+        right: 4px;
+    }
+
+    .modal-list-modules {
+        margin-top: 10px;
+        width: 100%;
+        max-width: 100%;
+        max-height: 300px;
+        overflow-y: auto;
+        @include scroolbar;
+        padding: 0;
+        border: none;
+    }
+
+    .modal-list-modules-item {
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid $col-border-op;
+        padding: 14px 6px;
+        justify-content: space-between;
+        cursor: pointer;
+        background-color: transparent;
+        transition: background-color 0.25s ease;
+        &:hover {
+            background-color: $col-border-op;
+        }
+
+        &:hover .modal-list-modules-item__add-btn {
+            background-color: $col-active;
+            color: #ffffff;
+        }
+
+        &__title {
+            padding: 0;
+            flex-shrink: 0;
+            width: 100%;
+        }
+
+        &__add-btn {
+            border: none;
+            transition: all 0.25s ease;
+            background-color: transparent;
+            font-size: 16px;
+
+            @include media-max($S) {
+                font-size: 14px;
+            }
+
+            @include media-max($XS) {
+                font-size: 12px;
+            }
+
+        }
+    }
 }

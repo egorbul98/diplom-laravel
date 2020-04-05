@@ -107,7 +107,9 @@
             align-items: center;
             width: 100%;
             padding-right: 10px;
-
+            @include media-max($S) {
+                padding-right: 0;
+            }
             .num {
                 padding-right: 10px;
 
@@ -139,7 +141,7 @@
             text-align: center;
             display: flex;
             justify-content: space-between;
-
+            flex-shrink: 0;
             @include media-max($S) {
                 width: 100%;
 
@@ -147,10 +149,14 @@
             }
 
             .btn {
-                min-width: 180px;
+                min-width: 100px;
 
                 @include media-max($S) {
                     min-width: auto;
+                }
+
+                &:first-child{
+                    margin-right: 10px;
                 }
             }
         }

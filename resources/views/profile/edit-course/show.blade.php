@@ -12,7 +12,8 @@
   <a href="{{route("profile.course.sections.edit", $course)}}" class="btn flex-c">Редактировать разделы</a>
   </div>
   @include('profile.edit-course.parts.course-sections', $course)
-
 </div>
+
+
 
 @endsection

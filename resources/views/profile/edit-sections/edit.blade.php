@@ -58,11 +58,27 @@
           
         </div>
       </div>
-      
-      
-    
     
   </section>
+
+  <div class="modal modal--hidden modal-modules">
+    <div class="modal-window">
+        <div class="modal-inner">
+          <h2 class="title center">Выберите модуль для добавления в раздел</h2>
+          <div class="form-field">
+            <input type="text" class="search" placeholder="Найти модуль по названию">
+            <button class="btn btn-search" type="submit">Искать</button>
+          </div>
+
+          <div class="modal-list-modules">
+            <p>Модулей пока нет</p>
+          </div>
+
+          <button class="modal-close" type="button"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+  </div>
+
 
 </div>
 @include('profile.parts.footer-editor', [$body = "sections"])

@@ -1,4 +1,4 @@
-<div class="modal modal--hidden">
+<div class="modal modal--hidden modal-step-types">
   <div class="modal-window">
       <div class="modal-inner">
         <h2 class="title center">Выберите тип шага</h2>

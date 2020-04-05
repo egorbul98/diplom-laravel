@@ -1,6 +1,11 @@
 import $ from "jquery"
 
-import { notificationMessage } from "./../fun"
+import {
+  notificationMessage,
+  MsgError,
+  MsgSuccess,
+  MsgSuccessDel
+} from "./../fun"
 
 //Создание раздела
 $(".course-sections #btn-create-section").on('click', function () {
@@ -23,11 +28,11 @@ $(".course-sections #btn-create-section").on('click', function () {
                 "course_id": courseId
             },
             success: function (response, status) {
-                notificationMessage("Раздел успешно создан");
+                notificationMessage(response.msg);
 
                 let lengthItems = $wrap.children().length
                 let str = `
-                <div class="course-sections-item ">
+                <div class="course-sections-item" data-section-id="${response.id}">
                 <div class="course-sections-item__inner section-edit shadow-light">
                   <div class="section-edit-wrap">
                     <div class="section-edit-wrap__num">${++lengthItems}</div>
@@ -54,6 +59,7 @@ $(".course-sections #btn-create-section").on('click', function () {
                     </h4>
                     <div class="list-modules-item__btns">
                       <button type="button" class="btn btn-create-module  list-modules-item__btn"  data-section-id="${response.id}">Создать модуль</button>
+                      <button type="button" class="btn btn-add-module  list-modules-item__btn" data-section-id="${response.id}">Добавить существующий</button>
                     </div>
                   </div>
                   <div class="list-modules-inner">
@@ -68,7 +74,7 @@ $(".course-sections #btn-create-section").on('click', function () {
                 $wrap.append(str);
             },
             error: function (response, status) {
-                notificationMessage("Неверно введены данные формы", "error");
+                notificationMessage(response.msg, "error");
             },
         });
     }
@@ -90,7 +96,7 @@ $(".course-sections").on("click", ".btn-delete-section", function () {
                 "id": id,
             },
             success: function (response, status) {
-                notificationMessage(response);
+                notificationMessage(response.msg);
 
                 $item.remove();
                 $(".course-sections-item .section-edit-wrap__num").each(function (index, element) {
@@ -98,7 +104,7 @@ $(".course-sections").on("click", ".btn-delete-section", function () {
                 });
             },
             error: function (response, status) {
-                notificationMessage("Ошибка удаления", "error");
+                notificationMessage(response.msg, "error");
             },
         });
     }
@@ -109,12 +115,12 @@ $(".course-sections").on('click', '.btn-create-module', function () {
     let $wrap = $(this).closest(".list-modules-item").siblings(".list-modules-inner");
     let title = $(this).closest(".list-modules-item").find(".input-create-module").val();
     let sectionId = $(this).attr("data-section-id");
-    let authorId = $(this).closest(".course-sections-list").attr("data-author-id"); 
+    let authorId = $(this).closest(".course-sections-list").attr("data-author-id");
     let sectionNum = $(this).closest(".course-sections-item ").find(".section-edit-wrap__num").text();
     let str = '';
-  console.log(authorId, sectionId);
-  
-  if (title != "") {
+    console.log(authorId, sectionId);
+
+    if (title != "") {
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -127,7 +133,7 @@ $(".course-sections").on('click', '.btn-create-module', function () {
                 "author_id": authorId,
             },
             success: function (response, status) {
-                notificationMessage("Модуль успешно добавлен");
+                notificationMessage(response.msg);
                 let lengthItems = $wrap.children().length
 
                 let str = `
@@ -138,7 +144,7 @@ $(".course-sections").on('click', '.btn-create-module', function () {
                 </h4>
                 <p class="list-modules-item__steps"><span>0</span> шагов</p>
                 <div class="list-modules-item__btns">
-                  <a href="/profile/course/module/${response.id}" class="btn ">Редактировать</a>
+                  <a href="/profile/course/module/${response.id}/section/${sectionId}/" class="btn ">Редактировать</a>
                   <button type="button" class="btn-delete-module" data-module-id="${response.id}"><i class="fas fa-times"></i></button>
                 </div>
               </div>
@@ -146,7 +152,7 @@ $(".course-sections").on('click', '.btn-create-module', function () {
                 $wrap.append(str);
             },
             error: function (response, status) {
-                notificationMessage("Неверно введено название формы, либо название слишком динное", "error");
+                notificationMessage(response.msg, "error");
             },
         });
         $wrap.append(str);
@@ -154,17 +160,16 @@ $(".course-sections").on('click', '.btn-create-module', function () {
 
 });
 
-
 //Удалить модуль
 $(".course-sections").on("click", ".btn-delete-module", function () {
     let id = $(this).attr("data-module-id");
     let $item = $(this).closest(".list-modules-item");
     let del = confirm("Вы точно хотите удалить модуль?");
-    let sectionId = $(this).closest(".list-modules").attr("data-section-id"); 
+    let sectionId = $(this).closest(".list-modules").attr("data-section-id");
     let $section = $(this).closest(".course-sections-item");
     let sectionNum = $section.find(".section-edit-wrap__num").text();
-  
-  if (del) {
+
+    if (del) {
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -175,26 +180,143 @@ $(".course-sections").on("click", ".btn-delete-module", function () {
                 "id": id,
                 "section_id": sectionId,
             },
-          success: function (response, status) {
-            console.log("suc");
-                notificationMessage(response);
+            success: function (response, status) {
+                console.log("suc");
+                notificationMessage(response.msg);
                 console.log("response");
-                
+
                 $item.remove();
 
                 $section.find(".list-modules-item .num").each(function (index, element) {
                     $(element).html(`${sectionNum}.${++index}`);
                 });
             },
-          error: function (response, status) {
-              console.log("asddasd");
-              
-                notificationMessage("Ошибка удаления", "error");
+            error: function (response, status) {
+                console.log("asddasd");
+
+                notificationMessage(response.msg, "error");
             },
         });
     }
 });
 
+//Открытие модульного окна для Добавления существующего модуля
+$(".course-sections").on('click', '.btn-add-module', function () {
+    let $wrap = $(".modal-modules .modal-list-modules");
+    let sectionId = $(this).attr("data-section-id");
+
+    let url = "/profile/ajax-list-modules-section";
+    let type = "GET";
+    let data = {
+        "section_id": sectionId
+    };
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: type,
+        url: url,
+        data: data,
+        success: function (response, status) {
+            renderModalListModules(response.modules, sectionId, $wrap);
+            $(".modal-modules").removeClass("modal--hidden");
+        },
+        error: function (response, status) {
+            notificationMessage(response.msg, "error");
+        },
+    });
+});
+
+//Поиск модулей в модалке
+$(".modal-modules .btn-search").on('click', function () {
+    let $wrap = $(".modal-modules .modal-list-modules");
+    let sectionId = $wrap.children(0).attr("data-section-id");
+    console.log(sectionId);
+    let text = $(this).siblings(".search").val();
+
+    let url = "/profile/ajax-search-modules-section";
+    let type = "GET";
+    let data = {
+        "section_id": sectionId,
+        "text": text
+    };
+    if (text != '') {
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type: type,
+            url: url,
+            data: data,
+            success: function (response, status) {
+                renderModalListModules(response.modules, sectionId, $wrap);
+            },
+            error: function (response, status) {
+                notificationMessage(response.msg, "error");
+            },
+        });
+    }
+
+});
 
 
+//Добавление существующего модуля
+$(".modal-modules .modal-list-modules").on('click', '.modal-list-modules-item', function () {
+  let moduleId = $(this).attr("data-module-id");
+  let sectionId = $(this).attr("data-section-id");
+  let title = $(this).children(".list-modules-item__title").text();
+  console.log(moduleId, sectionId, title);
+  let $wrap = $(`.course-sections-item[data-section-id=${sectionId}]`).find(".list-modules-inner");
+  let sectionNum = $(`.course-sections-item[data-section-id=${sectionId}]`).find(".section-edit-wrap__num").text();
+  let url = "/profile/ajax-add-module-in-section";
+  let type = "POST";
+  let data = {
+      "section_id": sectionId,
+      "module_id": moduleId,
+  };
+  $(".modal-modules").addClass("modal--hidden");
+  $.ajax({
+      headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      type: type,
+      url: url,
+      data: data,
+      success: function (response, status) {
+        notificationMessage(response.msg);
+        let lengthItems = $wrap.children().length
+        let str = `
+              <div class="list-modules-item">
+                <h4 class="list-modules-item__inner">
+                  <span class="num">${sectionNum}.${++lengthItems}</span>
+                  <input type="text" class="input-control input-bg" name="module-title[${response.module.id}]" value="${response.module.title}" placeholder="Название модуля">
+                </h4>
+                <p class="list-modules-item__steps"><span>${response.step_count}</span> шагов</p>
+                <div class="list-modules-item__btns">
+                  <a href="/profile/course/module/${response.module.id}/section/${sectionId}/" class="btn ">Редактировать</a>
+                  <button type="button" class="btn-delete-module" data-module-id="${response.module.id}"><i class="fas fa-times"></i></button>
+                </div>
+              </div>
+            `;
+                $wrap.append(str);
+      },
+      error: function (response, status) {
+          notificationMessage(response.msg, "error");
+      },
+  });
+});
 
+function renderModalListModules(arr, sectionId, $wrap) {
+    let str = '';
+    for (let i = 0; i < arr.length; i++) {
+        const element = arr[i];
+        str += `
+      <div class="modal-list-modules-item" data-module-id="${element.id}" data-section-id="${sectionId}">
+        <h5 class="list-modules-item__title">${element.title}</h5>
+        <button class="modal-list-modules-item__add-btn"><i class="fas fa-plus"></i></button>
+      </div >
+    `;
+    }
+    $wrap.empty();
+    $wrap.html(str);
+}

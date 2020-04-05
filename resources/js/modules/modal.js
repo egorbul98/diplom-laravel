@@ -7,6 +7,12 @@ $(document).ready(function () {
   });
   
   $("#btn-add-step").on("click", function () {
-    $(".modal").removeClass("modal--hidden");
+    $(".modal-step-types").removeClass("modal--hidden");
   });
+
+  // $("#btn-add-step").on("click", function () {
+  //   $(".modal-modules").removeClass("modal--hidden");
+  // });
+
+  
 });

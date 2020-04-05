@@ -36,6 +36,9 @@ Route::group(['prefix' => 'profile', "namespace"=>"Profile", "middleware"=>"auth
     
     Route::post('/ajax-add-section', "AjaxSectionController@add");
     Route::post('/ajax-del-section', "AjaxSectionController@delete");
+    Route::get('/ajax-list-modules-section', "AjaxSectionController@listModules");
+    Route::get('/ajax-search-modules-section', "AjaxSectionController@searchModules");
+    Route::post('/ajax-add-module-in-section', "AjaxSectionController@addModule");
 
     Route::post('/ajax-add-module', "AjaxModuleController@add");
     Route::post('/ajax-del-module', "AjaxModuleController@delete");
@@ -52,12 +55,12 @@ Route::group(['prefix' => 'profile', "namespace"=>"Profile", "middleware"=>"auth
     
 
     Route::group(['prefix' => 'course/module'], function () {
-        Route::get('{module}/{section}/{step_id?}', "EditorModuleController@edit")->name("profile.course.module.edit");
+        Route::get('{module}/section/{section}/{step_id?}', "EditorModuleController@edit")->name("profile.course.module.edit");
         Route::post('{module}', "EditorModuleController@save")->name("profile.course.module.save");
 
-        Route::post('{module_id}/{section}/step_type/{step_type_id}', 'StepController@store')->name("profile.module.step.store");;
-        Route::post('{module_id}/{step_id}', 'StepController@update')->name("profile.module.step.update");;
-        Route::get('{module_id}/{section}/destroy-step/{step_id}', 'StepController@destroy')->name("profile.module.step.destroy");;
+        Route::post('{module_id}/section/{section}/step_type/{step_type_id}', 'StepController@store')->name("profile.module.step.store");;
+        Route::post('{module_id}/step/{step_id}', 'StepController@update')->name("profile.module.step.update");;
+        Route::get('{module_id}/section/{section}/destroy-step/{step_id}', 'StepController@destroy')->name("profile.module.step.destroy");;
     });
    
 });

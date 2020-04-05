@@ -71,7 +71,7 @@
 
   <div class="form-btns-wrap">
     @if ($course->exists)
-      <button class="btn" type="submit">Сохранить</button>
+      <button class="btn" type="submit"><span class="icon m-r-8"><i class="fas fa-save"></i></span> Сохранить</button>
     @else
       <button class="btn" type="submit">Создать</button>
     @endif

@@ -40,7 +40,7 @@
                             @include('profile.edit-module.parts.select-competences', ["module_competences"=> $module->competences_out])
                         </div>
                     </div>
-                    <button class="btn btn-save-module" type="button">Сохранить данные модуля</button>
+                    <button class="btn btn-save-module" type="button"><span class="icon m-r-8"><i class="fas fa-save"></i></span> Сохранить данные модуля</button>
                 </div>
             </form>
 

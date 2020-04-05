@@ -16,7 +16,7 @@ class AjaxModuleController extends Controller
         $module = new Module($data);
         $module->save();
         $module->sections()->attach($data["section_id"]);
-        return response()->json(["id"=>$module->id], 200);
+        return response()->json(["id"=>$module->id, "msg"=>"Модуль успешно добавлен"], 200);
     }
     public function delete(Request $request)
     {
@@ -24,8 +24,9 @@ class AjaxModuleController extends Controller
         
         $module = Module::find($data["id"]);
         $module->sections()->detach($data["section_id"]);
-        $module->delete();
+        // $module->delete();
 
-        return response()->json("Модуль успешно удален", 200);
+        return response()->json(["msg"=>"Модуль успешно удален"],  200);
     }
+    
 }

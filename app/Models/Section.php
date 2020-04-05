@@ -21,10 +21,15 @@ class Section extends Model
     {
         return $this->belongsTo(Course::class);
     }
-    // public function modules()
-    // {
-    //     return $this->hasMany(Module::class);
-    // }
+    public function getModulesId()
+    {
+        $modules_section = $this->modules;
+        $modules_section_ids = [];
+        foreach ($modules_section as $item) {
+            $modules_section_ids[] = $item->id;
+        }
+        return $modules_section_ids;
+    }
 
     public function competences()
     {
