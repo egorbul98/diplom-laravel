@@ -14,38 +14,53 @@
     <main class="profile-content">
    
         <h3 class="title">Ваши созданные тесты</h3>
-        <a href="{{route("profile.tests.create")}}" class="btn btn-add"><span class="icon"><i class="fas fa-plus"></i></span> Создать</a>
+        <a href="{{route("profile.test.create")}}" class="btn btn-add"><span class="icon"><i class="fas fa-plus"></i></span> Создать</a>
       
       <div class="test-list">
 
-        @for ($i = 0; $i < 6; $i++) 
+    
+
+      @foreach ($tests as $test)
         <div class="test-item shadow-light">
             <div class="test-item-inner">
-                <div class="left">
-                    <div class="test-item__title">Тест номер один</div>
+                <div class="left flex-b">
+                    <div class="test-item__title">{{$test->title}}</div>
                 </div>
-                <div class="icon-arrow"><i class="fas fa-chevron-left"></i></div>
+                  <div class="icon-arrow"><i class="fas fa-chevron-left"></i></div>
+                  <div class="test-item-edit">
+                    <a href="{{route("profile.test.edit", $test)}}"><span class="icon"><i class="fas fa-edit"></i></span></a>
+                    <a href="#"><span class="icon"><i class="fas fa-trash-alt"></i></span></a>
+                  </div>
             </div>
             <div class="test-item-models">
               <div class="test-item-models__item">
                 <h4 class="test-item-models__text">
                   Модули, к которым прикреплен данный тест
                 </h4>
-                <button class="btn" type="button">Прикрепить тест к модулю</button>
+                <div>
+                  <button class="btn" type="button">Прикрепить тест к модулю</button>
+                  
+                </div>
               </div>
                 <div class="test-item-models__inner">
+                  @foreach ( $test->modules as $module)
                   <div class="test-item-models__item">
                     <p class="test-item-models__text">
-                      <a href="#">Умение считать просыте интегралы</a>
+                      <a href="#">{{$module->title}}</a>
                     </p>
                     <button class="btn" type="button">Открепить</button>
                   </div>
+                  @endforeach
                 </div>
-               
             </div>
+            
         </div>
-        @endfor 
+        @endforeach
     </div>
+
+    <section class="paginate center">
+      {{$tests->links()}}
+    </section>
 
     </main>
   </section>

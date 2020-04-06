@@ -13794,8 +13794,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_modal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/modal */ "./resources/js/modules/modal.js");
 /* harmony import */ var _modules_editor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/editor */ "./resources/js/modules/editor.js");
 /* harmony import */ var _modules_course_sections_edit__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/course-sections-edit */ "./resources/js/modules/course-sections-edit.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _modules_test_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/test-page */ "./resources/js/modules/test-page.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_7__);
 
 
 
@@ -13803,12 +13804,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-jquery__WEBPACK_IMPORTED_MODULE_6___default()(document).ready(function () {
-  jquery__WEBPACK_IMPORTED_MODULE_6___default()(".num-only").on("input", function (event) {
+
+jquery__WEBPACK_IMPORTED_MODULE_7___default()(document).ready(function () {
+  jquery__WEBPACK_IMPORTED_MODULE_7___default()(".num-only").on("input", function (event) {
     this.value = this.value.replace(/^\./g, '').replace(/\d\-/g, '$1').replace(/\-\-/g, '$1').replace(/[^0-9-.]/g, '').replace(/(\..*)\./g, '$1');
   }); // FORM DELETE COURSE course-header in profile
 
-  jquery__WEBPACK_IMPORTED_MODULE_6___default()("#delete-course").on("click", function (event) {
+  jquery__WEBPACK_IMPORTED_MODULE_7___default()("#delete-course").on("click", function (event) {
     event.preventDefault();
     var del = confirm("Вы точно хотите удалить курс?");
 
@@ -13817,34 +13819,34 @@ jquery__WEBPACK_IMPORTED_MODULE_6___default()(document).ready(function () {
     }
   }); //FORM SAVE ALL SECTIONS AND MODULES
 
-  jquery__WEBPACK_IMPORTED_MODULE_6___default()("#btn-save-sections").on("click", function (event) {
+  jquery__WEBPACK_IMPORTED_MODULE_7___default()("#btn-save-sections").on("click", function (event) {
     event.preventDefault(); // alert("sad")
 
     document.getElementById('form-save-sections').submit();
   }); //
 
-  jquery__WEBPACK_IMPORTED_MODULE_6___default()(".filter-btn").on("click", function () {
-    jquery__WEBPACK_IMPORTED_MODULE_6___default()(".filter .drop-down").slideToggle();
+  jquery__WEBPACK_IMPORTED_MODULE_7___default()(".filter-btn").on("click", function () {
+    jquery__WEBPACK_IMPORTED_MODULE_7___default()(".filter .drop-down").slideToggle();
   });
-  jquery__WEBPACK_IMPORTED_MODULE_6___default()(".header-top .auth .user").on("click", function () {
-    jquery__WEBPACK_IMPORTED_MODULE_6___default()(".header-top .auth .drop-down").slideToggle();
+  jquery__WEBPACK_IMPORTED_MODULE_7___default()(".header-top .auth .user").on("click", function () {
+    jquery__WEBPACK_IMPORTED_MODULE_7___default()(".header-top .auth .drop-down").slideToggle();
   }); //LESSON_PAGE
 
-  jquery__WEBPACK_IMPORTED_MODULE_6___default()(".lesson-page .btn-gamburger").on("click", function () {
-    jquery__WEBPACK_IMPORTED_MODULE_6___default()(".lesson-sidebar").toggleClass("lesson-sidebar--active");
+  jquery__WEBPACK_IMPORTED_MODULE_7___default()(".lesson-page .btn-gamburger").on("click", function () {
+    jquery__WEBPACK_IMPORTED_MODULE_7___default()(".lesson-sidebar").toggleClass("lesson-sidebar--active");
   });
-  jquery__WEBPACK_IMPORTED_MODULE_6___default()(".lesson-page .lesson-header__name").on("click", function () {
-    jquery__WEBPACK_IMPORTED_MODULE_6___default()(this).siblings(".drop-down").slideToggle();
+  jquery__WEBPACK_IMPORTED_MODULE_7___default()(".lesson-page .lesson-header__name").on("click", function () {
+    jquery__WEBPACK_IMPORTED_MODULE_7___default()(this).siblings(".drop-down").slideToggle();
   });
-  jquery__WEBPACK_IMPORTED_MODULE_6___default()('.lesson-page .section').on("click", function () {
-    jquery__WEBPACK_IMPORTED_MODULE_6___default()(".lesson-sidebar").removeClass("lesson-sidebar--active");
+  jquery__WEBPACK_IMPORTED_MODULE_7___default()('.lesson-page .section').on("click", function () {
+    jquery__WEBPACK_IMPORTED_MODULE_7___default()(".lesson-sidebar").removeClass("lesson-sidebar--active");
   }); //course-edit
 
-  jquery__WEBPACK_IMPORTED_MODULE_6___default()(".course-header-menu .btn").on('click', function () {
-    jquery__WEBPACK_IMPORTED_MODULE_6___default()(this).siblings(".drop-down").slideToggle();
+  jquery__WEBPACK_IMPORTED_MODULE_7___default()(".course-header-menu .btn").on('click', function () {
+    jquery__WEBPACK_IMPORTED_MODULE_7___default()(this).siblings(".drop-down").slideToggle();
   });
 
-  if (jquery__WEBPACK_IMPORTED_MODULE_6___default()("body").hasClass("editor")) {
+  if (jquery__WEBPACK_IMPORTED_MODULE_7___default()("body").hasClass("editor")) {
     window.onbeforeunload = function (evt) {
       var message = "вйцв";
 
@@ -13861,18 +13863,18 @@ jquery__WEBPACK_IMPORTED_MODULE_6___default()(document).ready(function () {
   } //------------
 
 
-  jquery__WEBPACK_IMPORTED_MODULE_6___default()(".btn-close").on("click", function () {
-    jquery__WEBPACK_IMPORTED_MODULE_6___default()(".header-wrap").removeClass("active");
+  jquery__WEBPACK_IMPORTED_MODULE_7___default()(".btn-close").on("click", function () {
+    jquery__WEBPACK_IMPORTED_MODULE_7___default()(".header-wrap").removeClass("active");
   });
-  jquery__WEBPACK_IMPORTED_MODULE_6___default()('.item-page .item-sections-item').on("click", function () {
-    jquery__WEBPACK_IMPORTED_MODULE_6___default()(this).toggleClass("active").children(".item-sections-item__cometencies").slideToggle();
+  jquery__WEBPACK_IMPORTED_MODULE_7___default()('.item-page .item-sections-item').on("click", function () {
+    jquery__WEBPACK_IMPORTED_MODULE_7___default()(this).toggleClass("active").children(".item-sections-item__cometencies").slideToggle();
   });
-  jquery__WEBPACK_IMPORTED_MODULE_6___default()('.test-list .test-item-inner').on("click", function () {
-    jquery__WEBPACK_IMPORTED_MODULE_6___default()(this).toggleClass("active").siblings(".test-item-models").slideToggle();
+  jquery__WEBPACK_IMPORTED_MODULE_7___default()('.test-list .test-item-inner').on("click", function () {
+    jquery__WEBPACK_IMPORTED_MODULE_7___default()(this).toggleClass("active").siblings(".test-item-models").slideToggle();
   });
-  jquery__WEBPACK_IMPORTED_MODULE_6___default()('.notifications').on("click", ".btn-close", function () {
-    jquery__WEBPACK_IMPORTED_MODULE_6___default()(this).closest(".notifications__item").slideUp(function () {
-      jquery__WEBPACK_IMPORTED_MODULE_6___default()(this).remove();
+  jquery__WEBPACK_IMPORTED_MODULE_7___default()('.notifications').on("click", ".btn-close", function () {
+    jquery__WEBPACK_IMPORTED_MODULE_7___default()(this).closest(".notifications__item").slideUp(function () {
+      jquery__WEBPACK_IMPORTED_MODULE_7___default()(this).remove();
     });
   });
 }); // import "./../sass/style.scss"
@@ -14541,6 +14543,218 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
     }]
   });
 });
+
+/***/ }),
+
+/***/ "./resources/js/modules/test-page.js":
+/*!*******************************************!*\
+  !*** ./resources/js/modules/test-page.js ***!
+  \*******************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _fun__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../fun */ "./resources/js/fun.js");
+
+ //удаление ответа
+
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(".answers-list-inner").on("click", ".icon--delete", function () {
+  var lengthAnswers = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest(".answers-list-inner").find(".answer").length;
+
+  if (lengthAnswers > 2) {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest(".answer").remove();
+  }
+}); //Создание ответа
+
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(".answers-list-inner").on("click", ".icon--add", function () {
+  var $wrap = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest(".answers-list-inner");
+  var str = "\n  <div class=\"answer\">\n  <div class=\"answer-inner\">\n    <div class=\"check\"><input type=\"checkbox\" name=\"checkbox\" value=\"\"></div>\n    <input type=\"text\" name=\"text\" value=\"\" class=\"input-control text\">\n  </div>\n  <div class=\"answer-icon-wrap\">\n    <div class=\"icon icon--delete\"><i class=\"fas fa-times\"></i></div>\n    <div class=\"icon icon--add\"><i class=\"fas fa-plus\"></i></div>\n  </div>\n</div>\n  ";
+  $wrap.append(str);
+}); //Сохранение секции
+
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(".edit-test .btn-save-test-section").on("click", function () {
+  var arrObjAnswers = getInputsAnswers();
+  var title = jquery__WEBPACK_IMPORTED_MODULE_0___default()("#test-section-title").val();
+
+  if (!arrObjAnswers || title == '') {
+    console.log("Нужно заполнить все поля и выбрать правильный ответ");
+    return false;
+  }
+
+  var testSectionId = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".btn-save-test-section").attr("data-test-section-id");
+  var testId = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest(".test-sections*").attr("data-test-id");
+  var url = "/profile/ajax-save-test-section";
+  var type = "POST";
+  var data = {
+    "answers": arrObjAnswers,
+    "test_id": testId,
+    "title": title,
+    "test_section_id": testSectionId
+  };
+  jquery__WEBPACK_IMPORTED_MODULE_0___default.a.ajax({
+    headers: {
+      'X-CSRF-TOKEN': jquery__WEBPACK_IMPORTED_MODULE_0___default()('meta[name="csrf-token"]').attr('content')
+    },
+    type: type,
+    url: url,
+    data: data,
+    success: function success(response, status) {
+      Object(_fun__WEBPACK_IMPORTED_MODULE_1__["notificationMessage"])(response.msg);
+    },
+    error: function error(response, status) {
+      Object(_fun__WEBPACK_IMPORTED_MODULE_1__["notificationMessage"])(response.msg, "error");
+    }
+  });
+}); //Добавить новый вопрос
+
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(".edit-test .btn-add-test-section").on("click", function () {
+  var $wrap = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".edit-test .answers-list-inner");
+  var testId = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest(".test-sections*").attr("data-test-id");
+  var url = "/profile/ajax-add-test-section";
+  var type = "POST";
+  var data = {
+    "test_id": testId
+  };
+  jquery__WEBPACK_IMPORTED_MODULE_0___default.a.ajax({
+    headers: {
+      'X-CSRF-TOKEN': jquery__WEBPACK_IMPORTED_MODULE_0___default()('meta[name="csrf-token"]').attr('content')
+    },
+    type: type,
+    url: url,
+    data: data,
+    success: function success(response, status) {
+      console.log(response);
+      var linksWrap = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".test-sections-links");
+      linksWrap.append("\n            <div class=\"test-sections-links__item\">\n            <a href=\"#\" class=\"test-sections-links__item-link\" data-test-section-id=\"".concat(response.testSection.id, "\">").concat(linksWrap.children().length + 1, "</a>\n          </div>\n        "));
+      renderQuerstion(response.testSection, response.answerTestSections);
+    },
+    error: function error(response, status) {
+      Object(_fun__WEBPACK_IMPORTED_MODULE_1__["notificationMessage"])(response.msg, "error");
+    }
+  });
+}); //Удалить вопрос
+
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(".edit-test .btn-del-test-section").on("click", function () {
+  var testSectionId = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".btn-save-test-section").attr("data-test-section-id");
+  var $block = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.test-sections-content'); //Для появления и исчезновения
+
+  $block.fadeOut(300);
+  var url = "/profile/ajax-delete-test-section";
+  var type = "POST";
+  var data = {
+    "test_section_id": testSectionId
+  };
+  jquery__WEBPACK_IMPORTED_MODULE_0___default.a.ajax({
+    headers: {
+      'X-CSRF-TOKEN': jquery__WEBPACK_IMPORTED_MODULE_0___default()('meta[name="csrf-token"]').attr('content')
+    },
+    type: type,
+    url: url,
+    data: data,
+    success: function success(response, status) {
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()(".test-sections-links__item-link[data-test-section-id=".concat(testSectionId, "]")).parent().remove();
+      var $items = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".test-sections-links__item-link");
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()($items).first().trigger("click");
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()($items).each(function (index, element) {
+        jquery__WEBPACK_IMPORTED_MODULE_0___default()(element).text(1 + index);
+      });
+    },
+    error: function error(response, status) {
+      Object(_fun__WEBPACK_IMPORTED_MODULE_1__["notificationMessage"])(response.msg, "error");
+    }
+  });
+}); //LINKS
+
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(".edit-test .test-sections-links").on("click", ".test-sections-links__item-link", function (e) {
+  e.preventDefault();
+  var $block = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.test-sections-content'); //Для появления и исчезновения
+
+  $block.fadeOut(300);
+  var testSectionId = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr("data-test-section-id");
+  console.log(testSectionId);
+  var $item = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest(".test-sections-links__item");
+  var url = "/profile/ajax-get-test-section";
+  var type = "GET";
+  var data = {
+    "test_section_id": testSectionId
+  };
+  jquery__WEBPACK_IMPORTED_MODULE_0___default.a.ajax({
+    headers: {
+      'X-CSRF-TOKEN': jquery__WEBPACK_IMPORTED_MODULE_0___default()('meta[name="csrf-token"]').attr('content')
+    },
+    type: type,
+    url: url,
+    data: data,
+    success: function success(response, status) {
+      $item.addClass("active").siblings().removeClass("active");
+      renderQuerstion(response.testSection, response.answers);
+      $block.fadeIn(300);
+    },
+    error: function error(response, status) {
+      Object(_fun__WEBPACK_IMPORTED_MODULE_1__["notificationMessage"])(response.msg, "error");
+    }
+  });
+});
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(".edit-test .btn-del-test-section").on("click", function () {});
+
+function renderQuerstion(arrTestSection, arrAnswers) {
+  var $wrap = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".edit-test .answers-list-inner");
+  var str = "";
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()("#test-section-title").val(arrTestSection.title);
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(".test-sections__img img").attr("src", arrTestSection.image);
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(".btn-save-test-section").attr("data-test-section-id", arrTestSection.id);
+
+  for (var i = 0; i < arrAnswers.length; i++) {
+    var answer = arrAnswers[i];
+    str += "\n    <div class=\"answer\">\n    <div class=\"answer-inner\">\n    <div class=\"check\"><input type=\"checkbox\" name=\"checkbox\" value=\"\"";
+
+    if (answer.correct == 1) {
+      str += " checked ";
+    }
+
+    str += "></div>\n        <input type=\"text\" name=\"text\" value=\"".concat(answer.value, "\" class=\"input-control text\">\n      </div>\n      <div class=\"answer-icon-wrap\">\n        <div class=\"icon icon--delete\"><i class=\"fas fa-times\"></i></div>\n        <div class=\"icon icon--add\"><i class=\"fas fa-plus\"></i></div>\n      </div>\n    </div>");
+  }
+
+  $wrap.html(str);
+}
+
+function getInputsAnswers() {
+  var $wrap = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".edit-test .answers-list-inner");
+  var inputs = $wrap.find(".text");
+  var arr = [];
+  var isTrue = true;
+  var val,
+      correct,
+      sumCorrect = 0;
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(inputs).each(function (index, element) {
+    val = jquery__WEBPACK_IMPORTED_MODULE_0___default()(element).val();
+
+    if (val == '') {
+      isTrue = false;
+    }
+
+    correct = jquery__WEBPACK_IMPORTED_MODULE_0___default()(element).siblings(".check").find("input").prop("checked");
+
+    if (correct) {
+      sumCorrect++;
+    }
+
+    arr.push({
+      "value": val,
+      "correct": correct
+    });
+  });
+
+  if (!isTrue || sumCorrect == 0) {
+    arr.length = 0;
+    return false;
+  }
+
+  return arr;
+}
 
 /***/ }),
 

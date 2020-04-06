@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class TestSection extends Model
 {
-    protected $fillabke = [
-        "test_id", "image"
+    protected $fillable = [
+        "test_id", "image", "title"
     ];
 
     public function test()

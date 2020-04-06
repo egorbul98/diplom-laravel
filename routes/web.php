@@ -34,11 +34,12 @@ Route::group(['prefix' => 'profile', "namespace"=>"Profile", "middleware"=>"auth
     Route::get('/module', "ModuleController@index")->name("profile.module.index");
     Route::get('/module/{module_id}/step/{step_id?}', "ModuleController@edit")->name("profile.module.edit");
 
-    Route::group(['prefix' => 'test'], function () {
-        Route::get('', "ProfileController@tests")->name("profile.tests");
-        Route::get('/create', "TestController@create")->name("profile.tests.create");
-    });
-   
+    Route::resource('test', 'TestController')->names("profile.test");
+    
+    Route::post('/ajax-save-test-section', "AjaxTestController@saveTestSection");
+    Route::post('/ajax-add-test-section', "AjaxTestController@addTestSection");
+    Route::post('/ajax-delete-test-section', "AjaxTestController@deleteTestSection");
+    Route::get('/ajax-get-test-section', "AjaxTestController@getTestSection");
     // Route::resource('module', 'ModuleController')->names("profile.module");
 
     Route::get('course/{course}/sections', "EditorSectionController@edit")->name("profile.course.sections.edit");

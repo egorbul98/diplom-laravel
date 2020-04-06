@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Test extends Model
 {
-    protected $fillabke = [
+    protected $fillable = [
         "title", "description", "author_id"
     ];
     public function test_sections()

@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
-
+use Illuminate\Support\Facades\Storage;
 class CourseController extends BaseController
 {
     /**
@@ -19,6 +19,7 @@ class CourseController extends BaseController
      */
     public function index()
     {
+        
         return view("profile.edit-course.index");
     }
 
@@ -50,6 +51,7 @@ class CourseController extends BaseController
         $course->save();
 
         if (isset($request->all()["image"])) {
+            Storage::disk('public')->deleteDirectory("courses/{$course->id}");
             $pathImage = $request->file("image")->store("courses/{$course->id}", 'public');
         }
         
@@ -106,6 +108,7 @@ class CourseController extends BaseController
 
         $data = $request->except("image");
         if (isset($request->all()["image"])) {
+            Storage::disk('public')->deleteDirectory("courses/{$id}");
             $data["image"] = $request->file("image")->store("courses/{$id}", "public");
         }
 

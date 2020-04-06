@@ -4,12 +4,16 @@
 .test-item{
   border: 1px solid $col-border-op;
   margin-bottom: 20px;
+  position: relative;
 }
 .test-item-inner{
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 16px 16px;
+  padding-right: 36px;
+  position: relative;
   cursor: pointer;
   &.active{
     .icon-arrow{
@@ -36,5 +40,128 @@
     padding: 10px 16px;
     font-size: 15px;
     border-top: 1px solid $col-border-op;
+  }
+}
+.test-item-edit{
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+
+  .icon{
+    cursor: pointer;
+  }
+}
+.test-sections-content{
+  display: none;
+}
+.test-sections{
+  .btn-save-test-section{
+    // margin-top: 10px;
+  }
+  .form-btns-wrap{
+    margin-top: 10px;
+  }
+  .test-sections-links{
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding-bottom: 10px;
+    flex-wrap: wrap;
+    &__item{
+      flex-shrink: 0;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 16px;
+      width: 30px;
+      height: 30px;
+      margin-right: 10px;
+      background-color: $col-border-op;
+      position: relative;
+      transition: all 0.3s;
+      margin-bottom: 10px;
+      
+      &.active{
+        background-color: $col-active;
+
+        a{
+          color: #ffffff;
+        }
+      }
+
+      &:hover{
+        background-color: $col-active;
+        a{
+          color: #ffffff;
+        }
+      }
+      a{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+      }
+    }
+  }
+
+
+  .answers-list{
+    margin-top: 10px;
+  }
+  .title{
+    margin-bottom: 10px;
+  }
+  .answer{
+    display: flex;
+    align-items: center;
+
+    &:last-child{
+      .icon--add{
+        visibility: visible;
+      }
+    }
+    .check{
+      padding: 10px;
+    }
+  }
+
+  .answer-inner{
+    display: flex;
+    width: 100%;
+    align-items: center;
+  }
+  .answer-icon-wrap{
+    display: flex;
+    align-items: center;
+
+    .icon{
+      margin-right: 10px;
+      margin-left: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+      &--delete{
+        color: red;
+      }
+      &--add{
+        visibility: hidden;
+      }
+      &:hover{
+        color: $col-active;
+      }
+      &:last-child{
+        margin: 0;
+      }
+    }
   }
 }

@@ -85,9 +85,7 @@ select {
 
   }
 
-  .input-control {
-    width: 100%;
-  }
+  
 
   .input-bg {
     border: none;
@@ -131,7 +129,9 @@ select {
     color: red;
   }
 }
-
+.input-control {
+  width: 100%;
+}
 .form-field {
   display: flex;
   align-items: center;
@@ -167,7 +167,11 @@ select {
 .form-btns-wrap {
   .btn {
     margin-right: 10px;
+    @include media-max($S){
+      margin-right: 0;
+    }
   }
+ 
 }
 
 input#image{

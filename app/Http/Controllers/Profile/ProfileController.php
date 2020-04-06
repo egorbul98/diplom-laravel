@@ -13,10 +13,10 @@ class ProfileController extends BaseController
         return view("profile.index");
     }
     
-    public function tests()
-    {
-        return view("profile.test.index");
-    }
+    // public function tests()
+    // {
+    //     return view("profile.test.index");
+    // }
     
     public function settings()
     {

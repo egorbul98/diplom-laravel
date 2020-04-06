@@ -4,6 +4,7 @@ import "./modules/module-edit-selections"
 import "./modules/modal"
 import "./modules/editor"
 import "./modules/course-sections-edit"
+import "./modules/test-page"
 
 import $ from "jquery"
 

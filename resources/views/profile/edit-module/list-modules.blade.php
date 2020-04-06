@@ -40,11 +40,11 @@
         </tbody>
       </table>
     </div>
-    <div class="main-wrap">
+
       <section class="paginate center">
         {{$modules->links()}}
       </section>
-    </div>
+
 
     </main>
   </section>

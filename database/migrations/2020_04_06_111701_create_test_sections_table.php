@@ -16,7 +16,8 @@ class CreateTestSectionsTable extends Migration
         Schema::create('test_sections', function (Blueprint $table) {
             $table->id();
             $table->integer("test_id");
-            $table->string("image")->nulluble();
+            $table->string("title");
+            $table->string("image")->nullable();
             $table->timestamps();
         });
     }
