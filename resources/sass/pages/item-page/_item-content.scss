@@ -28,7 +28,9 @@
   }
   &__cometencies{
     display: none;
-
+    max-height: 452px;
+    overflow-y: auto;
+    @include scroolbar;
     .competence{
       padding: 10px 16px;
       font-size: 15px;

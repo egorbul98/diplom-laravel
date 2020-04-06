@@ -13867,6 +13867,9 @@ jquery__WEBPACK_IMPORTED_MODULE_6___default()(document).ready(function () {
   jquery__WEBPACK_IMPORTED_MODULE_6___default()('.item-page .item-sections-item').on("click", function () {
     jquery__WEBPACK_IMPORTED_MODULE_6___default()(this).toggleClass("active").children(".item-sections-item__cometencies").slideToggle();
   });
+  jquery__WEBPACK_IMPORTED_MODULE_6___default()('.test-list .test-item-inner').on("click", function () {
+    jquery__WEBPACK_IMPORTED_MODULE_6___default()(this).toggleClass("active").siblings(".test-item-models").slideToggle();
+  });
   jquery__WEBPACK_IMPORTED_MODULE_6___default()('.notifications').on("click", ".btn-close", function () {
     jquery__WEBPACK_IMPORTED_MODULE_6___default()(this).closest(".notifications__item").slideUp(function () {
       jquery__WEBPACK_IMPORTED_MODULE_6___default()(this).remove();
@@ -14039,6 +14042,7 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(".course-sections").on('click', '.
     data: data,
     success: function success(response, status) {
       renderModalListModules(response.modules, sectionId, $wrap);
+      $wrap.attr("data-section-id", sectionId);
       jquery__WEBPACK_IMPORTED_MODULE_0___default()(".modal-modules").removeClass("modal--hidden");
     },
     error: function error(response, status) {
@@ -14049,8 +14053,7 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(".course-sections").on('click', '.
 
 jquery__WEBPACK_IMPORTED_MODULE_0___default()(".modal-modules .btn-search").on('click', function () {
   var $wrap = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".modal-modules .modal-list-modules");
-  var sectionId = $wrap.children(0).attr("data-section-id");
-  console.log(sectionId);
+  var sectionId = $wrap.attr("data-section-id");
   var text = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).siblings(".search").val();
   var url = "/profile/ajax-search-modules-section";
   var type = "GET";

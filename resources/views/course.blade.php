@@ -17,7 +17,7 @@
             class="name">{{$course->author->name}} {{$course->author->lastname}}</span></div>
       </div>
       <div class="item-header__img">
-        <img src="{{asset("img/course.jpg")}}" alt="">
+        <img src="{{asset("storage/".$course->image)}}" alt="">
       </div>
     </div>
   </div>

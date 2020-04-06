@@ -219,6 +219,7 @@ $(".course-sections").on('click', '.btn-add-module', function () {
         data: data,
         success: function (response, status) {
             renderModalListModules(response.modules, sectionId, $wrap);
+            $wrap.attr("data-section-id", sectionId);
             $(".modal-modules").removeClass("modal--hidden");
         },
         error: function (response, status) {
@@ -230,8 +231,7 @@ $(".course-sections").on('click', '.btn-add-module', function () {
 //Поиск модулей в модалке
 $(".modal-modules .btn-search").on('click', function () {
     let $wrap = $(".modal-modules .modal-list-modules");
-    let sectionId = $wrap.children(0).attr("data-section-id");
-    console.log(sectionId);
+    let sectionId = $wrap.attr("data-section-id");
     let text = $(this).siblings(".search").val();
 
     let url = "/profile/ajax-search-modules-section";

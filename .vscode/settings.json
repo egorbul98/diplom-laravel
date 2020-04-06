@@ -8,7 +8,7 @@
             // "resources":true,
             // "public/":true,
         "tests/":true,
-        "config/":true,
+        // "config/":true,
         "bootstrap":true,
         "artisan": true,
         "package*": true,

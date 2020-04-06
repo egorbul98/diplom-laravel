@@ -7,7 +7,7 @@
 @include('profile.edit-course.parts.course-header')
 
 <div class="main-wrap margin-bottom-100">
-  <div class="flex-b">
+  <div class="flex-b ">
     <h1 class="title">Разделы</h1>
   </div>
 

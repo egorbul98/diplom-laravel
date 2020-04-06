@@ -42,4 +42,12 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Course', 'author_id');
     }
+    public function modules()
+    {
+        return $this->hasMany(Module::class, 'author_id');
+    }
+    public function tests()
+    {
+        return $this->hasMany(Test::class, 'author_id');
+    }
 }

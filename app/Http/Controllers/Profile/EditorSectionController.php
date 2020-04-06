@@ -25,19 +25,19 @@ class EditorSectionController extends BaseController
         foreach ($data["title"] as $key => $value) {
             $section = Section::find($key);
             $section->title = $value;
-            $section->save();
+            $section->update();
         }
         foreach ($data["description"] as $key => $value) {
             $section = Section::find($key);
             $section->description = $value;
-            $section->save();
+            $section->update();
         }
         foreach ($data["module-title"] as $key => $value) {
             $module = Module::find($key);
             $module->title = $value;
-            $module->save();
+            $module->update();
         }
-
-         return redirect()->route("profile.course.sections.edit", Course::find($id))->with(["success"=>"Успешно сохранено"]);
+        $course = Course::find($id);
+         return redirect()->route("profile.course.sections.edit", compact("course"))->with(["success"=>"Успешно сохранено"]);
     }
 }

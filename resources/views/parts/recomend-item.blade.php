@@ -1,7 +1,7 @@
 <div class="slide">
   <div class="recommend-item">
       <div class="recommend-item__img">
-      <img src="{{asset("img/header-bg.jpg")}}" alt="картинка курса">
+      <img src="{{asset("storage/".$course->image)}}" alt="картинка курса">
       </div>
       <div class="recommend-item__info">
           <h3 class="recommend-item__title">

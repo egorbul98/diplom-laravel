@@ -16,6 +16,17 @@
       background-color: $col-btn;
       color: #ffffff;
     }
+
+    @include media-max($S){
+      padding: 2px 8px;
+      font-size: 14px;
+      margin-right: 8px;
+    }
+    @include media-max($XS){
+      padding: 2px 4px;
+      font-size: 13px;
+      margin-right: 5px;
+    }
   }
 
   .page-item.active{

@@ -30,10 +30,22 @@ Route::resource('course', 'CourseController')->only(["index", "show"])->names("c
 Route::group(['prefix' => 'profile', "namespace"=>"Profile", "middleware"=>"auth"], function () {
     Route::get('', "ProfileController@index")->name("profile");
     Route::resource('course', 'CourseController')->names("profile.course");
+    
+    Route::get('/module', "ModuleController@index")->name("profile.module.index");
+    Route::get('/module/{module_id}/step/{step_id?}', "ModuleController@edit")->name("profile.module.edit");
+
+    Route::group(['prefix' => 'test'], function () {
+        Route::get('', "ProfileController@tests")->name("profile.tests");
+        Route::get('/create', "TestController@create")->name("profile.tests.create");
+    });
+   
+    // Route::resource('module', 'ModuleController')->names("profile.module");
 
     Route::get('course/{course}/sections', "EditorSectionController@edit")->name("profile.course.sections.edit");
     Route::post('course/{course}/sections', "EditorSectionController@save")->name("profile.course.sections.save");
     
+    // Route::get('course/{course}/sections', "EditorSectionController@edit")->name("profile.course.sections.edit");
+
     Route::post('/ajax-add-section', "AjaxSectionController@add");
     Route::post('/ajax-del-section', "AjaxSectionController@delete");
     Route::get('/ajax-list-modules-section', "AjaxSectionController@listModules");
@@ -55,12 +67,13 @@ Route::group(['prefix' => 'profile', "namespace"=>"Profile", "middleware"=>"auth
     
 
     Route::group(['prefix' => 'course/module'], function () {
-        Route::get('{module}/section/{section}/{step_id?}', "EditorModuleController@edit")->name("profile.course.module.edit");
+        Route::get('{module}/section/{section?}/{step_id?}', "EditorModuleController@edit")->name("profile.course.module.edit");
+        
         Route::post('{module}', "EditorModuleController@save")->name("profile.course.module.save");
 
-        Route::post('{module_id}/section/{section}/step_type/{step_type_id}', 'StepController@store')->name("profile.module.step.store");;
-        Route::post('{module_id}/step/{step_id}', 'StepController@update')->name("profile.module.step.update");;
-        Route::get('{module_id}/section/{section}/destroy-step/{step_id}', 'StepController@destroy')->name("profile.module.step.destroy");;
+        Route::post('{module_id}/{step_type_id}/{section?}', 'StepController@store')->name("profile.module.step.store");
+        Route::post('{module_id}/step/{step_id}/store', 'StepController@update')->name("profile.module.step.update");
+        Route::get('{module_id}/destroy-step/{step_id}/section/{section?}', 'StepController@destroy')->name("profile.module.step.destroy");
     });
    
 });
@@ -71,6 +84,7 @@ view()->composer(['*'], function ($view) {
     $user = Auth::user();
     $view->with(["categories"=>$categories, "user"=>$user]);
 });
+
 
 
 Auth::routes();

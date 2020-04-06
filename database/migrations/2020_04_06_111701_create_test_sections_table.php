@@ -16,6 +16,7 @@ class CreateTestSectionsTable extends Migration
         Schema::create('test_sections', function (Blueprint $table) {
             $table->id();
             $table->integer("test_id");
+            $table->string("image")->nulluble();
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ class CreateTestSectionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('test__sections');
+        Schema::dropIfExists('test_sections');
     }
 }

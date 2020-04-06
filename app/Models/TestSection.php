@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class TestSection extends Model
 {
     protected $fillabke = [
-        "test_id"
+        "test_id", "image"
     ];
 
     public function test()

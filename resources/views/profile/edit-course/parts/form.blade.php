@@ -1,8 +1,8 @@
 @if ($course->exists)
-  <form class="form" action="{{route("profile.course.update", $course->id)}}" method="POST">
+  <form class="form" action="{{route("profile.course.update", $course->id)}}" method="POST" enctype="multipart/form-data">
   @method("PUT")
 @else
-<form class="form" action="{{route("profile.course.store")}}" method="POST">
+<form class="form" action="{{route("profile.course.store")}}" method="POST" enctype="multipart/form-data">
 @endif
   @csrf
   <div class="form-row">
@@ -53,20 +53,19 @@
     </div>
   </div>
 
-  
+ 
+
   <div class="form-row">
     <div class="form-row__left">
       <p><label class="" for="edit-foto">Изображение</label></p>
     </div>
     <div class="form-row__right form-field">
       <div class="new-course__img">
-        <img src="img/course.jpg" alt=""><span class="icon"><i class="fas fa-camera"></i></span>
-        <input type="file" id="image" name="image" style="visibility: hidden;">
+      <img src="{{asset('/storage/'.$course->image)}}" alt=""><span class="icon"><i class="fas fa-camera"></i></span>
+        <input type="file" id="image" name="image" style="">
         <label for="image" class="edit-foto"><i class="fas fa-edit"></i></label>
       </div>
-
     </div>
-    
   </div>
 
   <div class="form-btns-wrap">
@@ -75,8 +74,10 @@
     @else
       <button class="btn" type="submit">Создать</button>
     @endif
-    
-    <a href="{{URL::previous()}}" class="btn">Отмена</a>
+    @if ($course->exists)
+      <a href="{{route("profile.course.sections.edit", compact("course"))}}" class="btn">Перейти к редактированию разделов</a>
+    @endif
+    <a href="{{route("profile.course.index")}}" class="btn">Перейти к списоку курсов</a>
   </div>
 
 </form>

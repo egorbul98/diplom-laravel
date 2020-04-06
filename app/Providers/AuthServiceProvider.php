@@ -28,8 +28,14 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('edit-course', function ($user, $course) {
             return $user->id == $course->author_id;
         });
-        Gate::define('edit-module', function ($user, $section, $module) {
-            return $user->id == $section->course->author_id && $user->id ==$module->author_id;
+        Gate::define('edit-module', function ($user, $module) {
+            return $user->id ==$module->author_id;
+        });
+        Gate::define('edit-section', function ($user, $section) {
+            return $user->id == $section->course->author_id;
+        });
+        Gate::define('edit-test', function ($user, $test) {
+            return $user->id == $test->author_id;
         });
     }
 }

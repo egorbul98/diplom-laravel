@@ -5,7 +5,11 @@
           <div class="steps">
             @foreach ($step_types as $step)
             <div class="step">
-                <form class="form" action="{{route("profile.module.step.store", [$module, $section, $step->id])}}" method="POST">
+              @isset($section->id)
+                <form class="form" action="{{route("profile.module.step.store", [$module, $step->id, $section])}}" method="POST">
+              @else 
+                <form class="form" action="{{route("profile.module.step.store", [$module, $step->id])}}" method="POST">
+              @endisset
                   @csrf
                   <h3>{{$step->title}}</h3>
                   <p >{{$step->description}}</p>

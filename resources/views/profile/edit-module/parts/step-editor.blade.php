@@ -8,9 +8,22 @@
                 <p class="step-editor-header__title"><span class="step-text">Шаг 11</span>|<span
                         class="step-type">{{$step->type->title}}</span></p>
                 <div class="step-editor-header__wrap-btns">
-                    <a href="{{route("profile.module.step.destroy", [$module->id, $section, $step->id])}}"
+                    @isset($section->id)
+                        
+                    <a href="{{route("profile.module.step.destroy", [$module->id, $step->id, $section])}}"
                         class="step-editor-header__btn-del btn"><span class="icon"><i
                                 class="fas fa-times"></i></span>Удалить</a>
+
+                    @else
+                            
+                    <a href="{{route("profile.module.step.destroy", [$module->id,$step->id])}}"
+                        class="step-editor-header__btn-del btn"><span class="icon"><i
+                                class="fas fa-times"></i></span>Удалить</a>
+
+                    @endisset
+                   
+
+
                     <button type="submit" class="step-editor-header__btn-save btn"><span class="icon m-r-8"><i class="fas fa-save"></i></span> Сохранить</button>
                 </div>
             </div>

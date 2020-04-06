@@ -169,3 +169,20 @@ select {
     margin-right: 10px;
   }
 }
+
+input#image{
+  background-color: transparent;
+}
+
+.form-btns-wrap{
+  display: flex;
+  flex-wrap: wrap;
+
+  .btn{
+    margin-bottom: 10px;
+    @include media-max($S){
+      width: 100%;
+      text-align: center;
+    }
+  }
+}

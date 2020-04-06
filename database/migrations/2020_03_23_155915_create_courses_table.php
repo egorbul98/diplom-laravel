@@ -21,6 +21,7 @@ class CreateCoursesTable extends Migration
             $table->integer("category_id");
             $table->integer("author_id");
             $table->text("content");
+            $table->string("image")->nullable();
 
 
             $table->timestamps();

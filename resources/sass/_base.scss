@@ -262,7 +262,7 @@ button{
   display: block;
   width: 100%;
   overflow-y: auto;
-
+  margin-bottom: 20px;
 }
 .table{
   width: 100%;
@@ -288,6 +288,9 @@ button{
   .table-btn{
     width: 1px;
     
+    .btn{
+      display: block;
+    }
   }
   .table-img{
     width: 100px;
@@ -354,3 +357,4 @@ button{
 .m-r-8{
   margin-right: 8px;
 }
+

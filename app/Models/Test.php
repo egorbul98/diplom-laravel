@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Test extends Model
 {
     protected $fillabke = [
-        "title"
+        "title", "description", "author_id"
     ];
     public function test_sections()
     {
@@ -17,5 +17,9 @@ class Test extends Model
     public function modules()
     {
         return $this->belongsToMany(Module::class, 'test_module');
+    }
+    public function author()
+    {
+        return $this->belongsTo(User::class, "author_id");
     }
 }

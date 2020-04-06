@@ -767,6 +767,7 @@ button {
   display: block;
   width: 100%;
   overflow-y: auto;
+  margin-bottom: 20px;
 }
 
 .table {
@@ -802,6 +803,10 @@ button {
 
 .table .table-btn {
   width: 1px;
+}
+
+.table .table-btn .btn {
+  display: block;
 }
 
 .table .table-img {
@@ -1284,6 +1289,29 @@ select::-webkit-scrollbar-corner {
 
 .form-btns-wrap .btn {
   margin-right: 10px;
+}
+
+input#image {
+  background-color: transparent;
+}
+
+.form-btns-wrap {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.form-btns-wrap .btn {
+  margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+  .form-btns-wrap .btn {
+    width: 100%;
+    text-align: center;
+  }
 }
 
 .modal {
@@ -2419,6 +2447,22 @@ footer .form-field {
   color: #ffffff;
 }
 
+@media (max-width: 768px) {
+  .pagination .page-link {
+    padding: 2px 8px;
+    font-size: 14px;
+    margin-right: 8px;
+  }
+}
+
+@media (max-width: 576px) {
+  .pagination .page-link {
+    padding: 2px 4px;
+    font-size: 13px;
+    margin-right: 5px;
+  }
+}
+
 .pagination .page-item.active .page-link {
   background-color: #767fcf;
   color: #ffffff;
@@ -2594,6 +2638,40 @@ footer .form-field {
 }
 
 .item-sections-item__cometencies {
+  display: none;
+  max-height: 452px;
+  overflow-y: auto;
+}
+
+.item-sections-item__cometencies::-webkit-scrollbar {
+  display: block;
+  width: 4px;
+  height: 4px;
+  border-radius: 40px;
+  margin-right: 10px;
+}
+
+.item-sections-item__cometencies::-webkit-scrollbar-track {
+  display: block;
+  background-color: #dcdacb;
+  border-radius: 40px;
+  margin-right: 10px;
+  height: 16px;
+}
+
+.item-sections-item__cometencies::-webkit-scrollbar-thumb {
+  display: block;
+  background-color: #777;
+  border-radius: 40px;
+  margin-right: 10px;
+  height: 16px;
+}
+
+.item-sections-item__cometencies::-webkit-scrollbar-button {
+  display: none;
+}
+
+.item-sections-item__cometencies::-webkit-scrollbar-corner {
   display: none;
 }
 
@@ -3754,6 +3832,7 @@ footer .form-field {
   width: 100%;
   text-align: center;
   cursor: pointer;
+  color: #583671;
 }
 
 .profile-header__username {
@@ -3887,7 +3966,8 @@ footer .form-field {
 }
 
 .new-course__img {
-  width: 350px;
+  width: 100%;
+  max-width: 350px;
   height: 200px;
   background-color: #dcdacb;
   font-size: 30px;
@@ -3938,6 +4018,11 @@ footer .form-field {
   width: 100%;
   text-align: center;
   cursor: pointer;
+  transition: all 0.3s;
+}
+
+.new-course__img .edit-foto:hover {
+  background-color: #dcdacbcb;
 }
 
 .new-course .form {
@@ -4816,5 +4901,83 @@ footer .form-field {
 
 .step-answer-form .form-row:last-child {
   margin-bottom: 0;
+}
+
+.test-list {
+  margin-top: 20px;
+}
+
+.test-item {
+  border: 1px solid #dcdacb88;
+  margin-bottom: 20px;
+}
+
+.test-item-inner {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 16px;
+  cursor: pointer;
+}
+
+.test-item-inner.active .icon-arrow {
+  transform: rotate(-90deg);
+}
+
+.test-item-inner .icon-arrow {
+  transition: all 0.3s;
+}
+
+.test-item-models {
+  display: none;
+  max-height: 290px;
+  overflow-y: auto;
+}
+
+.test-item-models::-webkit-scrollbar {
+  display: block;
+  width: 4px;
+  height: 4px;
+  border-radius: 40px;
+  margin-right: 10px;
+}
+
+.test-item-models::-webkit-scrollbar-track {
+  display: block;
+  background-color: #dcdacb;
+  border-radius: 40px;
+  margin-right: 10px;
+  height: 16px;
+}
+
+.test-item-models::-webkit-scrollbar-thumb {
+  display: block;
+  background-color: #777;
+  border-radius: 40px;
+  margin-right: 10px;
+  height: 16px;
+}
+
+.test-item-models::-webkit-scrollbar-button {
+  display: none;
+}
+
+.test-item-models::-webkit-scrollbar-corner {
+  display: none;
+}
+
+.test-item-models__item {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  font-size: 15px;
+  border-top: 1px solid #dcdacb88;
 }
 

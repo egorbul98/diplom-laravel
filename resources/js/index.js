@@ -90,6 +90,12 @@ $(document).ready(function () {
             .slideToggle();
     });
 
+    $('.test-list .test-item-inner').on("click", function () {
+        $(this).toggleClass("active")
+            .siblings(".test-item-models")
+            .slideToggle();
+    });
+
 
     $('.notifications').on("click", ".btn-close", function () {
         $(this).closest(".notifications__item").slideUp(function () {

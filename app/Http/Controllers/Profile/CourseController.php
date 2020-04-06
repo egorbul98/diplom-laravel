@@ -41,14 +41,23 @@ class CourseController extends BaseController
      */
     public function store(CourseRequest $request)
     {
-        $data = $request->all();
+        $data = $request->except("image");
+
         $data["author_id"] = Auth::user()->id;
         $data["slug"] = Str::slug($data["title"]);
-      
+
         $course = new Course($data);
         $course->save();
-        if($course){
-            return redirect()->route("profile.course.index")->with(['success'=>"Курс успешно добавлен"]);
+
+        if (isset($request->all()["image"])) {
+            $pathImage = $request->file("image")->store("courses/{$course->id}", 'public');
+        }
+        
+        $course->image = $pathImage;
+        $course->save();
+        
+        if ($course) {
+            return redirect()->route("profile.course.edit", compact("course"))->with(['success' => "Курс успешно добавлен"]);
         }
     }
 
@@ -60,8 +69,8 @@ class CourseController extends BaseController
      */
     public function show(Course $course)
     {
-        if(Gate::denies('edit-course', $course)){
-            return redirect()->back()->withErrors(["error"=>"Недостаточно прав"]);
+        if (Gate::denies('edit-course', $course)) {
+            return redirect()->back()->withErrors(["error" => "Недостаточно прав"]);
         }
         return view("profile.edit-course.show", compact("course"));
     }
@@ -74,8 +83,8 @@ class CourseController extends BaseController
      */
     public function edit(Course $course)
     {
-        if(Gate::denies('edit-course', $course)){
-            return redirect()->back()->withErrors(["error"=>"Недостаточно прав"]);
+        if (Gate::denies('edit-course', $course)) {
+            return redirect()->back()->withErrors(["error" => "Недостаточно прав"]);
         }
         return view("profile.edit-course.create", compact("course"));
     }
@@ -89,20 +98,22 @@ class CourseController extends BaseController
      */
     public function update(CourseRequest $request, $id)
     {
-       
-       $course = Course::find($id);
-      
-       if(empty($course)){
-           return back()->withErrors(["error"=>"Запись id='{$id}' не найдена"]);
-       }
-      
-       $data = $request->all();
-       
-       $result = $course->update($data);
-      
-       if($result){
-            return back()->with(["success"=>"Успешно сохранено"]);
-       }
+        $course = Course::find($id);
+
+        if (empty($course)) {
+            return back()->withErrors(["error" => "Запись id='{$id}' не найдена"]);
+        }
+
+        $data = $request->except("image");
+        if (isset($request->all()["image"])) {
+            $data["image"] = $request->file("image")->store("courses/{$id}", "public");
+        }
+
+        $result = $course->update($data);
+
+        if ($result) {
+            return back()->with(["success" => "Успешно сохранено"]);
+        }
     }
 
     /**
@@ -115,6 +126,6 @@ class CourseController extends BaseController
     {
         $course = Course::find($id);
         $course->delete();
-        return redirect()->route("profile.course.index")->with(["success"=>"Курс успешно удален"]);
+        return redirect()->route("profile.course.index")->with(["success" => "Курс успешно удален"]);
     }
 }

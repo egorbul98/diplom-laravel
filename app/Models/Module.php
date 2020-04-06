@@ -7,7 +7,7 @@ use App\Models\Section;
 use App\Models\Competence;
 use App\Models\Answer;
 use App\Models\Step;
-
+use Carbon\Carbon;
 class Module extends Model
 {
     protected $fillable = [
@@ -15,7 +15,10 @@ class Module extends Model
         'title', 'author_id'
     ];
 
-
+   public function author()
+   {
+       return $this->belongsTo(User::class, "author_id");
+   }
     public function sections()
     {
         return $this->belongsToMany(Section::class, 'module_section');
@@ -43,5 +46,15 @@ class Module extends Model
     {
         return $this->belongsToMany(Test::class, 'test_module');
     }
+
+    // public function getCreatedAtAttribute($date)
+    // {
+    //     return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-m-d');
+    // }
+
+    // public function getUpdatedAtAttribute($date)
+    // {
+    //     return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-m-d');
+    // }
     
 }

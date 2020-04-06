@@ -1,0 +1,40 @@
+.test-list{
+  margin-top: 20px;
+}
+.test-item{
+  border: 1px solid $col-border-op;
+  margin-bottom: 20px;
+}
+.test-item-inner{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 16px;
+  cursor: pointer;
+  &.active{
+    .icon-arrow{
+      transform: rotate(-90deg);
+    }
+  }
+
+  .icon-arrow{
+    transition: all 0.3s;
+  }
+ 
+}
+
+.test-item-models{
+  display: none;
+  max-height: 290px;
+  overflow-y: auto;
+  @include scroolbar;
+
+  &__item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 16px;
+    font-size: 15px;
+    border-top: 1px solid $col-border-op;
+  }
+}

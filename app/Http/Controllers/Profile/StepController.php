@@ -16,20 +16,33 @@ class StepController extends BaseController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($module_id, Section $section, $step_type_id)
+    public function store($module_id, $step_type_id, Section $section)
     {
         
         if ($step_type_id <= 0 && $step_type_id >= 4) {
             return back()->withErrors(["error"=>"Ошибка создания шага"]);
         }
         $module = Module::find($module_id);
-        if(Gate::denies('edit-module', [$section, $module])){
+        if(Gate::denies('edit-module', [$module])){
+            
             return back()->withErrors(["error" => "Недостаточно прав"]);
         }
+        if(isset($section->id)){
+            if(Gate::denies('edit-section', [$section])){
+                return back()->withErrors(["error" => "Недостаточно прав"]);
+            }
+        }
+        
         $step = new Step();
         $step->step_type_id = $step_type_id;
         $module->steps()->save($step);
-        return redirect()->route("profile.course.module.edit", [$module, $section, $step->id]);
+        
+        if(isset($section->id)){
+            return redirect()->route("profile.course.module.edit", [$module, $section, $step->id]);
+        }else{
+            return redirect()->route("profile.module.edit", [$module, $step->id]);
+        }
+        
     }
 
     /**
@@ -58,15 +71,21 @@ class StepController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($module_id, Section $section, $id)
+    public function destroy($module_id, $id, Section $section)
     {
         $module = Module::find($module_id);
-        if(Gate::denies('edit-module', [$section, $module])){
+        if(Gate::denies('edit-module', [$module])){
             return back()->withErrors(["error" => "Недостаточно прав"]);
+        }
+        if(isset($section->id)){
+            if(Gate::denies('edit-section', [$section])){
+                return back()->withErrors(["error" => "Недостаточно прав"]);
+            }
         }
         $step = Step::find($id);
         $step->delete();
 
-        return redirect()->route("profile.course.module.edit", [$module, $section]);
+        // return back()->route("profile.course.module.edit", [$module, $section]);
+        return back()->with(["success"=>"Шаг успешно удален"]);
     }
 }

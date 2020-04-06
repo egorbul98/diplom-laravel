@@ -11,13 +11,24 @@
                       $active = '';
                     }
                 @endphp
-                
-                @if ($m_step->step_type_id == 2 || $m_step->step_type_id == 3)
+
+                @isset($section->id)
+
+                  @if ($m_step->step_type_id == 2 || $m_step->step_type_id == 3)
                   <div class="step-list__item {{$active}}"><a href="{{route("profile.course.module.edit", [$module, $section, $m_step->id])}}"><i class="fas fa-question"></i></a></div>
+                  @else
+                  <div class="step-list__item  {{$active}} "><a href="{{route("profile.course.module.edit", [$module, $section, $m_step->id])}}"></a></div>
+                  @endif
+
                 @else
-               
-                <div class="step-list__item  {{$active}} "><a href="{{route("profile.course.module.edit", [$module, $section, $m_step->id])}}"></a></div>
-                @endif
+                  @if ($m_step->step_type_id == 2 || $m_step->step_type_id == 3)
+                  <div class="step-list__item {{$active}}"><a href="{{route("profile.module.edit", [$module, $m_step->id])}}"><i class="fas fa-question"></i></a></div>
+                  @else
+                  <div class="step-list__item  {{$active}} "><a href="{{route("profile.module.edit", [$module, $m_step->id])}}"></a></div>
+                  @endif
+
+                @endisset
+                
               @endforeach
             </div>
               

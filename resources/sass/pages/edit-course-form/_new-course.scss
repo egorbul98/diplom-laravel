@@ -17,7 +17,8 @@
   
 
   &__img{
-    width: 350px;
+    width: 100%;
+    max-width: 350px;
     height: 200px;
     background-color: $col-border;
     font-size: 30px;
@@ -69,6 +70,10 @@
       width: 100%;
       text-align: center;
       cursor: pointer;
+      transition: all 0.3s;
+      &:hover{
+        background-color: $col-border-op-sm;
+      }
     }
   }
 

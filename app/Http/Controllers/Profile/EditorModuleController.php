@@ -16,10 +16,16 @@ class EditorModuleController extends BaseController
 {
     public function edit(Module $module, Section $section, $id_step = null)
     {
-        if(Gate::denies("edit-module", [$section, $module])){
+        
+        if(Gate::denies("edit-module", [$module])){
             return back()->withErrors(["error"=>"Недостаточно прав"]);
         };
-
+      
+        if(isset($section->title)){
+            if(Gate::denies('edit-section', [$section])){
+                return back()->withErrors(["error" => "Недостаточно прав"]);
+            }
+        };
         $step_types = StepType::all();
         if($id_step==null && isset($module->steps[0])){
             $step = $module->steps[0];
@@ -31,5 +37,6 @@ class EditorModuleController extends BaseController
         
         return view("profile.edit-module.module", compact("module", "step_types", "step", "section"));
     }
+   
     
 }
