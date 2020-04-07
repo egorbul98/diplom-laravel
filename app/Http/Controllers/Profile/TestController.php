@@ -72,16 +72,7 @@ class TestController extends Controller
         // return view("profile.test.create", compact("test"));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-       
-    }
+   
 
     /**
      * Show the form for editing the specified resource.
@@ -116,14 +107,21 @@ class TestController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+ 
+    public function delete($id)
     {
-        dd(__METHOD__);
+        $test = Test::findOrFail($id);
+        if(Gate::denies("edit-test", $test)){
+            return back()->with(["error" => "Недостаточно прав"]);
+        }
+        // $test->test_sections()->answers()->delete();
+        $test->modules()->detach();
+        foreach ($test->test_sections as $test_section) {
+            $test_section->answers()->delete();
+            $test_section->delete();
+        }
+        $test->delete();
+
+        return back()->with(["success" => "Удаление прошло успешно"]);
     }
 }

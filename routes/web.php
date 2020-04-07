@@ -34,8 +34,17 @@ Route::group(['prefix' => 'profile', "namespace"=>"Profile", "middleware"=>"auth
     Route::get('/module', "ModuleController@index")->name("profile.module.index");
     Route::get('/module/{module_id}/step/{step_id?}', "ModuleController@edit")->name("profile.module.edit");
 
-    Route::resource('test', 'TestController')->names("profile.test");
+    Route::get('/test/{test_id}/delete', "TestController@delete")->name("profile.test.delete");
+    Route::resource('test', 'TestController')->only(["update", "edit", "store", "create", "index"])->names("profile.test");
     
+    Route::get('/ajax-get-tests-for-module', "AjaxTestController@getTests");
+    Route::post('/ajax-attach-test-for-module', "AjaxTestController@attachTest");
+    Route::post('/ajax-detach-module-from-test', "AjaxTestController@detachModule");
+    Route::get('/ajax-search-modules-for-test', "AjaxTestController@searchModule");
+    Route::get('/ajax-search-tests-for-module', "AjaxTestController@searchTest");
+    Route::get('/ajax-get-modules-for-test', "AjaxTestController@getModules");
+    Route::post('/ajax-add-modules-for-test', "AjaxTestController@attachModule");
+
     Route::post('/ajax-save-test-section', "AjaxTestController@saveTestSection");
     Route::post('/ajax-add-test-section', "AjaxTestController@addTestSection");
     Route::post('/ajax-delete-test-section', "AjaxTestController@deleteTestSection");
@@ -47,6 +56,7 @@ Route::group(['prefix' => 'profile', "namespace"=>"Profile", "middleware"=>"auth
     Route::post('course/{course}/sections', "EditorSectionController@save")->name("profile.course.sections.save");
     
     // Route::get('course/{course}/sections', "EditorSectionController@edit")->name("profile.course.sections.edit");
+
 
     Route::post('/ajax-add-section', "AjaxSectionController@add");
     Route::post('/ajax-del-section', "AjaxSectionController@delete");

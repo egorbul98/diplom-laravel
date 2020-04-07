@@ -229,7 +229,7 @@ $(".course-sections").on('click', '.btn-add-module', function () {
 });
 
 //Поиск модулей в модалке
-$(".modal-modules .btn-search").on('click', function () {
+$(".edit-course .modal-modules .btn-search").on('click', function () {
     let $wrap = $(".modal-modules .modal-list-modules");
     let sectionId = $wrap.attr("data-section-id");
     let text = $(this).siblings(".search").val();
@@ -261,7 +261,7 @@ $(".modal-modules .btn-search").on('click', function () {
 
 
 //Добавление существующего модуля
-$(".modal-modules .modal-list-modules").on('click', '.modal-list-modules-item', function () {
+$(".edit-course .modal-list-modules").on('click', '.modal-list-modules-item', function () {
   let moduleId = $(this).attr("data-module-id");
   let sectionId = $(this).attr("data-section-id");
   let title = $(this).children(".list-modules-item__title").text();

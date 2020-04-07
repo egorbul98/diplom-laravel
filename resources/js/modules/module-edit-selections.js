@@ -29,10 +29,10 @@ $(document).ready(function () {
 
     if (!$("#in-competences").prop("checked")) {
         $("#in-competences").parent().siblings(".select-wrap").slideUp();
-    } 
+    }
     if (!$("#out-competences").prop("checked")) {
         $("#out-competences").parent().siblings(".select-wrap").slideUp();
-    } 
+    }
 
 });
 
@@ -178,6 +178,98 @@ $(".module-header .btn-save-module").on("click", function () {
     }
 })
 
+//Модалка тестов
+$("#btn-attach-test").on("click", function () {
+    let $wrap = $(".modal-modules .modal-list-modules");
+    let moduleId = $(this).attr("data-module-id");
+    console.log("moduleId", moduleId);
+
+    let url = "/profile/ajax-get-tests-for-module";
+    let type = "GET";
+    let data = {
+        "module_id": moduleId
+    };
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: type,
+        url: url,
+        data: data,
+        success: function (response, status) {
+            console.log(response);
+            renderTestlListModules(response.tests, moduleId, $wrap);
+            $wrap.attr("data-module-id", moduleId);
+            $(".modal-modules").removeClass("modal--hidden");
+        },
+        error: function (response, status) {
+            notificationMessage(response.msg, "error");
+        },
+    });
+});
+
+//Добавление теста к модулю через модалку
+$(".edit-module .modal-list-modules").on('click', '.modal-list-modules-item', function () {
+    let moduleId = $(this).attr("data-module-id");
+    let testId = $(this).attr("data-test-id");
+
+    let url = "/profile/ajax-attach-test-for-module";
+    let type = "POST";
+    let data = {
+        "test_id": testId,
+        "module_id": moduleId,
+    };
+    $(".modal-modules").addClass("modal--hidden");
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: type,
+        url: url,
+        data: data,
+        success: function (response, status) {
+            notificationMessage(response.msg);
+            console.log(response);
+            $(".current-test").html(`
+                Текущий тест: <a href="/profile/test/${response.test.id}/edit">${response.test.title}</a>
+            `)
+        },
+        error: function (response, status) {
+            notificationMessage(response.msg, "error");
+        },
+    });
+});
+
+//Поиск модулей в модалке
+$(".edit-module .modal-modules .btn-search").on('click', function () {
+    let $wrap = $(".modal-modules .modal-list-modules");
+    let moduleId = $(this).attr("data-module-id");
+    let text = $(this).siblings(".search").val();
+
+    let url = "/profile/ajax-search-tests-for-module";
+    let type = "GET";
+    let data = {
+        "text": text
+    };
+    if (text != '') {
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type: type,
+            url: url,
+            data: data,
+            success: function (response, status) {
+                renderTestlListModules(response.tests, moduleId, $wrap);
+                $wrap.attr("data-module-id", moduleId);
+            },
+            error: function (response, status) {
+                notificationMessage(response.msg, "error");
+            },
+        });
+    }
+
+});
 
 function renderCompetences($parent, arr) {
     let str = '';
@@ -191,4 +283,20 @@ function renderCompetences($parent, arr) {
     `;
     }
     $($parent).html(str);
+}
+
+
+function renderTestlListModules(arr, moduleId, $wrap) {
+    let str = '';
+    for (let i = 0; i < arr.length; i++) {
+        const element = arr[i];
+        str += `
+    <div class="modal-list-modules-item" data-test-id="${element.id}" data-module-id="${moduleId}">
+      <h5 class="list-modules-item__title">${element.title}</h5>
+      <button class="modal-list-modules-item__add-btn"><i class="fas fa-plus"></i></button>
+    </div >
+  `;
+    }
+    $wrap.empty();
+    $wrap.html(str);
 }

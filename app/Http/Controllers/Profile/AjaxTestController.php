@@ -5,9 +5,10 @@ namespace App\Http\Controllers\Profile;
 use App\Http\Controllers\Controller;
 use App\Models\AnswerTestSection;
 use App\Models\Test;
+use App\Models\Module;
 use App\Models\TestSection;
 use Illuminate\Http\Request;
-use DB, Storage;
+use DB, Storage, Auth;
 
 class AjaxTestController extends Controller
 {
@@ -101,4 +102,73 @@ class AjaxTestController extends Controller
 
         return response()->json(["image" => asset("Storage/".$pathImage)], 200);
     }
+
+    public function getModules(Request $request)
+    {
+        $test = Test::findOrFail($request->all()["test_id"]);
+        $modules_test_ids = $test->getModulesId();
+        
+        $user_id = Auth::user()->id;
+        $modules = Module::select(["id", "title"])->where("author_id", $user_id)->whereNotIn("id",$modules_test_ids)->get(); //Получаем модули не входящие в данный тест 
+       
+        return response()->json(["modules"=>$modules], 200);
+    }
+    public function getTests(Request $request)
+    {
+        $tests = Auth::user()->tests;
+        return response()->json(["tests"=>$tests], 200);
+    }
+
+   
+
+    public function attachModule(Request $request)
+    {
+        $data = $request->all();
+        // dd($data);
+        $module = Module::find($data["module_id"]);
+        $module->tests()->attach($data["test_id"]);
+        // dd($module->tests);
+        return response()->json(["msg"=>"Модуль успешно добавлен", "module"=>$module], 200);
+    }
+    public function detachModule(Request $request)
+    {
+        $data = $request->all();
+        $module = Module::find($data["module_id"]);
+        $module->tests()->detach($data["test_id"]);
+        return response()->json([], 200);
+    }
+
+    public function attachTest(Request $request)
+    {
+        $data = $request->all();
+        $test = Test::findOrFail($data["test_id"]);
+        $module = Module::findOrFail($data["module_id"]);
+        $module->tests()->detach();
+        $test->modules()->attach($data["module_id"]);
+
+        return response()->json(["msg"=>"Тест успешно добавлен", "test"=>$test], 200);
+    }
+
+    public function searchModule(Request $request)
+    {
+        $data = $request->all();
+        $test = Test::findOrFail($data["test_id"]);
+        $modules_test_ids = $test->getModulesId();
+        $user_id = Auth::user()->id;
+
+        $modules = Module::select(["id", "title"])->where("title", "like", "%".$data["text"]."%")->where("author_id", $user_id)->whereNotIn("id",$modules_test_ids)->get(); //Получаем модули
+
+
+        return response()->json(["modules"=>$modules], 200);
+    }
+    public function searchTest(Request $request)
+    {
+        $data = $request->all();
+        $user_id = Auth::user()->id;
+        $tests = Test::select(["id", "title"])->where("title", "like", "%".$data["text"]."%")->where("author_id", $user_id)->get(); //Получаем тесты
+
+        return response()->json(["tests"=>$tests], 200);
+    }
+
+
 }

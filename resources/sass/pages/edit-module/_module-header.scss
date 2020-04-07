@@ -142,7 +142,21 @@
       }
     }
     
-    .btn-save-module{
+    .btn{
         margin-top: 14px;
+        margin-right: 10px;
+        &:last-child{
+            margin-top: 10px;
+        }
+    }
+
+    .wrap-btn{
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .current-test{
+        
     }
 }

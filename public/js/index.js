@@ -14053,7 +14053,7 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(".course-sections").on('click', '.
   });
 }); //Поиск модулей в модалке
 
-jquery__WEBPACK_IMPORTED_MODULE_0___default()(".modal-modules .btn-search").on('click', function () {
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(".edit-course .modal-modules .btn-search").on('click', function () {
   var $wrap = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".modal-modules .modal-list-modules");
   var sectionId = $wrap.attr("data-section-id");
   var text = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).siblings(".search").val();
@@ -14082,7 +14082,7 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(".modal-modules .btn-search").on('
   }
 }); //Добавление существующего модуля
 
-jquery__WEBPACK_IMPORTED_MODULE_0___default()(".modal-modules .modal-list-modules").on('click', '.modal-list-modules-item', function () {
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(".edit-course .modal-list-modules").on('click', '.modal-list-modules-item', function () {
   var moduleId = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr("data-module-id");
   var sectionId = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr("data-section-id");
   var title = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children(".list-modules-item__title").text();
@@ -14487,6 +14487,91 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(".module-header .btn-save-module")
   } else {
     Object(_fun__WEBPACK_IMPORTED_MODULE_3__["notificationMessage"])(_fun__WEBPACK_IMPORTED_MODULE_3__["MsgErrorInputFill"], "error");
   }
+}); //Модалка тестов
+
+jquery__WEBPACK_IMPORTED_MODULE_0___default()("#btn-attach-test").on("click", function () {
+  var $wrap = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".modal-modules .modal-list-modules");
+  var moduleId = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr("data-module-id");
+  console.log("moduleId", moduleId);
+  var url = "/profile/ajax-get-tests-for-module";
+  var type = "GET";
+  var data = {
+    "module_id": moduleId
+  };
+  jquery__WEBPACK_IMPORTED_MODULE_0___default.a.ajax({
+    headers: {
+      'X-CSRF-TOKEN': jquery__WEBPACK_IMPORTED_MODULE_0___default()('meta[name="csrf-token"]').attr('content')
+    },
+    type: type,
+    url: url,
+    data: data,
+    success: function success(response, status) {
+      console.log(response);
+      renderTestlListModules(response.tests, moduleId, $wrap);
+      $wrap.attr("data-module-id", moduleId);
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()(".modal-modules").removeClass("modal--hidden");
+    },
+    error: function error(response, status) {
+      Object(_fun__WEBPACK_IMPORTED_MODULE_3__["notificationMessage"])(response.msg, "error");
+    }
+  });
+}); //Добавление теста к модулю через модалку
+
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(".edit-module .modal-list-modules").on('click', '.modal-list-modules-item', function () {
+  var moduleId = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr("data-module-id");
+  var testId = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr("data-test-id");
+  var url = "/profile/ajax-attach-test-for-module";
+  var type = "POST";
+  var data = {
+    "test_id": testId,
+    "module_id": moduleId
+  };
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(".modal-modules").addClass("modal--hidden");
+  jquery__WEBPACK_IMPORTED_MODULE_0___default.a.ajax({
+    headers: {
+      'X-CSRF-TOKEN': jquery__WEBPACK_IMPORTED_MODULE_0___default()('meta[name="csrf-token"]').attr('content')
+    },
+    type: type,
+    url: url,
+    data: data,
+    success: function success(response, status) {
+      Object(_fun__WEBPACK_IMPORTED_MODULE_3__["notificationMessage"])(response.msg);
+      console.log(response);
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()(".current-test").html("\n                \u0422\u0435\u043A\u0443\u0449\u0438\u0439 \u0442\u0435\u0441\u0442: <a href=\"/profile/test/".concat(response.test.id, "/edit\">").concat(response.test.title, "</a>\n            "));
+    },
+    error: function error(response, status) {
+      Object(_fun__WEBPACK_IMPORTED_MODULE_3__["notificationMessage"])(response.msg, "error");
+    }
+  });
+}); //Поиск модулей в модалке
+
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(".edit-module .modal-modules .btn-search").on('click', function () {
+  var $wrap = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".modal-modules .modal-list-modules");
+  var moduleId = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr("data-module-id");
+  var text = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).siblings(".search").val();
+  var url = "/profile/ajax-search-tests-for-module";
+  var type = "GET";
+  var data = {
+    "text": text
+  };
+
+  if (text != '') {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default.a.ajax({
+      headers: {
+        'X-CSRF-TOKEN': jquery__WEBPACK_IMPORTED_MODULE_0___default()('meta[name="csrf-token"]').attr('content')
+      },
+      type: type,
+      url: url,
+      data: data,
+      success: function success(response, status) {
+        renderTestlListModules(response.tests, moduleId, $wrap);
+        $wrap.attr("data-module-id", moduleId);
+      },
+      error: function error(response, status) {
+        Object(_fun__WEBPACK_IMPORTED_MODULE_3__["notificationMessage"])(response.msg, "error");
+      }
+    });
+  }
 });
 
 function renderCompetences($parent, arr) {
@@ -14498,6 +14583,18 @@ function renderCompetences($parent, arr) {
   }
 
   jquery__WEBPACK_IMPORTED_MODULE_0___default()($parent).html(str);
+}
+
+function renderTestlListModules(arr, moduleId, $wrap) {
+  var str = '';
+
+  for (var i = 0; i < arr.length; i++) {
+    var element = arr[i];
+    str += "\n    <div class=\"modal-list-modules-item\" data-test-id=\"".concat(element.id, "\" data-module-id=\"").concat(moduleId, "\">\n      <h5 class=\"list-modules-item__title\">").concat(element.title, "</h5>\n      <button class=\"modal-list-modules-item__add-btn\"><i class=\"fas fa-plus\"></i></button>\n    </div >\n  ");
+  }
+
+  $wrap.empty();
+  $wrap.html(str);
 }
 
 /***/ }),
@@ -14727,27 +14824,130 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(".edit-test .test-sections-links")
       Object(_fun__WEBPACK_IMPORTED_MODULE_1__["notificationMessage"])(response.msg, "error");
     }
   });
+}); //Открепление модуля
+
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(".test-list").on("click", ".btn-detach-module-test", function () {
+  var $item = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest(".test-item-models__item");
+  var moduleId = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr("data-module-id");
+  var testId = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest(".test-item").attr("data-test-id");
+  console.log(testId, moduleId);
+  var url = "/profile/ajax-detach-module-from-test";
+  var type = "POST";
+  var data = {
+    "test_id": testId,
+    "module_id": moduleId
+  };
+  jquery__WEBPACK_IMPORTED_MODULE_0___default.a.ajax({
+    headers: {
+      'X-CSRF-TOKEN': jquery__WEBPACK_IMPORTED_MODULE_0___default()('meta[name="csrf-token"]').attr('content')
+    },
+    type: type,
+    url: url,
+    data: data,
+    success: function success(response, status) {
+      $item.remove();
+    },
+    error: function error(response, status) {
+      Object(_fun__WEBPACK_IMPORTED_MODULE_1__["notificationMessage"])(response.msg, "error");
+    }
+  });
+}); //Модалка модулей
+
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(".test-list").on("click", ".btn-attach-test-module", function () {
+  var $wrap = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".modal-modules .modal-list-modules");
+  var testId = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr("data-test-id");
+  var url = "/profile/ajax-get-modules-for-test";
+  var type = "GET";
+  var data = {
+    "test_id": testId
+  };
+  jquery__WEBPACK_IMPORTED_MODULE_0___default.a.ajax({
+    headers: {
+      'X-CSRF-TOKEN': jquery__WEBPACK_IMPORTED_MODULE_0___default()('meta[name="csrf-token"]').attr('content')
+    },
+    type: type,
+    url: url,
+    data: data,
+    success: function success(response, status) {
+      renderModalListModules(response.modules, testId, $wrap);
+      $wrap.attr("data-test-id", testId);
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()(".modal-modules").removeClass("modal--hidden");
+    },
+    error: function error(response, status) {
+      Object(_fun__WEBPACK_IMPORTED_MODULE_1__["notificationMessage"])(response.msg, "error");
+    }
+  });
+}); //Добавление  модуля к тесту
+
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(".edit-test .modal-list-modules").on('click', '.modal-list-modules-item', function () {
+  var moduleId = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr("data-module-id");
+  var testId = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr("data-test-id");
+  console.log(testId);
+  var $wrap = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".test-item[data-test-id=".concat(testId, "]")).find(".test-item-models__inner");
+  var url = "/profile/ajax-add-modules-for-test";
+  var type = "POST";
+  var data = {
+    "test_id": testId,
+    "module_id": moduleId
+  };
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(".modal-modules").addClass("modal--hidden");
+  jquery__WEBPACK_IMPORTED_MODULE_0___default.a.ajax({
+    headers: {
+      'X-CSRF-TOKEN': jquery__WEBPACK_IMPORTED_MODULE_0___default()('meta[name="csrf-token"]').attr('content')
+    },
+    type: type,
+    url: url,
+    data: data,
+    success: function success(response, status) {
+      Object(_fun__WEBPACK_IMPORTED_MODULE_1__["notificationMessage"])(response.msg);
+      console.log(response);
+      var str = "\n        <div class=\"test-item-models__item\">\n        <p class=\"test-item-models__text\">\n          <a href=\"/module/".concat(response.module.id, "/step/\">").concat(response.module.title, "</a>\n        </p>\n        <button class=\"btn\" type=\"button\" data-module-id=\"").concat(response.module.id, "\">\u041E\u0442\u043A\u0440\u0435\u043F\u0438\u0442\u044C</button>\n      </div>\n            ");
+      $wrap.append(str);
+    },
+    error: function error(response, status) {
+      Object(_fun__WEBPACK_IMPORTED_MODULE_1__["notificationMessage"])(response.msg, "error");
+    }
+  });
+}); //Поиск модулей в модалке
+
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(".edit-test .modal-modules .btn-search").on('click', function () {
+  var $wrap = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".modal-modules .modal-list-modules");
+  var testId = $wrap.attr("data-test-id");
+  var text = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).siblings(".search").val();
+  var url = "/profile/ajax-search-modules-for-test";
+  var type = "GET";
+  var data = {
+    "test_id": testId,
+    "text": text
+  };
+
+  if (text != '') {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default.a.ajax({
+      headers: {
+        'X-CSRF-TOKEN': jquery__WEBPACK_IMPORTED_MODULE_0___default()('meta[name="csrf-token"]').attr('content')
+      },
+      type: type,
+      url: url,
+      data: data,
+      success: function success(response, status) {
+        renderModalListModules(response.modules, testId, $wrap);
+      },
+      error: function error(response, status) {
+        Object(_fun__WEBPACK_IMPORTED_MODULE_1__["notificationMessage"])(response.msg, "error");
+      }
+    });
+  }
 });
 
-function renderQuerstion(arrTestSection, arrAnswers) {
-  var $wrap = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".edit-test .answers-list-inner");
-  var str = "";
-  console.log(arrTestSection);
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()("#test-section-title").val(arrTestSection.title);
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()(".test-sections__img img").attr("src", arrTestSection.image);
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()(".btn-save-test-section").attr("data-test-section-id", arrTestSection.id);
+function renderModalListModules(arr, testId, $wrap) {
+  var str = '';
 
-  for (var i = 0; i < arrAnswers.length; i++) {
-    var answer = arrAnswers[i];
-    str += "\n    <div class=\"answer\">\n    <div class=\"answer-inner\">\n    <div class=\"check\"><input type=\"checkbox\" name=\"checkbox\" value=\"\"";
-
-    if (answer.correct == 1) {
-      str += " checked ";
-    }
-
-    str += "></div>\n        <input type=\"text\" name=\"text\" value=\"".concat(answer.value, "\" class=\"input-control text\">\n      </div>\n      <div class=\"answer-icon-wrap\">\n        <div class=\"icon icon--delete\"><i class=\"fas fa-times\"></i></div>\n        <div class=\"icon icon--add\"><i class=\"fas fa-plus\"></i></div>\n      </div>\n    </div>");
+  for (var i = 0; i < arr.length; i++) {
+    var element = arr[i];
+    str += "\n    <div class=\"modal-list-modules-item\" data-module-id=\"".concat(element.id, "\" data-test-id=\"").concat(testId, "\">\n      <h5 class=\"list-modules-item__title\">").concat(element.title, "</h5>\n      <button class=\"modal-list-modules-item__add-btn\"><i class=\"fas fa-plus\"></i></button>\n    </div >\n  ");
   }
 
+  $wrap.empty();
   $wrap.html(str);
 }
 
@@ -14784,6 +14984,29 @@ function getInputsAnswers() {
   }
 
   return arr;
+}
+
+function renderQuerstion(arrTestSection, arrAnswers) {
+  var $wrap = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".edit-test .answers-list-inner");
+  var str = "";
+  console.log(arrTestSection);
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()("#input-img").val("");
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()("#test-section-title").val(arrTestSection.title);
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(".test-sections__img img").attr("src", arrTestSection.image);
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(".btn-save-test-section").attr("data-test-section-id", arrTestSection.id);
+
+  for (var i = 0; i < arrAnswers.length; i++) {
+    var answer = arrAnswers[i];
+    str += "\n  <div class=\"answer\">\n  <div class=\"answer-inner\">\n  <div class=\"check\"><input type=\"checkbox\" name=\"checkbox\" value=\"\"";
+
+    if (answer.correct == 1) {
+      str += " checked ";
+    }
+
+    str += "></div>\n      <input type=\"text\" name=\"text\" value=\"".concat(answer.value, "\" class=\"input-control text\">\n    </div>\n    <div class=\"answer-icon-wrap\">\n      <div class=\"icon icon--delete\"><i class=\"fas fa-times\"></i></div>\n      <div class=\"icon icon--add\"><i class=\"fas fa-plus\"></i></div>\n    </div>\n  </div>");
+  }
+
+  $wrap.html(str);
 }
 
 /***/ }),

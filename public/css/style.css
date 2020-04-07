@@ -1401,6 +1401,12 @@ input#image {
   }
 }
 
+.modal .modal-window .title a {
+  -webkit-text-decoration-line: underline;
+          text-decoration-line: underline;
+  text-decoration: underline;
+}
+
 .modal .step {
   cursor: pointer;
   position: relative;
@@ -4691,8 +4697,22 @@ footer .form-field {
   padding-left: 0;
 }
 
-.module-header .btn-save-module {
+.module-header .btn {
   margin-top: 14px;
+  margin-right: 10px;
+}
+
+.module-header .btn:last-child {
+  margin-top: 10px;
+}
+
+.module-header .wrap-btn {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .steps-block {

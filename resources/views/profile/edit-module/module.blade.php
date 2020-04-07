@@ -57,7 +57,14 @@
             
                     @endisset
                     
-                    <button class="btn btn-save-module" type="button"><span class="icon m-r-8"><i class="fas fa-save"></i></span> Сохранить данные модуля</button>
+                    <div class="wrap-btn ">
+                        <button class="btn btn-save-module" type="button"><span class="icon m-r-8"><i class="fas fa-save"></i></span> Сохранить данные модуля</button>
+                        <button class="btn btn-attach-test" id="btn-attach-test" data-module-id="{{$module->id}}" type="button">Добавить тест к модулю</button>
+                        @isset($module->tests[0])
+                        <p class="current-test">Текущий тест: <a href="{{route("profile.test.edit",$module->tests[0]->id)}}">{{$module->tests[0]->title}}</a></p>
+                        @endisset
+                        
+                    </div>
                 </div>
             </form>
 
@@ -70,5 +77,23 @@
     
 </div>
 
+
+<div class="modal modal--hidden modal-modules">
+    <div class="modal-window">
+        <div class="modal-inner">
+          <h2 class="title center">Выберите тест, который хотите добавить или <a href="{{route("profile.test.create")}}">создайте новый</a></h2>
+          <div class="form-field">
+            <input type="text" class="search" placeholder="Найти тест по названию">
+            <button class="btn btn-search" type="submit">Искать</button>
+          </div>
+  
+          <div class="modal-list-modules">
+            <p>Тестов пока нет</p>
+          </div>
+  
+          <button class="modal-close" type="button"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+  </div>
 {{-- @include('profile.parts.footer-editor', [$body = "module"]) --}}
 @endsection

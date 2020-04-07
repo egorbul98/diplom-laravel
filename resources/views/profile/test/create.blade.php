@@ -44,7 +44,6 @@
         <div class="form-btns-wrap">
           @if ($test->exists)
             <button class="btn" type="submit"><span class="icon m-r-8"><i class="fas fa-save"></i></span> Сохранить</button>
-            {{-- <a href="{{route("profile.test.show", [$test, 2])}}" class="btn">К редактированию вопросов</a> --}}
           @else
             <button class="btn" type="submit">Создать</button>
           @endif
@@ -120,5 +119,6 @@
 </section>
 
 @endif
+
 
 @endsection

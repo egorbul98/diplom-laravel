@@ -22,4 +22,14 @@ class Test extends Model
     {
         return $this->belongsTo(User::class, "author_id");
     }
+
+    public function getModulesId()
+    {
+        $modules = $this->modules;
+        $modules_ids = [];
+        foreach ($modules as $item) {
+            $modules_ids[] = $item->id;
+        }
+        return $modules_ids;
+    }
 }
