@@ -40,6 +40,7 @@ Route::group(['prefix' => 'profile', "namespace"=>"Profile", "middleware"=>"auth
     Route::post('/ajax-add-test-section', "AjaxTestController@addTestSection");
     Route::post('/ajax-delete-test-section', "AjaxTestController@deleteTestSection");
     Route::get('/ajax-get-test-section', "AjaxTestController@getTestSection");
+    Route::post('/ajax-upload-image', "AjaxTestController@uploadImage");
     // Route::resource('module', 'ModuleController')->names("profile.module");
 
     Route::get('course/{course}/sections', "EditorSectionController@edit")->name("profile.course.sections.edit");

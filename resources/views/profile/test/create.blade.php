@@ -64,13 +64,12 @@
 
    
       <div class="test-sections-links">
-    
-        @for ($i = 0; $i < count($test->test_sections); $i++)
-          <div class="test-sections-links__item" >
-            <a href="{{$test->test_sections[$i]->id}}" class="test-sections-links__item-link" data-test-section-id="{{$test->test_sections[$i]->id}}">{{($i + 1)}}</a>
-          </div>
-        @endfor
-
+          @for ($i = 0; $i < count($test->test_sections); $i++)
+            <div class="test-sections-links__item" >
+              <a href="{{$test->test_sections[$i]->id}}" class="test-sections-links__item-link" data-test-section-id="{{$test->test_sections[$i]->id}}">{{($i + 1)}}</a>
+            </div>
+          @endfor
+          
       </div>
       
       <div class="test-sections-content">
@@ -80,13 +79,14 @@
           <input type="text" class="input-control" id="test-section-title" name="title" value="" maxlength="400" placeholder="Введите текст вопроса?">
         </div>
       </div>
-      <h4 class="title">Добавить картинку</h4>
-      <div class="flex-b">
+     
+      <div class="test-sections__img-wrap">
+        <div class="form-field">
+          <label for="input-img" class="img-input"><h4>Выбрать картинку</h4></label>
+          <input style="display: none" type="file" class="input-img" id="input-img" name="image" multiple="multiple">
+        </div>
         <div class="test-sections__img">
           <img src="" alt="">
-        </div>
-        <div class="form-field">
-          <input type="file" class="" name="image" value="" maxlength="400" placeholder="Введите текст вопроса?">
         </div>
       </div>
   

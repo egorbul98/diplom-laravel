@@ -14573,6 +14573,33 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(".answers-list-inner").on("click",
   var $wrap = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest(".answers-list-inner");
   var str = "\n  <div class=\"answer\">\n  <div class=\"answer-inner\">\n    <div class=\"check\"><input type=\"checkbox\" name=\"checkbox\" value=\"\"></div>\n    <input type=\"text\" name=\"text\" value=\"\" class=\"input-control text\">\n  </div>\n  <div class=\"answer-icon-wrap\">\n    <div class=\"icon icon--delete\"><i class=\"fas fa-times\"></i></div>\n    <div class=\"icon icon--add\"><i class=\"fas fa-plus\"></i></div>\n  </div>\n</div>\n  ";
   $wrap.append(str);
+}); //Сохранение картинки
+
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(".edit-test #input-img").on("input", function () {
+  var file = document.getElementById("input-img").files;
+  var data = new FormData();
+  var testSectionId = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".btn-save-test-section").attr("data-test-section-id");
+  data.append("image", file[0]);
+  data.append("test_section_id", testSectionId);
+  var image = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".test-sections__img img");
+  jquery__WEBPACK_IMPORTED_MODULE_0___default.a.ajax({
+    headers: {
+      'X-CSRF-TOKEN': jquery__WEBPACK_IMPORTED_MODULE_0___default()('meta[name="csrf-token"]').attr('content')
+    },
+    type: "POST",
+    url: "/profile/ajax-upload-image",
+    data: data,
+    dataType: "JSON",
+    processData: false,
+    contentType: false,
+    success: function success(response) {
+      // console.log(response.image);
+      image.attr("src", response.image);
+    },
+    error: function error(response) {
+      Object(_fun__WEBPACK_IMPORTED_MODULE_1__["notificationMessage"])(response, "error");
+    }
+  });
 }); //Сохранение секции
 
 jquery__WEBPACK_IMPORTED_MODULE_0___default()(".edit-test .btn-save-test-section").on("click", function () {
@@ -14626,10 +14653,9 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(".edit-test .btn-add-test-section"
     url: url,
     data: data,
     success: function success(response, status) {
-      console.log(response);
       var linksWrap = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".test-sections-links");
       linksWrap.append("\n            <div class=\"test-sections-links__item\">\n            <a href=\"#\" class=\"test-sections-links__item-link\" data-test-section-id=\"".concat(response.testSection.id, "\">").concat(linksWrap.children().length + 1, "</a>\n          </div>\n        "));
-      renderQuerstion(response.testSection, response.answerTestSections);
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()(".test-sections-links__item a").last().trigger("click"); // renderQuerstion(response.testSection, response.answerTestSections);
     },
     error: function error(response, status) {
       Object(_fun__WEBPACK_IMPORTED_MODULE_1__["notificationMessage"])(response.msg, "error");
@@ -14638,6 +14664,10 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(".edit-test .btn-add-test-section"
 }); //Удалить вопрос
 
 jquery__WEBPACK_IMPORTED_MODULE_0___default()(".edit-test .btn-del-test-section").on("click", function () {
+  if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(".test-sections-links__item-link").length == 1) {
+    return;
+  }
+
   var testSectionId = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".btn-save-test-section").attr("data-test-section-id");
   var $block = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.test-sections-content'); //Для появления и исчезновения
 
@@ -14698,11 +14728,11 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(".edit-test .test-sections-links")
     }
   });
 });
-jquery__WEBPACK_IMPORTED_MODULE_0___default()(".edit-test .btn-del-test-section").on("click", function () {});
 
 function renderQuerstion(arrTestSection, arrAnswers) {
   var $wrap = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".edit-test .answers-list-inner");
   var str = "";
+  console.log(arrTestSection);
   jquery__WEBPACK_IMPORTED_MODULE_0___default()("#test-section-title").val(arrTestSection.title);
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(".test-sections__img img").attr("src", arrTestSection.image);
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(".btn-save-test-section").attr("data-test-section-id", arrTestSection.id);

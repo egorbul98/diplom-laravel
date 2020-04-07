@@ -190,3 +190,19 @@ input#image{
     }
   }
 }
+
+.img-input{
+  border: 2px solid #dcdacb;
+  border-radius: 4px;
+  padding: 9px 20px 6px 12px;
+  // font-size: 14px;
+  transition: background-color 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  &:hover{
+    background-color: #dcdacb88;
+  }
+}
