@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Profile;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TestRequest;
+use App\Models\Module;
 use Illuminate\Http\Request;
 use App\Models\Test;
 use App\Models\TestSection;
@@ -114,8 +115,13 @@ class TestController extends Controller
         if(Gate::denies("edit-test", $test)){
             return back()->with(["error" => "Недостаточно прав"]);
         }
+        
         // $test->test_sections()->answers()->delete();
-        $test->modules()->detach();
+        foreach ($test->modules as $module) {
+            $module->test_id = null;
+            $module->update();
+        }
+
         foreach ($test->test_sections as $test_section) {
             $test_section->answers()->delete();
             $test_section->delete();

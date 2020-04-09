@@ -901,6 +901,25 @@ button {
   margin-right: 8px;
 }
 
+.nothing {
+  font-size: 32px;
+  text-align: center;
+  font-weight: bold;
+  margin: auto;
+}
+
+@media (max-width: 1024px) {
+  .nothing {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 768px) {
+  .nothing {
+    font-size: 18px;
+  }
+}
+
 /* Slider */
 
 .slick-slider {

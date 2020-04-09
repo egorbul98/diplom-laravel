@@ -361,3 +361,15 @@ button{
   margin-right: 8px;
 }
 
+.nothing{
+  font-size: 32px;
+  text-align: center;
+  font-weight: bold;
+  margin: auto;
+  @include media-max($M){
+    font-size: 26px;
+  }
+  @include media-max($S){
+    font-size: 18px;
+  }
+}

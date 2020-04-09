@@ -34,8 +34,8 @@ list
           @foreach ($courses as $course)
               @include('parts.course-item', $course)
           @endforeach
-          @if (!isset($courses))
-              Ничего
+          @if (!isset($courses[0]))
+             <div class="nothing">Здесь ничего нет</div>
           @endif
       </div>
 </section>

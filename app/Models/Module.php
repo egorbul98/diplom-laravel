@@ -42,9 +42,9 @@ class Module extends Model
         return $this->belongsToMany(Step::class, 'module_step');
     }
 
-    public function tests()
+    public function test()
     {
-        return $this->belongsToMany(Test::class, 'test_module');
+        return $this->belongsTo(Test::class);
     }
 
     // public function getCreatedAtAttribute($date)

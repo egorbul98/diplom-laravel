@@ -37,9 +37,14 @@
 
       <section class="item-sections item-content__section">
         <h2 class="title">Чему вы научитесь</h2>
-        @for ($i = 0; $i < 6; $i++) 
+     
+        @for ($i = 0; $i < $course->sections->count(); $i++)
           @include('parts.course.section-item') 
-        @endfor 
+        @endfor
+        {{-- @foreach ($course->sections as $section)
+          
+        @endforeach --}}
+         
       </section>
 
 

@@ -14,9 +14,13 @@ class Test extends Model
         return $this->hasMany(TestSection::class);
     }
 
+    // public function modules()
+    // {
+    //     return $this->belongsToMany(Module::class, 'test_module');
+    // }
     public function modules()
     {
-        return $this->belongsToMany(Module::class, 'test_module');
+        return $this->hasMany(Module::class);
     }
     public function author()
     {

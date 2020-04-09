@@ -60,8 +60,8 @@
                     <div class="wrap-btn ">
                         <button class="btn btn-save-module" type="button"><span class="icon m-r-8"><i class="fas fa-save"></i></span> Сохранить данные модуля</button>
                         <button class="btn btn-attach-test" id="btn-attach-test" data-module-id="{{$module->id}}" type="button">Добавить тест к модулю</button>
-                        @isset($module->tests[0])
-                        <p class="current-test">Текущий тест: <a href="{{route("profile.test.edit",$module->tests[0]->id)}}">{{$module->tests[0]->title}}</a></p>
+                        @isset($module->test)
+                        <p class="current-test">Текущий тест: <a href="{{route("profile.test.edit",$module->test->id)}}">{{$module->test->title}}</a></p>
                         @endisset
                         
                     </div>

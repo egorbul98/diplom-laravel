@@ -126,7 +126,8 @@ class AjaxTestController extends Controller
         $data = $request->all();
         // dd($data);
         $module = Module::find($data["module_id"]);
-        $module->tests()->attach($data["test_id"]);
+        $module->test_id = $data["test_id"];
+        $module->update();
         // dd($module->tests);
         return response()->json(["msg"=>"Модуль успешно добавлен", "module"=>$module], 200);
     }
@@ -134,7 +135,8 @@ class AjaxTestController extends Controller
     {
         $data = $request->all();
         $module = Module::find($data["module_id"]);
-        $module->tests()->detach($data["test_id"]);
+        $module->test_id = null;
+        $module->update();
         return response()->json([], 200);
     }
 
@@ -143,8 +145,8 @@ class AjaxTestController extends Controller
         $data = $request->all();
         $test = Test::findOrFail($data["test_id"]);
         $module = Module::findOrFail($data["module_id"]);
-        $module->tests()->detach();
-        $test->modules()->attach($data["module_id"]);
+        $module->test_id = $test->id;
+        $module->update();
 
         return response()->json(["msg"=>"Тест успешно добавлен", "test"=>$test], 200);
     }
@@ -155,7 +157,7 @@ class AjaxTestController extends Controller
         $test = Test::findOrFail($data["test_id"]);
         $modules_test_ids = $test->getModulesId();
         $user_id = Auth::user()->id;
-
+        
         $modules = Module::select(["id", "title"])->where("title", "like", "%".$data["text"]."%")->where("author_id", $user_id)->whereNotIn("id",$modules_test_ids)->get(); //Получаем модули
 
 

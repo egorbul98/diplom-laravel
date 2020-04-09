@@ -30,5 +30,9 @@ class Course extends Model
         return $this->belongsTo(Category::class);
     }
 
+    // public function steps()
+    // {
+    //     return $this->hasManyThrough('App\Comment', App\Post);
+    // }
    
 }
