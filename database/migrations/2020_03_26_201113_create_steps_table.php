@@ -16,6 +16,7 @@ class CreateStepsTable extends Migration
         Schema::create('steps', function (Blueprint $table) {
             $table->id();
             $table->integer("step_type_id");
+            $table->integer("module_id");
             $table->longText("content")->nulluble()->default("");
             
             $table->timestamps();

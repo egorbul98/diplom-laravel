@@ -280,7 +280,7 @@ $(".edit-test .modal-list-modules").on('click', '.modal-list-modules-item', func
         let str = `
         <div class="test-item-models__item">
         <p class="test-item-models__text">
-          <a href="/module/${response.module.id}/step/">${response.module.title}</a>
+          <a href="/profile/module/${response.module.id}/step/">${response.module.title}</a>
         </p>
         <button class="btn" type="button" data-module-id="${response.module.id}">Открепить</button>
       </div>

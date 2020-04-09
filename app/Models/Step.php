@@ -18,9 +18,10 @@ class Step extends Model
     {
         return $this->hasMany(AnswerString::class);
     }
+   
     public function modules()
     {
-        return $this->belongsToMany(Module::class, 'module_step');
+        return $this->belongsTo(Module::class);
     }
     public function type()
     {

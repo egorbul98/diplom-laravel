@@ -14901,7 +14901,7 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(".edit-test .modal-list-modules").
     success: function success(response, status) {
       Object(_fun__WEBPACK_IMPORTED_MODULE_1__["notificationMessage"])(response.msg);
       console.log(response);
-      var str = "\n        <div class=\"test-item-models__item\">\n        <p class=\"test-item-models__text\">\n          <a href=\"/module/".concat(response.module.id, "/step/\">").concat(response.module.title, "</a>\n        </p>\n        <button class=\"btn\" type=\"button\" data-module-id=\"").concat(response.module.id, "\">\u041E\u0442\u043A\u0440\u0435\u043F\u0438\u0442\u044C</button>\n      </div>\n            ");
+      var str = "\n        <div class=\"test-item-models__item\">\n        <p class=\"test-item-models__text\">\n          <a href=\"/profile/module/".concat(response.module.id, "/step/\">").concat(response.module.title, "</a>\n        </p>\n        <button class=\"btn\" type=\"button\" data-module-id=\"").concat(response.module.id, "\">\u041E\u0442\u043A\u0440\u0435\u043F\u0438\u0442\u044C</button>\n      </div>\n            ");
       $wrap.append(str);
     },
     error: function error(response, status) {

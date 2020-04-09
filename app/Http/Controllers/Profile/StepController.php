@@ -35,8 +35,8 @@ class StepController extends BaseController
         
         $step = new Step();
         $step->step_type_id = $step_type_id;
-        $module->steps()->save($step);
-        
+        $step->module_id = $module_id;
+        $step->save();
         if(isset($section->id)){
             return redirect()->route("profile.course.module.edit", [$module, $section, $step->id]);
         }else{

@@ -37,11 +37,15 @@ class Module extends Model
         return $this->belongsToMany(Competence::class, "competence_module")->wherePivot('type', "out");
     }
 
+    // public function steps()
+    // {
+    //     return $this->belongsToMany(Step::class, 'module_step');
+    // }
+   
     public function steps()
     {
-        return $this->belongsToMany(Step::class, 'module_step');
+        return $this->hasMany(Step::class);
     }
-
     public function test()
     {
         return $this->belongsTo(Test::class);
