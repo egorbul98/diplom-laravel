@@ -32,25 +32,60 @@ class Module extends Model
     {
         return $this->belongsToMany(Competence::class, "competence_module")->wherePivot('type', "in");
     }
+    public function competences_in_ids()
+    {
+        $competences_in = $this->competences_in;
+        $competences_in_ids = [];
+        foreach ($competences_in as $item) {
+            $competences_in_ids[] = $item->id;
+        }
+        return $competences_in_ids;
+    }
     public function competences_out()
     {
         return $this->belongsToMany(Competence::class, "competence_module")->wherePivot('type', "out");
     }
-
-    // public function steps()
-    // {
-    //     return $this->belongsToMany(Step::class, 'module_step');
-    // }
+    public function competences_out_ids()
+    {
+        $competences_out = $this->competences_out;
+        $competences_out_ids = [];
+        foreach ($competences_out as $item) {
+            $competences_out_ids[] = $item->id;
+        }
+        return $competences_out_ids;
+    }
    
     public function steps()
     {
         return $this->hasMany(Step::class);
     }
+
+    public function steps_ids()
+    {
+        $steps = $this->steps;
+        $steps_ids = [];
+        foreach ($steps as $item) {
+            $steps_ids[] = $item->id;
+        }
+        return $steps_ids;
+    }
+
+
     public function test()
     {
         return $this->belongsTo(Test::class);
     }
 
+    public function progress_users()
+    {
+        return $this->belongsToMany(User::class, 'progress_module');
+    }
+    public function progress_steps_for_user($user_id)
+    {
+       return $this->belongsToMany(Step::class, 'progress_step')->wherePivot('user_id', $user_id)->withPivot("complete");
+    }
+
+    
     // public function getCreatedAtAttribute($date)
     // {
     //     return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-m-d');

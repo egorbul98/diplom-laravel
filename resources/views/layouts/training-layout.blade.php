@@ -8,24 +8,28 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800&display=swap" rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{asset("css/style.css")}}">
-    <title>INDEX</title>
-    {{-- <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>  --}}
+    <title>Обучение</title>
 
 </head>
 
-<body class="@yield('class-body')">
+<body class="lesson-page @yield('class-body')">
    
     @include('parts.notifications')
     
-    @include('parts.header')
+    @include('training.parts.header-training')
 
-    @yield('content')
+   
     
-    @include('parts.footer')
-
-    {{-- <script src="https://kit.fontawesome.com/8dc48f921c.js" crossorigin="anonymous"></script> --}}
+    <div class="wrapper">
+        @include('training.parts.lesson-sidebar')
+    
+        <main class="lesson-content"> @yield('content') </main>
+    
+    </div>
 
     <script src="{{asset("js/index.js")}}"></script>
 </body>
 
 </html>
+
+

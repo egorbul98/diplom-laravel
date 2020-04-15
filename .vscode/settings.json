@@ -1,6 +1,6 @@
 {
     "files.exclude": {
-        "node_modules": true,
+        // "node_modules": true,
         "vendor": true,
         "README*": true,
         "server.php": true,
@@ -11,7 +11,7 @@
         // "config/":true,
         "bootstrap":true,
         "artisan": true,
-        "package*": true,
+        // "package*": true,
         "phpunit*": true,
         ".git*": true,
         "composer*":true,

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateModuleStepTable extends Migration
+class CreateProgressModuleTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class CreateModuleStepTable extends Migration
      */
     public function up()
     {
-        Schema::create('module_step', function (Blueprint $table) {
+        Schema::create('progress_module', function (Blueprint $table) {
             $table->integer("module_id");
-            $table->integer("step_id");
+            $table->integer("user_id");
+            $table->integer("course_id");
+            $table->integer("section_id");
+            $table->tinyInteger("complete")->default(0);
+            // $table->timestamps();
         });
     }
 
@@ -26,6 +30,6 @@ class CreateModuleStepTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('module_step');
+        Schema::dropIfExists('progress_module');
     }
 }

@@ -41,7 +41,8 @@
     overflow-y: auto;
     overflow-x: visible;
     padding-right: 6px;
-
+    
+    
     .section {
       cursor: pointer;
       position: relative;
@@ -49,16 +50,26 @@
       padding: 8px 8px;
       margin-bottom: 10px;
       transition: all 0.3s;
+      
       &.completed{
         background-color: $col-active-op;
       }
-      &:hover {
+      &:hover, &.active {
         background-color: $col-btn;
         .tooltip {
           opacity: 1;
           visibility: visible;
         }
       }
+
+      .overlay{
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        position: absolute;
+      }
+
       .num{
         width: 20px;
         flex-shrink: 0;

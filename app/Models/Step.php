@@ -28,4 +28,13 @@ class Step extends Model
         return $this->belongsTo(StepType::class, "step_type_id");
     }
     
+    public function progress_users()
+    {
+        return $this->belongsToMany(User::class, 'progress_step');
+    }
+
+    public function progress_users_for_user($user_id)
+    {
+        return $this->belongsToMany(User::class, 'progress_step')->wherePivot('user_id', $user_id);
+    }
 }

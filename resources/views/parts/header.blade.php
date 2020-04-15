@@ -61,9 +61,10 @@
                     <div class="nav__item"><a href="#">Новости</a></div>
                     <div class="nav__item"><a href="#">О нас</a></div>
                 </nav>
-                <form class="form" action="" method="GET">
+            <form class="form" action="{{route("course.search")}}" method="GET">
+                    @csrf
                     <div class="form-field">
-                        <input type="text" class="search" placeholder="Поиск по каталогу">
+                        <input type="text" class="search" name="text" placeholder="Поиск по каталогу">
                         <button class="btn btn-search" type="submit">Искать</button>
                     </div>
 

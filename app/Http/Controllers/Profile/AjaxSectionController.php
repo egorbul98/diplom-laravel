@@ -56,8 +56,8 @@ class AjaxSectionController extends Controller
         $data = $request->all();
         
         $module = Module::find($data["module_id"]);
-        $module->sections()->attach($data["section_id"]);
-        
+        $module->sections()->attach($data["section_id"], ["course_id"=>$data["course_id"]]);
+       
         return response()->json(["msg"=>"Модуль успешно добавлен", "module"=>$module, "step_count"=>$module->steps->count()], 200);
     }
 

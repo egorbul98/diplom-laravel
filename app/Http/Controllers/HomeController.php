@@ -19,4 +19,5 @@ class HomeController extends Controller
         $courses = Course::where("category_id", $category->id)->paginate(6);
         return view("category", compact("courses", "category"));
     }
+
 }

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+
 class CourseController extends BaseController
 {
     /**
@@ -19,7 +20,7 @@ class CourseController extends BaseController
      */
     public function index()
     {
-        
+
         return view("profile.edit-course.index");
     }
 
@@ -53,11 +54,11 @@ class CourseController extends BaseController
         if (isset($request->all()["image"])) {
             Storage::disk('public')->deleteDirectory("courses/{$course->id}");
             $pathImage = $request->file("image")->store("courses/{$course->id}", 'public');
+            $course->image = $pathImage;
         }
-        
-        $course->image = $pathImage;
+
         $course->save();
-        
+
         if ($course) {
             return redirect()->route("profile.course.edit", compact("course"))->with(['success' => "Курс успешно добавлен"]);
         }
@@ -130,5 +131,11 @@ class CourseController extends BaseController
         $course = Course::find($id);
         $course->delete();
         return redirect()->route("profile.course.index")->with(["success" => "Курс успешно удален"]);
+    }
+
+    public function graphShow($id)
+    {
+        $course = Course::findOrFail($id);
+        return view("profile.edit-course.graph-modules", compact("course"));
     }
 }

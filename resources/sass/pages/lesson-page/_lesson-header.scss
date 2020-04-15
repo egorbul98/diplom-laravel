@@ -48,6 +48,21 @@
         &:first-child {
           margin-top: 0;
         }
+
+        .btn{
+          text-transform: none;
+          font-weight: normal;
+          display: inline;
+          padding: 0;
+          margin: 0;
+          background-color: transparent;
+          font-size: 14px;
+          color: #ffffff;
+          transition: color 0.3s;
+          &:hover{
+            color: $col-active;
+          }
+        }
       }
     }
   }

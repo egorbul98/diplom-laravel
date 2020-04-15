@@ -1,5 +1,6 @@
 import "./modules/gamburger"
 import "./modules/slick"
+import "./modules/graph"
 import "./modules/module-edit-selections"
 import "./modules/modal"
 import "./modules/editor"

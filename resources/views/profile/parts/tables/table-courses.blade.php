@@ -10,40 +10,19 @@
       </tr>
     </thead>
     <tbody>
+    
+      @foreach ($user->progress_courses as $course)
+       
+      <tr>
+        <td class="table-img"><img src="{{asset("storage/".$course->image)}}" alt=""></td>
+        <td class="profile-content-table-course__title">{{$course->title}}</td>
+      <td><div class="progress-line"><div class="progress-line__fill" style="width: {{$user->modules_completed_for_course($course->id)->get()->count()/$course->modules->count()*100}}%"></div></div></td>
 
-      {{-- @foreach ($collection as $item)
-          
-      @endforeach --}}
+        <td>{{$course->created_at}}</td>
+        <td class="table-btn"><a href="{{route("training.course", [$course->id])}}" class="btn">Перейти</a></td>
+      </tr>
+      @endforeach
       
-      <tr>
-        <td class="table-img"><img src="img/course.jpg" alt=""></td>
-        <td class="profile-content-table-course__title">Программирование  на питоне</td>
-        
-        <td><div class="progress-line"><div class="progress-line__fill"></div></div></td>
-
-        <td>19.03.2020</td>
-        <td class="table-btn"><a href="#" class="btn">Перейти</a></td>
-      </tr>
-     
-      <tr>
-        <td class="table-img"><img src="img/header-bg.jpg" alt=""></td>
-        <td class="profile-content-table-course__title">Lorem ipsum dolor sit amet consectetur adipisicing elit. </td>
-        
-        <td><div class="progress-line"><div class="progress-line__fill"></div></div></td>
-
-        <td>19.03.2020</td>
-        <td class="table-btn"><a href="#" class="btn">Перейти</a></td>
-      </tr>
-     
-      <tr>
-        <td class="table-img"><img src="img/course.jpg" alt=""></td>
-        <td class="profile-content-table-course__title">Программирование  на питоне</td>
-        
-        <td><div class="progress-line"><div class="progress-line__fill"></div></div></td>
-
-        <td>19.03.2020</td>
-        <td class="table-btn"><a href="#" class="btn">Перейти</a></td>
-      </tr>
     
     </tbody>
   </table>

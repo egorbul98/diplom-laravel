@@ -15,7 +15,7 @@ class AjaxModuleController extends Controller
         $data = $request->all();
         $module = new Module($data);
         $module->save();
-        $module->sections()->attach($data["section_id"]);
+        $module->sections()->attach($data["section_id"], ["course_id"=>$data["course_id"]]);
         return response()->json(["id"=>$module->id, "msg"=>"Модуль успешно добавлен"], 200);
     }
     public function delete(Request $request)

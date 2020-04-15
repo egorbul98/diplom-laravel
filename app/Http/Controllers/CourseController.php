@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
 class CourseController extends Controller
 {
@@ -33,6 +34,23 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
-        return view("course", compact("course"));
+        $steps = collect();
+        foreach ($course->sections as $section) {
+            foreach ($section->modules as $module) {
+                foreach ($module->steps as $step) {
+                    $steps->push($step);
+                }
+            }
+        }
+            //    return Module::all();
+        return view("course", compact("course", "steps"));
+    }
+
+
+    public function search(Request $request)
+    {   
+        $text = $request->all()["text"];
+        $courses = Course::where("title", "like", "%".$text."%")->paginate(6);
+        return view("courses", compact("courses"));
     }
 }

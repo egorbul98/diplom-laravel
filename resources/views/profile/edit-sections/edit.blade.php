@@ -11,7 +11,7 @@
     <h1 class="title">Разделы</h1>
   </div>
 
-  <section class="course-sections">
+<section class="course-sections" data-course-id="{{$course->id}}">
     <form action="{{route("profile.course.sections.save", $course->id)}}" class="form" id="form-save-sections" method="POST">
       @csrf
       <div class="course-sections-list" data-author-id="{{$user->id}}">

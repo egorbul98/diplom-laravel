@@ -35,4 +35,9 @@ class Section extends Model
     {
         return $this->hasMany(Competence::class);
     }
+
+    public function progress_users()
+    {
+        return $this->belongsToMany(User::class, 'progress_section');
+    }
 }

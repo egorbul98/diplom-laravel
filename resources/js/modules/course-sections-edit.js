@@ -116,9 +116,10 @@ $(".course-sections").on('click', '.btn-create-module', function () {
     let title = $(this).closest(".list-modules-item").find(".input-create-module").val();
     let sectionId = $(this).attr("data-section-id");
     let authorId = $(this).closest(".course-sections-list").attr("data-author-id");
+    let courseId = $(this).closest(".course-sections").attr("data-course-id");
     let sectionNum = $(this).closest(".course-sections-item ").find(".section-edit-wrap__num").text();
     let str = '';
-    console.log(authorId, sectionId);
+    console.log(courseId);
 
     if (title != "") {
         $.ajax({
@@ -131,6 +132,7 @@ $(".course-sections").on('click', '.btn-create-module', function () {
                 "title": title,
                 "section_id": sectionId,
                 "author_id": authorId,
+                "course_id": courseId,
             },
             success: function (response, status) {
                 notificationMessage(response.msg);
@@ -264,6 +266,8 @@ $(".edit-course .modal-modules .btn-search").on('click', function () {
 $(".edit-course .modal-list-modules").on('click', '.modal-list-modules-item', function () {
   let moduleId = $(this).attr("data-module-id");
   let sectionId = $(this).attr("data-section-id");
+let courseId = $(".course-sections").attr("data-course-id");
+    
   let title = $(this).children(".list-modules-item__title").text();
   console.log(moduleId, sectionId, title);
   let $wrap = $(`.course-sections-item[data-section-id=${sectionId}]`).find(".list-modules-inner");
@@ -273,6 +277,7 @@ $(".edit-course .modal-list-modules").on('click', '.modal-list-modules-item', fu
   let data = {
       "section_id": sectionId,
       "module_id": moduleId,
+      "course_id": courseId,
   };
   $(".modal-modules").addClass("modal--hidden");
   $.ajax({

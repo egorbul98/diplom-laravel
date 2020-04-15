@@ -2,3 +2,17 @@
 .module-body{
   margin-bottom: 20px;
 }
+
+.wrap-btn-module-nav{
+  display: flex;
+  .form{
+    width: auto;
+  }
+  .btn{
+    margin-right: 10px;
+
+    &:last-child{
+      margin-right: 0;
+    }
+  }
+}

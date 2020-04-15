@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CompetencesSeeder::class);
         $this->call(CompetenceModuleSeeder::class);
         $this->call(StepTypesSeeder::class);
+        $this->call(StepSeeder::class);
         $this->call(ModuleSectionSeeder::class);
         // factory(\App\Post::class, 100)->create();
     }

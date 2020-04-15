@@ -32,8 +32,7 @@
   </table>
 </div>
 
-<div class="main-wrap">
+
   <section class="paginate center">
     {{$user->courses()->paginate(8)->links()}}
   </section>
-</div>

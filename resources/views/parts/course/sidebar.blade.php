@@ -1,4 +1,6 @@
-<a href="lesson-page-section.html" class="btn sidebar__btn">Начать обучение</a>
+
+
+<a href="{{route("training.course", [$course->id])}}" class="btn sidebar__btn">Начать обучение</a>
       <div class="sidebar__item ">
         <div class="sidebar__title">Оценки</div>
         <ul class="assessments">
@@ -10,21 +12,20 @@
           <li><i class="far fa-star"></i></li>
         </ul>
       </div>
-
       <div class="sidebar__item">
         <div class="sidebar__title">В курс входят</div>
         <div class="sidebar-list-info">
           <div class="sidebar-list-info__item">
-            <span class="num">28</span><span class="text">Теоретических модулей</span>
+            <span class="num">{{$steps->where("step_type_id", 1)->count()}}</span><span class="text">Теоретических модулей</span>
           </div>
           <div class="sidebar-list-info__item">
-            <span class="num">10</span><span class="text">Практических модулей</span>
+            <span class="num">{{$steps->where("step_type_id", 2)->count()}}</span><span class="text">Текстовых задач</span>
           </div>
           <div class="sidebar-list-info__item">
-            <span class="num">8</span><span class="text">Практических задач</span>
+            <span class="num">{{$steps->where("step_type_id", 3)->count()}}</span><span class="text">Числовых задач</span>
           </div>
         </div>
-        <div class="updated"><span class="text">Последнее обновление: </span><span>17.03.2020</span></div>
+        <div class="updated"><span class="text">Последнее обновление: </span><span>{{$course->updated_at}}</span></div>
       </div>
 
       <div class="sidebar__item">

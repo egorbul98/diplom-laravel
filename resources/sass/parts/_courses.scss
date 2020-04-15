@@ -22,7 +22,7 @@
   border: 1px solid $col-border;
   box-shadow: 0 0px 24px -10px $col-shadow;
   position: relative;
-
+  transition: all 0.3s;
   @include media-max($S) {
     width: 46%;
     margin-right: 2%;
@@ -39,6 +39,10 @@
 
   &:hover &__overlay {
     top: 0;
+  }
+  &:hover{
+    box-shadow: 0 0px 24px -5px $col-shadow;
+    transform: scale(1.02);
   }
 
   &__img {

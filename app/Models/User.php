@@ -50,4 +50,42 @@ class User extends Authenticatable
     {
         return $this->hasMany(Test::class, 'author_id');
     }
+
+    public function progress_courses()
+    {
+        return $this->belongsToMany(Course::class, 'progress_course')->withPivot("complete", "forget");
+    }
+    
+    public function progress_sections()
+    {
+        return $this->belongsToMany(Section::class, 'progress_section')->withPivot("complete");
+    }
+
+    public function sections_completed($course_id)
+    {
+        return $this->belongsToMany(Section::class, 'progress_section')->wherePivot('complete', 1)->wherePivot('course_id', $course_id);
+    }
+    public function sections_completed_ids($course_id)
+    {
+        $sections_completed = $this->sections_completed($course_id)->get();
+        $sections_completed_ids = [];
+        foreach ($sections_completed as $item) {
+            $sections_completed_ids[] = $item->id;
+        }
+        return $sections_completed_ids;
+    }
+
+    public function progress_modules()
+    {
+        return $this->belongsToMany(Course::class, 'progress_module')->withPivot("complete");
+    }
+
+    public function modules_completed_for_course($course_id)
+    {
+        return $this->belongsToMany(Module::class, 'progress_module')->wherePivot('complete', 1)->wherePivot('course_id', $course_id);
+    }
+    public function progress_steps()
+    {
+        return $this->belongsToMany(Course::class, 'progress_step')->withPivot("complete");
+    }
 }

@@ -24,15 +24,21 @@ class Course extends Model
     {
         return $this->hasMany(Section::class);
     }
+    
+    public function modules()
+    {
+        return $this->belongsToMany(Module::class, "module_section");
+    }
 
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
 
-    // public function steps()
-    // {
-    //     return $this->hasManyThrough('App\Comment', App\Post);
-    // }
+    public function progress_users()
+    {
+        return $this->belongsToMany(User::class, 'progress_course');
+    }
+
    
 }
