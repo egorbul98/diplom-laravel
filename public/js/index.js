@@ -64455,7 +64455,8 @@ __webpack_require__.r(__webpack_exports__);
 
   function getEdges(modules) {
     var from, to;
-    var edges = [];
+    var edges = []; //MainModule - модуль от которого будет идти связь
+
     modules.forEach(function (mainModule) {
       for (var i = 0; i < modules.length; i++) {
         from = mainModule.id;
@@ -64465,12 +64466,18 @@ __webpack_require__.r(__webpack_exports__);
           continue;
         }
 
+        if ((mainModule.id == 83 || mainModule.id == 84) && module.id == 85) {
+          console.log(mainModule.competencesOutIds, module.competencesInIds);
+          console.log(isInArray(mainModule.competencesOutIds, module.competencesInIds));
+        }
+
         if (isInArray(mainModule.competencesOutIds, module.competencesInIds) && mainModule.competencesOutIds.length >= module.competencesInIds.length) {
           var outCompetemsecString = '';
           to = module.id;
           mainModule.competencesOut.forEach(function (competence) {
             outCompetemsecString += competence.title + "\n";
           });
+          console.log("from ", from, "to ", to);
           edges.push({
             "from": from,
             "to": to,
@@ -64495,8 +64502,8 @@ __webpack_require__.r(__webpack_exports__);
           "id": module.id,
           "label": module.title
         });
-      });
-      console.log(dataEdgesModules);
+      }); // console.log(dataEdgesModules);
+
       var nodes = new vis.DataSet(dataNodesModules);
       var edges = new vis.DataSet(dataEdgesModules);
       var container = document.getElementById('graph' + section.id);

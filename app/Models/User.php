@@ -84,8 +84,26 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Module::class, 'progress_module')->wherePivot('complete', 1)->wherePivot('course_id', $course_id);
     }
+    public function modules_completed_for_section($section_id)
+    {
+        return $this->belongsToMany(Module::class, 'progress_module')->wherePivot('complete', 1)->wherePivot('section_id', $section_id);
+    }
+    public function id_modules_completed_for_section($section_id)
+    {
+        $modules_completed = $this->modules_completed_for_section($section_id)->get();
+        $modules_completed_ids = [];
+        foreach ($modules_completed as $item) {
+            $modules_completed_ids[] = $item->id;
+        }
+        return $modules_completed_ids;
+    }
     public function progress_steps()
     {
         return $this->belongsToMany(Course::class, 'progress_step')->withPivot("complete");
+    }
+
+    public function competences()
+    {
+        return $this->belongsToMany(Competence::class, 'competence_user');
     }
 }

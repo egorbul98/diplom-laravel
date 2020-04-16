@@ -18,7 +18,7 @@
         ".editorconfig":true,
         ".styleci.yml":true,
         "app/Console":true,
-        "functions":true,
+        // "functions":true,
         ".env*":true,
         "webpack*":true,
 

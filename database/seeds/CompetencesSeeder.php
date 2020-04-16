@@ -12,10 +12,21 @@ class CompetencesSeeder extends Seeder
     public function run()
     {
         $competences= [];
+        $competences[] = [
+            'title' => 'Выходной из первого',
+            "section_id"=> 1,
+        ];
+        $competences[] = [
+            'title' => 'Выходной из второго',
+            "section_id"=> 1,
+        ];
+        $competences[] = [
+            'title' => 'Выходной из третьего',
+            "section_id"=> 1,
+        ];
 
-        for ($i=1; $i < 30; $i++) { 
+        for ($i=2; $i < 30; $i++) { 
             $sectionId = $i;
-            
             $competences[] = [
                 'title' => 'Умение читать',
                 "section_id"=> $sectionId,
@@ -41,7 +52,7 @@ class CompetencesSeeder extends Seeder
                 "section_id"=> $sectionId,
             ];
             $competences[] = [
-                'title' => 'Знание того, что полезно в данный момент времени',
+                'title' => 'Знание чего-нибудь',
                 "section_id"=> $sectionId,
             ];
         };

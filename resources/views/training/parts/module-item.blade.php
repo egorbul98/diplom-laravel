@@ -1,5 +1,4 @@
-<div class="lesson-content__module-wrap">
-  <h2 class="title">Модуль для прохождения</h2>
+
   <div class="module shadow-light">
       <div class="module-list-steps">
         @php
@@ -39,4 +38,3 @@
       </div>
       <a href="{{route("training.module", [$course->id, $section->id, $module->id])}}" class="module__link"></a>
   </div>
-</div>

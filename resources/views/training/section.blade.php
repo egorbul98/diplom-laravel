@@ -35,11 +35,14 @@
 </div>
 
 @endif
-
-@if ($module->exists())
-    @include('training.parts.module-item', $module)
-@endif
-
+<div class="lesson-content__module-wrap">
+    <h2 class="title">Модули для прохождения</h2>
+    @if (isset($modules))
+        @foreach ($modules as $module)
+            @include('training.parts.module-item', $module)
+        @endforeach
+    @endif
+</div>
 
 <div class="lesson-content__learned-modules">
     <h2 class="title">Модули, которые уже изучены</h2>

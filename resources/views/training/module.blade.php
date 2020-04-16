@@ -10,9 +10,7 @@
 </div>
 
 <div class="module-body">
-
   {!!$step->content!!}
-  {{-- <p class="paragraph"></p> --}}
 </div>
 
 <div class="wrap-btn-module-nav">

@@ -12,10 +12,17 @@ class ModulesSeeder extends Seeder
     public function run()
     {
         $modules= [];
-        $title = "Модуль для самых модульных";
         $author_id = 3;
         $modules[] = [
-            'title' => $title,
+            'title' => "Модуль для самых модульных",
+            'author_id' => $author_id,
+        ];
+        $modules[] = [
+            'title' => "Второй четкий модуль",
+            'author_id' => $author_id,
+        ];
+        $modules[] = [
+            'title' => "Третий четкий модуль",
             'author_id' => $author_id,
         ];
         for ($i=1; $i < 80; $i++) { 

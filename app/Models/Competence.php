@@ -28,4 +28,8 @@ class Competence extends Model
     public function getCreatedAtColumn() {
         return null;
     }
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'competence_user');
+    }
 }
