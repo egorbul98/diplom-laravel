@@ -51,15 +51,15 @@
 
             <div class="header-middle">
                 <nav class="nav">
-                    <div class="nav__item"><a href="{{route("course.index")}}">Каталог</a>
+                    <div class="nav__item"><a href="#">Каталог</a>
                         <div class="nav__item-drop drop">
                             @foreach ($categories as $category_item)
                                 <div class="drop__item"><a href="{{route("category", $category_item->slug)}}">{{$category_item->title}}</a></div>
                              @endforeach
                         </div>
                     </div>
+                    <div class="nav__item"><a href="{{route("course.index")}}">Все курсы</a></div>
                     <div class="nav__item"><a href="#">Новости</a></div>
-                    <div class="nav__item"><a href="#">О нас</a></div>
                 </nav>
             <form class="form" action="{{route("course.search")}}" method="GET">
                     @csrf

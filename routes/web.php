@@ -34,9 +34,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'training', "namespace"=>"training"], function () {
         Route::get('course/{course_id}', "TrainingController@course")->name("training.course");
         Route::get('course/{course_id}/section/{section_id}', "TrainingController@section")->name("training.section");
+        Route::get('course/{course_id}/section/{section_id}/module/{module_id}/test', "TrainingController@test")->name("training.test");
         Route::get('course/{course_id}/section/{section_id}/module/{module_id}/step/{step_num?}', "TrainingController@module")->name("training.module");
+        
         Route::post('course/{course_id}/section/{section_id}/module/{module_id}/step/{step_id}', "TrainingController@checkAnswer")->name("training.step-check-answer");
         Route::post('module/completed', "TrainingController@moduleCompleted")->name("training.module-completed");
+        Route::post('test/completed', "TrainingController@testCompleted")->name("training.test-completed");
     });
 
     Route::group(['prefix' => 'profile', "namespace"=>"Profile"], function () {

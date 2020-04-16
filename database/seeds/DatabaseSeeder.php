@@ -22,6 +22,9 @@ class DatabaseSeeder extends Seeder
         $this->call(StepTypesSeeder::class);
         $this->call(StepSeeder::class);
         $this->call(ModuleSectionSeeder::class);
+        $this->call(TestsSeeder::class);
+        $this->call(TestSectionsSeeder::class);
+        $this->call(AnswerTestSectionsSeeder::class);
         // factory(\App\Post::class, 100)->create();
     }
 }

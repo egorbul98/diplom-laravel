@@ -16,7 +16,7 @@
 
           <div class="recommend-item-bottom">
               <div class="recommend-item__author">
-                  <span class="icon"><i class="fas fa-user"></i></span><span class="name">{{$course->author->name}} {{$course->author->lastname}}</span>
+                  <span class="icon"><i class="fas fa-user"></i></span><span class="name">{{$course->author->name}} <span class="lastname">{{$course->author->lastname}}</span></span>
               </div>
               <a href="{{route("course.show", $course)}}" class="btn  recommend-item__btn">Перейти</a>
 

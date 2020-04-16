@@ -35,18 +35,19 @@
 </div>
 
 @endif
-<div class="lesson-content__module-wrap">
-    <h2 class="title">Модули для прохождения</h2>
-    @if (isset($modules))
+
+@if (isset($modules[0]))
+    <div class="lesson-content__module-wrap">
+        <h2 class="title">Модули для прохождения</h2>
         @foreach ($modules as $module)
             @include('training.parts.module-item', $module)
         @endforeach
-    @endif
-</div>
+    </div>
+@endif
 
+@if (isset($modules_completed[0]))
 <div class="lesson-content__learned-modules">
-    <h2 class="title">Модули, которые уже изучены</h2>
-
+    <h2 class="title">Модули, которые вы изучили</h2>
     <div class="lesson-content__slider">
     @foreach ($modules_completed as $item_module)
 
@@ -67,11 +68,9 @@
         </div>
 
     @endforeach
-        
     </div>
-
 </div>
-
+@endif
 
 
 

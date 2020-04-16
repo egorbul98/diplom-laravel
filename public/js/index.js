@@ -64403,6 +64403,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _fun__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../fun */ "./resources/js/fun.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -64444,9 +64446,10 @@ __webpack_require__.r(__webpack_exports__);
       if (mainArr.indexOf(arr[i]) !== -1) {
         count++;
       }
-    }
+    } // if (count == mainArr.length && count!=0) {
 
-    if (count == mainArr.length && count != 0) {
+
+    if (count != 0) {
       return true;
     } else {
       return false;
@@ -64466,18 +64469,12 @@ __webpack_require__.r(__webpack_exports__);
           continue;
         }
 
-        if ((mainModule.id == 83 || mainModule.id == 84) && module.id == 85) {
-          console.log(mainModule.competencesOutIds, module.competencesInIds);
-          console.log(isInArray(mainModule.competencesOutIds, module.competencesInIds));
-        }
-
         if (isInArray(mainModule.competencesOutIds, module.competencesInIds) && mainModule.competencesOutIds.length >= module.competencesInIds.length) {
           var outCompetemsecString = '';
           to = module.id;
           mainModule.competencesOut.forEach(function (competence) {
             outCompetemsecString += competence.title + "\n";
           });
-          console.log("from ", from, "to ", to);
           edges.push({
             "from": from,
             "to": to,
@@ -64496,14 +64493,23 @@ __webpack_require__.r(__webpack_exports__);
     sections.forEach(function (section) {
       var dataEdgesModules = [];
       var dataNodesModules = [];
+      var color = '';
       dataEdgesModules = getEdges(section.modules);
       section.modules.forEach(function (module) {
+        color = '';
+
+        if (module.competencesInIds.length == 0) {
+          color = 'red';
+        }
+
         dataNodesModules.push({
           "id": module.id,
-          "label": module.title
+          "label": module.title,
+          color: {
+            border: color
+          }
         });
-      }); // console.log(dataEdgesModules);
-
+      });
       var nodes = new vis.DataSet(dataNodesModules);
       var edges = new vis.DataSet(dataEdgesModules);
       var container = document.getElementById('graph' + section.id);
@@ -64514,7 +64520,18 @@ __webpack_require__.r(__webpack_exports__);
       var options = {
         edges: {
           arrows: "to",
-          length: 600
+          length: 600,
+          physics: false
+        },
+        layout: _defineProperty({
+          hierarchical: true,
+          improvedLayout: true
+        }, "hierarchical", {
+          enabled: false,
+          direction: "LR"
+        }),
+        physics: {
+          stabilization: false
         }
       };
       var network = new vis.Network(container, data, options);

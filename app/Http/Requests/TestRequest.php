@@ -26,6 +26,7 @@ class TestRequest extends FormRequest
         return [
             "title" => "required|min:5|max:128",
             "description" => "",
+            "count_questions" => "required|integer|max:40",
         ];
     }
 }

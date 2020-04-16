@@ -106,4 +106,11 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Competence::class, 'competence_user');
     }
+
+    public function tests_completed()
+    {
+        return $this->belongsToMany(Test::class, 'module_test_user');
+    }
+
+    
 }

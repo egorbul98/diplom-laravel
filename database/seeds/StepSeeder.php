@@ -20,7 +20,17 @@ class StepSeeder extends Seeder
         $steps[] = [
             'module_id'=>1,
             'content'=>"content asdsa sad asd",
-            'step_type_id'=> 2,
+            'step_type_id'=> 1,
+        ];
+        $steps[] = [
+            'module_id'=>2,
+            'content'=>"content asdsa sad asd",
+            'step_type_id'=> 1,
+        ];
+        $steps[] = [
+            'module_id'=>3,
+            'content'=>"content asdsa sad asd",
+            'step_type_id'=> 1,
         ];
 
         DB::table('steps')->insert($steps);

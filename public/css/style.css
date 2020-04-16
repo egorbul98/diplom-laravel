@@ -1722,7 +1722,7 @@ input#image {
   .header-middle {
     font-size: 14px;
     align-items: flex-start;
-    margin-top: 0px;
+    margin-top: 10px;
   }
 }
 
@@ -2006,9 +2006,10 @@ input#image {
 }
 
 .recommend-item__info {
-  margin-left: 20px;
+  padding-left: 20px;
   padding-top: 10px;
   padding-bottom: 4px;
+  padding-right: 10px;
   position: relative;
   height: 100%;
   width: 100%;
@@ -2043,12 +2044,31 @@ input#image {
 }
 
 @media (max-width: 768px) {
+  .recommend-item__author .name {
+    margin-left: 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  .recommend-item__author .name {
+    margin-left: 6px;
+  }
+}
+
+@media (max-width: 576px) {
+  .recommend-item__author .lastname {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
   .recommend-item__author {
     font-size: 14px;
   }
 }
 
 .recommend-item .recommend-item-bottom {
+  padding-left: 20px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -4599,7 +4619,8 @@ footer .form-field {
   max-width: 48%;
   width: 100%;
   height: 450px;
-  border: 1px solid lightgray;
+  border: 1px solid #CFB986;
+  position: relative;
 }
 
 @media (max-width: 768px) {
@@ -4610,10 +4631,13 @@ footer .form-field {
 }
 
 .graphs-list-item .title {
-  padding-left: 10px;
+  position: absolute;
+  top: 4px;
+  left: 10px;
+  z-index: 1;
 }
 
-.graph-block {
+.graphs-list-item .graph-block {
   width: 100%;
   height: 100%;
 }

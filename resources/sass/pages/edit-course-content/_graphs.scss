@@ -9,18 +9,21 @@
   max-width: 48%;
   width: 100%;
   height: 450px;
-  border: 1px solid lightgray;
-
+  border: 1px solid $col-active;
+  position: relative;
   @include media-max($S){
     max-width: 100%;
     margin-bottom: 32px;
   }
 
   .title{
-    padding-left: 10px;
+    position: absolute;
+    top: 4px;
+    left: 10px;
+    z-index: 1;
   }
-}
-.graph-block {
-  width: 100%;
-  height: 100%;
+  .graph-block {
+    width: 100%;
+    height: 100%;
+  }
 }

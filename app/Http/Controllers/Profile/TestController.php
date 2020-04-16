@@ -73,8 +73,6 @@ class TestController extends Controller
         // return view("profile.test.create", compact("test"));
     }
 
-   
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -86,7 +84,6 @@ class TestController extends Controller
         if (Gate::denies('edit-test', $test)) {
             return redirect()->back()->withErrors(["error" => "Недостаточно прав"]);
         }
-        
         return view("profile.test.create", compact("test"));
     }
 

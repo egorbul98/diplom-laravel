@@ -41,6 +41,15 @@
           </div>
         </div>
 
+        <div class="form-row">
+          <div class="form-row__left">
+            <p><label class="" for="description">Количество активных вопросов при предъявлении теста</label></p>
+          </div>
+          <div class="form-row__right form-field">
+            <input type="number" name="count_questions" id="count_questions" min="1" max="40" class="input-control" value="{{old("count_questions", $test->count_questions)}}">
+          </div>
+        </div>
+
         <div class="form-btns-wrap">
           @if ($test->exists)
             <button class="btn" type="submit"><span class="icon m-r-8"><i class="fas fa-save"></i></span> Сохранить</button>

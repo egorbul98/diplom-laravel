@@ -44,7 +44,7 @@ import {
         }
     });
 
-    
+
 
     //содержит ли массив массив
     function isInArray(arr, mainArr) {
@@ -54,12 +54,13 @@ import {
                 count++;
             }
         }
-        if (count == mainArr.length && count!=0) {
+        // if (count == mainArr.length && count!=0) {
+        if (count != 0) {
             return true;
         } else {
             return false;
         }
-        
+
     }
 
     function getEdges(modules) {
@@ -73,23 +74,15 @@ import {
                 if (mainModule.id == module.id) {
                     continue;
                 }
-                
-                if ((mainModule.id == 83 || mainModule.id == 84) && module.id ==85) {
-                    console.log(mainModule.competencesOutIds, module.competencesInIds);
-                    console.log(isInArray(mainModule.competencesOutIds, module.competencesInIds));
-                }
-                
-                
+
                 if (isInArray(mainModule.competencesOutIds, module.competencesInIds) && mainModule.competencesOutIds.length >= module.competencesInIds.length) {
-                    
-                    let outCompetemsecString ='';
+
+                    let outCompetemsecString = '';
                     to = module.id;
                     mainModule.competencesOut.forEach(competence => {
                         outCompetemsecString += competence.title + "\n";
                     });
-                    
-                    console.log("from ", from, "to ", to);
-                    
+
                     edges.push({
                         "from": from,
                         "to": to,
@@ -100,7 +93,7 @@ import {
                     });
                 }
             }
-           
+
         });
         return edges;
     }
@@ -109,29 +102,48 @@ import {
         sections.forEach(section => {
             let dataEdgesModules = [];
             let dataNodesModules = [];
+            let color = '';
             dataEdgesModules = getEdges(section.modules);
             section.modules.forEach(module => {
+                color = '';
+                if (module.competencesInIds.length == 0) {
+                    color = 'red';
+                }
                 dataNodesModules.push({
                     "id": module.id,
                     "label": module.title,
+                    color: {
+                        border: color
+                    }
                 })
             });
-            // console.log(dataEdgesModules);
-           
+
             let nodes = new vis.DataSet(dataNodesModules);
             let edges = new vis.DataSet(dataEdgesModules);
-            
-            
+
+
             let container = document.getElementById('graph' + section.id);
             let data = {
                 nodes: nodes,
                 edges: edges
             };
-           
+
             let options = {
                 edges: {
                     arrows: "to",
-                    length: 600
+                    length: 600,
+                    physics: false
+                },
+                layout: {
+                    hierarchical: true,
+                    improvedLayout: true,
+                    hierarchical: {
+                        enabled: false,
+                        direction: "LR"
+                    }
+                },
+                physics: {
+                    stabilization: false
                 }
             };
             let network = new vis.Network(container, data, options);

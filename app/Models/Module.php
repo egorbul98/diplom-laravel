@@ -85,6 +85,11 @@ class Module extends Model
        return $this->belongsToMany(Step::class, 'progress_step')->wherePivot('user_id', $user_id)->withPivot("complete");
     }
 
+    public function test_completed()
+    {
+        return $this->belongsToMany(Test::class, 'module_test_user')->withPivot("user_id");
+    }
+
     
     // public function getCreatedAtAttribute($date)
     // {

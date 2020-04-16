@@ -136,9 +136,8 @@
 
   @include media-max($S) {
     font-size: 14px;
-    
     align-items: flex-start;
-    margin-top: 0px;
+    margin-top: 10px;
   }
   @include media-max($XS) {
     flex-direction: column;
