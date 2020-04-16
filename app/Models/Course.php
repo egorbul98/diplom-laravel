@@ -8,7 +8,7 @@ use App\Models\Section;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str;
-use Carbon\Carbon;
+use Carbon\Carbon, DB;
 class Course extends Model
 {
     protected $fillable = [
@@ -39,6 +39,21 @@ class Course extends Model
     {
         return $this->belongsToMany(User::class, 'progress_course');
     }
+
+    public function progress_sections()
+    {
+        return $this->belongsToMany(Section::class, 'progress_section')->withPivot("complete");
+    }
+    public function progress_sections_completed()
+    {
+        return $this->belongsToMany(Section::class, 'progress_section')->withPivot("complete")->wherePivot("complete", 1);
+    }
+    // public function procent_progress_for_user($user_id)
+    // {
+    //     $procent = DB::table('course')
+    //     ->join
+    // }
+
 
    
 }

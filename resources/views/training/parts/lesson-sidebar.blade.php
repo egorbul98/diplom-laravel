@@ -1,9 +1,13 @@
 <aside class="lesson-sidebar">
   <div class="lesson-sidebar__header">
     <h4 class="lesson-title"><a href="{{route("training.course", [$course->id])}}">{{$course->title}}</a></h4>
-    <div class="lesson-progress"><span>Прогресс по курсу:</span> <span class="progress">50%</span>
+    @php
+        $sections_completed = $course->progress_sections_completed;
+        $procent = count($sections_completed)/count($course->sections)*100;
+    @endphp
+    <div class="lesson-progress"><span>Прогресс по курсу:</span> <span class="progress">{{$procent}}%</span>
       <div class="progress-line">
-        <div class="progress-line__fill" style="width: 50%"></div>
+        <div class="progress-line__fill" style="width: {{$procent}}%"></div>
       </div>
     </div>
   </div>

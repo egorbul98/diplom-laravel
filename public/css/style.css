@@ -930,6 +930,12 @@ button {
   }
 }
 
+.link {
+  color: #CFB986;
+  -webkit-text-decoration: solid;
+          text-decoration: solid;
+}
+
 /* Slider */
 
 .slick-slider {
@@ -3465,6 +3471,9 @@ footer .form-field {
   text-align: justify;
   -moz-text-align-last: center;
        text-align-last: center;
+  max-width: 1112px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .lesson-content__tests {
@@ -3526,6 +3535,9 @@ footer .form-field {
 
 .lesson-content .title {
   text-align: center;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .lesson-content .module-list-steps {

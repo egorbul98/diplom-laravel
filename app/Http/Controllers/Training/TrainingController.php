@@ -24,7 +24,7 @@ class TrainingController extends Controller
       $id_modules_completed = $user->id_modules_completed_for_section($section->id);//id пройденных модулей
       $resultModules = collect();
       foreach ($modules as $module) {
-         if(!in_array($module->id, $id_modules_completed) && $this::accessModule($competences_user, $module)){//Если модуль еще не пройден и юзер обладает всеми нужными сбукомпетенциями
+         if(isset($module->steps[0]) && !in_array($module->id, $id_modules_completed) && $this::accessModule($competences_user, $module)){//Если модуль обладает шагами и еще не пройден ,а также юзер обладает всеми нужными сбукомпетенциями для входных субкомпетенций данного модуля
             $resultModules->push($module);
          }
       }
@@ -67,9 +67,15 @@ class TrainingController extends Controller
       $user = Auth::user();
 
       $modules = $this::getModules($section, $user);
-
+      if(count($modules) ==0 && $section->progress_users->where("id", $user->id)->where("complete", 1)->first() == null){
+         $section->progress_users()->detach($user->id);
+         $section->progress_users()->attach($user->id, ["course_id" => $course->id, "complete" => 1]);
+      }
+      $competences_user = DB::table('competence_user')
+      ->join("competences","competences.id","=","competence_user.competence_id")
+      ->where("competences.section_id", $section->id)->get();
       $modules_completed = Auth::user()->modules_completed_for_section($section->id)->get();
-      return view("training.section", compact("section", "course", "modules", "modules_completed"));
+      return view("training.section", compact("section", "course", "modules", "modules_completed", "competences_user"));
    }
    public function module($course_id, $section_id, $module_id, $step_num = 0)
    {
@@ -81,9 +87,10 @@ class TrainingController extends Controller
       if ($module->progress_users->where("id", Auth::user()->id)->first() == null) {
          $module->progress_users()->attach(Auth::user()->id, ["course_id" => $course->id, "section_id" => $section->id]);
       };
-      if ($section->modules->count() == $modules_completed->count() && $section->progress_users->where("id", Auth::user()->id)->first() == null) { //Если все модули раздела пройдены
-         $section->progress_users()->attach(Auth::user()->id, ["course_id" => $course->id, "complete" => 1]);
-      }
+      // if ($section->modules->count() == $modules_completed->count() && $section->progress_users->where("id", Auth::user()->id)->where("complete", 1)->first() == null) { //Если все модули раздела пройдены
+      //    $section->progress_users()->detach(Auth::user()->id);
+      //    $section->progress_users()->attach(Auth::user()->id, ["course_id" => $course->id, "complete" => 1]);
+      // }
       if (isset($module->steps[$step_num])) {
          $step = $module->steps[$step_num];
       } else {
@@ -176,13 +183,14 @@ class TrainingController extends Controller
          return redirect()->route("training.module", [$course->id, $section->id, $module->id])->withErrors(["error"=>"Тест не пройден. Вы ответили правильно на {$procentCorrent}% вопросов, а необходимо 75%"]);
       }
    }
-   public function moduleCompleted(Request $request)
+   public function moduleCompleted(Request $request)//Завершение модуля
    {
       $course = Course::findOrFail($request->all()["course_id"]);
       $module = Module::findOrFail($request->all()["module_id"]);
       $section = Section::findOrFail($request->all()["section_id"]);
       $steps_ids = $module->steps_ids();
       $user = Auth::user();
+      //Если имеется тест, то редирект на тест собсна
       if(isset($module->test) && $module->test_completed->where("id", $module->test_id)->first()==null){
          return redirect()->route("training.test", [$course->id, $section->id, $module->id])->with(["info"=>"Для прохождения модуля, необходимо пройти тест"]);
       }
@@ -204,12 +212,14 @@ class TrainingController extends Controller
          }
       }
 
-      //
-
-      $modules_completed = Auth::user()->modules_completed_for_course($course->id)->where("section_id", $section->id)->get();
-      if ($section->modules->count() == $modules_completed->count() && $section->progress_users->where("id", Auth::user()->id)->first() == null) { //Если все модули раздела пройдены
-         $section->progress_users()->attach(Auth::user()->id, ["course_id" => $course->id, "complete" => 1]);
+      $modules_completed = $user->modules_completed_for_course($course->id)->where("section_id", $section->id)->get();
+      // if ($section->modules->count() == $modules_completed->count() && $section->progress_users->where("id", $user->id)->first() == null) { //Если все модули раздела пройдены
+      //    $section->progress_users()->attach($user->id, ["course_id" => $course->id, "complete" => 1]);
+      // }
+      if ($section->modules->count() == $modules_completed->count() && $section->progress_users->where("id", $user->id)->where("complete", 1)->first() == null) { //Если все модули раздела пройдены
+         $section->progress_users()->detach($user->id);
+         $section->progress_users()->attach($user->id, ["course_id" => $course->id, "complete" => 1]);
       }
-      return redirect()->route("training.course", $course->id)->with(["success" => "Вы успешно прошли модуль"]);
+      return redirect()->route("training.section", [$course->id, $section->id])->with(["success" => "Вы успешно прошли модуль"]);
    }
 }

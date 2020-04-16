@@ -20,30 +20,28 @@
           @endforeach
         </div>
     </div>
+
     <div class="info-wrap__middle shadow-light">
-        <h3 class="title">Сейчас освоили <span class="num">5</span> навыков</h3>
+        <h3 class="title">Сейчас освоили <span class="num">{{count($competences_user)}}</span> навыков</h3>
         <div class="competences-list">
-            <div class="competence">Умение считать</div>
-            <div class="competence">Умение писать</div>
-            <div class="competence">Знание пользоваться пультом от телевизора</div>
-            <div class="competence">Умение считать</div>
-            <div class="competence">Умение писать</div>
-            <div class="competence">Умение считать</div>
-            <div class="competence">Умение писать</div>
+            @foreach ($competences_user as $competence)
+            <div class="competence">{{$competence->title}}</div>
+            @endforeach
         </div>
     </div>
 </div>
 
 @endif
-
-@if (isset($modules[0]))
-    <div class="lesson-content__module-wrap">
+<div class="lesson-content__module-wrap">
+    @if (isset($modules[0]))
         <h2 class="title">Модули для прохождения</h2>
         @foreach ($modules as $module)
             @include('training.parts.module-item', $module)
         @endforeach
-    </div>
-@endif
+    @else 
+    <h2 class="title">Вы прошли все модули данного раздела, <a href="#" class="link">перейдите в следующий раздел</a> или повторите уже пройденные модули</h2>
+    @endif
+</div>
 
 @if (isset($modules_completed[0]))
 <div class="lesson-content__learned-modules">
