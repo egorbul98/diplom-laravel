@@ -12,6 +12,7 @@ use App\Models\TestSection;
 use Illuminate\Http\Request;
 use Auth, DB;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Gate;
 
 class TrainingController extends Controller
 {
@@ -53,6 +54,11 @@ class TrainingController extends Controller
    public function course($course_id)
    {
       $course = Course::findOrFail($course_id);
+
+      if(Gate::denies('show-course', [$course])){
+         return back();
+      }
+      
       if ($course->progress_users->where("id", Auth::user()->id)->first() == null) {
          $course->progress_users()->attach(Auth::user()->id, ["course_id" => $course->id]);
       };
@@ -64,8 +70,14 @@ class TrainingController extends Controller
       $section = Section::findOrFail($section_id);
       $course = Course::findOrFail($course_id);
 
-      $user = Auth::user();
+      if(Gate::denies('show-course', [$course])){
+         return back();
+      }
+      if(Gate::denies('show-section', [$course, $section])){
+         return back()->withErrors(["error"=>"Такого раздела нет"]);
+      }
 
+      $user = Auth::user();
       $modules = $this::getModules($section, $user);
       if(count($modules) ==0 && $section->progress_users->where("id", $user->id)->where("complete", 1)->first() == null){
          $section->progress_users()->detach($user->id);

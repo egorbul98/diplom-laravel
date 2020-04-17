@@ -15,6 +15,7 @@
       @php
         $sections_completed = $course->progress_sections_completed;
         $procent = count($sections_completed)/count($course->sections)*100;
+        
       @endphp
       <tr>
         <td class="table-img"><img src="{{asset("storage/".$course->image)}}" alt=""></td>

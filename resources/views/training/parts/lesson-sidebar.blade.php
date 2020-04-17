@@ -4,6 +4,7 @@
     @php
         $sections_completed = $course->progress_sections_completed;
         $procent = count($sections_completed)/count($course->sections)*100;
+        // dd(count($sections_completed),count($course->sections));
     @endphp
     <div class="lesson-progress"><span>Прогресс по курсу:</span> <span class="progress">{{$procent}}%</span>
       <div class="progress-line">
