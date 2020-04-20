@@ -3,10 +3,10 @@
     <h4 class="lesson-title"><a href="{{route("training.course", [$course->id])}}">{{$course->title}}</a></h4>
     @php
         $sections_completed = $course->progress_sections_completed;
-        $procent = count($sections_completed)/count($course->sections)*100;
+        $procent = round(count($sections_completed)/count($course->sections)*100);
         // dd(count($sections_completed),count($course->sections));
     @endphp
-    <div class="lesson-progress"><span>Прогресс по курсу:</span> <span class="progress">{{$procent}}%</span>
+    <div class="lesson-progress"><span>Прогресс по курсу: </span><span class="progress">{{$procent}}%</span>
       <div class="progress-line">
         <div class="progress-line__fill" style="width: {{$procent}}%"></div>
       </div>
@@ -37,14 +37,8 @@
 
   <h4>Последние достижения</h4>
   <div class="lesson-sidebar__competences">
-    <div class="competence">Умение счиать</div>
-    <div class="competence">Умение писать</div>
-    <div class="competence">Знание что такое монитор</div>
-    <div class="competence">Умение счиать</div>
-    <div class="competence">Умение писать</div>
-    <div class="competence">Знание что такое монитор</div>
-    <div class="competence">Умение счиать</div>
-    <div class="competence">Умение писать</div>
-    <div class="competence">Знание что такое монитор</div>
+    @foreach ($user->competences_out_for_course($course->id) as $competence)
+    <div class="competence">{{$competence->title}}</div>
+    @endforeach
   </div>
 </aside>

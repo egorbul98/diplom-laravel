@@ -24,6 +24,8 @@ class CreateCoursesTable extends Migration
             $table->string("image")->nullable();
 
 
+            $table->tinyInteger("knowledge")->default(40);
+
             $table->timestamps();
         });
     }

@@ -9,7 +9,7 @@
           @if ($count2>0)
           <p class="module-list-steps__item">{{$count2}} текстовые задачи</p>
           @endif
-          @if ($count2>0)
+          @if ($count3>0)
           <p class="module-list-steps__item">{{$count3}} числовые задачи</p>
           @endif
          
@@ -24,7 +24,6 @@
                 @else 
                   <div class="progress-line__fill" style="width: 0%"></div>
                 @endif
-              
               </div>
           </div>
           <div class="right">
@@ -36,5 +35,9 @@
               </div>
           </div>
       </div>
-      <a href="{{route("training.module", [$course->id, $section->id, $module->id])}}" class="module__link"></a>
+      <form action="{{route("training.startModule", [$course->id, $section->id, $module->id])}}" method="POST" id="form-start-module{{$module->id}}">
+        @csrf
+        <a href="" class="module__link" onclick="event.preventDefault(); document.getElementById('form-start-module{{$module->id}}').submit();"></a>
+      </form>
+      
   </div>

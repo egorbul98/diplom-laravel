@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Course;
 use App\Models\Module;
 use App\Models\Competence;
-
+use DB;
 class Section extends Model
 {
     protected $fillable = [
@@ -34,6 +34,15 @@ class Section extends Model
     public function competences()
     {
         return $this->hasMany(Competence::class);
+    }
+    public function competences_out_modules()//компетенции, которые выходные у модулей данного раздела
+    {
+        return DB::table('competences')->select("title")
+            ->join("competence_module", "competence_module.competence_id", "=", "competences.id")
+        ->where("competences.section_id", $this->id)
+        ->where("competence_module.type", "out")
+        ->groupBy("title")
+        ->get();
     }
 
     public function progress_users()

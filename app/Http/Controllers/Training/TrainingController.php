@@ -10,7 +10,7 @@ use App\Models\Step;
 use App\Models\Test;
 use App\Models\TestSection;
 use Illuminate\Http\Request;
-use Auth, DB;
+use Auth, DB, Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Gate;
 
@@ -22,10 +22,10 @@ class TrainingController extends Controller
          return $competence->only(['id']);
       });
       $modules = $section->modules;
-      $id_modules_completed = $user->id_modules_completed_for_section($section->id);//id пройденных модулей
+      $id_modules_completed = $user->id_modules_completed_for_section($section->id); //id пройденных модулей
       $resultModules = collect();
       foreach ($modules as $module) {
-         if(isset($module->steps[0]) && !in_array($module->id, $id_modules_completed) && $this::accessModule($competences_user, $module)){//Если модуль обладает шагами и еще не пройден ,а также юзер обладает всеми нужными сбукомпетенциями для входных субкомпетенций данного модуля
+         if (isset($module->steps[0]) && !in_array($module->id, $id_modules_completed) && $this::accessModule($competences_user, $module)) { //Если модуль обладает шагами и еще не пройден ,а также юзер обладает всеми нужными сбукомпетенциями для входных субкомпетенций данного модуля
             $resultModules->push($module);
          }
       }
@@ -35,7 +35,7 @@ class TrainingController extends Controller
    private function accessModule($competences_user, $module)
    {
       $competences_in_ids = $module->competences_in_ids(); //id входных компетенций
-      if(count($competences_in_ids)==0){//Если входных еомпетенций нет
+      if (count($competences_in_ids) == 0) { //Если входных еомпетенций нет
          return true;
       }
       $count = 0; //Количество выходных компетенций, которые являются входными для другого модуля
@@ -51,18 +51,31 @@ class TrainingController extends Controller
          return false;
       }
    }
-   public function course($course_id)
+   public function startCourse($course_id)
    {
       $course = Course::findOrFail($course_id);
 
-      if(Gate::denies('show-course', [$course])){
-         return back();
-      }
-      
       if ($course->progress_users->where("id", Auth::user()->id)->first() == null) {
          $course->progress_users()->attach(Auth::user()->id, ["course_id" => $course->id]);
       };
-      return view("training.course", compact("course"));
+      return redirect()->route("training.course", $course->id);
+   }
+
+   public function course($course_id)
+   {
+      $course = Course::findOrFail($course_id);
+      $user = Auth::user();
+
+      if (Gate::denies('show-course', [$course])) {
+         return back();
+      }
+      $module_for_repeat = $user->modules_forget_for_course($course->id)->get(); //Получаем модули, для которых уже подошел срок повторения
+      if ($course->progress_users->where("id", Auth::user()->id)->first() == null) {
+         $course->progress_users()->attach(Auth::user()->id, ["course_id" => $course->id]);
+      };
+
+
+      return view("training.course", compact("course", "module_for_repeat"));
    }
 
    public function section($course_id, $section_id)
@@ -70,35 +83,52 @@ class TrainingController extends Controller
       $section = Section::findOrFail($section_id);
       $course = Course::findOrFail($course_id);
 
-      if(Gate::denies('show-course', [$course])){
-         return back();
-      }
-      if(Gate::denies('show-section', [$course, $section])){
-         return back()->withErrors(["error"=>"Такого раздела нет"]);
+
+      if (Gate::denies('show-section', [$course, $section])) {
+         return back()->withErrors(["error" => "Такого раздела нет"]);
       }
 
       $user = Auth::user();
       $modules = $this::getModules($section, $user);
-      if(count($modules) ==0 && $section->progress_users->where("id", $user->id)->where("complete", 1)->first() == null){
+      if (count($modules) == 0 && $section->progress_users->where("id", $user->id)->where("complete", 1)->first() == null) {
          $section->progress_users()->detach($user->id);
          $section->progress_users()->attach($user->id, ["course_id" => $course->id, "complete" => 1]);
       }
       $competences_user = DB::table('competence_user')
-      ->join("competences","competences.id","=","competence_user.competence_id")
-      ->where("competences.section_id", $section->id)->get();
+         ->join("competences", "competences.id", "=", "competence_user.competence_id")
+         ->where("competences.section_id", $section->id)->get();
+
       $modules_completed = Auth::user()->modules_completed_for_section($section->id)->get();
       return view("training.section", compact("section", "course", "modules", "modules_completed", "competences_user"));
    }
+   public function startModule($course_id, $section_id, $module_id)
+   {
+      $course = Course::findOrFail($course_id);
+      $module = Module::findOrFail($module_id);
+      $section = Section::findOrFail($section_id);
+
+      if ($module->progress_users->where("id", Auth::user()->id)->first() == null) {
+         $module->progress_users()->attach(Auth::user()->id, ["course_id" => $course->id, "section_id" => $section->id]);
+      };
+
+      return redirect()->route("training.module", [$course->id, $section->id, $module->id]);
+   }
+
    public function module($course_id, $section_id, $module_id, $step_num = 0)
    {
       $course = Course::findOrFail($course_id);
       $module = Module::findOrFail($module_id);
       $section = Section::findOrFail($section_id);
+
+
+
+      if (Gate::denies('show-module', [$course, $section, $module])) {
+         return back()->withErrors(["error" => "Нет доступа"]);
+      }
+
       $modules_completed = Auth::user()->modules_completed_for_course($course->id)->where("section_id", $section->id)->get();
-      
-      if ($module->progress_users->where("id", Auth::user()->id)->first() == null) {
-         $module->progress_users()->attach(Auth::user()->id, ["course_id" => $course->id, "section_id" => $section->id]);
-      };
+
+
       // if ($section->modules->count() == $modules_completed->count() && $section->progress_users->where("id", Auth::user()->id)->where("complete", 1)->first() == null) { //Если все модули раздела пройдены
       //    $section->progress_users()->detach(Auth::user()->id);
       //    $section->progress_users()->attach(Auth::user()->id, ["course_id" => $course->id, "complete" => 1]);
@@ -163,7 +193,7 @@ class TrainingController extends Controller
       $test = Test::findOrFail($module->test->id);
       return view("training.test", compact("test", "module", "section", "course"));
    }
-   public function testCompleted(Request $request)
+   public function testCompleted(Request $request) //Завершение теста (кнопка "Завершить")
    {
       $data = $request->all();
       $arr_corrent_sections_ids = [];
@@ -171,31 +201,31 @@ class TrainingController extends Controller
       $module = Module::findOrFail($data["module_id"]);
       $course = Course::findOrFail($data["course_id"]);
       $section = Section::findOrFail($data["section_id"]);
-      if(!isset($data["answer"])){
-         return back()->withErrors(["error"=>"Необходимо ответить на вопросы"]);
+      if (!isset($data["answer"])) {
+         return back()->withErrors(["error" => "Необходимо ответить на вопросы"]);
       }
       foreach ($data["answer"] as $test_section_id => $answer_id) {
          $test_section = TestSection::findOrFail($test_section_id);
          $correct_answers = $test_section->answers->where("correct", 1);
-         $count = 0;//Количество правильных ответов
+         $count = 0; //Количество правильных ответов
          foreach ($correct_answers as $correct) {
-            if($correct->id == $answer_id){
+            if ($correct->id == $answer_id) {
                $count++;
             }
-            if($count==count($correct_answers)){
+            if ($count == count($correct_answers)) {
                $arr_corrent_sections_ids[] = $test_section->id;
             }
          }
       }
-      $procentCorrent = count($arr_corrent_sections_ids)/$test->count_questions*100;
-      if($procentCorrent>75){
-         $module->test_completed()->attach($test->id, ["user_id"=>Auth::user()->id]);
-         return redirect()->route("training.module", [$course->id, $section->id, $module->id])->with(["success"=>"Тест успешно пройден"]);
-      }else{
-         return redirect()->route("training.module", [$course->id, $section->id, $module->id])->withErrors(["error"=>"Тест не пройден. Вы ответили правильно на {$procentCorrent}% вопросов, а необходимо 75%"]);
+      $procentCorrent = count($arr_corrent_sections_ids) / $test->count_questions * 100;
+      if ($procentCorrent > 75) {
+         $module->test_completed()->attach($test->id, ["user_id" => Auth::user()->id]);
+         return redirect()->route("training.module", [$course->id, $section->id, $module->id])->with(["success" => "Тест успешно пройден"]);
+      } else {
+         return redirect()->route("training.module", [$course->id, $section->id, $module->id])->withErrors(["error" => "Тест не пройден. Вы ответили правильно на {$procentCorrent}% вопросов, а необходимо 75%"]);
       }
    }
-   public function moduleCompleted(Request $request)//Завершение модуля
+   public function moduleCompleted(Request $request) //Завершение модуля
    {
       $course = Course::findOrFail($request->all()["course_id"]);
       $module = Module::findOrFail($request->all()["module_id"]);
@@ -203,19 +233,32 @@ class TrainingController extends Controller
       $steps_ids = $module->steps_ids();
       $user = Auth::user();
       //Если имеется тест, то редирект на тест собсна
-      if(isset($module->test) && $module->test_completed->where("id", $module->test_id)->first()==null){
-         return redirect()->route("training.test", [$course->id, $section->id, $module->id])->with(["info"=>"Для прохождения модуля, необходимо пройти тест"]);
+      if (isset($module->test) && $module->test_completed->where("id", $module->test_id)->first() == null) {
+         return redirect()->route("training.test", [$course->id, $section->id, $module->id])->with(["info" => "Для прохождения модуля, необходимо пройти тест"]);
       }
       $steps_progress = $module->progress_steps_for_user($user->id)->get(); //шаги, пройденные пользователем
 
       foreach ($steps_progress as $step) {
          if (!in_array($step->id, $steps_ids)) {
-            return back()->withErrors("Вы прошли не все модули!");
+            return back()->withErrors("Вы прошли не все шаги!");
          }
       }
 
+      $dataUpdate = ["course_id" => $course->id, "section_id" => $section->id, "complete" => 1]; //Инфо для записи в бд
+
+      if ($module->repeat == 1) {
+         //Определяем дату повторения модуля
+         // $forget_factor = $course->progress_users()->where("user_id", $user->id)->first();
+         $forget_factor = $course->progress_users()->where("user_id", $user->id)->first()->pivot->forget;
+         $knowleadge = $course->knowledge / 100; //Примерно 3 дня (74 часа)
+         $timeForget = $this::getTimeForget($knowleadge, $forget_factor) * 24; //Через сколько часов студент забудет материал до $knowledge %
+         // $dateRepetition = (new Carbon())->addHours($timeForget)->format("Y-m-d H:i:s");
+         $dateRepetition = (new Carbon())->addMinutes(1)->format("Y-m-d H:i:s");
+         $dataUpdate["repetition"] = $dateRepetition;
+      }
+
       $module->progress_users()->detach($user->id);
-      $module->progress_users()->attach($user->id, ["course_id" => $course->id, "section_id" => $section->id, "complete" => 1]);
+      $module->progress_users()->attach($user->id, $dataUpdate);
 
       //user освоил компетенции:
       foreach ($module->competences_out as $competence) {
@@ -233,5 +276,129 @@ class TrainingController extends Controller
          $section->progress_users()->attach($user->id, ["course_id" => $course->id, "complete" => 1]);
       }
       return redirect()->route("training.section", [$course->id, $section->id])->with(["success" => "Вы успешно прошли модуль"]);
+   }
+
+   public function forgotTest($course_id)
+   {
+      $course = Course::findOrFail($course_id);
+      $user = Auth::user();
+      $module_for_repeat = $user->modules_forget_for_course($course->id)->where("test_id", "!=", null)->get(); //Получаем модули с тестами, для которых уже подошел срок повторения 
+      $max_count_test_sections = 10; //Количество вопросов, от каждого теста
+      $test = collect();
+      $many_test_sections = collect(); //Формируем множество вопросов
+      foreach ($module_for_repeat as $module) {
+         $test_sections = $module->test->test_sections;
+         $count = count($test_sections);
+         if ($count > $max_count_test_sections) { //Если количество вопросов в тесте больше максимального количества вопросов от каждого теста ($count_test_sections)
+            $count = $max_count_test_sections;
+         }
+         $many_test_sections->push($test_sections->random($count));
+      }
+      $test->put("test_sections", $many_test_sections);
+      $test_sections = $test->flatten()->shuffle();
+      return view("training.test-forgot", compact("test_sections", "course"));
+   }
+
+   public function testForgotCompleted(Request $request) //Завершение теста (кнопка "Завершить")
+   {
+      $data = $request->all();
+      $test_sections = $request->except("course_id", "_token", "test_questions_count");
+      $user = Auth::user();
+      
+      $arr_current_answers = [];
+      $course = Course::findOrFail($data["course_id"]);
+      $testResult = [];
+      foreach ($test_sections as $test_section_id => $answers) {
+         $test_section = TestSection::findOrFail($test_section_id);
+         $testResult[] = [
+            "id" => $test_section->id,
+            "test_id" => $test_section->test_id,
+            "answers" => $answers,
+         ];
+      }
+      $testResult = $this::groupByKey($testResult, "test_id"); //Группируем массив по test_id. testResult - общий массив, со всемми ответами соответсвующих тестов
+
+      $count = 0; //Количество правильно отвеченных вопросов (всего за весь тест)
+      foreach ($test_sections as $test_section_id => $answers) {
+         $test_section = TestSection::findOrFail($test_section_id);
+         // $correct_answers = $test_section->answers()->where("correct", 1)->get("id")->all();
+         $correct_answers = $test_section->answers->where("correct", 1)->map(function ($answer) {
+            return $answer->id;
+         })->toArray();
+
+         $temp_count = 0; //Подсчет кол-ва правильных ответов в вопросе
+
+         foreach ($answers as $answer) {
+            if (in_array($answer, $correct_answers)) {
+               $temp_count++;
+            } else {
+               $temp_count--;
+            }
+         }
+
+         if ($temp_count == count($correct_answers)) {
+            $count += 1; //полностью Правильно отвеченный вопрос
+            $arr_current_answers[$test_section->test_id][] = $test_section->id;
+         } else {
+            if ($temp_count > 0) {
+               $avg = $temp_count / count($correct_answers);
+               $count += $avg;
+            }
+         }
+      }
+      // dd($course->tests()[0]->module_id);
+      foreach ($arr_current_answers as $test_id => $answers) {
+         $test = Test::findOrFail($test_id);
+         $percent_correct_answers = 70;
+         
+         $result = count($answers) / (int)$data["test_questions_count"][$test_id][0] * 100; //Процент правильно отвеченных вопросов для конкретного теста (test_id) модуля \
+         // dd(count($answers), count($testResult[$test_id]));
+         if ($result >= $percent_correct_answers) {
+            // $modules = DB::table('module_test_user')->select("module_id")
+            //    ->where("user_id", $user->id)->where("test_id", $test_id)->get(); //Модули, у которых есть данный тест
+            $modules = $course->tests()->where("test_id", $test_id); //Модули, у которых есть данный тест
+            foreach ($modules as $module) {
+               // $timeForget = $this::getTimeForget($knowleadge, $forget_factor) * 24; //Через сколько часов студент забудет материал до $knowledge %
+               // $dateRepetition = (new Carbon())->addHours($timeForget)->format("Y-m-d H:i:s");
+               $dateRepetition = (new Carbon())->addMinutes(1)->format("Y-m-d H:i:s");
+               DB::table('progress_module')
+                  ->where('module_id', $module->module_id)
+                  ->where('user_id', $user->id)
+                  ->update(['repetition' => $dateRepetition]);
+            }
+         }
+      }
+      return redirect()->route("training.course", [$course->id])->with(["success" => "Тест успешно пройден"]);
+      // if ($procentCorrent > 75) {
+      //    $module->test_completed()->attach($test->id, ["user_id" => Auth::user()->id]);
+      //    return redirect()->route("training.module", [$course->id, $section->id, $module->id])->with(["success" => "Тест успешно пройден"]);
+      // } else {
+      //    return redirect()->route("training.module", [$course->id, $section->id, $module->id])->withErrors(["error" => "Тест не пройден. Вы ответили правильно на {$procentCorrent}% вопросов, а необходимо 75%"]);
+      // }
+
+
+   }
+   private function getKnowledge($time, $forget_factor)
+   {
+      $first = 1 + ($time / $forget_factor);
+      $sec = -0.135;
+      return pow($first, $sec);
+   }
+   private function getForgetFactor($knowledge, $time)
+   {
+      return $time / (pow($knowledge, 1 / (-0.135)) - 1);
+   }
+   private function getTimeForget($knowledge, $forget_factor)
+   { //knowledge- знание (в какой день студент достигнет такого знания) return - возвращает дни
+      return $forget_factor * (pow($knowledge, 1 / (-0.135)) - 1);
+   }
+
+   private function groupByKey($array, $key)
+   {
+      $resultArr = [];
+      foreach ($array as $val) {
+         $resultArr[$val[$key]][] = $val;
+      }
+      return $resultArr;
    }
 }

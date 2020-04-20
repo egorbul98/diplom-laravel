@@ -114,6 +114,10 @@ select {
       @include media-max($S) {
         width: 100%;
       }
+
+      p{
+        padding-right: 10px;
+      }
     }
 
     &__right {
@@ -123,6 +127,8 @@ select {
         width: 100%;
       }
     }
+
+    
   }
 
   .required-input {

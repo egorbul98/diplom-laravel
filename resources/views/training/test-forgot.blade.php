@@ -8,27 +8,18 @@
     <p class="center">Для завершения данного модуля, пройдите тест</p>
   </div>
 
-  <form action="{{route("training.test-completed")}}" class="form" method="POST">
+  <form action="{{route("training.forgot-test-completed")}}" class="form" method="POST">
     @csrf
-    <input type="hidden" name="test_id" value="{{$test->id}}">
     <input type="hidden" name="course_id" value="{{$course->id}}">
-    <input type="hidden" name="module_id" value="{{$module->id}}">
-    <input type="hidden" name="section_id" value="{{$section->id}}">
+    @php $tests = $test_sections->groupBy("test_id") @endphp
+      @foreach ($tests as $test_id=>$test)
+        <input type="hidden" name="test_questions_count[{{$test_id}}][]" value="{{count($test)}}">
+      @endforeach
     <div class="module-test">
-      @php  
-            if($test->count_questions<=count($test->test_sections)){
-              $countQuestion = $test->count_questions; 
-            }else{
-              $countQuestion = count($test->test_sections); 
-            }
-            $test_sections = $test->test_sections->random($countQuestion);
-            
-            @endphp
-      @for ($i = 0; $i < $countQuestion; $i++)
+      @for ($i = 0; $i < count($test_sections); $i++)
       <div class="module-test__item">
-        <div class="module-test__question-num">{{$i+1}}</div>
         <div class="module-test__img"><img src="{{asset("storage/".$test_sections[$i]->image)}}" alt=""></div>
-        <p class="module-test__text paragraph">{{$test_sections[$i]->title}}</p>
+        <p class="module-test__text paragraph">{{$i+1}}. {{$test_sections[$i]->title}}</p>
         <div class="module-test__answers">
           @foreach ($test_sections[$i]->answers as $answer)
             {{-- <div class="form-field">
@@ -36,7 +27,7 @@
               <p class=""><label for="a1">То самое</label></p>
             </div> --}}
             <div class="form-field">
-              <input type="checkbox" name="answer[{{$test_sections[$i]->id}}]" id="answer{{$answer->id}}" value="{{$answer->id}}">
+              <input type="checkbox" name="{{$test_sections[$i]->id}}[]" id="answer{{$answer->id}}" value="{{$answer->id}}">
               <p class=""><label for="answer{{$answer->id}}">{{$answer->value}}</label></p>
             </div>
             @endforeach

@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Section;
 use App\Models\Competence;
-use App\Models\Answer;
+use App\Models\Pivots\Progress_Module;
 use App\Models\Step;
 use Carbon\Carbon;
+
 class Module extends Model
 {
     protected $fillable = [
@@ -15,10 +16,10 @@ class Module extends Model
         'title', 'author_id'
     ];
 
-   public function author()
-   {
-       return $this->belongsTo(User::class, "author_id");
-   }
+    public function author()
+    {
+        return $this->belongsTo(User::class, "author_id");
+    }
     public function sections()
     {
         return $this->belongsToMany(Section::class, 'module_section');
@@ -54,7 +55,7 @@ class Module extends Model
         }
         return $competences_out_ids;
     }
-   
+
     public function steps()
     {
         return $this->hasMany(Step::class);
@@ -78,11 +79,11 @@ class Module extends Model
 
     public function progress_users()
     {
-        return $this->belongsToMany(User::class, 'progress_module');
+        return $this->belongsToMany(User::class, 'progress_module')->using(Progress_Module::class);
     }
     public function progress_steps_for_user($user_id)
     {
-       return $this->belongsToMany(Step::class, 'progress_step')->wherePivot('user_id', $user_id)->withPivot("complete");
+        return $this->belongsToMany(Step::class, 'progress_step')->wherePivot('user_id', $user_id)->withPivot("complete");
     }
 
     public function test_completed()
@@ -90,7 +91,7 @@ class Module extends Model
         return $this->belongsToMany(Test::class, 'module_test_user')->withPivot("user_id");
     }
 
-    
+
     // public function getCreatedAtAttribute($date)
     // {
     //     return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-m-d');
@@ -100,5 +101,5 @@ class Module extends Model
     // {
     //     return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-m-d');
     // }
-    
+
 }

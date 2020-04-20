@@ -1,6 +1,9 @@
 
 
-<a href="{{route("training.course", [$course->id])}}" class="btn sidebar__btn">Начать обучение</a>
+<form action="{{route("training.startCourse", [$course->id])}}" method="POST">
+  @csrf
+  <button type="submit" class="btn sidebar__btn">Начать обучение</button>
+</form>
       <div class="sidebar__item ">
         <div class="sidebar__title">Оценки</div>
         <ul class="assessments">

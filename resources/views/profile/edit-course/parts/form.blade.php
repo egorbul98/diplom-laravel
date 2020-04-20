@@ -67,6 +67,16 @@
       </div>
     </div>
   </div>
+ 
+
+  <div class="form-row">
+    <div class="form-row__left">
+      <p><label class="" for="knowledge">Выберите процент знаний, при котором будет повторение модуля</label></p>
+    </div>
+    <div class="form-row__right form-field">
+      <input class="input-control" type="number" min="1" max="99" id="knowledge" name="knowledge" type="text" value="{{old("knowledge", $course->knowledge)}}" placeholder="например, 40">%
+    </div>
+  </div>
 
   <div class="form-btns-wrap">
     @if ($course->exists)

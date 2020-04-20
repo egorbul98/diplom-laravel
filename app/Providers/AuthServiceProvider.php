@@ -44,5 +44,8 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('show-section', function($user, $course, $section){
             return $section->course_id == $course->id;
         });
+        Gate::define('show-module', function($user, $course, $section, $module){
+            return $user->progress_modules()->where("module_id", $module->id)->where("section_id", $section->id)->first() != null;
+        });
     }
 }

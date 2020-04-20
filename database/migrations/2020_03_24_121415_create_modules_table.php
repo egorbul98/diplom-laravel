@@ -18,6 +18,7 @@ class CreateModulesTable extends Migration
             $table->string("title");
             $table->string("author_id");
             $table->string("test_id")->nullable();
+            $table->tinyInteger("repeat")->default(1);
 
             $table->timestamps();
         });

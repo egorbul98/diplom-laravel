@@ -1264,6 +1264,10 @@ select::-webkit-scrollbar-corner {
   }
 }
 
+.form .form-row__left p {
+  padding-right: 10px;
+}
+
 .form .form-row__right {
   width: 70%;
 }

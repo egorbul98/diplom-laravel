@@ -44,7 +44,7 @@ class CourseController extends BaseController
     public function store(CourseRequest $request)
     {
         $data = $request->except("image");
-
+        
         $data["author_id"] = Auth::user()->id;
         $data["slug"] = Str::slug($data["title"]);
 
@@ -108,6 +108,7 @@ class CourseController extends BaseController
         }
 
         $data = $request->except("image");
+      
         if (isset($request->all()["image"])) {
             Storage::disk('public')->deleteDirectory("courses/{$id}");
             $data["image"] = $request->file("image")->store("courses/{$id}", "public");

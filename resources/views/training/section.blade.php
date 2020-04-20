@@ -9,13 +9,15 @@
     <p class="desc">{{$section->description}}</p>
 </div>
 
-@if ($section->competences->count()>0)
 
+@php $section_competences = $section->competences_out_modules(); @endphp
+@if ($section_competences->count()>0)
 <div class="info-wrap">
     <div class="info-wrap__left shadow-light">
-        <h3 class="title">В этом разделе вы освоите <span class="num">{{$section->competences->count()}}</span> навыков</h3>
+        <h3 class="title">В этом разделе вы освоите <span class="num">{{$section_competences->count()}}</span> навыков</h3>
         <div class="competences-list">
-          @foreach ($section->competences as $competence)
+            {{-- {{$section->competences_out_modules()}} --}}
+          @foreach ($section_competences as $competence)
             <div class="competence">{{$competence->title}}</div>
           @endforeach
         </div>
@@ -62,6 +64,7 @@
                         </div>
                     </div>
                 </div>
+                <a href="{{route("training.module", [$course->id, $section->id, $item_module->id])}}" class="module__link"></a>
             </div>
         </div>
 
