@@ -71,10 +71,10 @@
 
   <div class="form-row">
     <div class="form-row__left">
-      <p><label class="" for="knowledge">Выберите процент знаний, при котором будет повторение модуля</label></p>
+      <p><label class="" for="knowledge_to_repeat">Процент знаний, при котором будет повторение модуля</label></p>
     </div>
     <div class="form-row__right form-field">
-      <input class="input-control" type="number" min="1" max="99" id="knowledge" name="knowledge" type="text" value="{{old("knowledge", $course->knowledge)}}" placeholder="например, 40">%
+      <input class="input-control" type="number" min="1" max="99" id="knowledge_to_repeat" name="knowledge_to_repeat" type="text" value="{{old("knowledge_to_repeat", $course->knowledge_to_repeat)}}" placeholder="например, 40">%
     </div>
   </div>
 

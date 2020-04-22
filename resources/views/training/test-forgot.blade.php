@@ -26,9 +26,9 @@
               <input type="radio" name="a1" id="a1" value="1">
               <p class=""><label for="a1">То самое</label></p>
             </div> --}}
-            <div class="form-field">
+            <div class="form-field form-checkbox">
               <input type="checkbox" name="{{$test_sections[$i]->id}}[]" id="answer{{$answer->id}}" value="{{$answer->id}}">
-              <p class=""><label for="answer{{$answer->id}}">{{$answer->value}}</label></p>
+              <p class="label"><span class="check"></span><label for="answer{{$answer->id}}">{{$answer->value}}</label></p>
             </div>
             @endforeach
 

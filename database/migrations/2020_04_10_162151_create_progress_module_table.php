@@ -19,7 +19,8 @@ class CreateProgressModuleTable extends Migration
             $table->integer("course_id");
             $table->integer("section_id");
             // $table->string("repetition")->nullable();
-            $table->dateTime("repetition")->nullable();
+            $table->dateTime("repetition")->nullable();//Дата следующего повторения
+            $table->dateTime("completed_at")->nullable();//Дата прохождения
             $table->tinyInteger("complete")->default(0);
             // $table->timestamps();
         });

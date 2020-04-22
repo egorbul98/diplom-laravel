@@ -38,7 +38,7 @@ Route::group(['middleware' => ['auth']], function () {
         
         Route::group(['middleware' => ['checkCourse']], function () {
             Route::get('course/{course_id}/section/{section_id}', "TrainingController@section")->name("training.section");
-            Route::get('course/{course_id}/section/{section_id}/module/{module_id}/test', "TrainingController@test")->name("training.test");
+            Route::get('course/{course_id}/section/{section_id}/module/{module_id}/step/{step_num?}/test', "TrainingController@test")->name("training.test");
             Route::get('course/{course_id}/section/{section_id}/module/{module_id}/step/{step_num?}', "TrainingController@module")->name("training.module");
             Route::post('course/{course_id}/section/{section_id}/module/{module_id}', "TrainingController@startModule")->name("training.startModule");
         });

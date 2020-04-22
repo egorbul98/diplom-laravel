@@ -19,6 +19,7 @@ class CreateTestsTable extends Migration
             $table->string("title");
             $table->integer("count_questions");
             $table->string("description")->nullable();
+            $table->tinyInteger("percent_correct_answers")->default(75);
            
             $table->timestamps();
         });

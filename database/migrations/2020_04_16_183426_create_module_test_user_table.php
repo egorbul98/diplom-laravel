@@ -17,6 +17,7 @@ class CreateModuleTestUserTable extends Migration
             $table->integer("module_id");
             $table->integer("test_id");
             $table->integer("user_id");
+            $table->tinyInteger("repeated")->default(0);//Тест был повторен?
             $table->timestamps();
         });
     }

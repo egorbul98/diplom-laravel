@@ -22,9 +22,8 @@ class CreateCoursesTable extends Migration
             $table->integer("author_id");
             $table->text("content");
             $table->string("image")->nullable();
-
-
-            $table->tinyInteger("knowledge")->default(40);
+            
+            $table->tinyInteger("knowledge_to_repeat")->default(40);
 
             $table->timestamps();
         });

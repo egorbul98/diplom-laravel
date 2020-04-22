@@ -6,6 +6,7 @@ import "./modules/modal"
 import "./modules/editor"
 import "./modules/course-sections-edit"
 import "./modules/test-page"
+import "./modules/training-page"
 
 import $ from "jquery"
 

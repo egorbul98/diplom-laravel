@@ -50,6 +50,15 @@
           </div>
         </div>
 
+        <div class="form-row">
+          <div class="form-row__left">
+            <p><label class="" for="description">Процент правильно отвеченных вопросов для прохождения теста</label></p>
+          </div>
+          <div class="form-row__right form-field">
+            <input type="number" name="percent_correct_answers" id="percent_correct_answers" min="1" max="100" class="input-control" value="{{old("percent_correct_answers", $test->percent_correct_answers)}}">
+          </div>
+        </div>
+
         <div class="form-btns-wrap">
           @if ($test->exists)
             <button class="btn" type="submit"><span class="icon m-r-8"><i class="fas fa-save"></i></span> Сохранить</button>

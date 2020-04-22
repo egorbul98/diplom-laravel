@@ -46,7 +46,7 @@ class checkCourse
                 }
             }
 
-            return redirect()->route("training.course", [$course->id])->with(["info" => "У вас есть забытые модули. Для продолжения обучения, необходимо их пройти"]);
+            return redirect()->route("training.course", [$course->id])->with(["info" => "У вас есть забытые модули или обязательные тесты. Для продолжения обучения, необходимо их пройти"]);
         }
 
         return $next($request);

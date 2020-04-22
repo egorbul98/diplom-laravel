@@ -64013,8 +64013,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_editor__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/editor */ "./resources/js/modules/editor.js");
 /* harmony import */ var _modules_course_sections_edit__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/course-sections-edit */ "./resources/js/modules/course-sections-edit.js");
 /* harmony import */ var _modules_test_page__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/test-page */ "./resources/js/modules/test-page.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _modules_training_page__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/training-page */ "./resources/js/modules/training-page.js");
+/* harmony import */ var _modules_training_page__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_modules_training_page__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_9__);
 
 
 
@@ -64024,12 +64026,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-jquery__WEBPACK_IMPORTED_MODULE_8___default()(document).ready(function () {
-  jquery__WEBPACK_IMPORTED_MODULE_8___default()(".num-only").on("input", function (event) {
+
+jquery__WEBPACK_IMPORTED_MODULE_9___default()(document).ready(function () {
+  jquery__WEBPACK_IMPORTED_MODULE_9___default()(".num-only").on("input", function (event) {
     this.value = this.value.replace(/^\./g, '').replace(/\d\-/g, '$1').replace(/\-\-/g, '$1').replace(/[^0-9-.]/g, '').replace(/(\..*)\./g, '$1');
   }); // FORM DELETE COURSE course-header in profile
 
-  jquery__WEBPACK_IMPORTED_MODULE_8___default()("#delete-course").on("click", function (event) {
+  jquery__WEBPACK_IMPORTED_MODULE_9___default()("#delete-course").on("click", function (event) {
     event.preventDefault();
     var del = confirm("Вы точно хотите удалить курс?");
 
@@ -64038,34 +64041,34 @@ jquery__WEBPACK_IMPORTED_MODULE_8___default()(document).ready(function () {
     }
   }); //FORM SAVE ALL SECTIONS AND MODULES
 
-  jquery__WEBPACK_IMPORTED_MODULE_8___default()("#btn-save-sections").on("click", function (event) {
+  jquery__WEBPACK_IMPORTED_MODULE_9___default()("#btn-save-sections").on("click", function (event) {
     event.preventDefault(); // alert("sad")
 
     document.getElementById('form-save-sections').submit();
   }); //
 
-  jquery__WEBPACK_IMPORTED_MODULE_8___default()(".filter-btn").on("click", function () {
-    jquery__WEBPACK_IMPORTED_MODULE_8___default()(".filter .drop-down").slideToggle();
+  jquery__WEBPACK_IMPORTED_MODULE_9___default()(".filter-btn").on("click", function () {
+    jquery__WEBPACK_IMPORTED_MODULE_9___default()(".filter .drop-down").slideToggle();
   });
-  jquery__WEBPACK_IMPORTED_MODULE_8___default()(".header-top .auth .user").on("click", function () {
-    jquery__WEBPACK_IMPORTED_MODULE_8___default()(".header-top .auth .drop-down").slideToggle();
+  jquery__WEBPACK_IMPORTED_MODULE_9___default()(".header-top .auth .user").on("click", function () {
+    jquery__WEBPACK_IMPORTED_MODULE_9___default()(".header-top .auth .drop-down").slideToggle();
   }); //LESSON_PAGE
 
-  jquery__WEBPACK_IMPORTED_MODULE_8___default()(".lesson-page .btn-gamburger").on("click", function () {
-    jquery__WEBPACK_IMPORTED_MODULE_8___default()(".lesson-sidebar").toggleClass("lesson-sidebar--active");
+  jquery__WEBPACK_IMPORTED_MODULE_9___default()(".lesson-page .btn-gamburger").on("click", function () {
+    jquery__WEBPACK_IMPORTED_MODULE_9___default()(".lesson-sidebar").toggleClass("lesson-sidebar--active");
   });
-  jquery__WEBPACK_IMPORTED_MODULE_8___default()(".lesson-page .lesson-header__name").on("click", function () {
-    jquery__WEBPACK_IMPORTED_MODULE_8___default()(this).siblings(".drop-down").slideToggle();
+  jquery__WEBPACK_IMPORTED_MODULE_9___default()(".lesson-page .lesson-header__name").on("click", function () {
+    jquery__WEBPACK_IMPORTED_MODULE_9___default()(this).siblings(".drop-down").slideToggle();
   });
-  jquery__WEBPACK_IMPORTED_MODULE_8___default()('.lesson-page .section').on("click", function () {
-    jquery__WEBPACK_IMPORTED_MODULE_8___default()(".lesson-sidebar").removeClass("lesson-sidebar--active");
+  jquery__WEBPACK_IMPORTED_MODULE_9___default()('.lesson-page .section').on("click", function () {
+    jquery__WEBPACK_IMPORTED_MODULE_9___default()(".lesson-sidebar").removeClass("lesson-sidebar--active");
   }); //course-edit
 
-  jquery__WEBPACK_IMPORTED_MODULE_8___default()(".course-header-menu .btn").on('click', function () {
-    jquery__WEBPACK_IMPORTED_MODULE_8___default()(this).siblings(".drop-down").slideToggle();
+  jquery__WEBPACK_IMPORTED_MODULE_9___default()(".course-header-menu .btn").on('click', function () {
+    jquery__WEBPACK_IMPORTED_MODULE_9___default()(this).siblings(".drop-down").slideToggle();
   });
 
-  if (jquery__WEBPACK_IMPORTED_MODULE_8___default()("body").hasClass("editor")) {
+  if (jquery__WEBPACK_IMPORTED_MODULE_9___default()("body").hasClass("editor")) {
     window.onbeforeunload = function (evt) {
       var message = "вйцв";
 
@@ -64082,18 +64085,18 @@ jquery__WEBPACK_IMPORTED_MODULE_8___default()(document).ready(function () {
   } //------------
 
 
-  jquery__WEBPACK_IMPORTED_MODULE_8___default()(".btn-close").on("click", function () {
-    jquery__WEBPACK_IMPORTED_MODULE_8___default()(".header-wrap").removeClass("active");
+  jquery__WEBPACK_IMPORTED_MODULE_9___default()(".btn-close").on("click", function () {
+    jquery__WEBPACK_IMPORTED_MODULE_9___default()(".header-wrap").removeClass("active");
   });
-  jquery__WEBPACK_IMPORTED_MODULE_8___default()('.item-page .item-sections-item').on("click", function () {
-    jquery__WEBPACK_IMPORTED_MODULE_8___default()(this).toggleClass("active").children(".item-sections-item__cometencies").slideToggle();
+  jquery__WEBPACK_IMPORTED_MODULE_9___default()('.item-page .item-sections-item').on("click", function () {
+    jquery__WEBPACK_IMPORTED_MODULE_9___default()(this).toggleClass("active").children(".item-sections-item__cometencies").slideToggle();
   });
-  jquery__WEBPACK_IMPORTED_MODULE_8___default()('.test-list .test-item-inner').on("click", function () {
-    jquery__WEBPACK_IMPORTED_MODULE_8___default()(this).toggleClass("active").siblings(".test-item-models").slideToggle();
+  jquery__WEBPACK_IMPORTED_MODULE_9___default()('.test-list .test-item-inner').on("click", function () {
+    jquery__WEBPACK_IMPORTED_MODULE_9___default()(this).toggleClass("active").siblings(".test-item-models").slideToggle();
   });
-  jquery__WEBPACK_IMPORTED_MODULE_8___default()('.notifications').on("click", ".btn-close", function () {
-    jquery__WEBPACK_IMPORTED_MODULE_8___default()(this).closest(".notifications__item").slideUp(function () {
-      jquery__WEBPACK_IMPORTED_MODULE_8___default()(this).remove();
+  jquery__WEBPACK_IMPORTED_MODULE_9___default()('.notifications').on("click", ".btn-close", function () {
+    jquery__WEBPACK_IMPORTED_MODULE_9___default()(this).closest(".notifications__item").slideUp(function () {
+      jquery__WEBPACK_IMPORTED_MODULE_9___default()(this).remove();
     });
   });
 }); // import "./../sass/style.scss"
@@ -65383,6 +65386,25 @@ function renderQuerstion(arrTestSection, arrAnswers) {
 
   $wrap.html(str);
 }
+
+/***/ }),
+
+/***/ "./resources/js/modules/training-page.js":
+/*!***********************************************!*\
+  !*** ./resources/js/modules/training-page.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// import $ from "jquery";
+// $(document).ready(function () {
+//   let $tests = $(".lesson-content__tests .test");
+//   $($tests).each(function (index, element) {
+//     if ($(element).find(".test__module").length == 0) {
+//       $(element).remove();
+//     }
+//   });
+// });
 
 /***/ }),
 

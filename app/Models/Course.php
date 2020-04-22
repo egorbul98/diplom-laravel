@@ -12,7 +12,7 @@ use Carbon\Carbon, DB;
 class Course extends Model
 {
     protected $fillable = [
-        'title', 'description', 'content', "slug", "category_id", "author_id", "image", "knowledge"
+        'title', 'description', 'content', "slug", "category_id", "author_id", "image", "knowledge_to_repeat"
     ];
 
     public function author()

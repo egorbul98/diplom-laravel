@@ -1,214 +1,307 @@
 input,
 textarea {
-  border: 2px solid $col-border;
-  border-radius: 4px;
-  padding: 9px 20px 6px 12px;
-  font-size: 14px;
-  transition: background-color 0.3s;
-  @include media-max($M) {
-    padding: 3px 20px 3px 12px;
-  }
+    border: 2px solid $col-border;
+    border-radius: 4px;
+    padding: 9px 20px 6px 12px;
+    font-size: 14px;
+    transition: background-color 0.3s;
 
-  @include media-max($S) {
-    // width: 100%;
-    padding: 6px 14px 6px;
+    @include media-max($M) {
+        padding: 3px 20px 3px 12px;
+    }
 
-    font-size: 12px;
-  }
+    @include media-max($S) {
+        // width: 100%;
+        padding: 6px 14px 6px;
 
-  &:focus{
-    background-color: $col-border-op;
-  }
+        font-size: 12px;
+    }
+
+    &:focus {
+        background-color: $col-border-op;
+    }
 
 }
 
 textarea {
-  width: 100%;
-  @include scroolbar;
-  overflow-y: auto;
+    width: 100%;
+    @include scroolbar;
+    overflow-y: auto;
 }
 
 form {
-  width: 100%;
+    width: 100%;
 }
 
 select {
-  cursor: pointer;
-  color: $col-main;
-  border: 1px solid $col-border;
-  border-radius: 10px;
-  overflow-x: hidden;
-  @include scroolbar;
-  padding: 4px;
-}
-
-.select-custom{
-
-  .select{
     cursor: pointer;
-  }
-
-  .checkboxes{
-    // display: none;
-    display: flex;
-    flex-direction: column;
-    border: 2px solid $col-border;
+    color: $col-main;
+    border: 1px solid $col-border;
     border-radius: 10px;
-    // border-bottom-left-radius: 10px;
-    // border-bottom-right-radius: 10px;
-    height: 162px;
-    overflow-y: auto;
     overflow-x: hidden;
     @include scroolbar;
-    label{
-      // margin-bottom: 10px;
-      padding: 4px 10px;
+    padding: 4px;
+}
 
-      @include media-max($S){
-        font-size: 12px;
-      }
+.select-custom {
+
+    .select {
+        cursor: pointer;
     }
-    .text{
-      margin-left: 10px;
+
+    .checkboxes {
+        // display: none;
+        display: flex;
+        flex-direction: column;
+        border: 2px solid $col-border;
+        border-radius: 10px;
+        // border-bottom-left-radius: 10px;
+        // border-bottom-right-radius: 10px;
+        height: 162px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        @include scroolbar;
+
+        label {
+            // margin-bottom: 10px;
+            padding: 4px 10px;
+
+            @include media-max($S) {
+                font-size: 12px;
+            }
+        }
+
+        .text {
+            margin-left: 10px;
+        }
     }
-  }
-  
+
 }
 
 .form {
-  .btn-search {
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
-    margin-left: -4px;
-    
-  
+    .btn-search {
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+        margin-left: -4px;
 
-  }
 
-  
 
-  .input-bg {
-    border: none;
-    background-color: transparent;
-    padding-left: 0;
-  }
+    }
 
-  .form-row {
+
+
+    .input-bg {
+        border: none;
+        background-color: transparent;
+        padding-left: 0;
+    }
+
+    .form-row {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 30px;
+        width: 100%;
+        position: relative;
+
+        @include media-max($S) {
+            flex-direction: column;
+            margin-bottom: 16px;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        &__left {
+            width: 30%;
+
+            @include media-max($S) {
+                width: 100%;
+            }
+
+            p {
+                padding-right: 10px;
+            }
+        }
+
+        &__right {
+            width: 70%;
+
+            @include media-max($S) {
+                width: 100%;
+            }
+        }
+
+
+    }
+
+    .required-input {
+        color: red;
+    }
+}
+
+.input-control {
+    width: 100%;
+}
+
+.form-field {
     display: flex;
-    align-items: flex-start;
-    margin-bottom: 30px;
+    align-items: center;
     width: 100%;
     position: relative;
-    @include media-max($S) {
-      flex-direction: column;
-      margin-bottom: 16px;
+
+    &__tooltip {
+        position: absolute;
+        top: 100%;
+
+        @include media-max($S) {
+            top: auto;
+            bottom: -16px;
+        }
+
+        .text {
+            font-size: 13px;
+            color: $col-grays;
+
+            @include media-max($S) {
+                font-size: 11px;
+            }
+        }
     }
 
-    &:last-child {
-      margin-bottom: 0;
-    }
-
-    &__left {
-      width: 30%;
-
-      @include media-max($S) {
+    input.search {
         width: 100%;
-      }
+        border-right: none;
 
-      p{
-        padding-right: 10px;
-      }
+        @include media-max($S) {
+            padding: 4px 14px 4px;
+        }
     }
-
-    &__right {
-      width: 70%;
-
-      @include media-max($S) {
-        width: 100%;
-      }
-    }
-
-    
-  }
-
-  .required-input {
-    color: red;
-  }
-}
-.input-control {
-  width: 100%;
-}
-.form-field {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  position: relative;
-
-  &__tooltip {
-    position: absolute;
-    top: 100%;
-    @include media-max($S) {
-      top: auto;
-      bottom: -16px;
-    }
-    .text {
-      font-size: 13px;
-      color: $col-grays;
-
-      @include media-max($S) {
-        font-size: 11px;
-      }
-    }
-  }
-
-  input.search {
-    width: 100%;
-    border-right: none;
-    @include media-max($S) {
-      padding: 4px 14px 4px;
-    }
-  }
 }
 
 .form-btns-wrap {
-  .btn {
-    margin-right: 10px;
-    @include media-max($S){
-      margin-right: 0;
+    .btn {
+        margin-right: 10px;
+
+        @include media-max($S) {
+            margin-right: 0;
+        }
     }
-  }
- 
+
 }
 
-input#image{
-  background-color: transparent;
+input#image {
+    background-color: transparent;
 }
 
-.form-btns-wrap{
-  display: flex;
-  flex-wrap: wrap;
+.form-btns-wrap {
+    display: flex;
+    flex-wrap: wrap;
 
-  .btn{
-    margin-bottom: 10px;
-    @include media-max($S){
-      width: 100%;
-      text-align: center;
+    .btn {
+        margin-bottom: 10px;
+
+        @include media-max($S) {
+            width: 100%;
+            text-align: center;
+        }
     }
-  }
 }
 
-.img-input{
-  border: 2px solid #dcdacb;
-  border-radius: 4px;
-  padding: 9px 20px 6px 12px;
-  // font-size: 14px;
-  transition: background-color 0.3s;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  &:hover{
-    background-color: #dcdacb88;
-  }
+.img-input {
+    border: 2px solid #dcdacb;
+    border-radius: 4px;
+    padding: 9px 20px 6px 12px;
+    // font-size: 14px;
+    transition: background-color 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+        background-color: #dcdacb88;
+    }
+}
+
+.form-checkbox {
+
+    &:first-child {
+        .label {
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+    }
+
+    &:last-child {
+        .label {
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            border-bottom: 1px solid $col-border;
+        }
+    }
+
+    input[type=checkbox] {
+        display: none;
+
+        &:checked+.label {
+            background-color: $col-btn;
+
+            label {
+                background-color: $col-btn;
+                color: #ffffff;
+            }
+
+            .check {
+                &::after {
+                    display: inline-block;
+                }
+            }
+
+        }
+    }
+
+    .label {
+        border: 1px solid $col-border;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        width: 100%;
+        border-bottom: none;
+        overflow: hidden;
+        transition: all 0.25s;
+        padding: 6px 10px;
+       
+        label {
+            position: relative;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .check {
+            position: relative;
+            top: 6px;
+            margin-right: 6px;
+            content: '';
+            width: 11px;
+            height: 11px;
+            background-color: #ffffff;
+            border: 1px solid $col-border;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+            flex-grow: 0;
+
+            &::after {
+                display: none;
+                content: '\2714';
+                left: 11px;
+                font-size: 11px;
+                color: $col-main;
+            }
+        }
+    }
+
 }

@@ -88,7 +88,7 @@ class Module extends Model
 
     public function test_completed()
     {
-        return $this->belongsToMany(Test::class, 'module_test_user')->withPivot("user_id");
+        return $this->belongsToMany(Test::class, 'module_test_user')->withPivot("user_id")->withPivot("repeated");
     }
 
 
