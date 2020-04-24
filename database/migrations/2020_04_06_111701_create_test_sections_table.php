@@ -17,6 +17,7 @@ class CreateTestSectionsTable extends Migration
             $table->id();
             $table->integer("test_id");
             $table->string("title");
+            $table->string("title_en")->nullable();
             $table->string("image")->nullable();
             $table->timestamps();
         });

@@ -43,6 +43,7 @@ class CourseController extends BaseController
      */
     public function store(CourseRequest $request)
     {
+       
         $data = $request->except("image");
         
         $data["author_id"] = Auth::user()->id;

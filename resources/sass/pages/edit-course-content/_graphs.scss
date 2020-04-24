@@ -27,3 +27,17 @@
     height: 100%;
   }
 }
+
+.learning-path__graphs-list{
+  height: 100%;
+  display: flex;
+}
+.learning-path__graph{
+  width: 50%;
+  height: 100%;
+  border-right: 1px solid $col-border;
+}
+.learning-path__graph-full{
+  width: 50%;
+  height: 100%;
+}

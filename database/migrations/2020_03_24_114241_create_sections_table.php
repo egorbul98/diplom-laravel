@@ -20,6 +20,9 @@ class CreateSectionsTable extends Migration
             $table->string("title");
             $table->text("description");
 
+            $table->string("title_en")->nullable();
+            $table->text("description_en")->nullable();
+
 
             $table->timestamps();
         });

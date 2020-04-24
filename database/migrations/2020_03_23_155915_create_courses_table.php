@@ -16,11 +16,16 @@ class CreateCoursesTable extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
             $table->string("title");
-            $table->string("slug");
             $table->text("description");
+            $table->text("content");
+            $table->string("slug");
             $table->integer("category_id");
             $table->integer("author_id");
-            $table->text("content");
+            
+            $table->string("title_en")->nullable();
+            $table->text("description_en")->nullable();
+            $table->text("content_en")->nullable();
+           
             $table->string("image")->nullable();
             
             $table->tinyInteger("knowledge_to_repeat")->default(40);

@@ -9,10 +9,13 @@ use App\Models\Category;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str;
 use Carbon\Carbon, DB;
+use App\Models\Traits\TranslateTable;
 class Course extends Model
 {
+    use TranslateTable;
+
     protected $fillable = [
-        'title', 'description', 'content', "slug", "category_id", "author_id", "image", "knowledge_to_repeat"
+        'title', 'description', 'content', "slug", "category_id", "author_id", "image", "knowledge_to_repeat", 'title_en', 'description_en', 'content_en'
     ];
 
     public function author()

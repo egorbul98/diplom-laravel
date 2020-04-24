@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class TestSection extends Model
 {
     protected $fillable = [
-        "test_id", "image", "title"
+        "test_id", "image", "title", "title_en"
     ];
 
     public function test()

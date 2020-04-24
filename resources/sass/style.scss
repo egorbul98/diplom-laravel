@@ -3,6 +3,7 @@
 @import "mixins";
 @import "base";
 
+
 // slick slider
 @import "~slick-carousel/slick/slick"; 
 @import "slick-fix";
@@ -10,6 +11,8 @@
 @import "../libs/fontawesome-free-5.13.0-web/css/all.min.css";
 //editor
 @import "../libs/editor/summernote-lite.css";
+//tabs
+@import "parts/tabs";
 
 //index
 @import "./parts/forms";
@@ -65,3 +68,6 @@
 
 //tests
 @import "./pages/tests/base.scss";
+
+
+@import "./parts/login-form";

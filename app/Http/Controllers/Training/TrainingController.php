@@ -64,6 +64,15 @@ class TrainingController extends Controller
       return redirect()->route("training.course", $course->id);
    }
 
+   public function learningPath($course_id)
+   {
+      $course = Course::findOrFail($course_id);
+      if (Gate::denies('show-course', [$course])) {
+         return back();
+      }
+      return view("training.learning-path", compact("course"));
+   }
+
    public function course($course_id)
    {
       $course = Course::findOrFail($course_id);
@@ -202,35 +211,33 @@ class TrainingController extends Controller
       if (!isset($data["answer"])) {
          return back()->withErrors(["error" => "Необходимо ответить на вопросы"]);
       }
-    
-      $arr_corrent_sections_ids = [];
+
       $test = Test::findOrFail($data["test_id"]);
       $module = Module::findOrFail($data["module_id"]);
       $course = Course::findOrFail($data["course_id"]);
       $section = Section::findOrFail($data["section_id"]);
       $user = Auth::user();
-    
-      
+
+
       $arr_correct_answers = [];
       $count = 0; //Количество правильно отвеченных вопросов (всего за весь тест)
       foreach ($data["answer"] as $test_section_id => $answers) {
          $test_section = TestSection::findOrFail($test_section_id);
-         
+
          $correct_answers = $test_section->answers->where("correct", 1)->map(function ($answer) {
             return $answer->id;
          })->toArray();
-        
+
          $temp_count = 0; //Подсчет кол-ва правильных ответов в вопросе
 
          foreach ($answers as $answer) {
             if (in_array($answer, $correct_answers)) {
                $temp_count++;
-               
             } else {
                $temp_count--;
             }
          }
-        
+
          if ($temp_count == count($correct_answers)) {
             $count += 1; //полностью Правильно отвеченный вопрос
             $arr_correct_answers[$test_section->test_id][] = $test_section->id;
@@ -241,15 +248,15 @@ class TrainingController extends Controller
             }
          }
       }
-      
-      // $procentCorrent = count($arr_correct_answers[$test->id]) / (int) $data["test_questions_count"][$test->id][0] * 100;
+
       $procentCorrent = $count / (int) $data["test_questions_count"][$test->id][0] * 100;
-      
-      if ($procentCorrent > $test->percent_correct_answers) {
-         $module->test_completed()->wherePivot('user_id', $user->id)->detach($test->id);
+
+      if ($procentCorrent > $test->percent_correct_answers && $module->test_completed()->wherePivot('user_id', $user->id)->wherePivot("test_id", $test->id)->first() != null) {
+         // $module->test_completed()->wherePivot('user_id', $user->id)->detach($test->id);
          $module->test_completed()->attach($test->id, ["user_id" => $user->id]);
+         session(["test_id{$test->id}" => '1']); //Записываем в сессию то, что данный тест пройден
          return redirect()->route("training.module", [$course->id, $section->id, $module->id, $data["step_num"]])->with(["success" => "Тест успешно пройден"]);
-      } else { 
+      } else {
          return redirect()->route("training.module", [$course->id, $section->id, $module->id, $data["step_num"]])->withErrors(["error" => "Тест не пройден. Вы ответили правильно на {$procentCorrent}% вопросов, а необходимо {$test->percent_correct_answers}%"]);
       }
    }
@@ -288,7 +295,9 @@ class TrainingController extends Controller
 
       $module->progress_users()->detach($user->id);
       $module->progress_users()->attach($user->id, $dataUpdate);
-
+      //Добавляем модуль в историю прохождения модулей
+      DB::table('learning_path')
+         ->insert(["module_id" => $module->id,  "course_id" => $course->id, "section_id" => $section->id, "user_id" => $user->id]);
       //user освоил компетенции:
       foreach ($module->competences_out as $competence) {
          if ($user->competences()->where("competence_id", $competence->id)->first() == null) {
@@ -301,7 +310,12 @@ class TrainingController extends Controller
       if ($section->modules->count() == $modules_completed->count() && $section->progress_users->where("id", $user->id)->where("complete", 1)->first() == null) { //Если все модули раздела пройдены
          $section->progress_users()->detach($user->id);
          $section->progress_users()->attach($user->id, ["course_id" => $course->id, "complete" => 1]);
+         $module->test_completed()->wherePivot("user_id", $user->id)->updateExistingPivot($module->test_id, ["repeated" => 0]);
+         session()->forget("test_id{$module->test_id}");
       }
+
+
+
       return redirect()->route("training.section", [$course->id, $section->id])->with(["success" => "Вы успешно прошли модуль"]);
    }
 
@@ -385,9 +399,9 @@ class TrainingController extends Controller
          }
       }
       $totalResult = ($count / $totalQuestions * 100); //Общий % правильно отвеченных вопросов
-      
+
       $updated_forget_factors_values = []; //значения всех коэффициентов забывания, полученные на основе тестирования модулей. Затем будет считаться среднее арифметическое для обновления КЗ данного пользователя
-   
+
       foreach ($arr_correct_answers as $test_id => $answers) {
          $test = Test::find($test_id);
          $result = count($answers) / (int) $data["test_questions_count"][$test_id][0] * 100; //Процент правильно отвеченных вопросов для конкретного теста (test_id) модуля \
@@ -400,15 +414,15 @@ class TrainingController extends Controller
             $timePassed = $completed_at->diffInHours(new Carbon); //Прошло времени (часы) после прохождения модуля в последний раз
             //************
             $timePassed = 240;
-            $updated_forget_factor = $this::getUpdatedForgetFactor($course->knowledge_to_repeat/100, $result/100, $timePassed / 24); //обновленный Коэффициент забывания на основе прохождения теста
+            $updated_forget_factor = $this::getUpdatedForgetFactor($course->knowledge_to_repeat / 100, $result / 100, $timePassed / 24); //обновленный Коэффициент забывания на основе прохождения теста
             $updated_forget_factors_values[] = $updated_forget_factor;
          }
          if ($result >= $test->percent_correct_answers) { //Если тест норм отвечен, то модуль считается не забытым
             //Обозначаем repeated = 0, чтобы данный тест не повторялся 
             DB::table('module_test_user')
-            ->where('test_id', $test_id)
-            ->where('user_id', $user->id)
-            ->update(['repeated' => 0]);
+               ->where('test_id', $test_id)
+               ->where('user_id', $user->id)
+               ->update(['repeated' => 0]);
          } else { //Обозначаем repeated = 1, чтобы данный тест повторялся (необязательно, чтобы он был пройден)
             DB::table('module_test_user')
                ->where('test_id', $test_id)
@@ -420,11 +434,11 @@ class TrainingController extends Controller
       if (count($updated_forget_factors_values) != 0) {
          $forget_factor = $course->progress_users()->where("user_id", $user->id)->first()->pivot->forget; //Коэф. забывания
          $updated_forget_factors_values[] = $forget_factor;
-         $avg = array_sum($updated_forget_factors_values)/count($updated_forget_factors_values);
+         $avg = array_sum($updated_forget_factors_values) / count($updated_forget_factors_values);
          $course->progress_users()->updateExistingPivot($user->id, ["forget" => $avg]);
       }
-      
-//************ */
+
+      //************ */
       $forget_factor = $course->progress_users()->where("user_id", $user->id)->first()->pivot->forget; //Коэф. забывания пользователя
       foreach ($arr_correct_answers as $test_id => $answers) {
          $test = Test::find($test_id);
@@ -473,16 +487,16 @@ class TrainingController extends Controller
       return $resultArr;
    }
 
-   private function getUpdatedForgetFactor($knowledgeToRepeat, $knowledge, $timePassed)//knowledgeToRepeat - процент знаний, при котором требуется повторение; knowledge -На сколько процентов человек помнит повторенный материал.timePassed - Спустя сколько времени человек решил повторить модуль (с момента последнего прохождения) (в днях)
-   {//все knowledge не в процентах, а в долях
-      $k = 0;//доля знаний на момент прохождения модуля
+   private function getUpdatedForgetFactor($knowledgeToRepeat, $knowledge, $timePassed) //knowledgeToRepeat - процент знаний, при котором требуется повторение; knowledge -На сколько процентов человек помнит повторенный материал.timePassed - Спустя сколько времени человек решил повторить модуль (с момента последнего прохождения) (в днях)
+   { //все knowledge не в процентах, а в долях
+      $k = 0; //доля знаний на момент прохождения модуля
       if ($knowledge >= $knowledgeToRepeat) {
          $k = $knowledgeToRepeat;
       } else {
          $k = $knowledge;
       }
-        
+
       $newKoef = $this::getForgetFactor($k, $timePassed);
-      return $newKoef;//Новый коэффициент
+      return $newKoef; //Новый коэффициент
    }
 }

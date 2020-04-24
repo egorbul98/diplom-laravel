@@ -1,0 +1,47 @@
+.login-form{
+  margin-top: 40px;
+  width: 100%;
+  max-width: 380px;
+  margin-left: auto;
+  margin-right: auto;
+  .card-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .form-field{
+    position: relative;
+    margin-bottom: 10px;
+
+    .input-control{
+      padding-left: 36px;
+    }
+
+    .form-label{
+      width: 34px;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      border-right: 1px solid $col-active;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 18px;
+    }
+  }
+
+  .btn-register{
+    font-size: 13px;
+
+    @include media-max($S){
+      font-size: 11px;
+    }
+  }
+
+  .btn-login{
+    width: 100%;
+    display: block;
+  }
+}

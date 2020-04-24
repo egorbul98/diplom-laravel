@@ -18,6 +18,7 @@ class CreateStepsTable extends Migration
             $table->integer("step_type_id");
             $table->integer("module_id");
             $table->longText("content")->nulluble()->default("");
+            $table->longText("content_en")->nulluble()->default("");
             
             $table->timestamps();
         });

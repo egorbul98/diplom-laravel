@@ -9,7 +9,7 @@ use App\Models\Module;
 class Competence extends Model
 {
     protected $fillable = [
-        'title', 'section_id'
+        'title','title_en', 'section_id'
     ];
 
     public function section()

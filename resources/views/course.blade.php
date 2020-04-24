@@ -11,7 +11,7 @@
   <div class="main-wrap">
     <div class="item-header-wrap">
       <div class="item-header__info">
-        <h1 class="item-header__title">{{$course->title}}</h1>
+        <h1 class="item-header__title">{{$course->__('title')}}</h1>
         <div class="item-header__desc">{{$course->description}}</div>
         <div class="item-header__author"><span class="icon"><i class="fas fa-user"></i></span><span
             class="name">{{$course->author->name}} {{$course->author->lastname}}</span></div>

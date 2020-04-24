@@ -11,7 +11,7 @@
 <br>
 
 @if (isset($module_for_repeat[0]))
-<h2 class="title necessary">Вам необходимо</h2>
+<h2 class="title necessary">Для продолжения обучения, вам необходимо:</h2>
 <div class="lesson-content-wrapper">
     @php
         $count = 0;

@@ -30,6 +30,7 @@ class CourseRequest extends FormRequest
             "content" => "required|min:10",
             "description" => "required|min:10",
             "category_id" => "required|integer",
+            "knowledge_to_repeat" => "required|integer",
         ];
     }
 }

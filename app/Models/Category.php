@@ -8,7 +8,7 @@ use App\Models\Course;
 class Category extends Model
 {
     protected $fillable = [
-        'title', 'slug'
+        'title', 'slug', 'title_en',
     ];
 
     // public function courses()

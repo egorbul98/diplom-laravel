@@ -13,7 +13,7 @@ class Module extends Model
 {
     protected $fillable = [
         // 'title', 'section_id'
-        'title', 'author_id'
+        'title', 'author_id', 'title_en',
     ];
 
     public function author()

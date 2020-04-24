@@ -29,7 +29,17 @@
             </div>
             <div class="step-editor-content">
                 <form action="">
-                    <textarea id="summernote" name="content">{{$step->content}}</textarea>
+                   
+                    @foreach ($listLanguages as $lang)
+                    @php $postfix = ($lang=="ru") ? '' : "_$lang" @endphp
+                        <div class="tab @if ($locale == $lang || ($locale == null && $lang=="ru")) tab--active @endif " data-tab="{{$lang}}">
+                            <textarea class="summernote" id="summernote" name="content{{$postfix}}"> 
+                               {{ $step['content'.$postfix]}}
+                        </textarea>
+                        </div>
+                    @endforeach
+                    
+                    
                 </form>
             </div>
         </section>

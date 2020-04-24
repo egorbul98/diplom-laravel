@@ -14,15 +14,17 @@
 </head>
 
 <body class="@yield('class-body')">
-   
     @include('parts.notifications')
-    
-    @include('parts.header')
+    <main class="main-container">
+        <div>
+            @include('parts.header')
 
-    @yield('content')
-    
-    @include('parts.footer')
+            @yield('content')
+        </div>
 
+
+        @include('parts.footer')
+    </main>
     {{-- <script src="https://kit.fontawesome.com/8dc48f921c.js" crossorigin="anonymous"></script> --}}
 
     <script src="{{asset("js/index.js")}}"></script>

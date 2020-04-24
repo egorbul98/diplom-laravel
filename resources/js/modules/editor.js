@@ -1,7 +1,7 @@
 
 import $ from "jquery"
 import "./../../libs/editor/summernote-lite"
- $('#summernote').summernote({
+ $('.summernote').summernote({
   toolbar: [
     ['style', ['style']],
     ['font', ['bold', 'underline', 'clear']],

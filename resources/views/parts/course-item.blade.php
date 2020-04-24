@@ -14,8 +14,7 @@
       </div>
   </div>
   <div class="courses-item__overlay">
-      <a href="{{route("course.show", $course)}}" class="ovelay-link"></a>
       <h1>Открыть</h1>
   </div>
-
+  <a href="{{route("course.show", $course)}}" class="ovelay-link"></a>
 </div>

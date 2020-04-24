@@ -26,7 +26,7 @@
       <input type="hidden" name="module_id" value="{{$module->id}}">
       <input type="hidden" name="section_id" value="{{$section->id}}">
       
-      @if (isset($module->test) && ($module->test_completed->where("id", $module->test_id)->first()==null || $module->test_completed->first()->pivot->repeated == 1))
+      @if (isset($module->test) && ($module->test_completed->where("id", $module->test_id)->first()==null || ($module->test_completed->first()->pivot->repeated == 1 && session("test_id{$module->test->id}")==null)))
       {{-- Если у модуля есть тест и этот тест либо вообще не проходился ни разу, либо этот тест проходился при повторении модуля (при забывании) и был не пройден --}}
       <a href="{{route("training.test", [$course->id, $section->id, $module->id, $step_num])}}" class="btn btn--green  btn-next-step">Пройти тест</a>
       @else

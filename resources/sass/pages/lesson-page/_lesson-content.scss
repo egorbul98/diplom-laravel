@@ -43,7 +43,7 @@
     }
     .test{
       cursor: pointer;
-      max-width: 900px;
+      // max-width: 900px;
       width: 100%;
       margin-left: auto;
       margin-right: auto;
@@ -110,7 +110,7 @@
 
   .module {
     cursor: pointer;
-    max-width: 900px;
+    // max-width: 900px;
     width: 100%;
     margin-left: auto;
     margin-right: auto;
@@ -319,10 +319,10 @@
   }
 }
 .lesson-content-wrapper{
-  display: flex;
-  justify-content: space-between;
+  // display: flex;
+  // justify-content: space-between;
 
-  @include media-max($M){
-    flex-wrap: wrap;
-  }
+  // @include media-max($M){
+  //   flex-wrap: wrap;
+  // }
 }

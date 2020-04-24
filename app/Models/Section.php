@@ -10,7 +10,7 @@ use DB;
 class Section extends Model
 {
     protected $fillable = [
-        'title', 'description', 'course_id'
+        'title', 'description', 'course_id', 'title_en','description_en',
     ];
 
     public function modules()

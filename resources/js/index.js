@@ -1,12 +1,14 @@
 import "./modules/gamburger"
 import "./modules/slick"
 import "./modules/graph"
+import "./modules/lesson-path"
 import "./modules/module-edit-selections"
 import "./modules/modal"
 import "./modules/editor"
 import "./modules/course-sections-edit"
 import "./modules/test-page"
 import "./modules/training-page"
+import "./modules/tabs"
 
 import $ from "jquery"
 

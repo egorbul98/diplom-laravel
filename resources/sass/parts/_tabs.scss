@@ -1,0 +1,21 @@
+.tabs-container {
+    .tab {
+        display: none;
+
+        &--active {
+            display: block;
+
+        }
+    }
+
+    .tab-btn {
+
+        &.active {
+            background-color: $col-active;
+        }
+    }
+
+    .tabs-btns {
+       margin-bottom: 20px;
+    }
+}

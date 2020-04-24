@@ -5,10 +5,11 @@
 @section('content')
 
 @include('profile.edit-course.parts.course-header')
-
+<div class="tabs-container">
 <div class="main-wrap margin-bottom-100">
   <div class="flex-b ">
     <h1 class="title">Разделы</h1>
+    @include('parts.tabs-btns')
   </div>
 
 <section class="course-sections" data-course-id="{{$course->id}}">
@@ -79,7 +80,7 @@
     </div>
   </div>
 
-
+</div>
 </div>
 @include('profile.parts.footer-editor', [$body = "sections"])
 @endsection

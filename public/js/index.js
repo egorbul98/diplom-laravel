@@ -64008,15 +64008,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_gamburger__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/gamburger */ "./resources/js/modules/gamburger.js");
 /* harmony import */ var _modules_slick__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/slick */ "./resources/js/modules/slick.js");
 /* harmony import */ var _modules_graph__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/graph */ "./resources/js/modules/graph.js");
-/* harmony import */ var _modules_module_edit_selections__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/module-edit-selections */ "./resources/js/modules/module-edit-selections.js");
-/* harmony import */ var _modules_modal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/modal */ "./resources/js/modules/modal.js");
-/* harmony import */ var _modules_editor__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/editor */ "./resources/js/modules/editor.js");
-/* harmony import */ var _modules_course_sections_edit__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/course-sections-edit */ "./resources/js/modules/course-sections-edit.js");
-/* harmony import */ var _modules_test_page__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/test-page */ "./resources/js/modules/test-page.js");
-/* harmony import */ var _modules_training_page__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/training-page */ "./resources/js/modules/training-page.js");
-/* harmony import */ var _modules_training_page__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_modules_training_page__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _modules_lesson_path__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/lesson-path */ "./resources/js/modules/lesson-path.js");
+/* harmony import */ var _modules_module_edit_selections__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/module-edit-selections */ "./resources/js/modules/module-edit-selections.js");
+/* harmony import */ var _modules_modal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/modal */ "./resources/js/modules/modal.js");
+/* harmony import */ var _modules_editor__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/editor */ "./resources/js/modules/editor.js");
+/* harmony import */ var _modules_course_sections_edit__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/course-sections-edit */ "./resources/js/modules/course-sections-edit.js");
+/* harmony import */ var _modules_test_page__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/test-page */ "./resources/js/modules/test-page.js");
+/* harmony import */ var _modules_training_page__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/training-page */ "./resources/js/modules/training-page.js");
+/* harmony import */ var _modules_training_page__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_modules_training_page__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _modules_tabs__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modules/tabs */ "./resources/js/modules/tabs.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_11__);
 
 
 
@@ -64027,12 +64029,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-jquery__WEBPACK_IMPORTED_MODULE_9___default()(document).ready(function () {
-  jquery__WEBPACK_IMPORTED_MODULE_9___default()(".num-only").on("input", function (event) {
+
+
+jquery__WEBPACK_IMPORTED_MODULE_11___default()(document).ready(function () {
+  jquery__WEBPACK_IMPORTED_MODULE_11___default()(".num-only").on("input", function (event) {
     this.value = this.value.replace(/^\./g, '').replace(/\d\-/g, '$1').replace(/\-\-/g, '$1').replace(/[^0-9-.]/g, '').replace(/(\..*)\./g, '$1');
   }); // FORM DELETE COURSE course-header in profile
 
-  jquery__WEBPACK_IMPORTED_MODULE_9___default()("#delete-course").on("click", function (event) {
+  jquery__WEBPACK_IMPORTED_MODULE_11___default()("#delete-course").on("click", function (event) {
     event.preventDefault();
     var del = confirm("Вы точно хотите удалить курс?");
 
@@ -64041,34 +64045,34 @@ jquery__WEBPACK_IMPORTED_MODULE_9___default()(document).ready(function () {
     }
   }); //FORM SAVE ALL SECTIONS AND MODULES
 
-  jquery__WEBPACK_IMPORTED_MODULE_9___default()("#btn-save-sections").on("click", function (event) {
+  jquery__WEBPACK_IMPORTED_MODULE_11___default()("#btn-save-sections").on("click", function (event) {
     event.preventDefault(); // alert("sad")
 
     document.getElementById('form-save-sections').submit();
   }); //
 
-  jquery__WEBPACK_IMPORTED_MODULE_9___default()(".filter-btn").on("click", function () {
-    jquery__WEBPACK_IMPORTED_MODULE_9___default()(".filter .drop-down").slideToggle();
+  jquery__WEBPACK_IMPORTED_MODULE_11___default()(".filter-btn").on("click", function () {
+    jquery__WEBPACK_IMPORTED_MODULE_11___default()(".filter .drop-down").slideToggle();
   });
-  jquery__WEBPACK_IMPORTED_MODULE_9___default()(".header-top .auth .user").on("click", function () {
-    jquery__WEBPACK_IMPORTED_MODULE_9___default()(".header-top .auth .drop-down").slideToggle();
+  jquery__WEBPACK_IMPORTED_MODULE_11___default()(".header-top .auth .user").on("click", function () {
+    jquery__WEBPACK_IMPORTED_MODULE_11___default()(".header-top .auth .drop-down").slideToggle();
   }); //LESSON_PAGE
 
-  jquery__WEBPACK_IMPORTED_MODULE_9___default()(".lesson-page .btn-gamburger").on("click", function () {
-    jquery__WEBPACK_IMPORTED_MODULE_9___default()(".lesson-sidebar").toggleClass("lesson-sidebar--active");
+  jquery__WEBPACK_IMPORTED_MODULE_11___default()(".lesson-page .btn-gamburger").on("click", function () {
+    jquery__WEBPACK_IMPORTED_MODULE_11___default()(".lesson-sidebar").toggleClass("lesson-sidebar--active");
   });
-  jquery__WEBPACK_IMPORTED_MODULE_9___default()(".lesson-page .lesson-header__name").on("click", function () {
-    jquery__WEBPACK_IMPORTED_MODULE_9___default()(this).siblings(".drop-down").slideToggle();
+  jquery__WEBPACK_IMPORTED_MODULE_11___default()(".lesson-page .lesson-header__name").on("click", function () {
+    jquery__WEBPACK_IMPORTED_MODULE_11___default()(this).siblings(".drop-down").slideToggle();
   });
-  jquery__WEBPACK_IMPORTED_MODULE_9___default()('.lesson-page .section').on("click", function () {
-    jquery__WEBPACK_IMPORTED_MODULE_9___default()(".lesson-sidebar").removeClass("lesson-sidebar--active");
+  jquery__WEBPACK_IMPORTED_MODULE_11___default()('.lesson-page .section').on("click", function () {
+    jquery__WEBPACK_IMPORTED_MODULE_11___default()(".lesson-sidebar").removeClass("lesson-sidebar--active");
   }); //course-edit
 
-  jquery__WEBPACK_IMPORTED_MODULE_9___default()(".course-header-menu .btn").on('click', function () {
-    jquery__WEBPACK_IMPORTED_MODULE_9___default()(this).siblings(".drop-down").slideToggle();
+  jquery__WEBPACK_IMPORTED_MODULE_11___default()(".course-header-menu .btn").on('click', function () {
+    jquery__WEBPACK_IMPORTED_MODULE_11___default()(this).siblings(".drop-down").slideToggle();
   });
 
-  if (jquery__WEBPACK_IMPORTED_MODULE_9___default()("body").hasClass("editor")) {
+  if (jquery__WEBPACK_IMPORTED_MODULE_11___default()("body").hasClass("editor")) {
     window.onbeforeunload = function (evt) {
       var message = "вйцв";
 
@@ -64085,18 +64089,18 @@ jquery__WEBPACK_IMPORTED_MODULE_9___default()(document).ready(function () {
   } //------------
 
 
-  jquery__WEBPACK_IMPORTED_MODULE_9___default()(".btn-close").on("click", function () {
-    jquery__WEBPACK_IMPORTED_MODULE_9___default()(".header-wrap").removeClass("active");
+  jquery__WEBPACK_IMPORTED_MODULE_11___default()(".btn-close").on("click", function () {
+    jquery__WEBPACK_IMPORTED_MODULE_11___default()(".header-wrap").removeClass("active");
   });
-  jquery__WEBPACK_IMPORTED_MODULE_9___default()('.item-page .item-sections-item').on("click", function () {
-    jquery__WEBPACK_IMPORTED_MODULE_9___default()(this).toggleClass("active").children(".item-sections-item__cometencies").slideToggle();
+  jquery__WEBPACK_IMPORTED_MODULE_11___default()('.item-page .item-sections-item').on("click", function () {
+    jquery__WEBPACK_IMPORTED_MODULE_11___default()(this).toggleClass("active").children(".item-sections-item__cometencies").slideToggle();
   });
-  jquery__WEBPACK_IMPORTED_MODULE_9___default()('.test-list .test-item-inner').on("click", function () {
-    jquery__WEBPACK_IMPORTED_MODULE_9___default()(this).toggleClass("active").siblings(".test-item-models").slideToggle();
+  jquery__WEBPACK_IMPORTED_MODULE_11___default()('.test-list .test-item-inner').on("click", function () {
+    jquery__WEBPACK_IMPORTED_MODULE_11___default()(this).toggleClass("active").siblings(".test-item-models").slideToggle();
   });
-  jquery__WEBPACK_IMPORTED_MODULE_9___default()('.notifications').on("click", ".btn-close", function () {
-    jquery__WEBPACK_IMPORTED_MODULE_9___default()(this).closest(".notifications__item").slideUp(function () {
-      jquery__WEBPACK_IMPORTED_MODULE_9___default()(this).remove();
+  jquery__WEBPACK_IMPORTED_MODULE_11___default()('.notifications').on("click", ".btn-close", function () {
+    jquery__WEBPACK_IMPORTED_MODULE_11___default()(this).closest(".notifications__item").slideUp(function () {
+      jquery__WEBPACK_IMPORTED_MODULE_11___default()(this).remove();
     });
   });
 }); // import "./../sass/style.scss"
@@ -64370,7 +64374,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _libs_editor_summernote_lite__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_libs_editor_summernote_lite__WEBPACK_IMPORTED_MODULE_1__);
 
 
-jquery__WEBPACK_IMPORTED_MODULE_0___default()('#summernote').summernote({
+jquery__WEBPACK_IMPORTED_MODULE_0___default()('.summernote').summernote({
   toolbar: [['style', ['style']], ['font', ['bold', 'underline', 'clear']], ['fontname', ['fontname']], ['color', ['color']], ['para', ['ul', 'ol', 'paragraph']], ['table', ['table']], ['insert', ['link', 'picture']], ['view', ['fullscreen', 'codeview', 'help']]]
 });
 
@@ -64539,6 +64543,208 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       };
       var network = new vis.Network(container, data, options);
     });
+  }
+})();
+
+/***/ }),
+
+/***/ "./resources/js/modules/lesson-path.js":
+/*!*********************************************!*\
+  !*** ./resources/js/modules/lesson-path.js ***!
+  \*********************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _fun__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../fun */ "./resources/js/fun.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+(function () {
+  var vis = __webpack_require__(/*! vis-network/dist/vis-network */ "./node_modules/vis-network/dist/vis-network.js");
+
+  var $graph = jquery__WEBPACK_IMPORTED_MODULE_0___default()("#graph");
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
+    if (jquery__WEBPACK_IMPORTED_MODULE_0___default()("body").hasClass("learning-path")) {
+      var courseId = $graph.attr("data-course-id");
+      jquery__WEBPACK_IMPORTED_MODULE_0___default.a.ajax({
+        headers: {
+          'X-CSRF-TOKEN': jquery__WEBPACK_IMPORTED_MODULE_0___default()('meta[name="csrf-token"]').attr('content')
+        },
+        type: "GET",
+        url: "/training/ajax-get-learning-path",
+        data: {
+          "course_id": courseId
+        },
+        success: function success(response, status) {
+          var modules = response.modules;
+          renderGraph(modules);
+          renderFullGraph(modules);
+        },
+        error: function error(response, status) {
+          if (response.msg == undefined) {
+            Object(_fun__WEBPACK_IMPORTED_MODULE_1__["notificationMessage"])(_fun__WEBPACK_IMPORTED_MODULE_1__["TotalMsgError"], "error");
+          } else {
+            Object(_fun__WEBPACK_IMPORTED_MODULE_1__["notificationMessage"])(response.msg, "error");
+          }
+        }
+      });
+    }
+  });
+
+  function renderGraph(modules) {
+    var dataEdgesModules = [];
+    var dataNodesModules = [];
+
+    var _loop = function _loop(i) {
+      var module = modules[i];
+      var nextModule = modules[i + 1];
+      var color = 'blue';
+      var obj = dataNodesModules.find(function (node) {
+        return node.id == module.id;
+      });
+
+      if (obj == undefined) {
+        dataNodesModules.push({
+          "id": module.id,
+          "label": module.title
+        });
+      } else if (i + 1 == modules.length - 1) {
+        var _obj = dataNodesModules.find(function (node) {
+          return node.id == nextModule.id;
+        });
+
+        if (_obj == undefined) {
+          dataNodesModules.push({
+            "id": nextModule.id,
+            "label": nextModule.title
+          });
+        }
+
+        color = 'red';
+      } else {
+        color = 'red';
+      }
+
+      var from = module.id,
+          to = nextModule.id;
+      dataEdgesModules.push({
+        "from": from,
+        "to": to,
+        color: color
+      });
+    };
+
+    for (var i = 0; i < modules.length - 1; i++) {
+      _loop(i);
+    }
+
+    console.log(dataEdgesModules, dataNodesModules);
+    var container = document.getElementById('graph');
+    var nodes = new vis.DataSet(dataNodesModules);
+    var edges = new vis.DataSet(dataEdgesModules);
+    var data = {
+      nodes: nodes,
+      edges: edges
+    };
+    var options = {
+      edges: {
+        arrows: "to",
+        length: 600,
+        physics: false,
+        font: {
+          size: 12
+        }
+      },
+      layout: _defineProperty({
+        hierarchical: true,
+        improvedLayout: true
+      }, "hierarchical", {
+        enabled: false,
+        direction: "LR"
+      }),
+      physics: {
+        stabilization: false
+      }
+    };
+    var network = new vis.Network(container, data, options);
+  }
+
+  function renderFullGraph(modules) {
+    var dataEdgesModules = [];
+    var dataNodesModules = [];
+
+    var _loop2 = function _loop2(i) {
+      var module = modules[i];
+      var nextModule = modules[i + 1];
+      var color = 'blue';
+      var obj = dataNodesModules.find(function (node) {
+        return node.moduleId == nextModule.id;
+      });
+
+      if (obj != undefined) {
+        color = "red";
+      }
+
+      if (i + 1 == modules.length - 1) {
+        dataNodesModules.push({
+          "id": i + 1,
+          "label": nextModule.title,
+          "moduleId": nextModule.id
+        });
+      }
+
+      dataNodesModules.push({
+        "id": i,
+        "label": module.title,
+        "moduleId": module.id
+      });
+      var from = i,
+          to = i + 1;
+      dataEdgesModules.push({
+        "from": from,
+        "to": to,
+        color: color
+      });
+    };
+
+    for (var i = 0; i < modules.length - 1; i++) {
+      _loop2(i);
+    }
+
+    var container = document.getElementById('learning-path__graph-full');
+    var nodes = new vis.DataSet(dataNodesModules);
+    var edges = new vis.DataSet(dataEdgesModules);
+    var data = {
+      nodes: nodes,
+      edges: edges
+    };
+    var options = {
+      edges: {
+        arrows: "to",
+        length: 600,
+        physics: false,
+        font: {
+          size: 12
+        }
+      },
+      layout: _defineProperty({
+        hierarchical: true,
+        improvedLayout: true
+      }, "hierarchical", {
+        enabled: false,
+        direction: "LR"
+      }),
+      physics: {
+        stabilization: false
+      }
+    };
+    var network = new vis.Network(container, data, options);
   }
 })();
 
@@ -65016,6 +65222,30 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
         slidesToScroll: 1
       }
     }]
+  });
+});
+
+/***/ }),
+
+/***/ "./resources/js/modules/tabs.js":
+/*!**************************************!*\
+  !*** ./resources/js/modules/tabs.js ***!
+  \**************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(".tabs-container .tab-btn").click(function () {
+    var data = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr("data-tab");
+    var $parent = this.closest(".tabs-container");
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).addClass("active").siblings().removeClass("active");
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()($parent).find(".tab").removeClass("tab--active").siblings(".tab[data-tab=" + data + "]").addClass("tab--active"); // $($parent).find(".tab").fadeOut( "slow", function() {
+    // });
   });
 });
 

@@ -20,4 +20,14 @@ class HomeController extends Controller
         return view("category", compact("courses", "category"));
     }
 
+    function setLocale($locale)
+    {
+        $languages = ["ru", "en"];
+        if(in_array($locale, $languages)){
+            session(["locale"=>$locale]);
+        }
+        
+        return back();
+    } 
+
 }

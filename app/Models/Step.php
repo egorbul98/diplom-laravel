@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Step extends Model
 {
     protected $fillable = [
-        'content', 'step_type_id'
+        'content', 'step_type_id', 'content_en',
     ];
     
     public function answersNum()

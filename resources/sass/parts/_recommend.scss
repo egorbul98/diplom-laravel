@@ -14,6 +14,7 @@
 .recommend {
   background-color: $col-active-op;
   height: 100%;
+  display: flex;
 }
 
 .recommend-wrap {
@@ -44,15 +45,17 @@
     transform: translate(0, -50%);
     z-index: 1;
     background-color: transparent;
-    font-size: 24px;
+    font-size: 46px;
     color: $col-main;
+    @include media-max($L) {
+      font-size: 30px;
+    }
     @include media-max($S) {
       font-size: 18px;
     }
   }
 
   .slick-next {
-
     left: 100%;
   }
 

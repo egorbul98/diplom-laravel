@@ -4,7 +4,7 @@
         <div class="header-mobile">
 
             <div class="title">
-            <h2><a href="{{route("home")}}">Онлайн курсы</a></h2>
+            <h2><a href="{{route("home")}}">@lang('main.online_courses')</a></h2>
             </div>
             <button class="btn-gamburger" type="button"><i class="fas fa-bars"></i></button>
         </div>
@@ -16,32 +16,42 @@
             <div class="header-top">
                 <div class="left-block">
                     <div class="title">
-                        <h2><a href="{{route("home")}}">Онлайн курсы</a></h2>
+                        <h2><a href="{{route("home")}}">@lang('main.online_courses')</a></h2>
                     </div>
                 </div>
                 <div class="right-block">
                     <a class="tel" href="#">8 800 555 35 35</a>
-                    <select name="language" id="language">
-                        <option value="rus" selected>Русский</option>
-                        <option value="en">Английский</option>
-                    </select>
+                    <div id="language" class="drop-down">
+
+                        <a href="#" class="">@lang("main.$locale")</a>
+
+                        <div class="language-inner shadow-light">
+                            @foreach ($listLanguages as $lang)
+                            @if ($locale != null && $lang!=$locale)
+                                <a href="{{route("set-locale", $lang)}}" class="lang">@lang("main.$lang")</a>
+                            @endif
+                            @endforeach
+                            
+                        </div>
+                    </div>
+                    
                     <div class="auth">
                         @auth
                         <div class="user">
                             <div class="user__name"><span class="lastname"></span><span class="firstname">{{$user->name}}</span></div>
                             <div class="icon"><i class="fas fa-chevron-down"></i></div>
                             <div class="drop-down shadow-light">
-                            <div class="drop-down__item"><a href="{{route("profile")}}">Личный кабинет</a></div>
-                                <div class="drop-down__item"><a href="{{route("logout")}}"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Выйти</a></div>
+                            <div class="drop-down__item"><a href="{{route("profile")}}">@lang('main.personal_area')</a></div>
+                                <div class="drop-down__item"><a href="{{route("logout")}}"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();">@lang('main.logout')</a></div>
                             </div>
                         </div>
-                        <a href="{{route("logout")}}" class="btn" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Выйти</a>
+                        <a href="{{route("logout")}}" class="btn" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">@lang('main.logout')</a>
 
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>
                         @else
-                        <a href="{{route("login")}}" class="btn login">Войти</a>
+                        <a href="{{route("login")}}" class="btn login">@lang('main.login')</a>
                         <a href="{{route("register")}}" class="btn">Регистрация</a>
                         @endauth
                     </div>
