@@ -6,7 +6,7 @@
     <div class="course-sections-item__inner shadow-light">
       <div class="course-sections-item__header">
         <h3 class="course-sections-item__title"><span class="num">{{++$i}}</span>{{$section->title}}</h3>
-        <p class="course-sections-item__count-models"><span>{{$section->modules->count()}}</span> модулей</p>
+        <p class="course-sections-item__count-models"><span>{{$section->modules->count()}}</span> {{Lang::choice('main.secitions_modules', $section->modules->count(), [], ($locale==null)? "ru" : $locale)}}</p>
       </div>
       <p class="course-sections-item__desc">{{$section->description}}</p>
     </div>
@@ -22,7 +22,7 @@
   @endforeach
   
   @if (!isset($course->sections[0]))
-      Здесь ничего нет
+      @lang('main.there_is_nothing')
   @endif
   
 </section>

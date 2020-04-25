@@ -8,7 +8,7 @@ import {
 (function () {
 
     let vis = require("vis-network/dist/vis-network");
-    let $graph = $("#graph");
+    let $graph = $("#learning-path__graph-full");
     $(document).ready(function () {
         if ($("body").hasClass("learning-path")) {
             let courseId = $graph.attr("data-course-id");
@@ -25,7 +25,7 @@ import {
                 success: function (response, status) {
 
                     let modules = response.modules;
-                    renderGraph(modules);
+                    // renderGraph(modules);
                     renderFullGraph(modules);
                 },
                 error: function (response, status) {

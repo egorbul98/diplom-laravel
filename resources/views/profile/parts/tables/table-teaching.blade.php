@@ -3,7 +3,7 @@
     <thead>
       <tr>
         <th></th>
-        <th>Название</th>
+        <th>@lang('main.title')</th>
         
         <th>Дата обновления</th>
         <th>Опубликован</th>

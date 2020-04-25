@@ -17,6 +17,17 @@
         position: relative;
     }
 
+    &.modal-review{
+        .modal-window{
+            width: 60%;
+
+            @include media-max($S) {
+                width: 80%;
+            }
+
+        }
+    }
+
     .modal-window {
         padding: 20px;
         background-color: #ffffff;
@@ -137,3 +148,4 @@
         }
     }
 }
+

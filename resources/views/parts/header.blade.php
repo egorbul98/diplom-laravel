@@ -23,12 +23,18 @@
                     <a class="tel" href="#">8 800 555 35 35</a>
                     <div id="language" class="drop-down">
 
-                        <a href="#" class="">@lang("main.$locale")</a>
+                       @if ($locale==null)
+                        <a href="#" class="">@lang("main.ru")</a>
+                            @else 
+                            <a href="#" class="">@lang("main.$locale")</a>
+                        @endif
 
                         <div class="language-inner shadow-light">
                             @foreach ($listLanguages as $lang)
-                            @if ($locale != null && $lang!=$locale)
-                                <a href="{{route("set-locale", $lang)}}" class="lang">@lang("main.$lang")</a>
+                            @if ($lang!=$locale)
+                            @if (!($locale==null && $lang=="ru"))
+                              <a href="{{route("set-locale", $lang)}}" class="lang">@lang("main.$lang")</a>
+                            @endif
                             @endif
                             @endforeach
                             
@@ -52,7 +58,7 @@
                         </form>
                         @else
                         <a href="{{route("login")}}" class="btn login">@lang('main.login')</a>
-                        <a href="{{route("register")}}" class="btn">Регистрация</a>
+                        <a href="{{route("register")}}" class="btn">@lang('main.registration')</a>
                         @endauth
                     </div>
                 </div>
@@ -61,21 +67,21 @@
 
             <div class="header-middle">
                 <nav class="nav">
-                    <div class="nav__item"><a href="#">Каталог</a>
+                    <div class="nav__item"><a href="#">@lang('main.catalog')</a>
                         <div class="nav__item-drop drop">
                             @foreach ($categories as $category_item)
                                 <div class="drop__item"><a href="{{route("category", $category_item->slug)}}">{{$category_item->title}}</a></div>
                              @endforeach
                         </div>
                     </div>
-                    <div class="nav__item"><a href="{{route("course.index")}}">Все курсы</a></div>
-                    <div class="nav__item"><a href="#">Новости</a></div>
+                    <div class="nav__item"><a href="{{route("course.index")}}">@lang('main.all_courses')</a></div>
+                    <div class="nav__item"><a href="#">@lang('main.news')</a></div>
                 </nav>
             <form class="form" action="{{route("course.search")}}" method="GET">
                     @csrf
                     <div class="form-field">
                         <input type="text" class="search" name="text" placeholder="Поиск по каталогу">
-                        <button class="btn btn-search" type="submit">Искать</button>
+                        <button class="btn btn-search" type="submit">@lang('main.search')</button>
                     </div>
 
                 </form>

@@ -6,7 +6,7 @@
         $procent = round(count($sections_completed)/count($course->sections)*100);
         // dd(count($sections_completed),count($course->sections));
     @endphp
-    <div class="lesson-progress"><span>Прогресс по курсу: </span><span class="progress">{{$procent}}%</span>
+    <div class="lesson-progress"><span>@lang('main.course_progress'): </span><span class="progress">{{$procent}}%</span>
       <div class="progress-line">
         <div class="progress-line__fill" style="width: {{$procent}}%"></div>
       </div>
@@ -35,7 +35,7 @@
   
   </div>
 
-  <h4>Последние достижения</h4>
+  <h4>@lang('main.recent_achievements')</h4>
   <div class="lesson-sidebar__competences">
     @foreach ($user->competences_out_for_course($course->id) as $competence)
     <div class="competence">{{$competence->title}}</div>

@@ -24,7 +24,7 @@
                    
 
 
-                    <button type="submit" class="step-editor-header__btn-save btn"><span class="icon m-r-8"><i class="fas fa-save"></i></span> Сохранить</button>
+                    <button type="submit" class="step-editor-header__btn-save btn"><span class="icon m-r-8"><i class="fas fa-save"></i></span> @lang('main.save')</button>
                 </div>
             </div>
             <div class="step-editor-content">

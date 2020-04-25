@@ -37,9 +37,9 @@
 
             </div>
             <div class="form-row input-add-competences form-field">
-                <input type="text" class="input-control" placeholder="Название компетенции">
+                <input type="text" class="input-control" placeholder="@lang('main.title') компетенции">
                 <div class="form-field__tooltip">
-                    <span class="text">Не более 128 символов</span>
+                    <span class="text">@lang('main.tooltips.characters_max', ["num"=> 128])</span>
                 </div>
                 
                 <button class="btn btn-add" data-section-id="{{$section->id}}" type="button"><i

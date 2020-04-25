@@ -8,7 +8,7 @@
 <div class="tabs-container">
 <div class="main-wrap margin-bottom-100">
   <div class="flex-b ">
-    <h1 class="title">Разделы</h1>
+    <h1 class="title">@lang('main.sections')</h1>
     @include('parts.tabs-btns')
   </div>
 
@@ -31,12 +31,12 @@
               <div class="section-edit-wrap__inputs">
                 <div class="form-row">
                   <div class="form-row__left">
-                    <p><label class="" for="title">Название<span class="required-input">*</span></label></p>
+                    <p><label class="" for="title">@lang('main.title')<span class="required-input">*</span></label></p>
                   </div>
                   <div class="form-row__right form-field">
                     <input class="input-control" maxlength="64" id="title" type="text">
                     <div class="form-field__tooltip">
-                      <span class="text">Не более 128 символов</span>
+                      <span class="text">@lang('main.tooltips.characters_max', ["num"=> 128])</span>
                     </div>
                   </div>
                 </div>
@@ -48,7 +48,7 @@
                   <div class="form-row__right form-field">
                     <textarea name="" cols="30" rows="5" id="description"></textarea>
                     <div class="form-field__tooltip">
-                      <span class="text">Не менее 10 символов</span>
+                      <span class="text">@lang('main.tooltips.at_least_characters', ["num"=> 10])</span>
                     </div>
                   </div>
                 </div>

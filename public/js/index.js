@@ -64015,7 +64015,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_course_sections_edit__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/course-sections-edit */ "./resources/js/modules/course-sections-edit.js");
 /* harmony import */ var _modules_test_page__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/test-page */ "./resources/js/modules/test-page.js");
 /* harmony import */ var _modules_training_page__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/training-page */ "./resources/js/modules/training-page.js");
-/* harmony import */ var _modules_training_page__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_modules_training_page__WEBPACK_IMPORTED_MODULE_9__);
 /* harmony import */ var _modules_tabs__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modules/tabs */ "./resources/js/modules/tabs.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_11__);
@@ -64568,7 +64567,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 (function () {
   var vis = __webpack_require__(/*! vis-network/dist/vis-network */ "./node_modules/vis-network/dist/vis-network.js");
 
-  var $graph = jquery__WEBPACK_IMPORTED_MODULE_0___default()("#graph");
+  var $graph = jquery__WEBPACK_IMPORTED_MODULE_0___default()("#learning-path__graph-full");
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
     if (jquery__WEBPACK_IMPORTED_MODULE_0___default()("body").hasClass("learning-path")) {
       var courseId = $graph.attr("data-course-id");
@@ -64582,8 +64581,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           "course_id": courseId
         },
         success: function success(response, status) {
-          var modules = response.modules;
-          renderGraph(modules);
+          var modules = response.modules; // renderGraph(modules);
+
           renderFullGraph(modules);
         },
         error: function error(response, status) {
@@ -65623,18 +65622,27 @@ function renderQuerstion(arrTestSection, arrAnswers) {
 /*!***********************************************!*\
   !*** ./resources/js/modules/training-page.js ***!
   \***********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-// import $ from "jquery";
-// $(document).ready(function () {
-//   let $tests = $(".lesson-content__tests .test");
-//   $($tests).each(function (index, element) {
-//     if ($(element).find(".test__module").length == 0) {
-//       $(element).remove();
-//     }
-//   });
-// });
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+
+
+(function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
+    // let $tests = $(".lesson-content__tests .test");
+    // $($tests).each(function (index, element) {
+    //   if ($(element).find(".test__module").length == 0) {
+    //     $(element).remove();
+    //   }
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(".create_review").click(function () {
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()(".modal-review").removeClass("modal--hidden");
+    });
+  });
+})();
 
 /***/ }),
 

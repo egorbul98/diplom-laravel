@@ -9,7 +9,8 @@
       <div class="icon"><i class="fas fa-chevron-down"></i></div>
       <div class="drop-down">
         <div class="drop-down__item"><a href="{{route("profile")}}">@lang('main.personal_area')</a></div>
-        <div class="drop-down__item"><a href="{{route("training.learning-path", $course->id)}}">Траектория обучения</a></div>
+        <div class="drop-down__item"><a href="{{route("training.learning-path", $course->id)}}">@lang('main.learning-path')</a></div>
+        <div class="drop-down__item"><a href="#" class="create_review">@lang('main.leave_feedback_about_this_course')</a></div>
         <form action="{{route("logout")}}" id="logout-form" method="POST" class="form">
           @csrf
           {{-- <div class="drop-down__item"><a href="{{route("logout")}}">@lang('main.logout')</a></div> --}}

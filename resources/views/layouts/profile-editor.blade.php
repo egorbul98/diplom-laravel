@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800&display=swap" rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{asset("css/style.css")}}">
-    <title>INDEX</title>
+    <title>@lang('main.personal_area')</title>
 
 </head>
 

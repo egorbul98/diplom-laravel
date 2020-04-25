@@ -22,12 +22,12 @@
         @csrf
         <div class="form-row">
           <div class="form-row__left">
-            <p><label class="" for="title">Название<span class="required-input">*</span></label></p>
+            <p><label class="" for="title">@lang('main.title')<span class="required-input">*</span></label></p>
           </div>
           <div class="form-row__right form-field">
             <input class="input-control" maxlength="64" id="title" name="title" type="text" value="{{old("title", $test->title)}}">
             <div class="form-field__tooltip">
-              <span class="text">Не более 64 символов</span>
+              <span class="text">@lang('main.tooltips.characters_max', ["num"=> 64])</span>
             </div>
           </div>
         </div>
@@ -61,9 +61,9 @@
 
         <div class="form-btns-wrap">
           @if ($test->exists)
-            <button class="btn" type="submit"><span class="icon m-r-8"><i class="fas fa-save"></i></span> Сохранить</button>
+            <button class="btn" type="submit"><span class="icon m-r-8"><i class="fas fa-save"></i></span> @lang('main.save')</button>
           @else
-            <button class="btn" type="submit">Создать</button>
+            <button class="btn" type="submit">@lang('main.сreate')</button>
           @endif
           
             <a href="{{route("profile.test.index")}}" class="btn">К списку тестов</a>

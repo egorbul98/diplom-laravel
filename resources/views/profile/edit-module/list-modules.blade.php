@@ -19,7 +19,7 @@
       <table class="table">
         <thead>
           <tr>
-            <th>Название</th>
+            <th>@lang('main.title')</th>
             <th>Количество шагов</th>
             <th>Дата изменения</th>
             <th></th>
@@ -33,7 +33,7 @@
             <td class="profile-content-table-course__title">{{$module->title}}</td>
             <td class="profile-content-table-course__title">{{$module->steps->count()}}</td>
             <td>{{$timeUpdated}}</td>
-            <td class="table-btn"><a href="{{route("profile.module.edit", $module->id)}}" class="btn">Редактировать</a></td>
+            <td class="table-btn"><a href="{{route("profile.module.edit", $module->id)}}" class="btn">@lang('main.edit')</a></td>
             <td class="table-btn"><a href="#" class="btn"><i class="fas fa-trash-alt"></i></a></td>
           </tr>
           @endforeach

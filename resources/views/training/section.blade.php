@@ -5,7 +5,7 @@
 @section('content')
 
 <div class="lesson-content__header">
-    <h1 class="title">Раздел <span class="num">1</span>. <span class="text">{{$section->title}}</span></h1>
+    <h1 class="title">@lang('main.section') <span class="num">1</span>. <span class="text">{{$section->title}}</span></h1>
     <p class="desc">{{$section->description}}</p>
 </div>
 

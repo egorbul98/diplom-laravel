@@ -16,7 +16,7 @@
                 @isset($section->id)
 
                 <a href="{{route("profile.course.sections.edit", $section->course->id)}}">Вернуться назад</a>
-                <div class="section-title">Раздел "{{$section->title}}"</div>
+                <div class="section-title">@lang('main.section') "{{$section->title}}"</div>
 
                 @include('parts.tabs-btns')
                 

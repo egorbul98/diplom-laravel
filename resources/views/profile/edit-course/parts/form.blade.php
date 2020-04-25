@@ -18,31 +18,32 @@
      
         <div class="form-row">
           <div class="form-row__left">
-          <p><label class="" for="title{{$postfix}}">Название<span class="required-input">*</span></label></p>
+          <p><label class="" for="title{{$postfix}}">@lang('main.title')<span class="required-input">*</span></label></p>
           </div>
           <div class="form-row__right form-field">
             <input class="input-control" maxlength="64" id="title{{$postfix}}" name="title{{$postfix}}" type="text" value="{{old("title$postfix", $course["title$postfix"])}}">
             <div class="form-field__tooltip">
-              <span class="text">Не более 64 символов</span>
+              {{-- <span class="text">{{Lang::line('main.tooltips.characters_max', array('num' => 'Taylor'))->get()}}</span> --}}
+              <span class="text">@lang('main.tooltips.characters_max', ["num"=> 64])</span>
             </div>
           </div>
         </div>
       
         <div class="form-row">
           <div class="form-row__left">
-            <p><label class="" for="description{{$postfix}}">Краткое описание<span class="required-input">*</span></label></p>
+            <p><label class="" for="description{{$postfix}}">@lang('main.short_description')<span class="required-input">*</span></label></p>
           </div>
           <div class="form-row__right form-field">
             <textarea name="description{{$postfix}}" id="description{{$postfix}}" rows="10">{{old("description$postfix", $course["description$postfix"])}}</textarea>
             <div class="form-field__tooltip">
-              <span class="text">Не более 200 символов</span>
+              <span class="text">@lang('main.tooltips.characters_max', ["num"=> 200])</span>
             </div>
           </div>
         </div>
       
         <div class="form-row">
           <div class="form-row__left">
-            <p><label class="" for="content{{$postfix}}">О курсе<span class="required-input">*</span></label></p>
+            <p><label class="" for="content{{$postfix}}">@lang('main.about_the_course')<span class="required-input">*</span></label></p>
           </div>
           <div class="form-row__right form-field">
             <textarea name="content{{$postfix}}" id="content{{$postfix}}" rows="10">{{old("content$postfix", $course["content$postfix"])}}</textarea>
@@ -57,7 +58,7 @@
  </div>  
  <div class="form-row">
   <div class="form-row__left">
-    <p><label class="" for="content">Выберите категорию<span class="required-input">*</span></label></p>
+    <p><label class="" for="content">@lang('main.select_a_category')<span class="required-input">*</span></label></p>
   </div>
   <div class="form-row__right form-field">
     
@@ -72,7 +73,7 @@
 
  <div class="form-row">
   <div class="form-row__left">
-    <p><label class="" for="edit-foto">Изображение</label></p>
+    <p><label class="" for="edit-foto">@lang('main.picture')</label></p>
   </div>
   <div class="form-row__right form-field">
     <div class="new-course__img">
@@ -85,7 +86,7 @@
 
  <div class="form-row">
   <div class="form-row__left">
-    <p><label class="" for="knowledge_to_repeat">Процент знаний, при котором будет повторение модуля</label></p>
+    <p><label class="" for="knowledge_to_repeat">@lang('main.the_percentage_of_knowledge_at_which_the_module_will_repeat')</label></p>
   </div>
   <div class="form-row__right form-field">
     <input class="input-control" type="number" min="1" max="99" id="knowledge_to_repeat" name="knowledge_to_repeat" type="text" value="{{old("knowledge_to_repeat", $course->knowledge_to_repeat)}}" placeholder="например, 40">%
@@ -94,14 +95,14 @@
 
   <div class="form-btns-wrap">
     @if ($course->exists)
-      <button class="btn" type="submit"><span class="icon m-r-8"><i class="fas fa-save"></i></span> Сохранить</button>
+      <button class="btn" type="submit"><span class="icon m-r-8"><i class="fas fa-save"></i></span> @lang('main.save')</button>
     @else
-      <button class="btn" type="submit">Создать</button>
+      <button class="btn" type="submit">@lang('main.сreate')</button>
     @endif
     @if ($course->exists)
-      <a href="{{route("profile.course.sections.edit", compact("course"))}}" class="btn">Перейти к редактированию разделов</a>
+      <a href="{{route("profile.course.sections.edit", compact("course"))}}" class="btn">@lang('main.go_to_section_editing')</a>
     @endif
-    <a href="{{route("profile.course.index")}}" class="btn">Перейти к списоку курсов</a>
+    <a href="{{route("profile.course.index")}}" class="btn">@lang('main.go_to_course_list')</a>
   </div>
 
 </form>

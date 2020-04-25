@@ -11,7 +11,7 @@
 <br>
 
 <div class="learning-path__graphs-list">
-    <div id="graph" class="learning-path__graph" data-course-id="{{$course->id}}"></div>
+    {{-- <div id="graph" class="learning-path__graph" data-course-id="{{$course->id}}"></div> --}}
     <div id="learning-path__graph-full" class="learning-path__graph-full" data-course-id="{{$course->id}}"></div>
 </div>
 

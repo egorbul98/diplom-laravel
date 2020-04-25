@@ -13,13 +13,13 @@
       <p class="status">Курс в разработке</p>
     </div>
     <div class="course-header-menu">
-      <button type="button" class="btn">Меню</button>
+      <button type="button" class="btn">@lang('main.menu')</button>
       <div class="drop-down shadow-light">
         
-        <p class="drop-down__item"><a href="{{route("profile.course.graph", $course->id)}}">Показать деревья модулей</a></p>
-        <p class="drop-down__item"><a href="{{route("profile.course.edit", $course->id)}}">Редактировать описание</a></p>
-        <p class="drop-down__item"><a href="{{route("profile.course.sections.edit", $course)}}">Редактировать разделы курса</a></p>
-        <p class="drop-down__item"><a id="delete-course" href="{{route("profile.course.destroy", $course)}}">Удалить</a></p>
+        <p class="drop-down__item"><a href="{{route("profile.course.graph", $course->id)}}">@lang('main.show_module_trees')</a></p>
+        <p class="drop-down__item"><a href="{{route("profile.course.edit", $course->id)}}">@lang('main.edit_description')</a></p>
+        <p class="drop-down__item"><a href="{{route("profile.course.sections.edit", $course)}}">@lang('main.edit_course_sections')</a></p>
+        <p class="drop-down__item"><a id="delete-course" href="{{route("profile.course.destroy", $course)}}">@lang('main.delete')</a></p>
 
       </div>
 

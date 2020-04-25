@@ -48,7 +48,7 @@
           </h4>
         <p class="list-modules-item__steps"><span>{{$module->steps->count()}}</span> шагов</p>
           <div class="list-modules-item__btns">
-            <a href="{{route("profile.course.module.edit", [$module, $section])}}" class="btn ">Редактировать</a>
+            <a href="{{route("profile.course.module.edit", [$module, $section])}}" class="btn ">@lang('main.edit')</a>
             <button type="button" class="btn-delete-module" data-module-id="{{$module->id}}"><i class="fas fa-times"></i></button>
           </div>
         </div>

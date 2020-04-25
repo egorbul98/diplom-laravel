@@ -35,7 +35,7 @@ list
               @include('parts.course-item', $course)
           @endforeach
           @if (!isset($courses[0]))
-             <div class="nothing">Здесь ничего нет</div>
+             <div class="nothing">@lang('main.there_is_nothing')</div>
           @endif
       </div>
 </section>

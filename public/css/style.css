@@ -1505,6 +1505,16 @@ input#image {
   position: relative;
 }
 
+.modal.modal-review .modal-window {
+  width: 60%;
+}
+
+@media (max-width: 768px) {
+  .modal.modal-review .modal-window {
+    width: 80%;
+  }
+}
+
 .modal .modal-window {
   padding: 20px;
   background-color: #ffffff;
@@ -4797,7 +4807,7 @@ footer .form-field {
 }
 
 .learning-path__graph-full {
-  width: 50%;
+  width: 100%;
   height: 100%;
 }
 

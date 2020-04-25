@@ -8,8 +8,8 @@
 
 <div class="main-wrap">
   <div class="flex-b flex-wrap">
-    <h1 class="title">Деревья модулей</h1>
-    <a href="{{route("profile.course.sections.edit", $course)}}" class="btn flex-c">Редактировать разделы</a>
+    <h1 class="title">@lang('main.module_trees')</h1>
+    <a href="{{route("profile.course.sections.edit", $course)}}" class="btn flex-c">@lang('main.edit_sections')</a>
   </div>
 
 
