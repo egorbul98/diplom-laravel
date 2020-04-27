@@ -13,13 +13,11 @@
 </head>
 
 <body class="lesson-page @yield('class-body')">
-    
+    @include('training.parts.modal-review')
     @include('parts.notifications')
     
     @include('training.parts.header-training')
-
-   
-    
+  
     <div class="wrapper">
         @include('training.parts.lesson-sidebar')
     
@@ -29,7 +27,7 @@
     
     </div>
 
-    @include('training.parts.modal-review')
+    
     <script src="{{asset("js/index.js")}}"></script>
 </body>
 

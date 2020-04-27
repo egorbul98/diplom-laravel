@@ -721,13 +721,49 @@ button {
   align-items: center;
 }
 
+.assessments li {
+  color: #dcdacb;
+}
+
 .assessments .assessment {
   margin-right: 10px;
   margin-top: 2px;
+  font-weight: 600;
 }
 
 .assessments .assessment::after {
   content: ":";
+}
+
+.assessments .active {
+  color: #CFB986;
+}
+
+.rating {
+  margin-left: 10px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row-reverse;
+  align-items: center;
+}
+
+.rating > input {
+  display: none;
+}
+
+.rating > input:hover ~ label,
+.rating > input:checked ~ label {
+  color: #CFB986;
+}
+
+.rating > label {
+  text-shadow: 0.5px 0.5px #777;
+  transition: all 0.15s;
+  cursor: pointer;
+  color: #dcdacb;
 }
 
 .notifications {
@@ -1063,6 +1099,7 @@ button {
 
 .tabs-container .tab {
   display: none;
+  width: 100%;
 }
 
 .tabs-container .tab--active {
@@ -1485,6 +1522,15 @@ input#image {
   color: #583671;
 }
 
+.filter-inner label {
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.filter-inner input:checked + label {
+  background-color: #CFB986;
+}
+
 .modal {
   position: fixed;
   top: 0;
@@ -1512,6 +1558,22 @@ input#image {
 @media (max-width: 768px) {
   .modal.modal-review .modal-window {
     width: 80%;
+  }
+}
+
+@media (max-width: 576px) {
+  .modal.modal-review .modal-window {
+    width: 100%;
+  }
+}
+
+.modal.modal-review .form-field {
+  margin-bottom: 10px;
+}
+
+@media (max-width: 576px) {
+  .modal.modal-review .form-field-rating {
+    justify-content: space-between;
   }
 }
 
@@ -1675,6 +1737,14 @@ input#image {
   .modal .modal-list-modules-item__add-btn {
     font-size: 12px;
   }
+}
+
+.modal-competences .header-btns {
+  margin-bottom: 10px;
+}
+
+.modal-competences .header-btns .tabs-btns {
+  margin: 0;
 }
 
 .header {

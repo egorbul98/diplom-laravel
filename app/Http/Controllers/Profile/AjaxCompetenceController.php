@@ -11,7 +11,6 @@ class AjaxCompetenceController extends Controller
 {
     public function add(CompetenceRequest $request)
     {
-       
         $data = $request->validated();
         $competence = new Competence($data);
         $competence->save();
@@ -27,6 +26,34 @@ class AjaxCompetenceController extends Controller
         $competence->delete();
 
         return response()->json("Компетенция успешно удалена", 200);
+    }
+
+    public function saveCompetences(Request $request)
+    {
+        
+        $data = $request->all();
+        $languages = array_keys($data);
+       
+        for ($i=0; $i < count($data[$languages[0]]); $i++) { 
+            $competenceForUpdate = Competence::findOrFail($data[$languages[0]][$i]["id"]);
+            
+            $dataForUpdate = [];
+            foreach ($languages as $lang) {
+                $postfix = ($lang=="ru") ? '' : "_$lang";
+                $competence = $data[$lang][$i];
+                $dataForUpdate["title$postfix"] = $competence["title"];
+            }
+            
+            $competenceForUpdate->update($dataForUpdate);
+            
+        }
+        // foreach ($data as $lang => $competences) {
+            
+        // }
+        // $competence = Competence::find($id);
+        // $competence->delete();
+
+        // return response()->json("Компетенция успешно удалена", 200);
     }
   
 

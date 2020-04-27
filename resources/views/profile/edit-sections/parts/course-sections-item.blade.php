@@ -12,7 +12,6 @@
          
           <div class="form-field">
             <input class="input-control input-title" name="title{{$postfix}}[{{$section->id}}]" id="title{{$postfix}}" type="text" maxlength="128" value="{{$section["title$postfix"]}}">
-            
           </div>
         </div>
 
@@ -41,6 +40,7 @@
     <div class="list-modules-inner">
       @php  $j = 0; @endphp
       @foreach ($section->modules as $module)
+      
         <div class="list-modules-item">
           <h4 class="list-modules-item__inner">
             <span class="num">{{$i}}.{{++$j}}</span>

@@ -1,3 +1,4 @@
+
 <div class="slide">
   <div class="recommend-item">
       <div class="recommend-item__img">
@@ -13,12 +14,12 @@
           <div class="recommend-item__desc">
             {{$course->description}}
           </div>
-
+         
           <div class="recommend-item-bottom">
               <div class="recommend-item__author">
                   <span class="icon"><i class="fas fa-user"></i></span><span class="name">{{$course->author->name}} <span class="lastname">{{$course->author->lastname}}</span></span>
               </div>
-              <a href="{{route("course.show", $course)}}" class="btn  recommend-item__btn">Перейти</a>
+              <a href="{{route("course.show", $course)}}" class="btn  recommend-item__btn">@lang('main.go_to')</a>
 
           </div>
       </div>

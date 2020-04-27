@@ -35,6 +35,11 @@ Route::group(['middleware' => ['setLocale']], function () {
             Route::post('course/{course_id}', "TrainingController@startCourse")->name("training.startCourse");
             Route::get('course/{course_id}', "TrainingController@course")->name("training.course");
             Route::get('course/{course_id}/learning-path', "TrainingController@learningPath")->name("training.learning-path");
+            
+             //ОтзывКонтроллер
+             Route::post('review/create-review', "ReviewController@createReview")->name("training.createReview");
+             Route::post('review/{review_id}/update-review', "ReviewController@updateReview")->name("training.updateReview");
+           
 
             Route::group(['middleware' => ['checkCourse']], function () {
                 Route::get('course/{course_id}/section/{section_id}', "TrainingController@section")->name("training.section");
@@ -94,6 +99,7 @@ Route::group(['middleware' => ['setLocale']], function () {
 
             Route::post('/ajax-add-competence', "AjaxCompetenceController@add");
             Route::post('/ajax-del-competence', "AjaxCompetenceController@delete");
+            Route::post('/ajax-save-competences', "AjaxCompetenceController@saveCompetences");
 
             Route::post('/ajax-add-answer-num', "AjaxAnswersController@addAnswerNum");
             Route::post('/ajax-add-answer-string', "AjaxAnswersController@addAnswerString");

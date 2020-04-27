@@ -65124,6 +65124,101 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(".edit-module .modal-list-modules"
       Object(_fun__WEBPACK_IMPORTED_MODULE_3__["notificationMessage"])(response.msg, "error");
     }
   });
+});
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(".open-modal-competences").on("click", function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(".modal-competences").removeClass("modal--hidden");
+}); //add competences in modal
+
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(".modal-competences .btn-add").on("click", function () {
+  var val = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).siblings("input").val();
+  var sectionId = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr("data-section-id");
+  var arrList = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".modal-competences .competences-list");
+
+  if (val != '') {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default.a.ajax({
+      headers: {
+        'X-CSRF-TOKEN': jquery__WEBPACK_IMPORTED_MODULE_0___default()('meta[name="csrf-token"]').attr('content')
+      },
+      type: "POST",
+      url: "/profile/ajax-add-competence",
+      data: {
+        "title": val,
+        "section_id": sectionId
+      },
+      success: function success(response, status) {
+        Object(_fun__WEBPACK_IMPORTED_MODULE_3__["notificationMessage"])(_fun__WEBPACK_IMPORTED_MODULE_3__["MsgSuccess"]);
+        var str = "\n                    <div class=\"flex-b competences-list__item\" data-competence-id=\"".concat(response.id, "\">\n                        <input type=\"text\" class=\"competence input-bg input-control input-title\" value=\"").concat(val, "\" data-section-id=\"").concat(sectionId, "\" data-competence-id=\"").concat(response.id, "\">\n                        <button class=\"btn-delete-competence btn-bg\" type=\"button\"\n                            data-competence-id=\"").concat(response.id, "\"><span class=\"icon\"><i\n                                    class=\"fas fa-times\"></i></span></button>\n                    </div>");
+
+        for (var i = 0; i < arrList.length; i++) {
+          var element = arrList[i];
+          jquery__WEBPACK_IMPORTED_MODULE_0___default()(element).append(str);
+        }
+      },
+      error: function error(response, status) {
+        Object(_fun__WEBPACK_IMPORTED_MODULE_3__["notificationMessage"])(TotalMsgError);
+      }
+    });
+  }
+}); //delete competences in modal
+
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(".modal-competences").on("click", ".btn-delete-competence", function () {
+  var id = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr("data-competence-id");
+  var $items = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".modal-competences").find(".competences-list__item[data-competence-id=" + id + "]");
+  var del = confirm("Вы точно хотите удалить компетенцию?");
+
+  if (del) {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default.a.ajax({
+      headers: {
+        'X-CSRF-TOKEN': jquery__WEBPACK_IMPORTED_MODULE_0___default()('meta[name="csrf-token"]').attr('content')
+      },
+      type: "POST",
+      url: "/profile/ajax-del-competence",
+      data: {
+        "id": id
+      },
+      success: function success(response, status) {
+        Object(_fun__WEBPACK_IMPORTED_MODULE_3__["notificationMessage"])(response);
+        $items.remove();
+      },
+      error: function error(response, status) {
+        Object(_fun__WEBPACK_IMPORTED_MODULE_3__["notificationMessage"])(_fun__WEBPACK_IMPORTED_MODULE_3__["MsgError"], "error");
+      }
+    });
+  }
+}); //save competences in modal
+
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(".modal-competences .btn-save-competences").on("click", function () {
+  var arrCompetences = {};
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(".modal-competences .tab").each(function (index, tab) {
+    var lang = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr("data-tab");
+    var langArr = [];
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(tab).find(".competence").each(function (index, competence) {
+      var id = jquery__WEBPACK_IMPORTED_MODULE_0___default()(competence).attr("data-competence-id");
+      langArr.push({
+        "id": id,
+        "title": jquery__WEBPACK_IMPORTED_MODULE_0___default()(competence).val()
+      });
+    });
+    arrCompetences[lang] = langArr;
+  });
+
+  if (arrCompetences[Object.keys(arrCompetences)[0]].length > 0) {
+    console.log(arrCompetences);
+    jquery__WEBPACK_IMPORTED_MODULE_0___default.a.ajax({
+      headers: {
+        'X-CSRF-TOKEN': jquery__WEBPACK_IMPORTED_MODULE_0___default()('meta[name="csrf-token"]').attr('content')
+      },
+      type: "POST",
+      url: "/profile/ajax-save-competences",
+      data: arrCompetences,
+      success: function success(response, status) {
+        Object(_fun__WEBPACK_IMPORTED_MODULE_3__["notificationMessage"])(_fun__WEBPACK_IMPORTED_MODULE_3__["MsgSuccess"]);
+      },
+      error: function error(response, status) {
+        Object(_fun__WEBPACK_IMPORTED_MODULE_3__["notificationMessage"])(TotalMsgError);
+      }
+    });
+  }
 }); //Поиск модулей в модалке
 
 jquery__WEBPACK_IMPORTED_MODULE_0___default()(".edit-module .modal-modules .btn-search").on('click', function () {
@@ -65153,6 +65248,10 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(".edit-module .modal-modules .btn-
       }
     });
   }
+}); //Перезагрузка страницы по закрытию модалки
+
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(".modal-competences .modal-close").on("click", function () {
+  location.reload();
 });
 
 function renderCompetences($parent, arr) {
@@ -65243,8 +65342,7 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
     var data = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr("data-tab");
     var $parent = this.closest(".tabs-container");
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).addClass("active").siblings().removeClass("active");
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()($parent).find(".tab").removeClass("tab--active").siblings(".tab[data-tab=" + data + "]").addClass("tab--active"); // $($parent).find(".tab").fadeOut( "slow", function() {
-    // });
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()($parent).find(".tab").removeClass("tab--active").siblings(".tab[data-tab=" + data + "]").addClass("tab--active");
   });
 });
 

@@ -12,13 +12,13 @@
                         
                     <a href="{{route("profile.module.step.destroy", [$module->id, $step->id, $section])}}"
                         class="step-editor-header__btn-del btn"><span class="icon"><i
-                                class="fas fa-times"></i></span>Удалить</a>
+                                class="fas fa-times"></i></span>@lang('main.delete')</a>
 
                     @else
                             
                     <a href="{{route("profile.module.step.destroy", [$module->id,$step->id])}}"
                         class="step-editor-header__btn-del btn"><span class="icon"><i
-                                class="fas fa-times"></i></span>Удалить</a>
+                                class="fas fa-times"></i></span>@lang('main.delete')</a>
 
                     @endisset
                    

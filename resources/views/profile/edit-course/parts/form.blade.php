@@ -1,16 +1,14 @@
 @if ($course->exists)
   <form class="form" action="{{route("profile.course.update", $course->id)}}" method="POST" enctype="multipart/form-data">
   @method("PUT")
-  <div class="tabs-container">
-
-    @include('parts.tabs-btns')
 
 @else
 <form class="form" action="{{route("profile.course.store")}}" method="POST" enctype="multipart/form-data">
   <div>
 @endif
   @csrf
- 
+  <div class="tabs-container">
+    @include('parts.tabs-btns')
    @foreach ($listLanguages as $lang)
 
     @php $postfix = ($lang=="ru") ? '' : "_$lang" @endphp

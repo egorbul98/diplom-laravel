@@ -25,6 +25,20 @@
                 width: 80%;
             }
 
+            @include media-max($XS) {
+                width: 100%;
+            }
+
+        }
+
+        .form-field{
+            margin-bottom: 10px;
+        }
+
+        .form-field-rating{
+            @include media-max($XS){
+                justify-content: space-between;
+            }
         }
     }
 
@@ -147,5 +161,15 @@
 
         }
     }
+
+  
 }
 
+.modal-competences{
+    .header-btns{
+        margin-bottom: 10px;
+        .tabs-btns{
+            margin: 0;
+        }
+    }
+}

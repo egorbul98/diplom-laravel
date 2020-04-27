@@ -14,7 +14,9 @@ list
               <h2 class="title">Рекомендуем к изучению</h2>
               <div class="recommend-list">
                 @foreach ($courses as $course)
-                  @include('parts.recomend-item', $course)
+                 
+                  @include('parts.recomend-item')
+                 
                 @endforeach
               </div>
           </div>
@@ -30,8 +32,10 @@ list
   <div class="main-wrap">
       <div class="courses-list">
           @foreach ($courses as $course)
-              @include('parts.course-item', $course)
+         
+              @include('parts.course-item', [$course])
           @endforeach
+       
           @if (!isset($courses[0]))
             <div class="nothing">@lang('main.there_is_nothing')</div>
           @endif

@@ -1,3 +1,4 @@
+
 <div class="courses-item">
   <div class="courses-item__img">
       <img src="{{asset("storage/".$course->image)}}" alt="картинка курса">

@@ -5,30 +5,39 @@
   <button type="submit" class="btn sidebar__btn">Начать обучение</button>
 </form>
       <div class="sidebar__item ">
-        <div class="sidebar__title">@lang('main.rating')</div>
+        <div class="sidebar__title">@lang('main.total_rating')</div>
+        @php $avg = $course->reviews->avg("stars"); 
+            $modulo = ($avg*10)%10;//Остаток от деления.
+            $bool = true; @endphp
         <ul class="assessments">
-          <li class="assessment">3,5</li>
-          <li><i class="fas fa-star"></i></li>
-          <li><i class="fas fa-star"></i></li>
-          <li><i class="fas fa-star"></i></li>
-          <li><i class="fas fa-star-half-alt"></i></li>
-          <li><i class="far fa-star"></i></li>
+          <div class="assessment">{{$avg}}</div>
+          @for ($i = 1; $i < 6; $i++)
+            @if ($i <= $avg)
+              <li class="active"><i class="fas fa-star"></i></li>
+            @elseif($modulo!=0 && $bool)
+              <li class="active"><i class="fas fa-star-half-alt"></i></li>
+              @php $bool=false @endphp
+            @else 
+              <li><i class="fas fa-star"></i></li>
+            @endif
+          
+          @endfor
         </ul>
       </div>
       <div class="sidebar__item">
         <div class="sidebar__title">@lang('main.the_course_includes')</div>
         <div class="sidebar-list-info">
           <div class="sidebar-list-info__item">
-            <span class="num">{{$steps->where("step_type_id", 1)->count()}}</span><span class="text">@lang('main.Theoretical_modules')</span>
+            <span class="num">{{$steps->where("step_type_id", 1)->count()}}</span><span class="text">{{Lang::choice('main.theoretical_modules', $steps->where("step_type_id", 1)->count(), [], ($locale==null)? "ru" : $locale)}}</span>
           </div>
           <div class="sidebar-list-info__item">
-            <span class="num">{{$steps->where("step_type_id", 2)->count()}}</span><span class="text">@lang('main.text_tasks')</span>
+            <span class="num">{{$steps->where("step_type_id", 2)->count()}}</span><span class="text">{{Lang::choice('main.text_tasks', $steps->where("step_type_id", 2)->count(), [], ($locale==null)? "ru" : $locale)}}</span>
           </div>
           <div class="sidebar-list-info__item">
-            <span class="num">{{$steps->where("step_type_id", 3)->count()}}</span><span class="text">@lang('main.numerical_tasks')</span>
+            <span class="num">{{$steps->where("step_type_id", 3)->count()}}</span><span class="text">{{Lang::choice('main.numerical_tasks', $steps->where("step_type_id", 3)->count(), [], ($locale==null)? "ru" : $locale)}}</span>
           </div>
         </div>
-        <div class="updated"><span class="text">@lang('main.last_update'): </span><span>{{$course->updated_at}}</span></div>
+        <div class="updated"><span class="text">@lang('main.last_update'): </span><span>@php if($course->updated_at!=null) echo $course->updated_at->format("d.m.Y")@endphp</span></div>
       </div>
 
       <div class="sidebar__item">

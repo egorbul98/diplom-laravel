@@ -50,11 +50,17 @@
 
       <section class="item-content__section reviews ">
         <h2 class="title">Отзывы о курсе</h2>
-        
-        @for ($i = 0; $i < 3; $i++) 
+        @php $reviews = $course->reviews()->paginate(8); @endphp
+        @forelse ($reviews as $review)
           @include('parts.course.revews-item') 
-        @endfor 
-
+        @empty
+            @lang('main.there_is_nothing')
+        @endforelse
+      
+       
+        <section class="paginate center">
+          {{$reviews->links()}}
+        </section>
       </section>
 
     </article>

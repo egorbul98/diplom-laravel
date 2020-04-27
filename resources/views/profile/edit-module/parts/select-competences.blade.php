@@ -7,27 +7,33 @@
                 @forelse ($module_competences as $item)
                 {{-- @dump($item->id) --}}
                 @php $id_competences[] = $item->title;@endphp
-                <div class="select-competences-item">
-                    <p class="text"><input type="text" value="{{$item->title}}" class="input-bg" readonly></p>
-                </div>
+                @foreach ($listLanguages as $lang)
+                    @php $postfix = ($lang=="ru") ? '' : "_$lang" @endphp
+                    <div class="tab 
+                    @if ($locale == $lang || ($locale == null && $lang=="ru")) tab--active @endif " data-tab="{{$lang}}">
+                    
+                    <div class="select-competences-item">
+                        <p class="text"><input type="text" value="{{$item["title$postfix"]}}" class="input-bg" readonly></p>
+                    </div>
+                    </div>
+                @endforeach
+                
                 @empty
-                <p>Пока ничего нет, но вы можете добавить новые компетенции</p>
+                <p>@lang('main.there_is_nothing')</p>
                 @endforelse
 
             </div>
-            <div class="select-competences__desc">Компетенции, входящие в модуль</div>
+            <div class="select-competences__desc">@lang('main.competencies_included_in_the_module')</div>
         </div>
         
         <div class="select-competences__right">
             <div class="checkboxes">
-              {{-- {{dump($id_competences)}} --}}
                 @foreach ($section->competences as $competence)
-              {{-- {{dump($competence->id)}} --}}
                 <p class="flex-b">
                     <label>
-                        <input type="checkbox" class="checkboxes__input" name="complex" value="{{$competence->id}}" @if (in_array($competence->title, $id_competences)) data-checked="true" @endif>
+                        <input type="checkbox" class="checkboxes__input" name="complex" value="{{$competence->id}}" @if (in_array($competence->__("title"), $id_competences)) data-checked="true" @endif>
                         <span class="check"></span>
-                        <span class="text paragraph">{{$competence->title}}</span>
+                        <span class="text paragraph">{{$competence->__("title")}}</span>
                     </label>
                     <button class="btn-delete-competence btn-bg" type="button"
                         data-competence-id="{{$competence->id}}"><span class="icon"><i
@@ -36,16 +42,16 @@
                 @endforeach
 
             </div>
-            <div class="form-row input-add-competences form-field">
-                <input type="text" class="input-control" placeholder="@lang('main.title') компетенции">
+            {{-- <div class="form-row input-add-competences form-field">
+                <input type="text" class="input-control" placeholder="Название компетенции">
                 <div class="form-field__tooltip">
                     <span class="text">@lang('main.tooltips.characters_max', ["num"=> 128])</span>
                 </div>
                 
                 <button class="btn btn-add" data-section-id="{{$section->id}}" type="button"><i
                         class="fas fa-plus"></i></button>
-            </div>
-            <div class="select-competences__desc">Выберите компетенции</div>
+            </div> --}}
+            <div class="select-competences__desc">@lang('main.choose_competencies')</div>
         </div>
     </div>
     

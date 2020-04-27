@@ -35,7 +35,7 @@
               @if (isset($module->steps[0]))
               <div class="step-list__item step-list__item--add" id="btn-add-step"><p><i class="fas fa-plus"></i></p></div>
                 @else
-                <button class="btn" id="btn-add-step"><i class="fas fa-plus"></i> Создать шаг</button>
+                <button class="btn" id="btn-add-step"><i class="fas fa-plus"></i> @lang('main.create_step')</button>
               @endif
               
               

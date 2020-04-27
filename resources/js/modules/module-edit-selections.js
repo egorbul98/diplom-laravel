@@ -122,7 +122,6 @@ $(".select-custom").on("click", ".btn-delete-competence", function () {
     }
 });
 
-
 //СОхранение данных модуля
 $(".module-header .btn-save-module").on("click", function () {
     let $parent = $(this).closest('.module-header');
@@ -240,6 +239,116 @@ $(".edit-module .modal-list-modules").on('click', '.modal-list-modules-item', fu
     });
 });
 
+$(".open-modal-competences").on("click", function () {
+    $(".modal-competences").removeClass("modal--hidden");
+});
+//add competences in modal
+$(".modal-competences .btn-add").on("click", function () {
+    let val = $(this).siblings("input").val();
+    let sectionId = $(this).attr("data-section-id");
+    let arrList = $(".modal-competences .competences-list");
+    if (val != '') {
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type: "POST",
+            url: "/profile/ajax-add-competence",
+            data: {
+                "title": val,
+                "section_id": sectionId
+            },
+            success: function (response, status) {
+                notificationMessage(MsgSuccess);
+                let str = `
+                    <div class="flex-b competences-list__item" data-competence-id="${response.id}">
+                        <input type="text" class="competence input-bg input-control input-title" value="${val}" data-section-id="${sectionId}" data-competence-id="${response.id}">
+                        <button class="btn-delete-competence btn-bg" type="button"
+                            data-competence-id="${response.id}"><span class="icon"><i
+                                    class="fas fa-times"></i></span></button>
+                    </div>`;
+
+                for (let i = 0; i < arrList.length; i++) {
+                    const element = arrList[i];
+                    $(element).append(str);
+                }
+            },
+            error: function (response, status) {
+                notificationMessage(TotalMsgError);
+            },
+        });
+
+
+
+
+    }
+});
+
+//delete competences in modal
+$(".modal-competences").on("click", ".btn-delete-competence", function () {
+    let id = $(this).attr("data-competence-id");
+    let $items = $(".modal-competences").find(".competences-list__item[data-competence-id=" + id + "]");
+    let del = confirm("Вы точно хотите удалить компетенцию?");
+    if (del) {
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type: "POST",
+            url: "/profile/ajax-del-competence",
+            data: {
+                "id": id,
+            },
+            success: function (response, status) {
+                notificationMessage(response);
+                $items.remove();
+            },
+            error: function (response, status) {
+                notificationMessage(MsgError, "error");
+            },
+        });
+    }
+    
+});
+
+//save competences in modal
+$(".modal-competences .btn-save-competences").on("click", function () {
+    let arrCompetences = {};
+    $(".modal-competences .tab").each(function (index, tab) {
+        let lang = $(this).attr("data-tab");
+        let langArr = [];
+        $(tab).find(".competence").each(function (index, competence) {
+            let id = $(competence).attr("data-competence-id");
+            langArr.push({
+                "id" : id,
+                "title" : $(competence).val(),
+            });
+        });
+        arrCompetences[lang] = langArr;
+    });
+    
+    if (arrCompetences[Object.keys(arrCompetences)[0]].length > 0) {
+        console.log(arrCompetences);
+
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type: "POST",
+            url: "/profile/ajax-save-competences",
+            data: arrCompetences,
+            success: function (response, status) {
+                notificationMessage(MsgSuccess);
+            },
+            error: function (response, status) {
+                notificationMessage(TotalMsgError);
+            },
+        });
+    }
+
+});
+
+
 //Поиск модулей в модалке
 $(".edit-module .modal-modules .btn-search").on('click', function () {
     let $wrap = $(".modal-modules .modal-list-modules");
@@ -271,6 +380,10 @@ $(".edit-module .modal-modules .btn-search").on('click', function () {
 
 });
 
+//Перезагрузка страницы по закрытию модалки
+$(".modal-competences .modal-close").on("click", function () {
+    location.reload();
+});
 function renderCompetences($parent, arr) {
     let str = '';
 
@@ -284,7 +397,6 @@ function renderCompetences($parent, arr) {
     }
     $($parent).html(str);
 }
-
 
 function renderTestlListModules(arr, moduleId, $wrap) {
     let str = '';

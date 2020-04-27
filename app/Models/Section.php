@@ -7,8 +7,10 @@ use App\Models\Course;
 use App\Models\Module;
 use App\Models\Competence;
 use DB;
+use App\Models\Traits\TranslateTable;
 class Section extends Model
 {
+    use TranslateTable;
     protected $fillable = [
         'title', 'description', 'course_id', 'title_en','description_en',
     ];

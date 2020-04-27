@@ -68,7 +68,7 @@
           <h2 class="title center">Выберите модуль для добавления в раздел</h2>
           <div class="form-field">
             <input type="text" class="search" placeholder="Найти модуль по названию">
-            <button class="btn btn-search" type="submit">Искать</button>
+            <button class="btn btn-search" type="submit">@lang('main.search')</button>
           </div>
 
           <div class="modal-list-modules">

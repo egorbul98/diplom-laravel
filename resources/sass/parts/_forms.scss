@@ -305,3 +305,16 @@ input#image {
     }
 
 }
+
+.filter-inner{
+    label{
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+    
+    input:checked{
+        &+label{
+            background-color: $col-active;
+        }
+    }
+}

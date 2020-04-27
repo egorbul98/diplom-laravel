@@ -20,21 +20,29 @@ class EditorSectionController extends BaseController
     }
     public function save($id, EditorSectionRequest $request)
     {
-        $data = $request->validated();
-
+        $data = $request->all();
         foreach ($data["title"] as $key => $value) {
             $section = Section::find($key);
             $section->title = $value;
+            $section->title_en = $data["title_en"][$key];
+            $section->description = $data["description"][$key];
+            $section->description_en = $data["description_en"][$key];
             $section->update();
         }
-        foreach ($data["description"] as $key => $value) {
-            $section = Section::find($key);
-            $section->description = $value;
-            $section->update();
-        }
+        // foreach ($data["title_en"] as $key => $value) {
+        //     $section = Section::find($key);
+        //     $section->title = $value;
+        //     $section->update();
+        // }
+        // foreach ($data["description"] as $key => $value) {
+        //     $section = Section::find($key);
+        //     $section->description = $value;
+        //     $section->update();
+        // }
         foreach ($data["module-title"] as $key => $value) {
             $module = Module::find($key);
             $module->title = $value;
+            $module->title_en = $data["module-title_en"][$key];
             $module->update();
         }
         $course = Course::find($id);

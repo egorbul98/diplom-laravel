@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Section;
 use App\Models\Module;
-
+use App\Models\Traits\TranslateTable;
 class Competence extends Model
 {
+    use TranslateTable;
     protected $fillable = [
-        'title','title_en', 'section_id'
+        'title', 'title_en', 'section_id'
     ];
 
     public function section()

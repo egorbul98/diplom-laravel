@@ -23,7 +23,7 @@
       <td><div class="progress-line"><div class="progress-line__fill" style="width: {{$procent}}%"></div></div></td>
 
         <td>{{$course->created_at}}</td>
-        <td class="table-btn"><a href="{{route("training.course", [$course->id])}}" class="btn">Перейти</a></td>
+        <td class="table-btn"><a href="{{route("training.course", [$course->id])}}" class="btn">@lang('main.go_to')</a></td>
       </tr>
       @endforeach
       

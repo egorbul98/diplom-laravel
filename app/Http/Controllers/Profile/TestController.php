@@ -96,7 +96,7 @@ class TestController extends Controller
      */
     public function update(TestRequest $request, Test $test)
     {
-        $data = $request->validated();
+        $data = $request->all();
 
         $result = $test->update($data);
 

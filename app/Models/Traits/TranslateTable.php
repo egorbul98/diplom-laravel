@@ -23,8 +23,7 @@ trait TranslateTable
     }
   
     $attributes = array_keys($this->attributes);
-    
-    if(in_array($newField,$attributes) && $newField != null){
+    if(in_array($newField, $attributes) && $this->$newField != null){
       return $this->$newField;
     }else{
       return $this->$fieldName;

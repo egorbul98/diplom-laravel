@@ -8,9 +8,10 @@ use App\Models\Competence;
 use App\Models\Pivots\Progress_Module;
 use App\Models\Step;
 use Carbon\Carbon;
-
+use App\Models\Traits\TranslateTable;
 class Module extends Model
 {
+    use TranslateTable;
     protected $fillable = [
         // 'title', 'section_id'
         'title', 'author_id', 'title_en',

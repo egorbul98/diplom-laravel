@@ -12,7 +12,7 @@
     @include('profile.parts.sidebar')
 
     <main class="profile-content">
-      <h3 class="title">Ваши созданные модули</h3>
+      <h3 class="title">@lang('main.your_created_modules')</h3>
     {{-- <a href="{{route("profile.course.create")}}" class="btn btn-add"><span class="icon"><i class="fas fa-plus"></i></span> Создать</a>
      --}}
     <div class="table-responsive">
@@ -20,8 +20,8 @@
         <thead>
           <tr>
             <th>@lang('main.title')</th>
-            <th>Количество шагов</th>
-            <th>Дата изменения</th>
+            <th>@lang('main.number_of_steps')</th>
+            <th>@lang('main.date_of_change')</th>
             <th></th>
             <th></th>
           </tr>

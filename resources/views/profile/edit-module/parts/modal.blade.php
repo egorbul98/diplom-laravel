@@ -1,7 +1,7 @@
 <div class="modal modal--hidden modal-step-types">
   <div class="modal-window">
       <div class="modal-inner">
-        <h2 class="title center">Выберите тип шага</h2>
+        <h2 class="title center">@lang('main.choose_step_type')</h2>
           <div class="steps">
             @foreach ($step_types as $step)
             <div class="step">

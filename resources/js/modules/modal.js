@@ -10,6 +10,7 @@ $(document).ready(function () {
     $(".modal-step-types").removeClass("modal--hidden");
   });
 
+  
   // $("#btn-add-step").on("click", function () {
   //   $(".modal-modules").removeClass("modal--hidden");
   // });
