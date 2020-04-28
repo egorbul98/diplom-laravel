@@ -37,7 +37,7 @@
       @endfor
      
     </div>
-    <button type="submit" class="btn btn--green">Завершить тест</button>
+    <button type="submit" class="btn btn--green">@lang('main.complete')</button>
   </form>
 
 

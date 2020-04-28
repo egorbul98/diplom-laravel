@@ -5,12 +5,12 @@
             $count2 = $module->steps->where("type_step_id", 2)->count();
             $count3 = $module->steps->where("type_step_id", 3)->count();
         @endphp
-          <p class="module-list-steps__item">{{$module->steps->count()}} шага</p>
+          <p class="module-list-steps__item">{{$module->steps->count()}} {{Lang::choice('main.step', $module->steps->count(), [], ($locale==null)? "ru" : $locale)}}</p>
           @if ($count2>0)
-          <p class="module-list-steps__item">{{$count2}} текстовые задачи</p>
+          <p class="module-list-steps__item">{{$count2}} {{Lang::choice('main.text_tasks', $count2, [], ($locale==null)? "ru" : $locale)}}</p>
           @endif
           @if ($count3>0)
-          <p class="module-list-steps__item">{{$count3}} числовые задачи</p>
+          <p class="module-list-steps__item">{{$count3}} {{Lang::choice('main.numerical_tasks', $count3, [], ($locale==null)? "ru" : $locale)}}</p>
           @endif
          
       </div>
@@ -27,7 +27,7 @@
               </div>
           </div>
           <div class="right">
-              <p class="">После освоения модуля вы получите:</p>
+              <p class="">@lang('main.after_mastering_the_module_you_will_receive'):</p>
               <div class="competencies">
                 @foreach ($module->competences_out as $competence)
                   <p class="competencie">{{$competence->title}}</p>

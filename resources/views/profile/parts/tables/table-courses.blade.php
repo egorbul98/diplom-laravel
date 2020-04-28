@@ -4,8 +4,8 @@
       <tr>
         <th></th>
         <th>@lang('main.title')</th>
-        <th>Прогресс</th>
-        <th>Дата начала</th>
+        <th>@lang('main.progress')</th>
+        <th>@lang('main.the_date_of_the_beginning')</th>
         <th></th>
       </tr>
     </thead>

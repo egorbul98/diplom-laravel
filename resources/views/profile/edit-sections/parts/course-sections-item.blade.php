@@ -32,8 +32,8 @@
         <input type="text" class="input-control input-create-module" placeholder="Название модуля">
       </h4>
       <div class="list-modules-item__btns">
-        <button type="button" class="btn btn-create-module  list-modules-item__btn" data-section-id="{{$section->id}}">Создать модуль</button>
-        <button type="button" class="btn btn-add-module  list-modules-item__btn" data-section-id="{{$section->id}}">Добавить существующий</button>
+        <button type="button" class="btn btn-create-module  list-modules-item__btn" data-section-id="{{$section->id}}">@lang('main.create_module')</button>
+        <button type="button" class="btn btn-add-module  list-modules-item__btn" data-section-id="{{$section->id}}">@lang('main.add_existing')</button>
       </div>
       
     </div>

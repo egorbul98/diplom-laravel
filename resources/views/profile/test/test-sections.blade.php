@@ -8,10 +8,8 @@
 <section class="new-course">
   <div class="main-wrap">
    
-    <h1 class="new-course__header">Создание вопросов</h1>
+    <h1 class="new-course__header">@lang('main.create_questions')</h1>
  
-   
-    
   </div>
 </section>
 

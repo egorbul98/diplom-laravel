@@ -5,24 +5,10 @@
 
 @section('content')
 
-<section class="recommend-outer shadow">
-    <div class="recommend">
-        <div class="main-wrap">
-            <div class="recommend-wrap">
-                <h2 class="title">Рекомендуем к изучению</h2>
-                <div class="recommend-list">
-                    @foreach ($courses as $course)
-                        @include('parts.recomend-item', $course)
-                    @endforeach
-                   
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+@include('parts.recommend-courses-section')
 
 <section class="title-outer">
-    <h1 class="title">Новые курсы</h1>
+    <h1 class="title">@lang('main.new_courses')</h1>
     <div class="line"></div>
 </section>
 
@@ -33,11 +19,11 @@
                 @include('parts.course-item', $course)
             @endforeach
         </div>
-        <a href="#" class="btn btn-more">Показать еще</a>
+        <a href="#" class="btn btn-more">@lang('main.show_more')</a>
 </section>
 
 <section class="title-outer">
-    <h1 class="title">Популярные курсы</h1>
+    <h1 class="title">@lang('main.popular_courses')</h1>
     <div class="line"></div>
 </section>
 
@@ -46,7 +32,7 @@
         <div class="courses-list">
             @for ($i = 0; $i < 6; $i++) @include('parts.course-item') @endfor 
         </div>
-        <a href="#" class="btn btn-more">Показать еще</a>
+        <a href="#" class="btn btn-more">@lang('main.show_more')</a>
     </div>
 </section>
 
@@ -76,7 +62,7 @@
                 </div>
                 <div class="news-item__ellipse"></div>
                 <div class="news-item__overlay">
-                    <h1>Открыть</h1>
+                    <h1>@lang('main.open')</h1>
                 </div>
             </div>
             <div class="news-item">
@@ -96,11 +82,11 @@
                 </div>
                 <div class="news-item__ellipse"></div>
                 <div class="news-item__overlay">
-                    <h1>Открыть</h1>
+                    <h1>@lang('main.open')</h1>
                 </div>
             </div>
         </div>
-        <a href="#" class="btn btn-more">Показать еще</a>
+        <a href="#" class="btn btn-more">@lang('main.show_more')</a>
     </div>
 </section>
 @endsection

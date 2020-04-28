@@ -43,7 +43,7 @@
         
                 <div class="form-row">
                   <div class="form-row__left">
-                    <p><label class="" for="title">Описание<span class="required-input">*</span></p>
+                    <p><label class="" for="title">@lang('main.description')<span class="required-input">*</span></p>
                   </div>
                   <div class="form-row__right form-field">
                     <textarea name="" cols="30" rows="5" id="description"></textarea>
@@ -54,7 +54,7 @@
                 </div>
               </div>
             </div>
-          <button type="button" id="btn-create-section" data-id-course="{{$course->id}}" class="btn">Создать раздел</button>
+          <button type="button" id="btn-create-section" data-id-course="{{$course->id}}" class="btn">@lang('main.create_section')</button>
           </div>
           
         </div>
@@ -65,14 +65,14 @@
   <div class="modal modal--hidden modal-modules">
     <div class="modal-window">
         <div class="modal-inner">
-          <h2 class="title center">Выберите модуль для добавления в раздел</h2>
+          <h2 class="title center">@lang('main.select_a_module_to_add_to_the_section')</h2>
           <div class="form-field">
             <input type="text" class="search" placeholder="Найти модуль по названию">
             <button class="btn btn-search" type="submit">@lang('main.search')</button>
           </div>
 
           <div class="modal-list-modules">
-            <p>Модулей пока нет</p>
+            <p>@lang('main.no_modules_yet')</p>
           </div>
 
           <button class="modal-close" type="button"><i class="fas fa-times"></i></button>

@@ -8,9 +8,9 @@
 <section class="new-test">
     <div class="main-wrap">
         @if ($test->exists)
-        <h1 class="new-course__header">Редактирование теста</h1>
+        <h1 class="new-course__header">@lang('main.test_editing')</h1>
         @else
-        <h1 class="new-course__header">Создание нового теста</h1>
+        <h1 class="new-course__header">@lang('main.create_a_new_test')</h1>
         @endif
 
         @if ($test->exists)
@@ -43,7 +43,7 @@
 
                         <div class="form-row">
                             <div class="form-row__left">
-                                <p><label class="" for="description{{$postfix}}">Описание теста</label></p>
+                                <p><label class="" for="description{{$postfix}}">@lang('main.test_description')</label></p>
                             </div>
                             <div class="form-row__right form-field">
                             <textarea name="description{{$postfix}}" id="description{{$postfix}}"
@@ -55,8 +55,7 @@
                     @endforeach
                     <div class="form-row">
                         <div class="form-row__left">
-                            <p><label class="" for="description">Количество активных вопросов при предъявлении
-                                    теста</label></p>
+                            <p><label class="" for="description">@lang('main.number_of_active_questions_upon_presentation_of_the_test')</label></p>
                         </div>
                         <div class="form-row__right form-field">
                             <input type="number" name="count_questions" id="count_questions" min="1" max="40"
@@ -66,8 +65,7 @@
 
                     <div class="form-row">
                         <div class="form-row__left">
-                            <p><label class="" for="description">Процент правильно отвеченных вопросов для прохождения
-                                    теста</label></p>
+                            <p><label class="" for="description">@lang('main.percentage_of_correctly_answered_questions_for_passing_the_test')</label></p>
                         </div>
                         <div class="form-row__right form-field">
                             <input type="number" name="percent_correct_answers" id="percent_correct_answers" min="1"
@@ -84,7 +82,7 @@
                         <button class="btn" type="submit">@lang('main.сreate')</button>
                         @endif
 
-                        <a href="{{route("profile.test.index")}}" class="btn">К списку тестов</a>
+                        <a href="{{route("profile.test.index")}}" class="btn">@lang('main.to_the_list_of_tests')</a>
                     </div>
                 </div>
             </form>
@@ -95,7 +93,7 @@
 
 <section class="test-sections margin-bottom-100" data-test-id="{{$test->id}}">
     <div class="main-wrap">
-        <h2 class="new-course__header">Вопросы и варианты ответов</h2>
+        <h2 class="new-course__header">@lang('main.questions_and_answer_options')</h2>
 
 
         <div class="test-sections-links">
@@ -110,7 +108,7 @@
 
         <div class="test-sections-content">
             <div class="margin-bottom-20">
-                <h4 class="title">Текст вопроса</h4>
+                <h4 class="title">@lang('main.question_text')</h4>
                 <div class="form-field">
                     <input type="text" class="input-control" id="test-section-title" name="title" value=""
                         maxlength="400" placeholder="Введите текст вопроса?">
@@ -120,7 +118,7 @@
             <div class="test-sections__img-wrap">
                 <div class="form-field">
                     <label for="input-img" class="img-input">
-                        <h4>Выбрать картинку</h4>
+                        <h4>@lang('main.choose_a_picture')</h4>
                     </label>
                     <input style="display: none" type="file" class="input-img" id="input-img" name="image"
                         multiple="multiple">
@@ -131,7 +129,7 @@
             </div>
 
             <div class="answers-list">
-                <p>Верный</p>
+                <p>@lang('main.correct')</p>
                 <div class="answers-list-inner">
 
                     <div class="answer">
@@ -151,11 +149,9 @@
             </div>
 
             <div class="form-btns-wrap">
-                <button class="btn btn-save-test-section" type="button"><i class="fas fa-save"></i> Сохранить
-                    вопрос</button>
-                <button class="btn btn-del-test-section" type="button">Удалить вопрос</button>
-                <button class="btn btn-add-test-section" type="button" data-test-section-id="">Добавить следующий
-                    вопрос</button>
+                <button class="btn btn-save-test-section" type="button"><i class="fas fa-save"></i> @lang('main.save_question')</button>
+                <button class="btn btn-del-test-section" type="button">@lang('main.delete_question')</button>
+                <button class="btn btn-add-test-section" type="button" data-test-section-id="">@lang('main.add_next_question')</button>
             </div>
         </div>
     </div>

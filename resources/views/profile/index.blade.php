@@ -12,7 +12,7 @@
     @include('profile.parts.sidebar')
 
     <main class="profile-content">
-      <h3 class="title">Все курсы</h3>
+      <h3 class="title">@lang('main.all_courses')</h3>
       
       @include('profile.parts.tables.table-courses')
 

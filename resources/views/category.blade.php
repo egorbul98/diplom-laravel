@@ -7,24 +7,10 @@ list
 
 @section('content')
 
-<section class="recommend-outer shadow">
-  <div class="recommend">
-      <div class="main-wrap">
-          <div class="recommend-wrap">
-              <h2 class="title">Рекомендуем к изучению</h2>
-              <div class="recommend-list">
-                @foreach ($courses as $course)
-                  @include('parts.recomend-item', $course)
-                @endforeach
-              </div>
-          </div>
-      </div>
-  </div>
-</section>
-
+@include('parts.recommend-courses-section')
 
 <section class="title-outer">
-  <h1 class="title">{{$category->title}}</h1>
+  <h1 class="title">{{$category->__("title")}}</h1>
   <div class="line"></div>
 </section>
 {{-- <h1 class="category-title"></h1> --}}

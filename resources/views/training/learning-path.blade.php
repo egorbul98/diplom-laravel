@@ -6,7 +6,7 @@
 
 <div class="lesson-content__header">
     <h1 class="title">{{$course->title}}</h1>
-    <p class="desc">Ваша траектория обучения</p>
+    <p class="desc">@lang('main.your_learning_path')</p>
 </div>
 <br>
 

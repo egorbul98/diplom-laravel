@@ -5,8 +5,8 @@
         <th></th>
         <th>@lang('main.title')</th>
         
-        <th>Дата обновления</th>
-        <th>Опубликован</th>
+        <th>@lang('main.update_date')</th>
+        <th>@lang('main.published')</th>
 
         <th></th>
       </tr>

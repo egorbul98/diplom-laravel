@@ -6,10 +6,10 @@
       </div>
       <div class="recommend-item__info">
           <h3 class="recommend-item__title">
-            {{$course->title}}
+            {{$course->__("title")}}
           </h3>
           <div class="recommend-item__category">
-            {{$course->category->title}}
+            {{$course->category->__("title")}}
           </div>
           <div class="recommend-item__desc">
             {{$course->description}}

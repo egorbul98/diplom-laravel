@@ -29,14 +29,14 @@
   <main class="content">
     <article class="item-content">
       <section class="item-body item-content__section">
-        <h2 class="title">О курсе</h2>
+        <h2 class="title">@lang('main.about_the_course')</h2>
         <p class="paragraph">
           {{$course->content}}
         </p>
       </section>
 
       <section class="item-sections item-content__section">
-        <h2 class="title">Чему вы научитесь</h2>
+        <h2 class="title">@lang('main.what_do_you_learn')</h2>
      
         @for ($i = 0; $i < $course->sections->count(); $i++)
           @include('parts.course.section-item') 
@@ -49,7 +49,7 @@
 
 
       <section class="item-content__section reviews ">
-        <h2 class="title">Отзывы о курсе</h2>
+        <h2 class="title">@lang('main.course_reviews')</h2>
         @php $reviews = $course->reviews()->paginate(8); @endphp
         @forelse ($reviews as $review)
           @include('parts.course.revews-item') 

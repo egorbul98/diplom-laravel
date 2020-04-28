@@ -10,10 +10,10 @@
             @csrf
             
             <input type="hidden" name="course_id" value="{{$course->id}}">
-            <h2 class="title center">Ваш отзыв</h2>
+            <h2 class="title center">@lang('main.your_feedback')</h2>
             <div class="form-field form-field-rating">
              
-                <p class="">Ваша оценка</p>
+                <p class="">@lang('main.your_mark')</p>
                 @php $currentRating = ($review !=null) ? $review->stars : null;@endphp
                 <div class="rating">
                   @for ($i = 5; $i > 0; $i--)
@@ -24,7 +24,7 @@
             </div>
             <div class="form-field">
                 <label for="text"></label>
-                <textarea name="text" id="text" rows="10" placeholder="Ваш комментарий">{{($review !=null) ? $review->text : ""}}</textarea>
+                <textarea name="text" id="text" rows="10" placeholder="@lang('main.your_comment')">{{($review !=null) ? $review->text : ""}}</textarea>
             </div>
             <button class="btn" type="submit">@lang('main.save')</button>
           </form>

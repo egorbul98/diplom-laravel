@@ -7,23 +7,7 @@ list
 
 @section('content')
 
-<section class="recommend-outer shadow">
-  <div class="recommend">
-      <div class="main-wrap">
-          <div class="recommend-wrap">
-              <h2 class="title">Рекомендуем к изучению</h2>
-              <div class="recommend-list">
-                @foreach ($courses as $course)
-                 
-                  @include('parts.recomend-item')
-                 
-                @endforeach
-              </div>
-          </div>
-      </div>
-  </div>
-</section>
-
+@include('parts.recommend-courses-section')
 
 @include('parts.filter');
 

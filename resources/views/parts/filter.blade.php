@@ -21,7 +21,7 @@
                 @foreach ($categories as $category)
                   <div class="form-field">
                     <input type="checkbox" name="category[{{$category->id}}]" id="category{{$category->id}}" @if (request()->has("category") && isset(request()->all()["category"][$category->id])) checked @endif>
-                    <label for="category{{$category->id}}">{{$category->title}}</label>
+                    <label for="category{{$category->id}}">{{$category->__("title")}}</label>
                   </div>
                 @endforeach
               </div>

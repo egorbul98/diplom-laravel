@@ -28,23 +28,23 @@
       
       @if (isset($module->test) && ($module->test_completed->where("id", $module->test_id)->first()==null || ($module->test_completed->first()->pivot->repeated == 1 && session("test_id{$module->test->id}")==null)))
       {{-- Если у модуля есть тест и этот тест либо вообще не проходился ни разу, либо этот тест проходился при повторении модуля (при забывании) и был не пройден --}}
-      <a href="{{route("training.test", [$course->id, $section->id, $module->id, $step_num])}}" class="btn btn--green  btn-next-step">Пройти тест</a>
+      <a href="{{route("training.test", [$course->id, $section->id, $module->id, $step_num])}}" class="btn btn--green  btn-next-step">@lang('main.take_the_test')</a>
       @else
-        <button type="submit" class="btn btn--green btn-next-step">Завершить</button>
+        <button type="submit" class="btn btn--green btn-next-step">@lang('main.complete')</button>
       @endif
-        {{-- <button type="submit" class="btn btn--green btn-next-step">Завершить</button> --}}
+        {{-- <button type="submit" class="btn btn--green btn-next-step">@lang('main.complete')</button> --}}
 
     </form>
       
     @else 
-    <a href="{{route("training.module", [$course->id, $section->id, $module->id, ($step_num+1)])}}" class="btn btn-next-step">Следующий шаг</a>
+    <a href="{{route("training.module", [$course->id, $section->id, $module->id, ($step_num+1)])}}" class="btn btn-next-step">@lang('main.the_next_step')</a>
     @endif
   @endif
 </div>  
 
 @if ($step->type->id == 2 || $step->type->id == 3)
   <div class="module-answer">
-    <p class="module-answer__condition">Напишите ответ</p>
+    <p class="module-answer__condition">@lang('main.write_the_answer')</p>
     <form action="{{route("training.step-check-answer", [$course->id, $section->id, $module->id, $step->id])}}" class="form" method="POST">
       @csrf
       <div class="form-field">
@@ -59,7 +59,7 @@
         @endif
         
       </div>
-        <button type="submit" class="btn">Ответить</button>
+        <button type="submit" class="btn">@lang('main.to_answer')</button>
     </form>
   </div>
 @endif

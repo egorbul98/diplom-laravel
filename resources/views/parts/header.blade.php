@@ -70,7 +70,7 @@
                     <div class="nav__item"><a href="#">@lang('main.catalog')</a>
                         <div class="nav__item-drop drop">
                             @foreach ($categories as $category_item)
-                                <div class="drop__item"><a href="{{route("category", $category_item->slug)}}">{{$category_item->title}}</a></div>
+                                <div class="drop__item"><a href="{{route("category", $category_item->slug)}}">{{$category_item->__("title")}}</a></div>
                              @endforeach
                         </div>
                     </div>

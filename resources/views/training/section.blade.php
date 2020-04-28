@@ -14,7 +14,7 @@
 @if ($section_competences->count()>0)
 <div class="info-wrap">
     <div class="info-wrap__left shadow-light">
-        <h3 class="title">В этом разделе вы освоите <span class="num">{{$section_competences->count()}}</span> навыков</h3>
+        <h3 class="title">@lang('main.in_this_section_you_will_learn') <span class="num">{{$section_competences->count()}}</span> {{Lang::choice('main.skill', $section_competences->count(), [], ($locale==null)? "ru" : $locale)}}</h3>
         <div class="competences-list">
             {{-- {{$section->competences_out_modules()}} --}}
           @foreach ($section_competences as $competence)
@@ -24,7 +24,7 @@
     </div>
 
     <div class="info-wrap__middle shadow-light">
-        <h3 class="title">Сейчас освоили <span class="num">{{count($competences_user)}}</span> навыков</h3>
+        <h3 class="title">@lang('main.now_mastered') <span class="num">{{count($competences_user)}}</span> {{Lang::choice('main.skill', count($competences_user), [], ($locale==null)? "ru" : $locale)}}</h3>
         <div class="competences-list">
             @foreach ($competences_user as $competence)
             <div class="competence">{{$competence->title}}</div>
@@ -36,18 +36,18 @@
 @endif
 <div class="lesson-content__module-wrap">
     @if (isset($modules[0]))
-        <h2 class="title">Модули для прохождения</h2>
+        <h2 class="title">@lang('main.modules_for_passing')</h2>
         @foreach ($modules as $module)
             @include('training.parts.module-item', $module)
         @endforeach
     @else 
-    <h2 class="title">Вы прошли все модули данного раздела, <a href="#" class="link">перейдите в следующий раздел</a> или повторите уже пройденные модули</h2>
+    <h2 class="title">@lang('main.you_have_completed_all_the_modules_in_this_section.'), <a href="#" class="link">@lang('main.go_to_the_next_section.')</a> @lang('main.or_repeat_already_completed_modules.')</h2>
     @endif
 </div>
 
 @if (isset($modules_completed[0]))
 <div class="lesson-content__learned-modules">
-    <h2 class="title">Модули, которые вы изучили</h2>
+    <h2 class="title">@lang('main.modules_you_learned.')</h2>
     <div class="lesson-content__slider">
     @foreach ($modules_completed as $item_module)
 
@@ -56,7 +56,7 @@
                 <div class="module-inner">
                     <h2 class="module__title">{{$item_module->title}}</h2>
                     <div class="right">
-                        <p class="">Полученные компетенции:</p>
+                        <p class="">@lang('main.competencies_gained.'):</p>
                         <div class="competencies">
                             @foreach ($item_module->competences_out as $competence)
                                 <p class="competencie">{{$competence->title}}</p>

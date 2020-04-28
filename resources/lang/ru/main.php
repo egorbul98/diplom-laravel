@@ -21,6 +21,7 @@ return [
     'catalog'=>'Каталог',
     'new_courses'=>'Новые курсы',
     'popular_courses'=>'Популярные курсы',
+    'show_more'=>'Показать еще',
     'recommended_for_study'=>'Рекомендуем к изучению',
     'home'=>'Главная',
     'about'=>'О нас',
@@ -28,8 +29,12 @@ return [
     'section'=>'Раздел',
     'sections'=>'Разделы',
     'go_to'=>'Перейти',
+    'open'=>'Открыть',
     'all'=>'Все',
     'only'=>'Только',
+    'recommended_for_study'=>'Рекомендуем к изучению',
+    'what_do_you_learn'=>'Чему вы научитесь',
+    
 
 
     //profile
@@ -72,7 +77,40 @@ return [
     'select_the_test_you_want_to_add_or'=>'Выберите тест, который хотите добавить или',
     'create_new'=>'создайте новый',
     'no_tests_yet'=>'Тестов пока нет',
-
+    'no_modules_yet'=>'Модулей пока нет',
+    'create_module'=>'Создать модуль',
+    'create_section'=>'Создать раздел',
+    'add_existing'=>'Добавить существующий',
+    'description'=>'Описание',
+    'select_a_module_to_add_to_the_section'=>'Выберите модуль для добавления в раздел',
+    'progress'=>'Прогресс',
+    'the_date_of_the_beginning'=>'Дата начала',
+    'update_date'=>'Дата обновления',
+    'published'=>'Опубликован',
+    'created_modules'=>'Созданные модули',
+    'created_courses'=>'Созданные курсы',
+    'created_tests'=>'Созданные тесты',
+    'my_courses'=>'Мои курсы',
+    'settings'=>'Настройки',
+    'create_questions'=>'Создание вопросов',
+    'detach'=>'Открепить',
+    'your_created_tests'=>'Ваши созданные тесты',
+    'modules_to_which_this_test_is_attached'=>'Модули, к которым прикреплен данный тест',
+    'attach_test_to_module'=>'Прикрепить тест к модулю',
+    'select_a_module_to_attach_to_the_test'=>'Выберите модуль для прикрепления к тесту',
+    'test_editing'=>'Редактирование теста',
+    'create_a_new_test'=>'Создание нового теста',
+    'test_description'=>'Описание теста',
+    'number_of_active_questions_upon_presentation_of_the_test'=>'Количество активных вопросов при предъявлении теста',
+    'percentage_of_correctly_answered_questions_for_passing_the_test'=>'Процент правильно отвеченных вопросов для прохождения теста',
+    'to_the_list_of_tests'=>'К списку тестов',
+    'questions_and_answer_options'=>'Вопросы и варианты ответов',
+    'question_text'=>'Текст вопроса',
+    'choose_a_picture'=>'Выбрать картинку',
+    'correct'=>'Верный',
+    'save_question'=>'Сохранить вопрос',
+    'delete_question'=>'Удалить вопрос',
+    'add_next_question'=>'Добавить следующий вопрос',
 
 
     'training'=>'Обучение',
@@ -80,8 +118,33 @@ return [
     'leave_feedback_about_this_course'=>'Оставить отзыв о данном курсе',
     'course_progress'=>'Прогресс по курсу',
     'recent_achievements'=>'Последние достижения',
-    
+    'to_continue_your_studies_you_need_to'=>'Для продолжения обучения, вам необходимо',
+    'step'=>'шаг|шага|шагов',
+    'after_mastering_the_module_you_will_receive'=>'После освоения модуля вы получите',
+    'your_comment'=>'Ваш комментарий',
+    'the_test_includes_questions_from_the_following_modules'=>'Тест включает вопросы из следующих модулей',
+    'take_the_test'=>'Пройти тест',
+    'repeat_the_following_modules'=>'Повторить следующие модули',
+    'your_learning_path'=>'Ваша траектория обучения',
+    'the_next_step'=>'Следующий шаг',
+    'write_the_answer'=>'Напишите ответ',
+    'to_answer'=>'Ответить',
+    'complete'=>'Завершить',
+    'in_this_section_you_will_learn'=>'В этом разделе вы освоите',
+    'skill'=>'навык|навыка|навыков',
+    'now_mastered'=>'Сейчас освоили',
+    'modules_for_passing'=>'Модули для прохождения',
+    'you_have_completed_all_the_modules_in_this_section.'=>'Вы прошли все модули данного раздела',
+    'go_to_the_next_section.'=>'перейдите в следующий раздел',
+    'or_repeat_already_completed_modules.'=>'или повторите уже пройденные модули',
+    'modules_you_learned.'=>'Модули, которые вы изучили',
+    'competencies_gained.'=>'Полученные компетенции',
+
+
     'total_rating'=>'Общая оценка',
+    'your_mark'=>'Ваша оценка',
+    'your_feedback'=>'Ваш отзыв',
+    'course_reviews'=>'Отзывы о курсе',
     'the_course_includes'=>'В курс входят',
     'theoretical_modules'=>'Теоретический модуль|Теоретического модуля|Теоретических модулей',
     'text_tasks'=>'Текстовая задача|Текстовые задачи|Текстовых задач',
@@ -105,4 +168,4 @@ return [
 ];
 // @lang('main.welcome')
 
-// <p class="course-sections-item__count-models"><span>{{$section->modules->count()}}</span> {{Lang::choice('main.secitions_modules', $section->modules->count(), [], ($locale==null)? "ru" : $locale)}}</p>
+// {{Lang::choice('main.secitions_modules', $section->modules->count(), [], ($locale==null)? "ru" : $locale)}}
