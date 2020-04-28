@@ -19,7 +19,7 @@
                             <label for="name" class="form-label"><i class="fas fa-user-circle"></i></label>
 
                             <input id="name" type="text" class="input-control @error('name') is-invalid @enderror"
-                                name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Имя пользователя">
+                                name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="@lang('main.username')">
 
                             @error('name')
                             <span class="invalid-feedback" role="alert">
@@ -49,8 +49,8 @@
 
                             <input id="password" type="password"
                                 class="input-control @error('password') is-invalid @enderror" name="password" required
-                                autocomplete="new-password" placeholder="Пароль">
-
+                                autocomplete="new-password" placeholder="@lang('main.password')">
+                                
                             @error('password')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -64,14 +64,14 @@
 
 
                             <input id="password-confirm" type="password" class="input-control"
-                                name="password_confirmation" required autocomplete="new-password" placeholder="Подтверждение пароля">
-
+                                name="password_confirmation" required autocomplete="new-password" placeholder="@lang('main.password_confirmation')">
+                                
                         </div>
 
                         <div class="form-field mb-0">
 
                             <button type="submit" class="btn btn-login">
-                                {{ __('Регистрация') }}
+                                @lang('main.registration')
                             </button>
 
                         </div>

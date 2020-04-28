@@ -34,8 +34,19 @@ return [
     'only'=>'Только',
     'recommended_for_study'=>'Рекомендуем к изучению',
     'what_do_you_learn'=>'Чему вы научитесь',
-    
 
+    'password'=>'Пароль',
+    'username'=>'Имя пользователя',
+    'password_confirmation'=>'Подтверждение пароля',
+    'catalog_search'=>'Поиск по каталогу',
+    'example'=>'Например',
+    'find_a_test_by_name'=>'Найти тест по названию',
+    'competency_name'=>'Название компетенции',
+    'find_module_by_name'=>'Найти модуль по названию',
+    'module_name'=>'Название модуля',
+    'enter_a_question_text'=>'Введите текст вопроса',
+    'enter_your_answer'=>'Введите ответ',
+    
 
     //profile
     'show_module_trees'=>'Показать деревья модулей',
@@ -127,6 +138,7 @@ return [
     'repeat_the_following_modules'=>'Повторить следующие модули',
     'your_learning_path'=>'Ваша траектория обучения',
     'the_next_step'=>'Следующий шаг',
+    'previous_step'=>'Предыдущий шаг',
     'write_the_answer'=>'Напишите ответ',
     'to_answer'=>'Ответить',
     'complete'=>'Завершить',

@@ -5,17 +5,17 @@
 @if(isset($step) && !empty($step) && $step->exists())
 
 <div class="lesson-content__header">
-  <h1 class="title">{{$module->title}}</h1>
+  <h1 class="title">{{$module->__("title")}}</h1>
   <h1 class="step">{{$step_num+1}}/{{$module->steps->count()}}</h1>
 </div>
 
 <div class="module-body">
-  {!!$step->content!!}
+  {!!$step->__("content")!!}
 </div>
 
 <div class="wrap-btn-module-nav">
   @if ($step_num!=0)
-    <a href="{{route("training.module", [$course->id, $section->id, $module->id, ($step_num-1)])}}" class="btn btn-next-step">Предыдущий шаг</a>
+    <a href="{{route("training.module", [$course->id, $section->id, $module->id, ($step_num-1)])}}" class="btn btn-next-step">@lang('main.previous_step')</a>
   @endif
   
   @if ($step->progress_users_for_user(Auth::user()->id)->exists())
@@ -49,7 +49,7 @@
       @csrf
       <div class="form-field">
         @if ($step->type->id == 2)
-          <textarea name="answerString" class=" module-answer__input" placeholder="Введите ответ"></textarea>
+          <textarea name="answerString" class=" module-answer__input" placeholder="@lang('main.enter_your_answer')"></textarea>
         @else
         <div class="form-row">
           <div class="form-row__right form-field ">

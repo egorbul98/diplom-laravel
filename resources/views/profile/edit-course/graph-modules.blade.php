@@ -16,7 +16,7 @@
 <div class="graphs-list">
   @foreach ($course->sections as $section)
   <div class="graphs-list-item">
-    <h3 class="title">{{$section->title}}</h3>
+    <h3 class="title">{{$section->__("title")}}</h3>
     <div id="graph{{$section->id}}" class="graph-block"></div>
   </div>
   

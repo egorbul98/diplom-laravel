@@ -27,15 +27,15 @@
   
   <div class="list-modules shadow-light" data-section-id="{{$section->id}}" data-author-id="{{$user->id}}">
     <div class="list-modules-item">
-
+      
       <h4 class="list-modules-item__inner">
-        <input type="text" class="input-control input-create-module" placeholder="Название модуля">
+        <input type="text" class="input-control input-create-module" placeholder="@lang('main.module_name')">
       </h4>
       <div class="list-modules-item__btns">
         <button type="button" class="btn btn-create-module  list-modules-item__btn" data-section-id="{{$section->id}}">@lang('main.create_module')</button>
         <button type="button" class="btn btn-add-module  list-modules-item__btn" data-section-id="{{$section->id}}">@lang('main.add_existing')</button>
       </div>
-      
+      @lang('main.find_module_by_name')
     </div>
     <div class="list-modules-inner">
       @php  $j = 0; @endphp
@@ -44,9 +44,9 @@
         <div class="list-modules-item">
           <h4 class="list-modules-item__inner">
             <span class="num">{{$i}}.{{++$j}}</span>
-            <input type="text" name="module-title{{$postfix}}[{{$module->id}}]" class="input-control input-bg" value="{{$module["title$postfix"]}}" placeholder="Название модуля">
+            <input type="text" name="module-title{{$postfix}}[{{$module->id}}]" class="input-control input-bg" value="{{$module["title$postfix"]}}" placeholder="@lang('main.module_name')">
           </h4>
-        <p class="list-modules-item__steps"><span>{{$module->steps->count()}}</span> шагов</p>
+        <p class="list-modules-item__steps"><span>{{$module->steps->count()}}</span> {{Lang::choice('main.step', $module->steps->count(), [], ($locale==null)? "ru" : $locale)}}</p>
           <div class="list-modules-item__btns">
             <a href="{{route("profile.course.module.edit", [$module, $section])}}" class="btn ">@lang('main.edit')</a>
             <button type="button" class="btn-delete-module" data-module-id="{{$module->id}}"><i class="fas fa-times"></i></button>

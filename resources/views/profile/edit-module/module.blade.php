@@ -17,7 +17,7 @@
                 @isset($section->id)
 
                 <a href="{{route("profile.course.sections.edit", $section->course->id)}}">@lang('main.come_back')</a>
-                <div class="section-title">@lang('main.section') "{{$section->title}}"</div>
+                <div class="section-title">@lang('main.section') "{{$section->__("title")}}"</div>
 
                 @else
                 <div><a href="{{route("profile.module.index")}}">@lang('main.back_to_the_list_of_modules')</a></div> <br>
@@ -80,7 +80,7 @@
                                 type="button">@lang('main.add_test_to_module')</button>
                             @isset($module->test)
                             <p class="current-test">@lang('main.current_test'): <a
-                                    href="{{route("profile.test.edit",$module->test->id)}}">{{$module->test->title}}</a>
+                                    href="{{route("profile.test.edit",$module->test->id)}}">{{$module->test->__("title")}}</a>
                             </p>
                             @endisset
 
@@ -105,10 +105,10 @@
             <h2 class="title center">@lang('main.select_the_test_you_want_to_add_or') <a
                     href="{{route("profile.test.create")}}">@lang('main.create_new')</a></h2>
             <div class="form-field">
-                <input type="text" class="search" placeholder="Найти тест по названию">
+                <input type="text" class="search" placeholder="@lang('main.find_a_test_by_name')">
                 <button class="btn btn-search" type="submit">@lang('main.search')</button>
             </div>
-
+           
             <div class="modal-list-modules">
                 <p>@lang('main.no_tests_yet')</p>
             </div>

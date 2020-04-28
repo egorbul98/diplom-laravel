@@ -17,7 +17,7 @@
       
       <div class="module-inner">
           <div class="left">
-              <h2 class="module__title">{{$module->title}}</h2>
+              <h2 class="module__title">{{$module->__("title")}}</h2>
               <div class="progress-line">
                 @if ($module->steps->count()!=0)
                 <div class="progress-line__fill" style="width: {{$module->progress_steps_for_user(Auth::user()->id)->get()->count()/$module->steps->count()*100}}%"></div>
@@ -30,7 +30,7 @@
               <p class="">@lang('main.after_mastering_the_module_you_will_receive'):</p>
               <div class="competencies">
                 @foreach ($module->competences_out as $competence)
-                  <p class="competencie">{{$competence->title}}</p>
+                  <p class="competencie">{{$competence->__("title")}}</p>
                 @endforeach
               </div>
           </div>

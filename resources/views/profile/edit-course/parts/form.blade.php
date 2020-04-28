@@ -62,7 +62,7 @@
     
     <select name="category_id" class="section-categories">
       @foreach ($categories as $category)
-        <option value="{{$category->id}}" @if ($category->id == $course->category_id) selected @endif>{{$category->title}}</option>
+        <option value="{{$category->id}}" @if ($category->id == $course->category_id) selected @endif>{{$category->__("title")}}</option>
       @endforeach
     </select>
 
@@ -87,7 +87,7 @@
     <p><label class="" for="knowledge_to_repeat">@lang('main.the_percentage_of_knowledge_at_which_the_module_will_repeat')</label></p>
   </div>
   <div class="form-row__right form-field">
-    <input class="input-control" type="number" min="1" max="99" id="knowledge_to_repeat" name="knowledge_to_repeat" type="text" value="{{old("knowledge_to_repeat", $course->knowledge_to_repeat)}}" placeholder="например, 40">%
+    <input class="input-control" type="number" min="1" max="99" id="knowledge_to_repeat" name="knowledge_to_repeat" type="text" value="{{old("knowledge_to_repeat", $course->knowledge_to_repeat)}}" placeholder="@lang('main.example'), 40">%
   </div>
 </div>
 

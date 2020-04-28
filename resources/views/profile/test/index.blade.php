@@ -24,7 +24,7 @@
         <div class="test-item shadow-light" data-test-id="{{$test->id}}">
             <div class="test-item-inner">
                 <div class="left flex-b">
-                    <div class="test-item__title">{{$test->title}}</div>
+                    <div class="test-item__title">{{$test->__("title")}}</div>
                 </div>
                   <div class="icon-arrow"><i class="fas fa-chevron-left"></i></div>
                   <div class="test-item-edit">
@@ -46,7 +46,7 @@
                   @foreach ( $test->modules as $module)
                   <div class="test-item-models__item">
                     <p class="test-item-models__text">
-                      <a href="{{route("profile.module.edit", $module->id)}}">{{$module->title}}</a>
+                      <a href="{{route("profile.module.edit", $module->id)}}">{{$module->__("title")}}</a>
                     </p>
                   <button class="btn btn-detach-module-test" type="button" data-module-id="{{$module->id}}">@lang('main.detach')</button>
                   </div>
@@ -72,7 +72,7 @@
       <div class="modal-inner">
         <h2 class="title center">@lang('main.select_a_module_to_attach_to_the_test')</h2>
         <div class="form-field">
-          <input type="text" class="search" placeholder="Найти модуль по названию">
+          <input type="text" class="search" placeholder="@lang('main.find_module_by_name')">
           <button class="btn btn-search" type="submit">@lang('main.search')</button>
         </div>
 

@@ -11,8 +11,8 @@
                 <form class="form" action="{{route("profile.module.step.store", [$module, $step->id])}}" method="POST">
               @endisset
                   @csrf
-                  <h3>{{$step->title}}</h3>
-                  <p >{{$step->description}}</p>
+                  <h3>{{$step->__("title")}}</h3>
+                  <p >{{$step->__("description")}}</p>
                   <a href="" class="overlay"></a>
               </form>
             </div>

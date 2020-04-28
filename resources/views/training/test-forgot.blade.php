@@ -19,7 +19,7 @@
       @for ($i = 0; $i < count($test_sections); $i++)
       <div class="module-test__item">
         <div class="module-test__img"><img src="{{asset("storage/".$test_sections[$i]->image)}}" alt=""></div>
-        <p class="module-test__text paragraph">{{$i+1}}. {{$test_sections[$i]->title}}</p>
+        <p class="module-test__text paragraph">{{$i+1}}. {{$test_sections[$i]->__("title")}}</p>
         <div class="module-test__answers">
           @foreach ($test_sections[$i]->answers as $answer)
             {{-- <div class="form-field">

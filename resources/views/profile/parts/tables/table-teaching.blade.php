@@ -16,7 +16,7 @@
       @php  $timeUpdated = Carbon\Carbon::parse($course->updated_at)->addHours(45)->format("d.m.Y h:i"); @endphp
         <tr>
           <td class="table-img"><img src="{{asset("storage/".$course->image)}}" alt="img"></td>
-        <td class="profile-content-table-course__title">{{$course->title}}</td>
+        <td class="profile-content-table-course__title">{{$course->__("title")}}</td>
           
           <td class="vertical-m">
             {{$timeUpdated}}

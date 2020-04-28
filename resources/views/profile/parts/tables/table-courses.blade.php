@@ -19,7 +19,7 @@
       @endphp
       <tr>
         <td class="table-img"><img src="{{asset("storage/".$course->image)}}" alt=""></td>
-        <td class="profile-content-table-course__title">{{$course->title}}</td>
+        <td class="profile-content-table-course__title">{{$course->__("title")}}</td>
       <td><div class="progress-line"><div class="progress-line__fill" style="width: {{$procent}}%"></div></div></td>
 
         <td>{{$course->created_at}}</td>

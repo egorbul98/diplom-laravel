@@ -67,7 +67,7 @@
         <div class="modal-inner">
           <h2 class="title center">@lang('main.select_a_module_to_add_to_the_section')</h2>
           <div class="form-field">
-            <input type="text" class="search" placeholder="Найти модуль по названию">
+            <input type="text" class="search" placeholder="@lang('main.find_module_by_name')">
             <button class="btn btn-search" type="submit">@lang('main.search')</button>
           </div>
 

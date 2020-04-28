@@ -6,7 +6,7 @@
                 @php $id_competences = []; @endphp
                 @forelse ($module_competences as $item)
                 {{-- @dump($item->id) --}}
-                @php $id_competences[] = $item->title;@endphp
+                @php $id_competences[] = $item->__("title");@endphp
                 @foreach ($listLanguages as $lang)
                     @php $postfix = ($lang=="ru") ? '' : "_$lang" @endphp
                     <div class="tab 
@@ -43,7 +43,7 @@
 
             </div>
             {{-- <div class="form-row input-add-competences form-field">
-                <input type="text" class="input-control" placeholder="Название компетенции">
+                <input type="text" class="input-control" placeholder="@lang('main.competency_name')">
                 <div class="form-field__tooltip">
                     <span class="text">@lang('main.tooltips.characters_max', ["num"=> 128])</span>
                 </div>

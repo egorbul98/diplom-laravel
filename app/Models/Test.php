@@ -3,9 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\Traits\TranslateTable;
 class Test extends Model
 {
+    use TranslateTable;
     protected $fillable = [
         "title", "description", "author_id", "count_questions", "percent_correct_answers", "title_en", "description_en"
     ];

@@ -80,7 +80,7 @@
             <form class="form" action="{{route("course.search")}}" method="GET">
                     @csrf
                     <div class="form-field">
-                        <input type="text" class="search" name="text" placeholder="Поиск по каталогу">
+                        <input type="text" class="search" name="text" placeholder="@lang('main.catalog_search')">
                         <button class="btn btn-search" type="submit">@lang('main.search')</button>
                     </div>
 

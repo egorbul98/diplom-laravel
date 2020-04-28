@@ -3,9 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\Traits\TranslateTable;
 class TestSection extends Model
 {
+    use TranslateTable;
     protected $fillable = [
         "test_id", "image", "title", "title_en"
     ];

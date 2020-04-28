@@ -5,8 +5,8 @@
 @section('content')
 
 <div class="lesson-content__header">
-    <h1 class="title">@lang('main.section') <span class="num">1</span>. <span class="text">{{$section->title}}</span></h1>
-    <p class="desc">{{$section->description}}</p>
+    <h1 class="title">@lang('main.section') <span class="num">1</span>. <span class="text">{{$section->__("title")}}</span></h1>
+    <p class="desc">{{$section->__("description")}}</p>
 </div>
 
 
@@ -18,7 +18,7 @@
         <div class="competences-list">
             {{-- {{$section->competences_out_modules()}} --}}
           @foreach ($section_competences as $competence)
-            <div class="competence">{{$competence->title}}</div>
+            <div class="competence">{{$competence->__("title")}}</div>
           @endforeach
         </div>
     </div>
@@ -27,7 +27,7 @@
         <h3 class="title">@lang('main.now_mastered') <span class="num">{{count($competences_user)}}</span> {{Lang::choice('main.skill', count($competences_user), [], ($locale==null)? "ru" : $locale)}}</h3>
         <div class="competences-list">
             @foreach ($competences_user as $competence)
-            <div class="competence">{{$competence->title}}</div>
+            <div class="competence">{{$competence->__("title")}}</div>
             @endforeach
         </div>
     </div>
@@ -54,12 +54,12 @@
         <div class="slide">
             <div class="module shadow-light">
                 <div class="module-inner">
-                    <h2 class="module__title">{{$item_module->title}}</h2>
+                    <h2 class="module__title">{{$item_module->__("title")}}</h2>
                     <div class="right">
                         <p class="">@lang('main.competencies_gained.'):</p>
                         <div class="competencies">
                             @foreach ($item_module->competences_out as $competence)
-                                <p class="competencie">{{$competence->title}}</p>
+                                <p class="competencie">{{$competence->__("title")}}</p>
                             @endforeach
                         </div>
                     </div>

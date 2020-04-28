@@ -111,7 +111,7 @@
                 <h4 class="title">@lang('main.question_text')</h4>
                 <div class="form-field">
                     <input type="text" class="input-control" id="test-section-title" name="title" value=""
-                        maxlength="400" placeholder="Введите текст вопроса?">
+                        maxlength="400" placeholder="@lang('main.enter_a_question_text')?">
                 </div>
             </div>
 

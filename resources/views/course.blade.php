@@ -12,7 +12,7 @@
     <div class="item-header-wrap">
       <div class="item-header__info">
         <h1 class="item-header__title">{{$course->__('title')}}</h1>
-        <div class="item-header__desc">{{$course->description}}</div>
+        <div class="item-header__desc">{{$course->__("description")}}</div>
         <div class="item-header__author"><span class="icon"><i class="fas fa-user"></i></span><span
             class="name">{{$course->author->name}} {{$course->author->lastname}}</span></div>
       </div>
@@ -31,7 +31,7 @@
       <section class="item-body item-content__section">
         <h2 class="title">@lang('main.about_the_course')</h2>
         <p class="paragraph">
-          {{$course->content}}
+          {{$course->__("content")}}
         </p>
       </section>
 

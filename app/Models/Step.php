@@ -3,9 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\Traits\TranslateTable;
 class Step extends Model
 {
+    use TranslateTable;
     protected $fillable = [
         'content', 'step_type_id', 'content_en',
     ];

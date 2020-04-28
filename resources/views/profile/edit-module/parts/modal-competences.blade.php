@@ -25,7 +25,7 @@
                           @endforeach
                       </div>
                       <div class="input-add-competences form-field">
-                          <input type="text" class="input-control" placeholder="Название компетенции">
+                          <input type="text" class="input-control" placeholder="@lang('main.competency_name')">
                           <button class="btn btn-add" data-section-id="{{$section->id}}" type="button"><i class="fas fa-plus"></i></button>
                       </div>
                   </div>

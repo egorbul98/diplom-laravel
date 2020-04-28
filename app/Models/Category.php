@@ -4,9 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Course;
-
+use App\Models\Traits\TranslateTable;
 class Category extends Model
 {
+    use TranslateTable;
     protected $fillable = [
         'title', 'slug', 'title_en',
     ];

@@ -5,8 +5,8 @@
 @section('content')
 
 <div class="lesson-content__header">
-    <h1 class="title">{{$course->title}}</h1>
-    <p class="desc">{{$course->description}}</p>
+    <h1 class="title">{{$course->__("title")}}</h1>
+    <p class="desc">{{$course->__("description")}}</p>
 </div>
 <br>
 
@@ -33,8 +33,8 @@
                 @if(isset($module->test) && $module->test_completed()->first()!=null &&
                 $module->test_completed()->first()->pivot->repeated == 0)
                 <div class="test__module">
-                    <p class="name">{{$module->title}}</p>
-                    <div class="section">{{$module->test->title}}</div>
+                    <p class="name">{{$module->__("title")}}</p>
+                    <div class="section">{{$module->test->__("title")}}</div>
                 </div>
                 @endif
                 @endforeach

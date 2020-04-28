@@ -30,7 +30,7 @@
           @foreach ($modules as $module)
           @php  $timeUpdated = Carbon\Carbon::parse($module->updated_at)->format("d.m.Y"); @endphp
           <tr>
-            <td class="profile-content-table-course__title">{{$module->title}}</td>
+            <td class="profile-content-table-course__title">{{$module->__("title")}}</td>
             <td class="profile-content-table-course__title">{{$module->steps->count()}}</td>
             <td>{{$timeUpdated}}</td>
             <td class="table-btn"><a href="{{route("profile.module.edit", $module->id)}}" class="btn">@lang('main.edit')</a></td>

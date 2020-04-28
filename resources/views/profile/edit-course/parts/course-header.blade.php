@@ -8,8 +8,8 @@
       </form>
     </div>
     <div class="course-header-title">
-      <h2 class="title">{{$course->title}}</h2>
-      <p class="category">{{$course->category->title}}</p>
+      <h2 class="title">{{$course->__("title")}}</h2>
+      <p class="category">{{$course->category->__("title")}}</p>
       <p class="status">Курс в разработке</p>
     </div>
     <div class="course-header-menu">

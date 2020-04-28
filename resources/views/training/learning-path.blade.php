@@ -5,7 +5,7 @@
 @section('content')
 
 <div class="lesson-content__header">
-    <h1 class="title">{{$course->title}}</h1>
+    <h1 class="title">{{$course->__("title")}}</h1>
     <p class="desc">@lang('main.your_learning_path')</p>
 </div>
 <br>

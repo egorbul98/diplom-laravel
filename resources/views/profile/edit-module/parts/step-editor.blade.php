@@ -6,7 +6,7 @@
         <section class="step-editor">
             <div class="step-editor-header flex-b">
                 <p class="step-editor-header__title"><span class="step-text">Шаг 11</span>|<span
-                        class="step-type">{{$step->type->title}}</span></p>
+                        class="step-type">{{$step->type->__("title")}}</span></p>
                 <div class="step-editor-header__wrap-btns">
                     @isset($section->id)
                         

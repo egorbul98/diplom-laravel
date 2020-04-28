@@ -12,7 +12,7 @@
             {{$course->category->__("title")}}
           </div>
           <div class="recommend-item__desc">
-            {{$course->description}}
+            {{$course->__("description")}}
           </div>
          
           <div class="recommend-item-bottom">

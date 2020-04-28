@@ -30,7 +30,7 @@
                         <div class="form-field">
                             <label for="password" class="form-label"><i class="fas fa-unlock-alt"></i></label>
                         
-                            <input id="password" type="password" class="input-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Пароль">
+                            <input id="password" type="password" class="input-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="@lang('main.password')">
 
                             @error('password')
                                 <span class="invalid-feedback" role="alert">
