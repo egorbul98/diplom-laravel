@@ -35,7 +35,7 @@
         <button type="button" class="btn btn-create-module  list-modules-item__btn" data-section-id="{{$section->id}}">@lang('main.create_module')</button>
         <button type="button" class="btn btn-add-module  list-modules-item__btn" data-section-id="{{$section->id}}">@lang('main.add_existing')</button>
       </div>
-      @lang('main.find_module_by_name')
+      
     </div>
     <div class="list-modules-inner">
       @php  $j = 0; @endphp

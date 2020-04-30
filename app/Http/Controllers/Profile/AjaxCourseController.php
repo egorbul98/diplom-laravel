@@ -12,7 +12,7 @@ class AjaxCourseController extends Controller
     {
         $course = Course::findOrFail($request["course_id"]);
         if (Gate::denies('edit-course', $course)) {
-            return response()->json(["msg" => "Недостаточно прав"], 400);
+            return response()->json(["msg" => trans('messages.not_enough_rights')], 400);
         }
         $sections = [];
         foreach ($course->sections as $section) {

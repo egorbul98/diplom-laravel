@@ -22,7 +22,7 @@
   }
 
   .icon-arrow{
-    transition: all 0.3s;
+    transition: all 0.3s ease;
   }
  
 }
@@ -97,7 +97,7 @@
       margin-right: 10px;
       background-color: $col-border-op;
       position: relative;
-      transition: all 0.3s;
+      transition: all 0.3s ease;
       margin-bottom: 10px;
       &.btn-add{
         width: max-content;
@@ -165,7 +165,7 @@
       margin-right: 10px;
       margin-left: 10px;
       cursor: pointer;
-      transition: all 0.3s;
+      transition: all 0.3s ease;
       &--delete{
         color: red;
       }

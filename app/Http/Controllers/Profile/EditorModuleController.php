@@ -18,12 +18,12 @@ class EditorModuleController extends BaseController
     {
         
         if(Gate::denies("edit-module", [$module])){
-            return back()->withErrors(["error"=>"Недостаточно прав"]);
+            return back()->withErrors(["error"=>trans('messages.not_enough_rights')]);
         };
       
         if(isset($section->title)){
             if(Gate::denies('edit-section', [$section])){
-                return back()->withErrors(["error" => "Недостаточно прав"]);
+                return back()->withErrors(["error" => trans('messages.not_enough_rights')]);
             }
         };
         $step_types = StepType::all();

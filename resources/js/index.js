@@ -9,6 +9,8 @@ import "./modules/course-sections-edit"
 import "./modules/test-page"
 import "./modules/training-page"
 import "./modules/tabs"
+import "./modules/user-settings-page"
+import "./modules/admin-page"
 
 import $ from "jquery"
 
@@ -108,7 +110,12 @@ $(document).ready(function () {
         });
     });
 
-   
+   //filter click on check - submit form
+    $(".filter-inner .btn-submit-form").click(function (e) { 
+        setTimeout(() => {
+            $(this).closest("form").submit();
+        }, 200);
+    });
 });
 
 

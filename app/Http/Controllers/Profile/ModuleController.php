@@ -65,7 +65,7 @@ class ModuleController extends Controller
         $module = Module::findOrFail($id);
 
         if(Gate::denies("edit-module", [$module])){
-            return back()->withErrors(["error"=>"Недостаточно прав"]);
+            return back()->withErrors(["error"=>trans('messages.not_enough_rights')]);
         };
         $step_types = StepType::all();
         if($id_step==null && isset($module->steps[0])){

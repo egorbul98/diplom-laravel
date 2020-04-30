@@ -32,8 +32,9 @@ return [
     'open'=>'Открыть',
     'all'=>'Все',
     'only'=>'Только',
-    'recommended_for_study'=>'Рекомендуем к изучению',
     'what_do_you_learn'=>'Чему вы научитесь',
+    'new_first'=>'Сначала новые',
+    'first_old'=>'Сначала старые',
 
     'password'=>'Пароль',
     'username'=>'Имя пользователя',
@@ -47,8 +48,22 @@ return [
     'enter_a_question_text'=>'Введите текст вопроса',
     'enter_your_answer'=>'Введите ответ',
     
+//admin
+    'admin_panel'=>'Административная панель',
+    'assign_roles_to_user'=>'Назничить роли пользователю',
+    'course_published'=>'Курс опубликован',
 
     //profile
+    
+    'avatar'=>'Аватарка',
+    'language'=>'Язык',
+    'about_myself'=>'О себе',
+    'your_name'=>'Ваше имя',
+    'your_last_name'=>'Ваша фамилия',
+    'upload'=>'Загрузить',
+    'post_course'=>'Опубликовать курс',
+    'unpublish'=>'Снять с публикации',
+
     'show_module_trees'=>'Показать деревья модулей',
     'edit_description'=>'Редактировать описание',
     'edit_sections'=>'Редактировать разделы',

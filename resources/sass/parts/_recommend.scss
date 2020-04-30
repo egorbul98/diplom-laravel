@@ -8,6 +8,9 @@
   @include media-max($S) {
     height: 600px;
   }
+  @include media-max($XS) {
+    height: 556px;
+  }
 
 }
 
@@ -25,7 +28,11 @@
   flex-direction: column;
   padding: 0 10px;
   .title {
-    margin-bottom: 16px;
+    margin-bottom: 26px;
+
+    @include media-max($S){
+      margin-bottom: 16px;
+    }
   }
 
 }
@@ -177,7 +184,7 @@
     }
 
     @include media-max($XS) {
-      max-height: 98px;
+      max-height: 100px;
     }
 
     @include scroolbar;

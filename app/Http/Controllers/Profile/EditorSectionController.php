@@ -14,7 +14,7 @@ class EditorSectionController extends BaseController
     public function edit(Course $course)
     {
         if(Gate::denies('edit-course', $course)){
-            return redirect()->back()->withErrors(["error"=>"Недостаточно прав"]);
+            return redirect()->back()->withErrors(["error"=>trans('messages.not_enough_rights')]);
         }
         return view("profile.edit-sections.edit", compact("course"));
     }
@@ -46,6 +46,6 @@ class EditorSectionController extends BaseController
             $module->update();
         }
         $course = Course::find($id);
-         return redirect()->route("profile.course.sections.edit", compact("course"))->with(["success"=>"Успешно сохранено"]);
+         return redirect()->route("profile.course.sections.edit", compact("course"))->with(["success"=>trans('messages.saved_successfully')]);
     }
 }

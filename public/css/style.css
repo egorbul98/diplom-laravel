@@ -499,13 +499,13 @@ h1 {
 }
 
 h2 {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: bold;
 }
 
 @media (max-width: 768px) {
   h2 {
-    font-size: 18px;
+    font-size: 19px;
   }
 }
 
@@ -589,7 +589,7 @@ p.paragraph {
 a,
 button {
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
 }
 
 a {
@@ -687,6 +687,10 @@ button {
   }
 }
 
+.d-block {
+  display: block;
+}
+
 .btn-close {
   cursor: pointer;
 }
@@ -706,6 +710,10 @@ button {
 
 .shadow-light {
   box-shadow: 0 0px 20px -10px #424242;
+}
+
+.shadow-light--y {
+  box-shadow: 0 14px 20px -18px #424242;
 }
 
 #language {
@@ -831,6 +839,20 @@ button {
   margin-bottom: 20px;
 }
 
+.table-responsive .btn {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.table-responsive .user_role::after {
+  content: ",";
+}
+
+.table-responsive .user_role:last-child:after {
+  display: none;
+}
+
 .table {
   width: 100%;
   border-collapse: collapse;
@@ -934,6 +956,10 @@ button {
   margin-bottom: 20px;
 }
 
+.margin-top-20 {
+  margin-top: 20px;
+}
+
 .no-entry {
   display: -webkit-box;
   display: -webkit-flex;
@@ -985,6 +1011,17 @@ button {
   color: #CFB986;
   -webkit-text-decoration: solid;
           text-decoration: solid;
+}
+
+.link-upload {
+  margin-left: 10px;
+  cursor: pointer;
+  color: #767fcf;
+  transition: color 0.3s;
+}
+
+.link-upload:hover {
+  color: #CFB986;
 }
 
 /* Slider */
@@ -1512,6 +1549,7 @@ input#image {
   align-items: center;
   flex-shrink: 0;
   flex-grow: 0;
+  border-radius: 3px;
 }
 
 .form-checkbox .label .check::after {
@@ -1522,13 +1560,97 @@ input#image {
   color: #583671;
 }
 
-.filter-inner label {
-  cursor: pointer;
-  transition: all 0.3s;
+.form-filter-users {
+  margin-top: 16px;
 }
 
-.filter-inner input:checked + label {
-  background-color: #CFB986;
+.form-filter-users__inner {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+@media (max-width: 768px) {
+  .form-filter-users__inner {
+    flex-direction: column;
+  }
+
+  .form-filter-users__inner .btn-filter {
+    margin-top: 8px;
+  }
+}
+
+@media (max-width: 576px) {
+  .form-filter-users__inner .btn-filter {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .form-filter-users .form-checkbox {
+    display: block;
+  }
+}
+
+.form-filter-users .form-checkbox .label {
+  border-radius: 0;
+  border: none;
+}
+
+.form-filter-users .form-checkbox:last-child .label {
+  border: none;
+}
+
+.form-filter-users .form-checkbox:first-child .label {
+  border: none;
+}
+
+.form-filter-users .checkbox-item {
+  border-right: 1px solid #ffffff;
+}
+
+@media (max-width: 576px) {
+  .form-filter-users .checkbox-item {
+    border-right: none;
+    border-bottom: 1px solid #ffffff;
+  }
+}
+
+.form-filter-users .checkbox-item:last-child {
+  border: none;
+}
+
+@media (max-width: 576px) {
+  .form-filter-users .checkbox-item:last-child {
+    border-bottom: 1px solid #ffffff;
+  }
+}
+
+.form-filter-users .checkbox-item:last-child .label {
+  border-bottom-right-radius: 10px;
+}
+
+@media (max-width: 576px) {
+  .form-filter-users .checkbox-item:last-child .label {
+    border-radius: 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .form-filter-users .checkbox-item:first-child {
+    border-top: 1px solid #ffffff;
+  }
+}
+
+.form-filter-users .checkbox-item:first-child .label {
+  border-bottom-left-radius: 10px;
+}
+
+@media (max-width: 576px) {
+  .form-filter-users .checkbox-item:first-child .label {
+    border-radius: 0;
+  }
 }
 
 .modal {
@@ -1539,7 +1661,7 @@ input#image {
   bottom: 0;
   background-color: #00000056;
   z-index: 10;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
 }
 
 .modal--hidden {
@@ -1747,6 +1869,16 @@ input#image {
   margin: 0;
 }
 
+.modal-roles .form-checkbox {
+  display: block;
+}
+
+.modal-roles .form-checkbox .label {
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid #ffffff;
+}
+
 .header {
   padding-top: 20px;
 }
@@ -1760,7 +1892,7 @@ input#image {
     z-index: 10;
     visibility: hidden;
     opacity: 0;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
     position: absolute;
     left: 0;
     top: -100%;
@@ -1856,7 +1988,12 @@ input#image {
   position: relative;
 }
 
+.header-top .right-block .auth .user:hover .icon {
+  text-shadow: 0 0 6px #dcdacb;
+}
+
 .header-top .right-block .auth .user .icon {
+  transition: all 0.3s ease;
   margin-left: 10px;
 }
 
@@ -1906,6 +2043,7 @@ input#image {
   display: flex;
   flex-direction: column;
   position: relative;
+  font-weight: 700;
 }
 
 @media (max-width: 768px) {
@@ -1925,6 +2063,12 @@ input#image {
   padding: 0 10px;
   left: -10px;
   background-color: #fff;
+}
+
+@media (max-width: 768px) {
+  .header-top .right-block #language.drop-down .language-inner {
+    background-color: transparent;
+  }
 }
 
 .header-middle {
@@ -1986,12 +2130,12 @@ input#image {
   width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
   position: relative;
 }
 
 .header-middle .nav__item::after {
-  transition: all 0.3s;
+  transition: all 0.3s ease;
   content: "";
   width: 100%;
   height: 2px;
@@ -2124,6 +2268,12 @@ input#image {
   }
 }
 
+@media (max-width: 576px) {
+  .recommend-outer {
+    height: 556px;
+  }
+}
+
 .recommend {
   background-color: rgba(207, 185, 134, 0.9);
   height: 100%;
@@ -2146,7 +2296,13 @@ input#image {
 }
 
 .recommend-wrap .title {
-  margin-bottom: 16px;
+  margin-bottom: 26px;
+}
+
+@media (max-width: 768px) {
+  .recommend-wrap .title {
+    margin-bottom: 16px;
+  }
 }
 
 .recommend-list {
@@ -2325,7 +2481,7 @@ input#image {
 
 @media (max-width: 576px) {
   .recommend-item__desc {
-    max-height: 98px;
+    max-height: 100px;
   }
 }
 
@@ -2388,7 +2544,7 @@ input#image {
   border: 1px solid #dcdacb;
   box-shadow: 0 0px 24px -10px #424242;
   position: relative;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
 }
 
 @media (max-width: 768px) {
@@ -2455,6 +2611,14 @@ input#image {
   }
 }
 
+@media (max-width: 576px) {
+  .courses-item__title {
+    height: -webkit-max-content;
+    height: -moz-max-content;
+    height: max-content;
+  }
+}
+
 .courses-item__author,
 .courses-item__category {
   font-size: 16px;
@@ -2486,7 +2650,7 @@ input#image {
 }
 
 .courses-item__overlay {
-  transition: all 0.3s;
+  transition: all 0.3s ease;
   width: 100%;
   height: 100%;
   position: absolute;
@@ -2643,7 +2807,7 @@ input#image {
 }
 
 .news-item__overlay {
-  transition: all 0.3s;
+  transition: all 0.3s ease;
   width: 100%;
   height: 100%;
   position: absolute;
@@ -3002,7 +3166,7 @@ footer .form-field {
 }
 
 .item-sections-item .icon-arrow {
-  transition: all 0.3s;
+  transition: all 0.3s ease;
 }
 
 .item-sections-item.active .icon-arrow {
@@ -3159,14 +3323,22 @@ footer .form-field {
   padding-bottom: 20px;
 }
 
-@media (max-width: 576px) {
+@media (max-width: 768px) {
   .filter__btns-wrap {
-    flex-wrap: wrap-reverse;
+    flex-direction: column;
   }
 
   .filter__btns-wrap .filter-btn {
+    order: 1;
     width: 100%;
     margin-top: 10px;
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .filter__btns-wrap {
+    flex-wrap: wrap-reverse;
   }
 }
 
@@ -3179,15 +3351,65 @@ footer .form-field {
   align-items: center;
 }
 
+@media (max-width: 768px) {
+  .filter__btns-wrap .filter-inner {
+    width: 100%;
+  }
+}
+
+.filter__btns-wrap .filter-inner label {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .filter__btns-wrap .filter-inner label {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  .filter__btns-wrap .filter-inner label {
+    border-right: 1px solid #ffffff;
+    text-align: center;
+  }
+
+  .filter__btns-wrap .filter-inner label:last-child {
+    border-right: none;
+  }
+}
+
+.filter__btns-wrap .filter-inner input:checked + label {
+  background-color: #CFB986;
+}
+
 .filter .filter-wrapper {
   background-color: #dcdacb88;
   padding: 0 20px;
   border: 1px solid #dcdacb;
 }
 
+@media (max-width: 768px) {
+  .filter .filter-wrapper {
+    padding: 0 14px;
+  }
+}
+
+@media (max-width: 576px) {
+  .filter .filter-wrapper {
+    padding: 0 10px;
+  }
+}
+
 .filter .btn {
   margin-right: 10px;
   display: block;
+}
+
+@media (max-width: 768px) {
+  .filter .btn {
+    margin-right: 0;
+  }
 }
 
 .filter .btn .icon {
@@ -3434,7 +3656,7 @@ footer .form-field {
 
 @media (max-width: 768px) {
   .lesson-sidebar {
-    transition: all 0.3s;
+    transition: all 0.3s ease;
     width: 100%;
     left: -100%;
   }
@@ -3496,7 +3718,7 @@ footer .form-field {
   background-color: #777;
   padding: 8px 8px;
   margin-bottom: 10px;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
 }
 
 .lesson-sidebar__content .section.completed {
@@ -3544,7 +3766,7 @@ footer .form-field {
   position: absolute;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
   border-radius: 6px;
   width: -webkit-max-content;
   width: -moz-max-content;
@@ -4182,7 +4404,7 @@ footer .form-field {
 }
 
 .profile-header__img .edit-foto {
-  transition: all 0.3s;
+  transition: all 0.3s ease;
   bottom: -100%;
   font-size: 20px;
   position: absolute;
@@ -4337,6 +4559,11 @@ footer .form-field {
   overflow: hidden;
 }
 
+.new-course__img--size {
+  max-width: 168px;
+  height: 140px;
+}
+
 .new-course__img img {
   position: absolute;
   top: 0;
@@ -4368,7 +4595,7 @@ footer .form-field {
 }
 
 .new-course__img .edit-foto {
-  transition: all 0.3s;
+  transition: all 0.3s ease;
   bottom: 0;
   font-size: 20px;
   position: absolute;
@@ -4378,7 +4605,7 @@ footer .form-field {
   width: 100%;
   text-align: center;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
 }
 
 .new-course__img .edit-foto:hover {
@@ -5185,7 +5412,7 @@ footer .form-field {
   margin-right: 10px;
   background-color: #dcdacb88;
   position: relative;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
 }
 
 @media (max-width: 1024px) {
@@ -5369,7 +5596,7 @@ footer .form-field {
 }
 
 .test-item-inner .icon-arrow {
-  transition: all 0.3s;
+  transition: all 0.3s ease;
 }
 
 .test-item-models {
@@ -5487,7 +5714,7 @@ footer .form-field {
   margin-right: 10px;
   background-color: #dcdacb88;
   position: relative;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
   margin-bottom: 10px;
 }
 
@@ -5574,7 +5801,7 @@ footer .form-field {
   margin-right: 10px;
   margin-left: 10px;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
 }
 
 .test-sections .answer-icon-wrap .icon--delete {

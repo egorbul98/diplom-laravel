@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
-
+use Lang;
 class CourseController extends BaseController
 {
     /**
@@ -74,7 +74,7 @@ class CourseController extends BaseController
     public function show(Course $course)
     {
         if (Gate::denies('edit-course', $course)) {
-            return redirect()->back()->withErrors(["error" => "Недостаточно прав"]);
+            return redirect()->back()->withErrors(["error" => trans('messages.not_enough_rights')]);
         }
         return view("profile.edit-course.show", compact("course"));
     }
@@ -88,7 +88,7 @@ class CourseController extends BaseController
     public function edit(Course $course)
     {
         if (Gate::denies('edit-course', $course)) {
-            return redirect()->back()->withErrors(["error" => "Недостаточно прав"]);
+            return redirect()->back()->withErrors(["error" => trans('messages.not_enough_rights')]);
         }
         return view("profile.edit-course.create", compact("course"));
     }
@@ -118,8 +118,9 @@ class CourseController extends BaseController
         $result = $course->update($data);
 
         if ($result) {
-            return back()->with(["success" => "Успешно сохранено"]);
+            return back()->with(["success" => trans('messages.saved_successfully')]);
         }
+        
     }
 
     /**
@@ -132,7 +133,7 @@ class CourseController extends BaseController
     {
         $course = Course::find($id);
         $course->delete();
-        return redirect()->route("profile.course.index")->with(["success" => "Курс успешно удален"]);
+        return redirect()->route("profile.course.index")->with(["success" => trans('messages.successfully_deleted')]);
     }
 
     public function graphShow($id)
@@ -140,4 +141,42 @@ class CourseController extends BaseController
         $course = Course::findOrFail($id);
         return view("profile.edit-course.graph-modules", compact("course"));
     }
+    public function published($id)
+    {
+        $course = Course::findOrFail($id);
+
+        if (Gate::denies('edit-course', $course)) {
+            return redirect()->back()->withErrors(["error" => trans('messages.not_enough_rights')]);
+        }
+        
+        $course->update(["status_id" => 2]);
+        return redirect()->back()->with(["info" => trans('messages.course_submitted')]);
+    }
+    public function unpublished($id)
+    {
+        $course = Course::findOrFail($id);
+
+        if (Gate::denies('edit-course', $course)) {
+            return redirect()->back()->withErrors(["error" => trans('messages.not_enough_rights')]);
+        }
+
+        $course->update(["status_id" => 1]);
+        return redirect()->back()->with(["info" => trans('messages.course_discontinued')]);
+    }
+
+    // public function uploadImage(Request $request)
+    // {
+    //     $data = $request->all();
+    //     dd($data);
+    //     // $user = Auth::user();
+    //     if (isset($request->all()["image"])) {
+    //         $data = $request->except("image");
+    //         Storage::disk('public')->deleteDirectory("users-images/{$user->id}");
+    //         $pathImage = $request->file("image")->store("users-images/{$user->id}", "public");
+    //         $user->image = $pathImage;
+    //         $user->update();
+    //     }
+
+    //     return response()->json(["image" => asset("Storage/".$pathImage), "msg"=>trans('messages.saved_successfully')], 200);
+    // }
 }

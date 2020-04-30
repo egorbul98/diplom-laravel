@@ -27,7 +27,7 @@ class AjaxAnswersController extends Controller
         $answer = AnswerNum::find($id);
         $answer->delete();
 
-        return response()->json("Успешно удалено", 200);
+        return response()->json(trans('messages.successfully_deleted'), 200);
     }
 
     public function addAnswerString(AnswerStringRequest $request)
@@ -47,7 +47,7 @@ class AjaxAnswersController extends Controller
         $answer = AnswerString::find($id);
         $answer->delete();
 
-        return response()->json("Успешно удалено", 200);
+        return response()->json(trans('messages.successfully_deleted'), 200);
     }
     
 

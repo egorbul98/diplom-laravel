@@ -8,34 +8,77 @@
     align-items: center;
     padding-top: 20px;
     padding-bottom: 20px;
-    
+
+    @include media-max($S){
+      flex-direction: column;
+
+      .filter-btn{
+        order: 1;
+        width: 100%;
+        margin-top: 10px;
+        margin-right: 0;
+      }
+    }
 
     @include media-max($XS){
       flex-wrap: wrap-reverse;
 
-      .filter-btn{
-        width: 100%;
-        margin-top: 10px;
-      }
     }
 
     .filter-inner {
       display: flex;
       justify-content: space-between;
       align-items: center;
+
+      @include media-max($S){
+        width: 100%;
+        
+      }
+      label{
+          cursor: pointer;
+          transition: all 0.3s ease;
+
+          @include media-max($S){
+            font-size: 10px;
+          }
+          @include media-max($XS){
+            border-right: 1px solid #ffffff;
+            text-align: center;
+            &:last-child{
+              border-right: none;
+            }
+          }
+      }
+    
+      input:checked{
+          &+label{
+              background-color: $col-active;
+          }
+      }
     }
+   
   }
 
   .filter-wrapper {
     background-color: $col-border-op;
     padding: 0 20px;
     border: 1px solid $col-border;
+
+    @include media-max($S){
+      padding: 0 14px;
+    }
+    @include media-max($XS){
+      padding: 0 10px;
+    }
   }
 
   .btn {
     margin-right: 10px;
     display: block;
 
+    @include media-max($S){
+      margin-right: 0;
+    }
     .icon {
       margin-right: 10px;
     }

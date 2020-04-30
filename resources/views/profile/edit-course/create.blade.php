@@ -1,6 +1,6 @@
 @extends('layouts.default')
 
-@section('class-body') edit-course @endsection
+@section('class-body') edit-course edit-course-description @endsection
 
 @section('content')
 

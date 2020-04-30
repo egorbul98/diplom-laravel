@@ -6,6 +6,7 @@ use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use DB, Auth, Carbon\Carbon;
+use App;
 
 class CourseController extends Controller
 {
@@ -17,7 +18,7 @@ class CourseController extends Controller
     public function index(Request $request)
     {
 
-        $query = Course::query();
+        $query = Course::query()->where("courses.status_id", 3);
         if ($request->all()) {
             if (isset($request->all()["category"])) {
                 $query
@@ -35,18 +36,24 @@ class CourseController extends Controller
             if (isset($request->all()["sort"])) {
                 if ($request->all()["sort"] == "new") {
                     $query->orderBy("id");
-                } else {
+                } elseif ($request->all()["sort"] == "old") {
                     $query->orderBy("id", "DESC");
+                } elseif ($request->all()["sort"] == "popular") {
+                    $query->withCount("visits")->orderBy("visits_count", "DESC");
                 }
             }
         }
 
         $courses = $query->paginate(6)->withPath("?" . $request->getQueryString());
 
+        if (Auth::check()) {
+            $recommended_courses = $this::getRecommendedCourses(6);
+        }
+        if (!isset($recommended_courses[0])) {
+            $recommended_courses = $this::getPopularCourses(6);
+        }
 
-        // dd($courses[0]->reviews);
-        // dd($courses);
-        return view("courses", compact("courses"));
+        return view("courses", compact("courses", "recommended_courses"));
     }
 
     /**
@@ -57,6 +64,9 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
+        if($course->status_id!=3){//Если курс не опубликован
+            return back()->withErrors(["errors"=>trans("messages.not_enough_rights")]);
+        }
         $steps = collect();
         foreach ($course->sections as $section) {
             foreach ($section->modules as $module) {
@@ -67,12 +77,13 @@ class CourseController extends Controller
         }
 
         $user = Auth::user();
-        
-        if ($user!=null && DB::table('visits')//Если пользователь сегодня не посещал данный курс, то записываем в таблицу VISITS
+
+        if ($user != null && DB::table('visits') //Если пользователь сегодня не посещал данный курс, то записываем в таблицу VISITS
             ->where("course_id", $course->id)
             ->where("user_id", $user->id)
-            ->where("created_at", ">=", (new Carbon)->startOfDay()->toDateTimeString())->first() == null) {
-            DB::table('visits')->insert(["course_id" => $course->id, "user_id" => $user->id, "created_at"=>(new Carbon)]);
+            ->where("created_at", ">=", (new Carbon)->startOfDay()->toDateTimeString())->first() == null
+        ) {
+            DB::table('visits')->insert(["course_id" => $course->id, "user_id" => $user->id, "created_at" => (new Carbon)]);
         };
 
         return view("course", compact("course", "steps"));
@@ -82,7 +93,20 @@ class CourseController extends Controller
     public function search(Request $request)
     {
         $text = $request->all()["text"];
-        $courses = Course::where("title", "like", "%" . $text . "%")->paginate(6);
-        return view("courses", compact("courses"));
+        $locale = App::getLocale();
+        if ($locale == "ru" || $locale == null) {
+            $courses = Course::where("title", "like", "%" . $text . "%")->where("courses.status_id", 3)->paginate(6);
+        } else {
+            $courses = Course::where("title_en", "like", "%" . $text . "%")->where("courses.status_id", 3)->paginate(6);
+        }
+
+        if (Auth::check()) {
+            $recommended_courses = $this::getRecommendedCourses(6);
+        }
+        if (!isset($recommended_courses[0])) {
+            $recommended_courses = $this::getPopularCourses(6);
+        }
+
+        return view("courses", compact("courses", "recommended_courses"));
     }
 }

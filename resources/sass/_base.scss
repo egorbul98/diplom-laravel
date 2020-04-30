@@ -49,10 +49,10 @@ h1{
 }
 
 h2{
-  font-size: 22px;
+  font-size: 24px;
   font-weight: bold;
   @include media-max($S) {
-    font-size: 18px;
+    font-size: 19px;
   }
 
   @include media-max($XS){
@@ -109,7 +109,7 @@ p{
 }
 a, button{
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
 }
 a{
   text-decoration: none;
@@ -186,6 +186,9 @@ button{
     font-size: 12px;
   }
 }
+.d-block{
+  display: block;
+}
 .btn-close{
   cursor: pointer;
 }
@@ -204,6 +207,10 @@ button{
 }
 .shadow-light{
   box-shadow:0 0px 20px -10px $col-shadow;
+
+  &--y{
+    box-shadow: 0 14px 20px -18px $col-shadow;
+  }
 }
 #language{
   border: none;
@@ -310,6 +317,22 @@ button{
   width: 100%;
   overflow-y: auto;
   margin-bottom: 20px;
+
+  .btn{
+    width: max-content;
+  }
+
+  .user_role{
+
+    &::after{
+      content: ',';
+    }
+
+    &:last-child:after{
+      display: none;
+    }
+   
+  }
 }
 .table{
   width: 100%;
@@ -388,6 +411,10 @@ button{
 .margin-bottom-20{
   margin-bottom: 20px;
 }
+.margin-top-20{
+  margin-top: 20px;
+}
+
 .no-entry{
   display: flex;
   justify-content: center;
@@ -425,3 +452,14 @@ button{
   text-decoration: solid;
   
 }
+
+.link-upload{
+  margin-left: 10px;
+  cursor: pointer;
+  color: $col-btn;
+  transition: color 0.3s;
+  &:hover{
+    color: $col-active;
+  }
+}
+

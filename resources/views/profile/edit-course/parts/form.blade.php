@@ -76,9 +76,10 @@
   <div class="form-row__right form-field">
     <div class="new-course__img">
     <img src="{{asset('/storage/'.$course->image)}}" alt=""><span class="icon"><i class="fas fa-camera"></i></span>
-      <input type="file" id="image" name="image" style="">
       <label for="image" class="edit-foto"><i class="fas fa-edit"></i></label>
     </div>
+    <input type="file" id="image" name="image" style="display: none">
+    <label for="image" class="edit-foto"><p class="link-upload">@lang('main.upload')</p></label>
   </div>
 </div>
 
@@ -87,7 +88,7 @@
     <p><label class="" for="knowledge_to_repeat">@lang('main.the_percentage_of_knowledge_at_which_the_module_will_repeat')</label></p>
   </div>
   <div class="form-row__right form-field">
-    <input class="input-control" type="number" min="1" max="99" id="knowledge_to_repeat" name="knowledge_to_repeat" type="text" value="{{old("knowledge_to_repeat", $course->knowledge_to_repeat)}}" placeholder="@lang('main.example'), 40">%
+    <input class="input-control" type="number" min="1" max="99" id="knowledge_to_repeat" name="knowledge_to_repeat" type="text" value="{{old("knowledge_to_repeat", $course->knowledge_to_repeat)}}" placeholder="@lang('main.example'), 40"><span> %</span>
   </div>
 </div>
 

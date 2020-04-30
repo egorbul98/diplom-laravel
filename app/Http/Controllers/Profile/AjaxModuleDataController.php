@@ -34,7 +34,7 @@ class AjaxModuleDataController extends Controller
         // $section = new Section($data);
         // $section->save();
 
-        return response()->json(["msg"=>"Успешно сохранено"], 200);
+        return response()->json(["msg"=>trans('messages.saved_successfully')], 200);
     }
  
 }

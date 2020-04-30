@@ -37,6 +37,7 @@
 
   <h4>@lang('main.recent_achievements')</h4>
   <div class="lesson-sidebar__competences">
+    {{-- @dd($user->competences_out_for_course($course->id)) --}}
     @foreach ($user->competences_out_for_course($course->id) as $competence)
     <div class="competence">{{$competence->__("title")}}</div>
     @endforeach

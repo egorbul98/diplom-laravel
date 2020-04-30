@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\SectionRequest;
 use App\Models\Section;
 use App\Models\Module;
-use Auth;
+use Auth, App;
 class AjaxSectionController extends Controller
 {
     public function add(SectionRequest $request)
@@ -47,7 +47,13 @@ class AjaxSectionController extends Controller
         $modules_section_ids = $section->getModulesId();
         $user_id = Auth::user()->id;
 
-        $modules = Module::select(["id", "title"])->where("title", "like", "%".$text."%")->where("author_id", $user_id)->whereNotIn("id",$modules_section_ids)->get(); //Получаем модули не входящие в данный раздел и с текстом
+        $locale = App::getLocale();
+        if($locale=="ru" || $locale==null){
+            $modules = Module::select(["id", "title"])->where("title", "like", "%".$text."%")->where("author_id", $user_id)->whereNotIn("id",$modules_section_ids)->get(); //Получаем модули не входящие в данный раздел и с текстом
+        }else{
+            $modules = Module::select(["id", "title_en as title"])->where("title_en", "like", "%".$text."%")->where("author_id", $user_id)->whereNotIn("id",$modules_section_ids)->get(); //Получаем модули не входящие в данный раздел и с текстом
+        }
+        
         return response()->json(["modules"=>$modules], 200);
     }
 

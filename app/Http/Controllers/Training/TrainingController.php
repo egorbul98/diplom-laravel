@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Training;
 
 use App\Http\Controllers\Controller;
+use App\Models\Competence;
 use App\Models\Course;
 use App\Models\Module;
 use App\Models\Section;
@@ -106,8 +107,9 @@ class TrainingController extends Controller
          $section->progress_users()->detach($user->id);
          $section->progress_users()->attach($user->id, ["course_id" => $course->id, "complete" => 1]);
       }
-      $competences_user = DB::table('competence_user')
-         ->join("competences", "competences.id", "=", "competence_user.competence_id")
+    
+      $competences_user = Competence::select("competences.*")
+         ->join("competence_user", "competences.id", "=", "competence_user.competence_id")
          ->where("competences.section_id", $section->id)->get();
 
       $modules_completed = Auth::user()->modules_completed_for_section($section->id)->get();
@@ -250,13 +252,17 @@ class TrainingController extends Controller
       }
 
       $procentCorrent = $count / (int) $data["test_questions_count"][$test->id][0] * 100;
-
       if ($procentCorrent > $test->percent_correct_answers && $module->test_completed()->wherePivot('user_id', $user->id)->wherePivot("test_id", $test->id)->first() != null) {
          // $module->test_completed()->wherePivot('user_id', $user->id)->detach($test->id);
          $module->test_completed()->attach($test->id, ["user_id" => $user->id]);
          session(["test_id{$test->id}" => '1']); //Записываем в сессию то, что данный тест пройден
          return redirect()->route("training.module", [$course->id, $section->id, $module->id, $data["step_num"]])->with(["success" => "Тест успешно пройден"]);
-      } else {
+      } elseif($procentCorrent > $test->percent_correct_answers && $module->test_completed()->wherePivot('user_id', $user->id)->wherePivot("test_id", $test->id)->first() == null){
+         $module->test_completed()->attach($test->id, ["user_id" => $user->id]);
+         session(["test_id{$test->id}" => '1']); //Записываем в сессию то, что данный тест пройден
+         return redirect()->route("training.module", [$course->id, $section->id, $module->id, $data["step_num"]])->with(["success" => "Тест успешно пройден"]);
+      }
+      else {
          return redirect()->route("training.module", [$course->id, $section->id, $module->id, $data["step_num"]])->withErrors(["error" => "Тест не пройден. Вы ответили правильно на {$procentCorrent}% вопросов, а необходимо {$test->percent_correct_answers}%"]);
       }
    }

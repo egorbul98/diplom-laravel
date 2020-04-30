@@ -61,7 +61,14 @@ Route::group(['middleware' => ['setLocale']], function () {
         Route::group(['prefix' => 'profile', "namespace" => "Profile"], function () {
             Route::get('', "ProfileController@index")->name("profile");
             Route::get('course/{course_id}/graph', "CourseController@graphShow")->name("profile.course.graph");
+            Route::get('course/{course_id}/published', "CourseController@published")->name("profile.course.published");
+            Route::get('course/{course_id}/unpublished', "CourseController@unpublished")->name("profile.course.unpublished");
+            // Route::post('course/ajax-upload-image', "CourseController@uploadImage");
             Route::resource('course', 'CourseController')->names("profile.course");
+
+            Route::get('/settings', "ProfileController@settings")->name("profile.settings");
+            Route::post('/save-settings', "ProfileController@saveSettings")->name("profile.saveSettings");
+            Route::post('/ajax-upload-avatar', "ProfileController@uploadAvatar");
 
             Route::get('/ajax-get-course-sections', 'AjaxCourseController@getSections');
 
@@ -117,6 +124,16 @@ Route::group(['middleware' => ['setLocale']], function () {
                 Route::post('{module_id}/step/{step_id}/store', 'StepController@update')->name("profile.module.step.update");
                 Route::get('{module_id}/destroy-step/{step_id}/section/{section?}', 'StepController@destroy')->name("profile.module.step.destroy");
             });
+        });
+
+        Route::group(['prefix' => 'admin', "namespace" => "Admin", "middleware"=>["checkAdmin"]], function () {
+            Route::get('/list-users', "AdminController@listUsers")->name("admin.listUsers");
+            Route::get('/list-waiting-courses', "AdminController@listWaitingCourses")->name("admin.listWaitingCourses");
+
+            Route::get('/list-waiting-courses/published/{course_id}', "AdminController@publishedCourse")->name("admin.publishedCourse");
+            
+            Route::post('/ajax-get-roles-user', "AdminController@getRolesUser");
+            Route::post('/ajax-save-roles-user', "AdminController@saveRolesUser");
         });
     });
 

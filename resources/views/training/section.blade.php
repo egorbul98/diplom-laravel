@@ -17,8 +17,14 @@
         <h3 class="title">@lang('main.in_this_section_you_will_learn') <span class="num">{{$section_competences->count()}}</span> {{Lang::choice('main.skill', $section_competences->count(), [], ($locale==null)? "ru" : $locale)}}</h3>
         <div class="competences-list">
             {{-- {{$section->competences_out_modules()}} --}}
+            {{-- @dd($section_competences) --}}
           @foreach ($section_competences as $competence)
-            <div class="competence">{{$competence->__("title")}}</div>
+          @if ($locale==null || $locale="ru")
+          <div class="competence">{{$competence->title}}</div>
+          @else 
+          <div class="competence">{{$competence->title_en}}</div>
+          @endif
+            
           @endforeach
         </div>
     </div>
@@ -26,6 +32,7 @@
     <div class="info-wrap__middle shadow-light">
         <h3 class="title">@lang('main.now_mastered') <span class="num">{{count($competences_user)}}</span> {{Lang::choice('main.skill', count($competences_user), [], ($locale==null)? "ru" : $locale)}}</h3>
         <div class="competences-list">
+           
             @foreach ($competences_user as $competence)
             <div class="competence">{{$competence->__("title")}}</div>
             @endforeach

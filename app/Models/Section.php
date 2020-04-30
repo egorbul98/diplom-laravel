@@ -39,7 +39,7 @@ class Section extends Model
     }
     public function competences_out_modules()//компетенции, которые выходные у модулей данного раздела
     {
-        return DB::table('competences')->select("title")
+        return DB::table('competences')->select("title", "title_en")
             ->join("competence_module", "competence_module.competence_id", "=", "competences.id")
         ->where("competences.section_id", $this->id)
         ->where("competence_module.type", "out")

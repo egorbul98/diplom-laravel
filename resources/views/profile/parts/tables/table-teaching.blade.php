@@ -13,7 +13,7 @@
     </thead>
     <tbody>
       @foreach ($user->courses()->paginate(8) as $course)
-      @php  $timeUpdated = Carbon\Carbon::parse($course->updated_at)->addHours(45)->format("d.m.Y h:i"); @endphp
+      @php  $timeUpdated = Carbon\Carbon::parse($course->updated_at)->format("d.m.Y h:i"); @endphp
         <tr>
           <td class="table-img"><img src="{{asset("storage/".$course->image)}}" alt="img"></td>
         <td class="profile-content-table-course__title">{{$course->__("title")}}</td>

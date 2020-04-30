@@ -7,9 +7,11 @@
           <div class="filter-inner">
             {{-- @dd(request()->getQueryString()) --}}
             <input type="radio" id="sort-new" name="sort" style="display: none" @if (request()->has("sort") && request()->all()["sort"]=="new") checked @endif value="new">
-            <label for="sort-new" class="btn">Сначала новые</label>
+            <label for="sort-new" class="btn btn-submit-form">@lang('main.new_first')</label>
             <input type="radio" id="sort-old" name="sort" style="display: none"  @if (request()->has("sort") && request()->all()["sort"]=="old") checked @endif value="old">
-            <label for="sort-old" class="btn">Сначала старые</label>
+            <label for="sort-old" class="btn btn-submit-form">@lang('main.first_old')</label>
+            <input type="radio" id="sort-popular" name="sort" style="display: none"  @if (request()->has("sort") && request()->all()["sort"]=="popular") checked @endif value="popular">
+            <label for="sort-popular" class="btn btn-submit-form">Сначала популярные</label>
           </div>
         </div>
         <form action="" class="form">

@@ -22,7 +22,7 @@
   border: 1px solid $col-border;
   box-shadow: 0 0px 24px -10px $col-shadow;
   position: relative;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
   @include media-max($S) {
     width: 46%;
     margin-right: 2%;
@@ -83,6 +83,9 @@
       font-size: 16px;
       height: 68px;
     }
+    @include media-max($XS) {
+      height: max-content;
+    }
 
   }
 
@@ -115,7 +118,7 @@
     z-index: 1;
   }
   &__overlay {
-    transition: all 0.3s;
+    transition: all 0.3s ease;
     width: 100%;
     height: 100%;
     position: absolute;

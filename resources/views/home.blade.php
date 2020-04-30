@@ -15,7 +15,7 @@
 <section class="courses">
     <div class="main-wrap">
         <div class="courses-list">
-            @foreach ($courses as $course)
+            @foreach ($new_courses as $course)
                 @include('parts.course-item', $course)
             @endforeach
         </div>
@@ -30,7 +30,9 @@
 <section class="courses">
     <div class="main-wrap">
         <div class="courses-list">
-            @for ($i = 0; $i < 6; $i++) @include('parts.course-item') @endfor 
+             @foreach ($popular_courses as $course)
+                @include('parts.course-item')
+             @endforeach
         </div>
         <a href="#" class="btn btn-more">@lang('main.show_more')</a>
     </div>

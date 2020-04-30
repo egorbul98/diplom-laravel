@@ -10,7 +10,7 @@
     <div class="course-header-title">
       <h2 class="title">{{$course->__("title")}}</h2>
       <p class="category">{{$course->category->__("title")}}</p>
-      <p class="status">Курс в разработке</p>
+      <p class="status">{{$course->status->__("title")}}</p>
     </div>
     <div class="course-header-menu">
       <button type="button" class="btn">@lang('main.menu')</button>
@@ -19,6 +19,13 @@
         <p class="drop-down__item"><a href="{{route("profile.course.graph", $course->id)}}">@lang('main.show_module_trees')</a></p>
         <p class="drop-down__item"><a href="{{route("profile.course.edit", $course->id)}}">@lang('main.edit_description')</a></p>
         <p class="drop-down__item"><a href="{{route("profile.course.sections.edit", $course)}}">@lang('main.edit_course_sections')</a></p>
+
+        @if ($course->status->id==2 || $course->status->id==3)
+          <p class="drop-down__item"><a href="{{route("profile.course.unpublished", $course->id)}}">@lang('main.unpublish')</a></p>
+        @else 
+          <p class="drop-down__item"><a href="{{route("profile.course.published", $course->id)}}">@lang('main.post_course')</a></p>
+        @endif
+
         <p class="drop-down__item"><a id="delete-course" href="{{route("profile.course.destroy", $course)}}">@lang('main.delete')</a></p>
 
       </div>

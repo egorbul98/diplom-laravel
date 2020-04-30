@@ -5,15 +5,16 @@
 @section('content')
 
 @include('profile.edit-module.parts.modal', $step_types)
+@isset($section->id)
 @include('profile.edit-module.parts.modal-competences')
-
+@endisset
 
 <div class="margin-bottom-100">
     <div class="tabs-container">
         <div class="main-wrap">
 
             <section class="module-header-wrap">
-
+                
                 @isset($section->id)
 
                 <a href="{{route("profile.course.sections.edit", $section->course->id)}}">@lang('main.come_back')</a>
@@ -39,7 +40,10 @@
                                     </div>
                                 @endforeach
                             </h2>
-                            <button type="button" class="open-modal-competences btn">@lang('main.list_of_competencies_in_this_section')</button> 
+                            @isset($section->id)
+                                <button type="button" class="open-modal-competences btn">@lang('main.list_of_competencies_in_this_section')</button> 
+                            @endisset
+                            
                         </div>
                         
                         @isset($section->id)

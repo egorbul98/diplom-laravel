@@ -21,6 +21,7 @@ class CreateCoursesTable extends Migration
             $table->string("slug");
             $table->integer("category_id");
             $table->integer("author_id");
+            $table->tinyInteger("status_id")->default(1);
             
             $table->string("title_en")->nullable();
             $table->text("description_en")->nullable();

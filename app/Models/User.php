@@ -11,7 +11,7 @@ use App\Models\Pivots\Progress_Module;
 
 class User extends Authenticatable
 {
-
+    
     use Notifiable;
 
     /**
@@ -20,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', "lastname"
+        'name', 'email', 'password', "lastname", "about", "language", "image"
     ];
 
     /**
@@ -40,6 +40,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'role_user');
+    }
+   
+
     public function fullname()
     {
         return $this->name." ".$this->lastname;
@@ -139,12 +146,13 @@ class User extends Authenticatable
 
     public function competences_out_for_course($course_id) //компетенции, которые освоил user в данном курсе
     {
-        return DB::table('competences')->select("competences.title")
-            ->join("competence_user", "competence_user.competence_id", "=", "competences.id")
-            ->join("sections", "competences.section_id", "=", "sections.id")
-            ->where("sections.course_id", $course_id)
-            ->where("competence_user.user_id", $this->id)
-            ->groupBy("competences.title")
-            ->get();
+        return Competence::select("competences.*")
+        ->join("competence_user", "competence_user.competence_id", "=", "competences.id")
+        ->join("sections", "competences.section_id", "=", "sections.id")
+        ->where("sections.course_id", $course_id)
+        ->where("competence_user.user_id", $this->id)
+        ->groupBy("competences.title")
+        ->get();
+      
     }
 }

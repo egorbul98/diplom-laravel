@@ -32,7 +32,7 @@ class UsersSeeder extends Seeder
             ],
         ];
 
-        for ($i=0; $i < 10; $i++) { 
+        for ($i=0; $i < 20; $i++) { 
             $name = "User {$i}";
             $lastname = "Lastnameser";
             $email = "vasi{$i}@mail.ru";

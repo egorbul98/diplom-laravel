@@ -8,7 +8,7 @@ use App\Models\Test;
 use App\Models\Module;
 use App\Models\TestSection;
 use Illuminate\Http\Request;
-use DB, Storage, Auth;
+use DB, Storage, Auth, App;
 
 class AjaxTestController extends Controller
 {
@@ -31,7 +31,7 @@ class AjaxTestController extends Controller
         }
         DB::table("answer_test_sections")->insert($answerTestSections);
 
-        return response()->json(["msg" => "Успешно сохранено"], 200);
+        return response()->json(["msg" => trans('messages.saved_successfully')], 200);
     }
 
     public function deleteTestSection(Request $request)
@@ -46,7 +46,7 @@ class AjaxTestController extends Controller
         }
         $testSection->delete();
 
-        return response()->json(["msg" => "Успешно удалено"], 200);
+        return response()->json(["msg" => trans('messages.successfully_deleted')], 200);
     }
 
     public function addTestSection(Request $request)
@@ -158,8 +158,12 @@ class AjaxTestController extends Controller
         $modules_test_ids = $test->getModulesId();
         $user_id = Auth::user()->id;
         
-        $modules = Module::select(["id", "title"])->where("title", "like", "%".$data["text"]."%")->where("author_id", $user_id)->whereNotIn("id",$modules_test_ids)->get(); //Получаем модули
-
+        $locale = App::getLocale();
+        if($locale=="ru" || $locale==null){
+            $modules = Module::select(["id", "title"])->where("title", "like", "%".$data["text"]."%")->where("author_id", $user_id)->whereNotIn("id",$modules_test_ids)->get(); //Получаем модули
+        }else{
+            $modules = Module::select(["id", "title_en as title"])->where("title_en", "like", "%".$data["text"]."%")->where("author_id", $user_id)->whereNotIn("id",$modules_test_ids)->get(); //Получаем модули
+        }
 
         return response()->json(["modules"=>$modules], 200);
     }
@@ -167,8 +171,13 @@ class AjaxTestController extends Controller
     {
         $data = $request->all();
         $user_id = Auth::user()->id;
-        $tests = Test::select(["id", "title"])->where("title", "like", "%".$data["text"]."%")->where("author_id", $user_id)->get(); //Получаем тесты
-
+        $locale = App::getLocale();
+        if($locale=="ru" || $locale==null){
+            $tests = Test::select(["id", "title"])->where("title", "like", "%".$data["text"]."%")->where("author_id", $user_id)->get(); //Получаем тесты
+        }else{
+            $tests = Test::select(["id", "title_en as title"])->where("title_en", "like", "%".$data["text"]."%")->where("author_id", $user_id)->get(); //Получаем тесты
+        }
+        
         return response()->json(["tests"=>$tests], 200);
     }
 

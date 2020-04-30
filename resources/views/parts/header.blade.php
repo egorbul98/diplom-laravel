@@ -46,13 +46,16 @@
                         <div class="user">
                             <div class="user__name"><span class="lastname"></span><span class="firstname">{{$user->name}}</span></div>
                             <div class="icon"><i class="fas fa-chevron-down"></i></div>
-                            <div class="drop-down shadow-light">
-                            <div class="drop-down__item"><a href="{{route("profile")}}">@lang('main.personal_area')</a></div>
+                            <div class="drop-down shadow-light--y">
+                                <div class="drop-down__item"><a href="{{route("profile")}}">@lang('main.personal_area')</a></div>
+                                @if ($user->roles()->where("id", 2)->first()!=null)
+                                    <div class="drop-down__item"><a href="{{route("admin.listUsers")}}">@lang('main.admin_panel')</a></div>
+                                @endif
+                                
                                 <div class="drop-down__item"><a href="{{route("logout")}}"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();">@lang('main.logout')</a></div>
                             </div>
                         </div>
                         <a href="{{route("logout")}}" class="btn" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">@lang('main.logout')</a>
-
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>
@@ -68,7 +71,7 @@
             <div class="header-middle">
                 <nav class="nav">
                     <div class="nav__item"><a href="#">@lang('main.catalog')</a>
-                        <div class="nav__item-drop drop">
+                        <div class="nav__item-drop drop shadow-light--y">
                             @foreach ($categories as $category_item)
                                 <div class="drop__item"><a href="{{route("category", $category_item->slug)}}">{{$category_item->__("title")}}</a></div>
                              @endforeach

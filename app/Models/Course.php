@@ -15,8 +15,18 @@ class Course extends Model
     use TranslateTable;
 
     protected $fillable = [
-        'title', 'description', 'content', "slug", "category_id", "author_id", "image", "knowledge_to_repeat", 'title_en', 'description_en', 'content_en'
+        'title', 'description', 'content', "slug", "category_id", "author_id", "image", "knowledge_to_repeat", 'title_en', 'description_en', 'content_en', "status_id"
     ];
+
+    public function visits()
+    {
+        return $this->belongsToMany(User::class, 'visits');
+    }
+   
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
+    }
 
     public function author()
     {

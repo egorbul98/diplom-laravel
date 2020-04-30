@@ -6,7 +6,7 @@
     bottom: 0;
     background-color: $col-modal-bg;
     z-index: 10;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
 
     &--hidden {
         opacity: 0;
@@ -17,8 +17,8 @@
         position: relative;
     }
 
-    &.modal-review{
-        .modal-window{
+    &.modal-review {
+        .modal-window {
             width: 60%;
 
             @include media-max($S) {
@@ -31,12 +31,12 @@
 
         }
 
-        .form-field{
+        .form-field {
             margin-bottom: 10px;
         }
 
-        .form-field-rating{
-            @include media-max($XS){
+        .form-field-rating {
+            @include media-max($XS) {
                 justify-content: space-between;
             }
         }
@@ -72,8 +72,8 @@
                 margin-bottom: 10px;
             }
 
-            
-            a{
+
+            a {
                 text-decoration-line: underline;
                 text-decoration: underline;
             }
@@ -129,6 +129,7 @@
         cursor: pointer;
         background-color: transparent;
         transition: background-color 0.25s ease;
+
         &:hover {
             background-color: $col-border-op;
         }
@@ -162,14 +163,30 @@
         }
     }
 
-  
+
 }
 
-.modal-competences{
-    .header-btns{
+.modal-competences {
+    .header-btns {
         margin-bottom: 10px;
-        .tabs-btns{
+
+        .tabs-btns {
             margin: 0;
         }
+    }
+}
+
+.modal-roles {
+
+    .form-checkbox {
+        display: block;
+
+
+        .label {
+            border-radius: 0;
+            border: none;
+            border-bottom: 1px solid #ffffff;
+        }
+        
     }
 }

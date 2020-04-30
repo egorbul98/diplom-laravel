@@ -2,9 +2,9 @@
   <div class="recommend">
       <div class="main-wrap">
           <div class="recommend-wrap">
-              <h2 class="title">@lang('main.recommended_for_study')</h2>
+              <h1 class="title">@lang('main.recommended_for_study')</h1>
               <div class="recommend-list">
-                @foreach ($courses as $course)
+                @foreach ($recommended_courses as $course)
                   @include('parts.recomend-item')
                 @endforeach
               </div>

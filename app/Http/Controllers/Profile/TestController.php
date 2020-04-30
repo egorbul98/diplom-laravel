@@ -82,7 +82,7 @@ class TestController extends Controller
     public function edit(Test $test)
     {
         if (Gate::denies('edit-test', $test)) {
-            return redirect()->back()->withErrors(["error" => "Недостаточно прав"]);
+            return redirect()->back()->withErrors(["error" => trans('messages.not_enough_rights')]);
         }
         return view("profile.test.create", compact("test"));
     }
@@ -101,7 +101,7 @@ class TestController extends Controller
         $result = $test->update($data);
 
         if ($result) {
-            return back()->with(["success" => "Успешно сохранено"]);
+            return back()->with(["success" => trans('messages.saved_successfully')]);
         }
     }
 
@@ -110,7 +110,7 @@ class TestController extends Controller
     {
         $test = Test::findOrFail($id);
         if(Gate::denies("edit-test", $test)){
-            return back()->with(["error" => "Недостаточно прав"]);
+            return back()->with(["error" => trans('messages.not_enough_rights')]);
         }
         
         // $test->test_sections()->answers()->delete();
@@ -125,6 +125,6 @@ class TestController extends Controller
         }
         $test->delete();
 
-        return back()->with(["success" => "Удаление прошло успешно"]);
+        return back()->with(["success" => trans('messages.successfully_deleted')]);
     }
 }
