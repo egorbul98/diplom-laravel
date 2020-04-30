@@ -58,17 +58,17 @@ class TestController extends Controller
         $answerTestSections = [];
         $answerTestSections[] = [
             "test_section_id"=>$testSection->id,
-            "value" => "Первый ответ",
+            "value" => trans('messages.first_answer'),
             "correct" => 1,
         ];
         $answerTestSections[] = [
             "test_section_id"=>$testSection->id,
-            "value" => "Второй ответ",
+            "value" => trans('messages.second_answer'),
             "correct" => 0,
         ];
         DB::table("answer_test_sections")->insert($answerTestSections);
 
-        return redirect()->route("profile.test.edit", $test)->with(['success' => "Тест успешно добавлен"]);
+        return redirect()->route("profile.test.edit", $test)->with(['success' => trans('messages.upload_successful')]);
         // return redirect()->route("profile.test.edit", $test);
         // return view("profile.test.create", compact("test"));
     }

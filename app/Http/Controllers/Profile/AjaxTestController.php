@@ -60,12 +60,12 @@ class AjaxTestController extends Controller
         $answerTestSections = [];
         $answerTestSections[] = [
             "test_section_id" => $testSection->id,
-            "value" => "Первый ответ",
+            "value" => trans('messages.first_answer'),
             "correct" => 1,
         ];
         $answerTestSections[] = [
             "test_section_id" => $testSection->id,
-            "value" => "Второй ответ",
+            "value" => trans('messages.second_answer'),
             "correct" => 0,
         ];
 
@@ -129,7 +129,7 @@ class AjaxTestController extends Controller
         $module->test_id = $data["test_id"];
         $module->update();
         // dd($module->tests);
-        return response()->json(["msg"=>"Модуль успешно добавлен", "module"=>$module], 200);
+        return response()->json(["msg"=>trans('messages.upload_successful'), "module"=>$module], 200);
     }
     public function detachModule(Request $request)
     {
@@ -148,7 +148,7 @@ class AjaxTestController extends Controller
         $module->test_id = $test->id;
         $module->update();
 
-        return response()->json(["msg"=>"Тест успешно добавлен", "test"=>$test], 200);
+        return response()->json(["msg"=>trans('messages.upload_successful'), "test"=>$test], 200);
     }
 
     public function searchModule(Request $request)

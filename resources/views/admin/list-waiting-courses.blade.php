@@ -12,7 +12,7 @@
 
     <main class="profile-content">
 
-      <h3 class="title">Курсы на публикацию</h3>
+      <h3 class="title">@lang('main.publishing_courses')</h3>
 
       <div class="table-responsive">
         <table class="table">
@@ -34,7 +34,7 @@
                 
               <td class="vertical-m">{{$timeUpdated}}</td>
                 
-              <td class="table-btn vertical-m"><a href="{{route("admin.publishedCourse", $course->id)}}" class="btn">Опубликовать</a></td>
+              <td class="table-btn vertical-m"><a href="{{route("admin.publishedCourse", $course->id)}}" class="btn">@lang('main.publish')</a></td>
             </tr>
             @endforeach
             

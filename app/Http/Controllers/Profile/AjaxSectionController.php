@@ -17,7 +17,7 @@ class AjaxSectionController extends Controller
         $section = new Section($data);
         $section->save();
 
-        return response()->json(["id"=>$section->id, "msg"=>"Раздел успешно добавлен"], 200);
+        return response()->json(["id"=>$section->id, "msg"=>trans('messages.upload_successful')], 200);
     }
     
     public function delete(Request $request)
@@ -27,7 +27,7 @@ class AjaxSectionController extends Controller
         $section = Section::find($id);
         $section->delete();
 
-        return response()->json(["msg"=>"Раздел успешно удален"], 200);
+        return response()->json(["msg"=>trans('messages.successfully_deleted')], 200);
     }
 
     public function listModules(Request $request)
@@ -64,7 +64,7 @@ class AjaxSectionController extends Controller
         $module = Module::find($data["module_id"]);
         $module->sections()->attach($data["section_id"], ["course_id"=>$data["course_id"]]);
        
-        return response()->json(["msg"=>"Модуль успешно добавлен", "module"=>$module, "step_count"=>$module->steps->count()], 200);
+        return response()->json(["msg"=>trans('messages.upload_successful'), "module"=>$module, "step_count"=>$module->steps->count()], 200);
     }
 
    

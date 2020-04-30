@@ -14,7 +14,7 @@
 
     <main class="profile-content">
 
-      <h3 class="title">Все пользователи</h3>
+      <h3 class="title">@lang('main.a_list_of_users')</h3>
       <form class="form-filter-users form" action="" method="GET">
         <div class="form-field">
           <input type="text" class="input-control" name="text" placeholder="Поиск по имени" value="@if (request()->has("text")){{request()->all()["text"]}}@endif">
@@ -29,7 +29,7 @@
             @endforeach
             
           </div>
-          <button class="btn btn-filter" type="submit">Искать</button>
+          <button class="btn btn-filter" type="submit">@lang('main.search')</button>
         </div>
       </form>
       <div class="table-responsive">
@@ -37,10 +37,10 @@
           <thead>
             <tr>
               <th></th>
-              <th>Имя</th>
-              <th>Роли</th>
-              <th>Дата регистрации</th>
-              <th>Назначить роль</th>
+              <th>@lang('main.name')</th>
+              <th>@lang('main.roles')</th>
+              <th>@lang('main.registration_date')</th>
+              <th>@lang('main.assign_role')</th>
             </tr>
           </thead>
           <tbody>
@@ -66,7 +66,7 @@
               </td>
               {{-- <td class="profile-content-table-course__title">{{$user_item->created_at->format("d.m.Y")}}</td> --}}
               <td>{{$timeReg}}</td>
-              <td class="table-btn"><a href="#" class="btn btn-add-role" data-user-id="{{$user_item->id}}">Назначить</a></td>
+              <td class="table-btn"><a href="#" class="btn btn-add-role" data-user-id="{{$user_item->id}}">@lang('main.assign')</a></td>
             </tr>
             @endforeach
             

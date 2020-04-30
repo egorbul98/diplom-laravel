@@ -2,7 +2,7 @@
 {{-- <div class="modal hidden modal-roles"> --}}
   <div class="modal-window">
       <div class="modal-inner">
-        <h2 class="title center"><span class="username" data-user-id="">Пользователь</span><div>@lang('main.assign_roles_to_user') </div></h2>
+        <h2 class="title center"><span class="username" data-user-id="">@lang('main.user')</span><div>@lang('main.assign_roles_to_user') </div></h2>
        
           <form class="form form-roles" action="" type="POST">
             <input type="hidden" class="user_id" name="user_id" value="">

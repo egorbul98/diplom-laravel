@@ -16,7 +16,7 @@ class AjaxModuleController extends Controller
         $module = new Module($data);
         $module->save();
         $module->sections()->attach($data["section_id"], ["course_id"=>$data["course_id"]]);
-        return response()->json(["id"=>$module->id, "msg"=>"Модуль успешно добавлен"], 200);
+        return response()->json(["id"=>$module->id, "msg"=>trans('messages.upload_successful')], 200);
     }
     public function delete(Request $request)
     {
@@ -26,7 +26,7 @@ class AjaxModuleController extends Controller
         $module->sections()->detach($data["section_id"]);
         // $module->delete();
 
-        return response()->json(["msg"=>"Модуль успешно удален"],  200);
+        return response()->json(["msg"=>trans('messages.successfully_deleted')],  200);
     }
     
 }

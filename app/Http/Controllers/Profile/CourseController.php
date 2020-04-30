@@ -61,7 +61,7 @@ class CourseController extends BaseController
         $course->save();
 
         if ($course) {
-            return redirect()->route("profile.course.edit", compact("course"))->with(['success' => "Курс успешно добавлен"]);
+            return redirect()->route("profile.course.edit", compact("course"))->with(['success' => trans('messages.upload_successful')]);
         }
     }
 
@@ -105,7 +105,7 @@ class CourseController extends BaseController
         $course = Course::find($id);
 
         if (empty($course)) {
-            return back()->withErrors(["error" => "Запись id='{$id}' не найдена"]);
+            return back()->withErrors(["error" => trans('messages.record_not_found', ["id"=>$id])]);
         }
 
         $data = $request->except("image");

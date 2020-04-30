@@ -25,7 +25,7 @@ class AjaxCompetenceController extends Controller
         $competence = Competence::find($id);
         $competence->delete();
 
-        return response()->json("Компетенция успешно удалена", 200);
+        return response()->json(trans('messages.successfully_deleted'), 200);
     }
 
     public function saveCompetences(Request $request)
@@ -53,7 +53,7 @@ class AjaxCompetenceController extends Controller
         // $competence = Competence::find($id);
         // $competence->delete();
 
-        // return response()->json("Компетенция успешно удалена", 200);
+        // return response()->json(trans('messages.successfully_deleted'), 200);
     }
   
 

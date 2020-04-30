@@ -20,7 +20,7 @@ class StepController extends BaseController
     {
         
         if ($step_type_id <= 0 && $step_type_id >= 4) {
-            return back()->withErrors(["error"=>"Ошибка создания шага"]);
+            return back()->withErrors(["error"=>trans('messages.error_creating_step')]);
         }
         $module = Module::find($module_id);
         if(Gate::denies('edit-module', [$module])){
@@ -86,6 +86,6 @@ class StepController extends BaseController
         $step->delete();
 
         // return back()->route("profile.course.module.edit", [$module, $section]);
-        return back()->with(["success"=>"Шаг успешно удален"]);
+        return back()->with(["success"=>trans('messages.step_successfully_deleted')]);
     }
 }

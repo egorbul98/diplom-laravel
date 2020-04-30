@@ -52,6 +52,15 @@ return [
     'admin_panel'=>'Административная панель',
     'assign_roles_to_user'=>'Назничить роли пользователю',
     'course_published'=>'Курс опубликован',
+    'user'=>'Пользователь',
+    'a_list_of_users'=>'Список пользователей',
+    'publishing_courses'=>'Курсы на публикацию',
+    'name'=>'Имя',
+    'roles'=>'Роли',
+    'registration_date'=>'Дата регистрации',
+    'assign_role'=>'Назначить роль',
+    'assign'=>'Назначить',
+    'publish'=>'Опубликовать',
 
     //profile
     

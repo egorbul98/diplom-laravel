@@ -55,7 +55,7 @@ class AdminController extends Controller
             $user = User::findOrFail($data["user_id"]);
             return response()->json(["roles"=>$user->roles, "username"=>$user->fullname(), "user_id"=>$user->id], 200);
         }else{
-            return response()->json(["msg"=>"Ошибка получения данных"], 400);
+            return response()->json(["msg"=>trans('messages.error_receiving_data')], 400);
         }
     }
 //ajax
@@ -70,7 +70,7 @@ class AdminController extends Controller
             $user->roles()->attach($data["roles"]);
             return response()->json(["msg"=>trans('messages.saved_successfully')], 200);
         }else{
-            return response()->json(["msg"=>"Ошибка получения данных"], 400);
+            return response()->json(["msg"=>trans('messages.error_receiving_data')], 400);
         }
     }
 

@@ -48,7 +48,21 @@ return [
     'module_name'=>'Module name',
     'enter_a_question_text'=>'Enter the question text',
     'enter_your_answer'=>'Enter your answer',
-    
+
+
+    //admin
+    'admin_panel'=>'Admin panel',
+    'assign_roles_to_user'=>'Assign Roles to User',
+    'course_published'=>'Course published',
+    'user'=>'User',
+    'a_list_of_users'=>'a list of users',
+    'publishing_courses'=>'Publishing Courses',
+    'name'=>'Name',
+    'roles'=>'Roles',
+    'registration_date'=>'Registration date',
+    'assign_role'=>'Assign role',
+    'assign'=>'Assign',
+    'publish'=>'Publish',
 
     //profile
 

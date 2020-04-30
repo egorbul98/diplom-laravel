@@ -194,9 +194,9 @@ class TrainingController extends Controller
       }
 
       if ($check) {
-         return back()->with(["success" => "Введен верный ответ!"]);
+         return back()->with(["success" => trans('messages.the_correct_answer_is_entered')]);
       } else {
-         return back()->withErrors("Введен неверный ответ");
+         return back()->withErrors(trans('messages.the_incorrect_answer_is_entered'));
       }
    }
    public function test($course_id, $section_id, $module_id, $step_num = 0)
@@ -211,7 +211,7 @@ class TrainingController extends Controller
    {
       $data = $request->all();
       if (!isset($data["answer"])) {
-         return back()->withErrors(["error" => "Необходимо ответить на вопросы"]);
+         return back()->withErrors(["error" => trans('messages.need_to_answer_questions')]);
       }
 
       $test = Test::findOrFail($data["test_id"]);
@@ -256,14 +256,14 @@ class TrainingController extends Controller
          // $module->test_completed()->wherePivot('user_id', $user->id)->detach($test->id);
          $module->test_completed()->attach($test->id, ["user_id" => $user->id]);
          session(["test_id{$test->id}" => '1']); //Записываем в сессию то, что данный тест пройден
-         return redirect()->route("training.module", [$course->id, $section->id, $module->id, $data["step_num"]])->with(["success" => "Тест успешно пройден"]);
+         return redirect()->route("training.module", [$course->id, $section->id, $module->id, $data["step_num"]])->with(["success" => trans('messages.test_passed_successfully')]);
       } elseif($procentCorrent > $test->percent_correct_answers && $module->test_completed()->wherePivot('user_id', $user->id)->wherePivot("test_id", $test->id)->first() == null){
          $module->test_completed()->attach($test->id, ["user_id" => $user->id]);
          session(["test_id{$test->id}" => '1']); //Записываем в сессию то, что данный тест пройден
-         return redirect()->route("training.module", [$course->id, $section->id, $module->id, $data["step_num"]])->with(["success" => "Тест успешно пройден"]);
+         return redirect()->route("training.module", [$course->id, $section->id, $module->id, $data["step_num"]])->with(["success" => trans('messages.test_passed_successfully')]);
       }
       else {
-         return redirect()->route("training.module", [$course->id, $section->id, $module->id, $data["step_num"]])->withErrors(["error" => "Тест не пройден. Вы ответили правильно на {$procentCorrent}% вопросов, а необходимо {$test->percent_correct_answers}%"]);
+         return redirect()->route("training.module", [$course->id, $section->id, $module->id, $data["step_num"]])->withErrors(["error" => trans('messages.the_test_failed', ["num"=>$procentCorrent, "total_num"=>$test->percent_correct_answers])]);
       }
    }
    public function moduleCompleted(Request $request) //Завершение модуля
@@ -275,13 +275,13 @@ class TrainingController extends Controller
       $user = Auth::user();
       //Если имеется тест, то редирект на тест собсна
       if (isset($module->test) && $module->test_completed->where("id", $module->test_id)->first() == null) {
-         return redirect()->route("training.test", [$course->id, $section->id, $module->id])->with(["info" => "Для прохождения модуля, необходимо пройти тест"]);
+         return redirect()->route("training.test", [$course->id, $section->id, $module->id])->with(["info" => trans('messages.to_pass_the_module_you_must_pass_the_test')]);
       }
       $steps_progress = $module->progress_steps_for_user($user->id)->get(); //шаги, пройденные пользователем
 
       foreach ($steps_progress as $step) {
          if (!in_array($step->id, $steps_ids)) {
-            return back()->withErrors("Вы прошли не все шаги!");
+            return back()->withErrors(trans('messages.you_didn’t_go_all_the_steps'));
          }
       }
 
@@ -322,7 +322,7 @@ class TrainingController extends Controller
 
 
 
-      return redirect()->route("training.section", [$course->id, $section->id])->with(["success" => "Вы успешно прошли модуль"]);
+      return redirect()->route("training.section", [$course->id, $section->id])->with(["success" => trans('messages.you_have_successfully_completed_the_module')]);
    }
 
    public function forgotTest($course_id) //фОРМИРОВАНИЕ ТЕСТА
@@ -352,7 +352,7 @@ class TrainingController extends Controller
       $test_sections = $request->except("course_id", "_token", "test_questions_count");
       $user = Auth::user();
       if (count($test_sections) == 0) {
-         return back()->withErrors("Необходимо ответить на вопросы");
+         return back()->withErrors(trans('messages.need_to_answer_questions'));
       }
 
       $arr_correct_answers = [];
@@ -463,7 +463,7 @@ class TrainingController extends Controller
             }
          }
       }
-      return redirect()->route("training.course", [$course->id])->with(["success" => "Тест успешно пройден. Вы правильно ответили на " . $totalResult . "% вопросов."]);
+      return redirect()->route("training.course", [$course->id])->with(["success" => trans('messages.need_to_answer_questions', ["num"=>$totalResult])]);
    }
 
    private function getKnowledge($time, $forget_factor)
