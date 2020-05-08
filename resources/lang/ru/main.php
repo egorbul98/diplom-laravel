@@ -35,6 +35,7 @@ return [
     'what_do_you_learn'=>'Чему вы научитесь',
     'new_first'=>'Сначала новые',
     'first_old'=>'Сначала старые',
+    'popular_first'=>'Сначала популярные',
 
     'password'=>'Пароль',
     'username'=>'Имя пользователя',
@@ -82,6 +83,7 @@ return [
     'module_trees'=>'Деревья модулей',
     'edit_course_sections'=>'Редактировать разделы курса',
     'secitions_modules'=>'модуль|модуля|модулей',
+    'module'=>'Модуль',
     'short_description'=>'Краткое описание',
     'about_the_course'=>'О курсе',
     'select_a_category'=>'Выберите категорию',
@@ -146,6 +148,8 @@ return [
     'save_question'=>'Сохранить вопрос',
     'delete_question'=>'Удалить вопрос',
     'add_next_question'=>'Добавить следующий вопрос',
+    'new_question'=>'Новый вопрос',
+    'repeat_module_after_learning_it'=>'Повторять модуль после его изучения',
 
 
     'training'=>'Обучение',

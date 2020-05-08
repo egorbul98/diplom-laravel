@@ -1496,6 +1496,7 @@ input#image {
 
 .form-checkbox input[type=checkbox] {
   display: none;
+  cursor: pointer;
 }
 
 .form-checkbox input[type=checkbox]:checked + .label {
@@ -1651,6 +1652,10 @@ input#image {
   .form-filter-users .checkbox-item:first-child .label {
     border-radius: 0;
   }
+}
+
+input[type=checkbox] {
+  cursor: pointer;
 }
 
 .modal {
@@ -2010,6 +2015,12 @@ input#image {
   z-index: 1;
 }
 
+@media (max-width: 576px) {
+  .header-top .right-block .auth .drop-down {
+    right: auto;
+  }
+}
+
 .header-top .right-block .auth .drop-down__item {
   margin-top: 10px;
 }
@@ -2097,6 +2108,12 @@ input#image {
 
 .header-middle .form {
   margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+  .header-middle .form {
+    margin-top: 0;
+  }
 }
 
 .header-middle .form-field {
@@ -3967,6 +3984,12 @@ footer .form-field {
   font-size: 14px;
 }
 
+@media (max-width: 768px) {
+  .lesson-content__tests .test .section {
+    font-size: 12px;
+  }
+}
+
 .lesson-content__module-wrap,
 .lesson-content__learned-modules {
   margin-top: 20px;
@@ -4256,7 +4279,6 @@ footer .form-field {
 }
 
 .lesson-content .info-wrap .competence:last-child {
-  border: none;
   margin-bottom: 0;
 }
 
@@ -5328,6 +5350,10 @@ footer .form-field {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+}
+
+.input-check-repeat-module {
+  margin-top: 10px;
 }
 
 .steps-block {

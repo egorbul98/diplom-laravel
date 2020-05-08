@@ -64992,7 +64992,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var competencesIn = [];
 var competencesOut = [];
-var competences = []; //Проверка на наличие нажатых checkboxes
+var competences = [];
+var lang = document.getElementsByTagName("html")[0].getAttribute("lang"); //Проверка на наличие нажатых checkboxes
 
 jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(".select-competences__right .checkboxes input").each(function (index, element) {
@@ -65101,6 +65102,7 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(".module-header .btn-save-module")
   var $parent = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.module-header');
   var moduleId = $parent.attr("data-module-id");
   var moduleTitle = $parent.find(".module-header-item__title-input").val();
+  var repeat = $parent.find("#repeat").prop("checked");
   var competencesOutArr = [];
   var competencesInArr = [];
 
@@ -65127,7 +65129,8 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(".module-header .btn-save-module")
     "competences_out": competencesOutArr,
     "competences_in": competencesInArr,
     "title": moduleTitle,
-    "id": moduleId
+    "id": moduleId,
+    "repeat": repeat
   };
 
   if (moduleTitle != '') {
@@ -65157,7 +65160,8 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()("#btn-attach-test").on("click", fu
   var url = "/profile/ajax-get-tests-for-module";
   var type = "GET";
   var data = {
-    "module_id": moduleId
+    "module_id": moduleId,
+    "lang": lang
   };
   jquery__WEBPACK_IMPORTED_MODULE_0___default.a.ajax({
     headers: {
@@ -65185,7 +65189,8 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(".edit-module .modal-list-modules"
   var type = "POST";
   var data = {
     "test_id": testId,
-    "module_id": moduleId
+    "module_id": moduleId,
+    "lang": lang
   };
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(".modal-modules").addClass("modal--hidden");
   jquery__WEBPACK_IMPORTED_MODULE_0___default.a.ajax({
@@ -65441,20 +65446,35 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _fun__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../fun */ "./resources/js/fun.js");
 
- //удаление ответа
+ //checkbox all languages устанавливает галки на всех чекбоксах данного ответа в разных табах
+
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(".answers-list-inner").on("input", "input[type='checkbox']", function () {
+  var answerId = this.closest(".answer").getAttribute("data-answer-id");
+  var arrAnswers = document.querySelectorAll(".answer[data-answer-id='".concat(answerId, "']"));
+
+  for (var i = 0; i < arrAnswers.length; i++) {
+    var answer = arrAnswers[i];
+    var checkbox = answer.querySelector("input[type='checkbox']");
+    checkbox.checked = this.checked;
+  }
+}); //удаление ответа
 
 jquery__WEBPACK_IMPORTED_MODULE_0___default()(".answers-list-inner").on("click", ".icon--delete", function () {
   var lengthAnswers = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest(".answers-list-inner").find(".answer").length;
 
   if (lengthAnswers > 2) {
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest(".answer").remove();
+    var answerId = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest(".answer").attr("data-answer-id");
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(".answer[data-answer-id='".concat(answerId, "']")).remove(); //Удаляем на всех языках
   }
+
+  renderIdAnswers();
 }); //Создание ответа
 
 jquery__WEBPACK_IMPORTED_MODULE_0___default()(".answers-list-inner").on("click", ".icon--add", function () {
-  var $wrap = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest(".answers-list-inner");
-  var str = "\n  <div class=\"answer\">\n  <div class=\"answer-inner\">\n    <div class=\"check\"><input type=\"checkbox\" name=\"checkbox\" value=\"\"></div>\n    <input type=\"text\" name=\"text\" value=\"\" class=\"input-control text\">\n  </div>\n  <div class=\"answer-icon-wrap\">\n    <div class=\"icon icon--delete\"><i class=\"fas fa-times\"></i></div>\n    <div class=\"icon icon--add\"><i class=\"fas fa-plus\"></i></div>\n  </div>\n</div>\n  ";
+  var $wrap = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".answers-list-inner");
+  var str = "\n    <div class=\"answer\">\n    <div class=\"answer-inner\">\n        <div class=\"check\"><input type=\"checkbox\" name=\"checkbox\" value=\"\"></div>\n        <input type=\"text\" name=\"text\" value=\"\" class=\"input-control text\">\n    </div>\n    <div class=\"answer-icon-wrap\">\n        <div class=\"icon icon--delete\"><i class=\"fas fa-times\"></i></div>\n        <div class=\"icon icon--add\"><i class=\"fas fa-plus\"></i></div>\n    </div>\n    </div>\n    ";
   $wrap.append(str);
+  renderIdAnswers();
 }); //Сохранение картинки
 
 jquery__WEBPACK_IMPORTED_MODULE_0___default()(".edit-test #input-img").on("input", function () {
@@ -65482,14 +65502,14 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(".edit-test #input-img").on("input
       Object(_fun__WEBPACK_IMPORTED_MODULE_1__["notificationMessage"])(response, "error");
     }
   });
-}); //Сохранение секции
+}); //Сохранение секции (Вопроса в целом. вместе с ответами сохраняем)
 
 jquery__WEBPACK_IMPORTED_MODULE_0___default()(".edit-test .btn-save-test-section").on("click", function () {
   var arrObjAnswers = getInputsAnswers();
   var title = jquery__WEBPACK_IMPORTED_MODULE_0___default()("#test-section-title").val();
 
   if (!arrObjAnswers || title == '') {
-    console.log("Нужно заполнить все поля и выбрать правильный ответ");
+    Object(_fun__WEBPACK_IMPORTED_MODULE_1__["notificationMessage"])("Нужно заполнить все поля и выбрать правильный ответ", "error");
     return false;
   }
 
@@ -65639,12 +65659,14 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(".test-list").on("click", ".btn-de
 }); //Модалка модулей
 
 jquery__WEBPACK_IMPORTED_MODULE_0___default()(".test-list").on("click", ".btn-attach-test-module", function () {
+  var lang = document.getElementsByTagName("html")[0].getAttribute("lang");
   var $wrap = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".modal-modules .modal-list-modules");
   var testId = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr("data-test-id");
   var url = "/profile/ajax-get-modules-for-test";
   var type = "GET";
   var data = {
-    "test_id": testId
+    "test_id": testId,
+    "lang": lang
   };
   jquery__WEBPACK_IMPORTED_MODULE_0___default.a.ajax({
     headers: {
@@ -65665,6 +65687,7 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(".test-list").on("click", ".btn-at
 }); //Добавление  модуля к тесту
 
 jquery__WEBPACK_IMPORTED_MODULE_0___default()(".edit-test .modal-list-modules").on('click', '.modal-list-modules-item', function () {
+  var lang = document.getElementsByTagName("html")[0].getAttribute("lang");
   var moduleId = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr("data-module-id");
   var testId = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr("data-test-id");
   console.log(testId);
@@ -65673,7 +65696,8 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(".edit-test .modal-list-modules").
   var type = "POST";
   var data = {
     "test_id": testId,
-    "module_id": moduleId
+    "module_id": moduleId,
+    "lang": lang
   };
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(".modal-modules").addClass("modal--hidden");
   jquery__WEBPACK_IMPORTED_MODULE_0___default.a.ajax({
@@ -65737,30 +65761,38 @@ function renderModalListModules(arr, testId, $wrap) {
 }
 
 function getInputsAnswers() {
-  var $wrap = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".edit-test .answers-list-inner");
-  var inputs = $wrap.find(".text");
+  var $wrap = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".edit-test .answers-list-inner[data-lang='ru']");
+  var answers = $wrap.find(".answer");
   var arr = [];
   var isTrue = true;
   var val,
+      answerId,
       correct,
       sumCorrect = 0;
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()(inputs).each(function (index, element) {
-    val = jquery__WEBPACK_IMPORTED_MODULE_0___default()(element).val();
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(answers).each(function (index, answer) {
+    var obj = {};
+    var val = jquery__WEBPACK_IMPORTED_MODULE_0___default()(answer).find(".text").val();
+    answerId = answer.getAttribute("data-answer-id");
+    var arrayAnswersList = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".answers-list-inner[data-lang!='ru']");
+    arrayAnswersList.each(function (index, answerList) {
+      var lang = answerList.getAttribute("data-lang");
+      var value = answerList.querySelector(".answer[data-answer-id='".concat(answerId, "']")).querySelector(".text").value;
+      obj["value_" + lang] = value;
+    });
 
     if (val == '') {
       isTrue = false;
     }
 
-    correct = jquery__WEBPACK_IMPORTED_MODULE_0___default()(element).siblings(".check").find("input").prop("checked");
+    correct = jquery__WEBPACK_IMPORTED_MODULE_0___default()(answer).find("input[type='checkbox']").prop("checked");
 
     if (correct) {
       sumCorrect++;
     }
 
-    arr.push({
-      "value": val,
-      "correct": correct
-    });
+    obj.value = val;
+    obj.correct = correct;
+    arr.push(obj);
   });
 
   if (!isTrue || sumCorrect == 0) {
@@ -65773,25 +65805,52 @@ function getInputsAnswers() {
 
 function renderQuerstion(arrTestSection, arrAnswers) {
   var $wrap = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".edit-test .answers-list-inner");
+  $wrap.empty();
   var str = "";
-  console.log(arrTestSection);
   jquery__WEBPACK_IMPORTED_MODULE_0___default()("#input-img").val("");
   jquery__WEBPACK_IMPORTED_MODULE_0___default()("#test-section-title").val(arrTestSection.title);
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(".test-sections__img img").attr("src", arrTestSection.image);
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(".btn-save-test-section").attr("data-test-section-id", arrTestSection.id);
 
-  for (var i = 0; i < arrAnswers.length; i++) {
+  var _loop = function _loop(i) {
     var answer = arrAnswers[i];
-    str += "\n  <div class=\"answer\">\n  <div class=\"answer-inner\">\n  <div class=\"check\"><input type=\"checkbox\" name=\"checkbox\" value=\"\"";
+    $wrap.each(function (index, element) {
+      str = "";
+      var lang = element.getAttribute("data-lang");
+      var value;
 
-    if (answer.correct == 1) {
-      str += " checked ";
-    }
+      if (lang == "ru") {
+        value = answer.value;
+      } else {
+        value = answer["value_" + lang] == null ? "Answer ".concat(i + 1) : answer["value_" + lang];
+      }
 
-    str += "></div>\n      <input type=\"text\" name=\"text\" value=\"".concat(answer.value, "\" class=\"input-control text\">\n    </div>\n    <div class=\"answer-icon-wrap\">\n      <div class=\"icon icon--delete\"><i class=\"fas fa-times\"></i></div>\n      <div class=\"icon icon--add\"><i class=\"fas fa-plus\"></i></div>\n    </div>\n  </div>");
+      str += "\n            <div class=\"answer\"'>\n            <div class=\"answer-inner\">\n            <div class=\"check\"><input type=\"checkbox\" name=\"checkbox\" value=\"\"";
+
+      if (answer.correct == 1) {
+        str += " checked ";
+      }
+
+      str += "></div>\n                <input type=\"text\" name=\"text\" value=\"".concat(value, "\" class=\"input-control text\">\n                </div>\n                <div class=\"answer-icon-wrap\">\n                <div class=\"icon icon--delete\"><i class=\"fas fa-times\"></i></div>\n                <div class=\"icon icon--add\"><i class=\"fas fa-plus\"></i></div>\n                </div>\n            </div>");
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()(element).append(str);
+    });
+  };
+
+  for (var i = 0; i < arrAnswers.length; i++) {
+    _loop(i);
   }
 
-  $wrap.html(str);
+  renderIdAnswers();
+}
+
+function renderIdAnswers() {
+  var $tabs = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".answers-list .answers-list-inner");
+  $tabs.each(function (index, element) {
+    var $answers = jquery__WEBPACK_IMPORTED_MODULE_0___default()(element).find(".answer");
+    $answers.each(function (index, element) {
+      element.setAttribute("data-answer-id", index);
+    });
+  });
 }
 
 /***/ }),
@@ -77044,8 +77103,8 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(".edit-user #image").on("input", f
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! E:\openserver\ospanel\domains\courses\resources\js\index.js */"./resources/js/index.js");
-module.exports = __webpack_require__(/*! E:\openserver\ospanel\domains\courses\resources\sass\style.scss */"./resources/sass/style.scss");
+__webpack_require__(/*! E:\openServer\OSPanel\domains\courses\resources\js\index.js */"./resources/js/index.js");
+module.exports = __webpack_require__(/*! E:\openServer\OSPanel\domains\courses\resources\sass\style.scss */"./resources/sass/style.scss");
 
 
 /***/ })

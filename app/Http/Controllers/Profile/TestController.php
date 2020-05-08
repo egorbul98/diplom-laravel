@@ -53,6 +53,7 @@ class TestController extends Controller
         $testSection = new TestSection();
         $testSection->test_id = $test->id;
         $testSection->title = "Новый вопрос?";
+        $testSection->title_en = "New question";
         $testSection->save();
 
         $answerTestSections = [];

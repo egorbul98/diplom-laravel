@@ -244,7 +244,7 @@ input#image {
 
     input[type=checkbox] {
         display: none;
-
+        cursor: pointer;
         &:checked+.label {
             background-color: $col-btn;
 
@@ -385,4 +385,8 @@ input#image {
 
         
     }
+}
+
+input[type=checkbox]{
+    cursor: pointer;
 }

@@ -15,12 +15,14 @@ class AnswerTestSectionsSeeder extends Seeder
         for ($i=1; $i < 21; $i++) { 
             $answers[] = [
                 'test_section_id'=>$i,
-                'value'=>trans('messages.first_answer'),
+                'value'=>"Первый ответ",
+                'value_en'=>"First answer",
                 'correct'=>1,
             ];
             $answers[] = [
                 'test_section_id'=>$i,
-                'value'=>trans('messages.second_answer'),
+                'value'=>"Второй ответ",
+                'value_en'=>"Second answer",
                 'correct'=>0,
             ];
         }

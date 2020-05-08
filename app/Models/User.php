@@ -112,8 +112,7 @@ class User extends Authenticatable
 
     public function modules_forget_for_course($course_id) //carbon - Текущее время //Получаем модули, для которых уже подошел срок повторения
     {
-        return $this->belongsToMany(Module::class, 'progress_module')
-            ->withPivot("complete")->withPivot("repetition")->withPivot("section_id")->using(Progress_Module::class)->wherePivot('complete', 1)->wherePivot('course_id', $course_id)->wherePivot('repetition', '<=', new Carbon());
+        return $this->belongsToMany(Module::class, 'progress_module')->where("repeat", 0)->withPivot("complete")->withPivot("repetition")->withPivot("section_id")->using(Progress_Module::class)->wherePivot('complete', 1)->wherePivot('course_id', $course_id)->wherePivot('repetition', '<=', new Carbon());
     }
 
     public function modules_completed_for_section($section_id)

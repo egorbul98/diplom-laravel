@@ -21,7 +21,10 @@
           <td class="vertical-m">
             {{$timeUpdated}}
           </td>
-          <td class="vertical-m">Нет</td>
+          <td class="vertical-m">
+            
+            {{$course->status->__("title")}}
+          </td>
           
         <td class="table-btn vertical-m"><a href="{{route("profile.course.show", $course)}}" class="btn">@lang('main.go_to')</a></td>
         </tr>

@@ -17,6 +17,7 @@ class AjaxModuleDataController extends Controller
 
         $module = Module::find($data["id"]);
         $module->title = $data["title"];
+        $module->repeat = ($data["repeat"]== "true") ? 1 : 0;
         $module->update();
         
         $module->competences()->detach();

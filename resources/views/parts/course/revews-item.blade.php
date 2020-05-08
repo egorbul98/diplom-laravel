@@ -1,5 +1,6 @@
 <div class="reviews-item">
   <ul class="assessments">
+    {{-- @dd( $review) --}}
     @for ($i = 1; $i < 6 ; $i++)
       <li class=" @if($i <= $review->stars) active @endif"><i class="fas fa-star"></i></li>
     @endfor

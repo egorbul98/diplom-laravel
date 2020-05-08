@@ -4,7 +4,7 @@
 @section('class-body') edit-test @endsection
 
 @section('content')
-
+<div class="tabs-container">
 <section class="new-test">
     <div class="main-wrap">
         @if ($test->exists)
@@ -20,7 +20,7 @@
             <form class="form" action="{{route("profile.test.store")}}" method="POST">
                 @endif
                 @csrf
-                <div class="tabs-container">
+                
                     @include('parts.tabs-btns')
                     @foreach ($listLanguages as $lang)
                     @php $postfix = ($lang=="ru") ? '' : "_$lang" @endphp
@@ -84,17 +84,18 @@
 
                         <a href="{{route("profile.test.index")}}" class="btn">@lang('main.to_the_list_of_tests')</a>
                     </div>
-                </div>
+                
             </form>
 
     </div>
 </section>
 @if ($test->exists)
 
+
 <section class="test-sections margin-bottom-100" data-test-id="{{$test->id}}">
     <div class="main-wrap">
+        
         <h2 class="new-course__header">@lang('main.questions_and_answer_options')</h2>
-
 
         <div class="test-sections-links">
             @for ($i = 0; $i < count($test->test_sections); $i++)
@@ -105,59 +106,72 @@
                 @endfor
 
         </div>
+       
 
-        <div class="test-sections-content">
-            <div class="margin-bottom-20">
-                <h4 class="title">@lang('main.question_text')</h4>
-                <div class="form-field">
-                    <input type="text" class="input-control" id="test-section-title" name="title" value=""
-                        maxlength="400" placeholder="@lang('main.enter_a_question_text')?">
-                </div>
-            </div>
+       
+            <div class="test-sections-content">
+                <div class="margin-bottom-20">
+                    <h4 class="title">@lang('main.question_text')</h4>
+                    <div class="form-field">
+                        @foreach ($listLanguages as $lang)
+                        @php $postfix = ($lang=="ru") ? '' : "_$lang" @endphp
+                        <div class="tab  @if ($locale == $lang || ($locale == null && $lang=="ru")) tab--active @endif " data-tab="{{$lang}}">
 
-            <div class="test-sections__img-wrap">
-                <div class="form-field">
-                    <label for="input-img" class="img-input">
-                        <h4>@lang('main.choose_a_picture')</h4>
-                    </label>
-                    <input style="display: none" type="file" class="input-img" id="input-img" name="image"
-                        multiple="multiple">
-                </div>
-                <div class="test-sections__img">
-                    <img src="" alt="">
-                </div>
-            </div>
+                        <input type="text" class="input-control" id="test-section-title" name="title{{$postfix}}" value=""
+                            maxlength="400" placeholder="@lang('main.enter_a_question_text')?">
 
-            <div class="answers-list">
-                <p>@lang('main.correct')</p>
-                <div class="answers-list-inner">
-
-                    <div class="answer">
-                        <div class="answer-inner">
-                            <div class="check"><input type="checkbox" name="checkbox" value=""></div>
-                            <input type="text" name="text" value="" class="input-control text">
-                        </div>
-                        <div class="answer-icon-wrap">
-                            <div class="icon icon--delete"><i class="fas fa-times"></i></div>
-                            <div class="icon icon--add"><i class="fas fa-plus"></i></div>
-                        </div>
+                        </div>@endforeach
                     </div>
+                </div>
+
+                <div class="test-sections__img-wrap">
+                    <div class="form-field">
+                        <label for="input-img" class="img-input">
+                            <h4>@lang('main.choose_a_picture')</h4>
+                        </label>
+                        <input style="display: none" type="file" class="input-img" id="input-img" name="image"
+                            multiple="multiple">
+                    </div>
+                    <div class="test-sections__img">
+                        <img src="" alt="">
+                    </div>
+                </div>
+
+                <div class="answers-list">
+                    <p>@lang('main.correct')</p>
+                    @foreach ($listLanguages as $lang)
+                        @php $postfix = ($lang=="ru") ? '' : "_$lang" @endphp
+                        <div class="tab  @if ($locale == $lang || ($locale == null && $lang=="ru")) tab--active @endif " data-tab="{{$lang}}">
+                        <div class="answers-list-inner" data-lang="{{$lang}}">
+                            <div class="answer">
+                                <div class="answer-inner">
+                                    <div class="check"><input type="checkbox" name="checkbox" value=""></div>
+                                    
+                                    <input type="text" name="value{{$postfix}}" value="" class="input-control text">
+                                
+                                </div>
+                                <div class="answer-icon-wrap">
+                                    <div class="icon icon--delete"><i class="fas fa-times"></i></div>
+                                    <div class="icon icon--add"><i class="fas fa-plus"></i></div>
+                                </div>
+                            </div>
 
 
+                        </div>
+                    </div>@endforeach
+                </div>
 
+                <div class="form-btns-wrap">
+                    <button class="btn btn-save-test-section" type="button"><i class="fas fa-save"></i> @lang('main.save_question')</button>
+                    <button class="btn btn-del-test-section" type="button">@lang('main.delete_question')</button>
+                    <button class="btn btn-add-test-section" type="button" data-test-section-id="">@lang('main.add_next_question')</button>
                 </div>
             </div>
-
-            <div class="form-btns-wrap">
-                <button class="btn btn-save-test-section" type="button"><i class="fas fa-save"></i> @lang('main.save_question')</button>
-                <button class="btn btn-del-test-section" type="button">@lang('main.delete_question')</button>
-                <button class="btn btn-add-test-section" type="button" data-test-section-id="">@lang('main.add_next_question')</button>
-            </div>
-        </div>
+            
     </div>
 </section>
 
 @endif
 
-
+</div>
 @endsection

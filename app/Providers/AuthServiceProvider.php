@@ -26,16 +26,21 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Gate::define('edit-course', function ($user, $course) {
-            return $user->id == $course->author_id;
+            $admin = $user->roles()->where("role_id", 2)->first() != null;
+            
+            return $user->id == $course->author_id || $admin;
         });
         Gate::define('edit-module', function ($user, $module) {
-            return $user->id ==$module->author_id;
+            $admin = $user->roles()->where("role_id", 2)->first() != null;
+            return $user->id ==$module->author_id || $admin;
         });
         Gate::define('edit-section', function ($user, $section) {
-            return $user->id == $section->course->author_id;
+            $admin = $user->roles()->where("role_id", 2)->first() != null;
+            return $user->id == $section->course->author_id || $admin;
         });
         Gate::define('edit-test', function ($user, $test) {
-            return $user->id == $test->author_id;
+            $admin = $user->roles()->where("role_id", 2)->first() != null;
+            return $user->id == $test->author_id || $admin;
         });
 
         Gate::define('show-course', function($user, $course){

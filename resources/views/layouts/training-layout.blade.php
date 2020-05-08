@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="{{($locale == null) ? "ru" : $locale}}">
 
 <head>
     <meta charset="UTF-8">

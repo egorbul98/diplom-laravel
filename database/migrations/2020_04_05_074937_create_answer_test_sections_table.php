@@ -17,6 +17,7 @@ class CreateAnswerTestSectionsTable extends Migration
             $table->id();
             $table->integer("test_section_id");
             $table->string("value");
+            $table->string("value_en")->nullable();
             $table->tinyInteger("correct")->default(0);
             $table->timestamps();
         });

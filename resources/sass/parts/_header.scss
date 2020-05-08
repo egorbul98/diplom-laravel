@@ -104,6 +104,9 @@
         background-color: #fff;
         display: none;
         z-index: 1;
+        @include media-max($XS) {
+          right: auto;
+        }
 
         &__item{
           margin-top: 10px;
@@ -179,6 +182,10 @@
 
   .form{
     margin-top: 10px;
+
+    @include media-max($S) {
+     margin-top: 0;
+    }
   }
 
   .form-field{

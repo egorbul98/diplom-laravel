@@ -27,7 +27,7 @@ class checkCourse
         }
 
         $modules_for_repeat = $user->modules_forget_for_course($course->id)->get(); //Получаем модули, для которых уже подошел срок повторения
-
+        
         //Забытые модули добавляем в таблицу с забытыми модулями (modules_repetition_user)
         if (count($modules_for_repeat) > 0) {
 

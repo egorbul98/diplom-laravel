@@ -4,8 +4,8 @@
 
 @section('content')
   <div class="lesson-content__header">
-    <h1 class="title">Сетевые технологии. Модуль</h1>
-    <p class="center">Для завершения данного модуля, пройдите тест</p>
+    <h1 class="title">{{$test->title}}</h1>
+    <p class="center">{{$test->description}}</p>
   </div>
 
   <form action="{{route("training.test-completed")}}" class="form" method="POST">

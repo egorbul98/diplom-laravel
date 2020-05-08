@@ -18,14 +18,16 @@ class AjaxTestController extends Controller
         $testSection = TestSection::find($data["test_section_id"]);
         $testSection->title = $data["title"];
         $testSection->update();
-
+     
         $testSection->answers()->delete();
         $answerTestSections = [];
-        // dd($data["answers"]);
+        
         foreach ($data["answers"] as $answer) {
+
             $answerTestSections[] = [
                 "test_section_id" => $testSection->id,
                 "value" => $answer["value"],
+                "value_en" => ($answer["value_en"] == "") ? null : $answer["value_en"],
                 "correct" => $answer["correct"] == "true" ? 1 : 0,
             ];
         }

@@ -16,6 +16,7 @@ class TestSectionsSeeder extends Seeder
             $test_sections[] = [
                 'test_id'=>1,
                 'title'=>"Вопрос №".$i,
+                'title_en'=>"Question №".$i,
             ];
         }
         

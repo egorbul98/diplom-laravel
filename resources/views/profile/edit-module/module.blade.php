@@ -24,12 +24,12 @@
                 <div><a href="{{route("profile.module.index")}}">@lang('main.back_to_the_list_of_modules')</a></div> <br>
                 
                 @endisset
-
+я
                 @include('parts.tabs-btns') 
                 <form class="form">
                     <div class="module-header" data-module-id="{{$module->id}}">
                         <div class="module-header-top">
-                            <h2 class="title module-header-item__title">{{Lang::choice('main.secitions_modules', 1, [], ($locale==null)? "ru" : $locale)}}
+                            <h2 class="title module-header-item__title">@lang('main.module') 
                                 @foreach ($listLanguages as $lang)
                                     @php $postfix = ($lang=="ru") ? '' : "_$lang" @endphp
                                     <div class="tab 
@@ -40,6 +40,10 @@
                                     </div>
                                 @endforeach
                             </h2>
+                            <div class="form-field input-check-repeat-module">
+                                <input type="checkbox" name="repeat" id="repeat" @if ($module->repeat == 1) checked @endif>
+                                <label for="repeat">@lang('main.repeat_module_after_learning_it')</label>
+                            </div>
                             @isset($section->id)
                                 <button type="button" class="open-modal-competences btn">@lang('main.list_of_competencies_in_this_section')</button> 
                             @endisset
@@ -82,11 +86,21 @@
                                         class="fas fa-save"></i></span> @lang('main.save_module_data')</button>
                             <button class="btn btn-attach-test" id="btn-attach-test" data-module-id="{{$module->id}}"
                                 type="button">@lang('main.add_test_to_module')</button>
-                            @isset($module->test)
+                           
+                            @php
+                                if($locale == null || $locale == "ru"){
+                                    $module_test = $module->test;
+                                }elseif($locale == "en"){
+                                    $module_test = $module->test_en;
+                                }
+                            @endphp
+                          
+                            @isset($module_test)
                             <p class="current-test">@lang('main.current_test'): <a
-                                    href="{{route("profile.test.edit",$module->test->id)}}">{{$module->test->__("title")}}</a>
+                                    href="{{route("profile.test.edit",$module_test->id)}}">{{$module_test->__("title")}}</a>
                             </p>
                             @endisset
+
 
                         </div>
                     </div>

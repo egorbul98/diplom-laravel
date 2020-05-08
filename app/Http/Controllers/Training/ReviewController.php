@@ -17,6 +17,13 @@ class ReviewController extends Controller
     $review->user_id = Auth::user()->id;
     $review->course_id = $course->id;
     $review->text = $data["text"];
+    if($data["stars"] == "" || $data["stars"]<1){
+      $data["stars"] = null;
+    }
+    if($data["stars"]>5){
+      $data["stars"] = 5;
+    }
+    $review->stars = $data["stars"];  
     $review->save();
     return back()->with(["success"=>"Отзыв успешно сохранен"]);
   }

@@ -24,12 +24,13 @@
         </ul>
       </div>
       <div class="footer-item">
-        <form class="form" action="" method="GET">
+        <form class="form" action="{{route("course.search")}}" method="GET">
+          @csrf
           <div class="form-field">
-            <input type="text" class="search" placeholder="@lang('main.catalog_search')">
-            <button class="btn btn-search" type="submit">@lang('main.search')</button>
+              <input type="text" class="search" name="text" placeholder="@lang('main.catalog_search')">
+              <button class="btn btn-search" type="submit">@lang('main.search')</button>
           </div>
-        </form>
+      </form>
      
         <div id="language" class="drop-down">
 

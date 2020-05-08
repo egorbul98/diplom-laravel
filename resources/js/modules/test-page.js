@@ -7,29 +7,46 @@ import {
     MsgErrorInputFill
 } from "./../fun"
 
+//checkbox all languages устанавливает галки на всех чекбоксах данного ответа в разных табах
+$(".answers-list-inner").on("input", "input[type='checkbox']", function () {
+    let answerId = this.closest(".answer").getAttribute("data-answer-id");
+    let arrAnswers = document.querySelectorAll(`.answer[data-answer-id='${answerId}']`);
+    
+    for (let i = 0; i < arrAnswers.length; i++) {
+        const answer = arrAnswers[i];
+        let checkbox = answer.querySelector("input[type='checkbox']");
+        checkbox.checked = this.checked;
+    }
+});
+
 //удаление ответа
 $(".answers-list-inner").on("click", ".icon--delete", function () {
     let lengthAnswers = $(this).closest(".answers-list-inner").find(".answer").length;
     if (lengthAnswers > 2) {
-        $(this).closest(".answer").remove();
+        let answerId = $(this).closest(".answer").attr("data-answer-id");
+        $(`.answer[data-answer-id='${answerId}']`).remove();//Удаляем на всех языках
     }
+
+    renderIdAnswers();
 });
+
 //Создание ответа
 $(".answers-list-inner").on("click", ".icon--add", function () {
-    let $wrap = $(this).closest(".answers-list-inner");
+    let $wrap = $(".answers-list-inner");
     let str = `
-  <div class="answer">
-  <div class="answer-inner">
-    <div class="check"><input type="checkbox" name="checkbox" value=""></div>
-    <input type="text" name="text" value="" class="input-control text">
-  </div>
-  <div class="answer-icon-wrap">
-    <div class="icon icon--delete"><i class="fas fa-times"></i></div>
-    <div class="icon icon--add"><i class="fas fa-plus"></i></div>
-  </div>
-</div>
-  `
+    <div class="answer">
+    <div class="answer-inner">
+        <div class="check"><input type="checkbox" name="checkbox" value=""></div>
+        <input type="text" name="text" value="" class="input-control text">
+    </div>
+    <div class="answer-icon-wrap">
+        <div class="icon icon--delete"><i class="fas fa-times"></i></div>
+        <div class="icon icon--add"><i class="fas fa-plus"></i></div>
+    </div>
+    </div>
+    `
     $wrap.append(str);
+    renderIdAnswers();
 });
 
 //Сохранение картинки
@@ -60,15 +77,16 @@ $(".edit-test #input-img").on("input", function () {
         }
     });
 });
-//Сохранение секции
+//Сохранение секции (Вопроса в целом. вместе с ответами сохраняем)
 $(".edit-test .btn-save-test-section").on("click", function () {
     let arrObjAnswers = getInputsAnswers();
     let title = $("#test-section-title").val();
-
+   
     if (!arrObjAnswers || title == '') {
-        console.log("Нужно заполнить все поля и выбрать правильный ответ");
+        notificationMessage("Нужно заполнить все поля и выбрать правильный ответ", "error");
         return false;
     }
+    
     let testSectionId = $(".btn-save-test-section").attr("data-test-section-id");
     let testId = $(this).closest(".test-sections*").attr("data-test-id");
     let url = "/profile/ajax-save-test-section";
@@ -127,6 +145,7 @@ $(".edit-test .btn-add-test-section").on("click", function () {
         },
     });
 });
+
 //Удалить вопрос
 $(".edit-test .btn-del-test-section").on("click", function () {
     if ($(".test-sections-links__item-link").length == 1) {
@@ -175,7 +194,6 @@ $(".edit-test .test-sections-links").on("click", ".test-sections-links__item-lin
         "test_section_id": testSectionId,
     };
 
-
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -197,42 +215,16 @@ $(".edit-test .test-sections-links").on("click", ".test-sections-links__item-lin
 
 //Открепление модуля
 $(".test-list").on("click", ".btn-detach-module-test", function () {
-  let $item = $(this).closest(".test-item-models__item");
-  let moduleId = $(this).attr("data-module-id");
-  let testId = $(this).closest(".test-item").attr("data-test-id");
-  console.log(testId, moduleId);
-  
-  let url = "/profile/ajax-detach-module-from-test";
-  let type = "POST";
-  let data = {
-      "test_id": testId,
-      "module_id": moduleId,
-  };
-  $.ajax({
-      headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      },
-      type: type,
-      url: url,
-      data: data,
-      success: function (response, status) {
-        $item.remove();
-      },
-      error: function (response, status) {
-          notificationMessage(response.msg, "error");
-      },
-  });
-});
+    let $item = $(this).closest(".test-item-models__item");
+    let moduleId = $(this).attr("data-module-id");
+    let testId = $(this).closest(".test-item").attr("data-test-id");
+    console.log(testId, moduleId);
 
-
-//Модалка модулей
-$(".test-list").on("click", ".btn-attach-test-module", function () {
-    let $wrap = $(".modal-modules .modal-list-modules");
-    let testId = $(this).attr("data-test-id");
-    let url = "/profile/ajax-get-modules-for-test";
-    let type = "GET";
+    let url = "/profile/ajax-detach-module-from-test";
+    let type = "POST";
     let data = {
-        "test_id": testId
+        "test_id": testId,
+        "module_id": moduleId,
     };
     $.ajax({
         headers: {
@@ -242,9 +234,38 @@ $(".test-list").on("click", ".btn-attach-test-module", function () {
         url: url,
         data: data,
         success: function (response, status) {
-          renderModalListModules(response.modules, testId, $wrap);
-          $wrap.attr("data-test-id", testId);
-          $(".modal-modules").removeClass("modal--hidden");
+            $item.remove();
+        },
+        error: function (response, status) {
+            notificationMessage(response.msg, "error");
+        },
+    });
+});
+
+
+//Модалка модулей
+$(".test-list").on("click", ".btn-attach-test-module", function () {
+    let lang = document.getElementsByTagName("html")[0].getAttribute("lang");
+
+    let $wrap = $(".modal-modules .modal-list-modules");
+    let testId = $(this).attr("data-test-id");
+    let url = "/profile/ajax-get-modules-for-test";
+    let type = "GET";
+    let data = {
+        "test_id": testId,
+        "lang": lang
+    };
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: type,
+        url: url,
+        data: data,
+        success: function (response, status) {
+            renderModalListModules(response.modules, testId, $wrap);
+            $wrap.attr("data-test-id", testId);
+            $(".modal-modules").removeClass("modal--hidden");
         },
         error: function (response, status) {
             notificationMessage(response.msg, "error");
@@ -254,30 +275,32 @@ $(".test-list").on("click", ".btn-attach-test-module", function () {
 
 //Добавление  модуля к тесту
 $(".edit-test .modal-list-modules").on('click', '.modal-list-modules-item', function () {
-  let moduleId = $(this).attr("data-module-id");
-  let testId = $(this).attr("data-test-id");
-  console.log(testId);
-  
-  let $wrap = $(`.test-item[data-test-id=${testId}]`).find(".test-item-models__inner");
-  let url = "/profile/ajax-add-modules-for-test";
-  let type = "POST";
-  let data = {
-      "test_id": testId,
-      "module_id": moduleId,
-  };
-  $(".modal-modules").addClass("modal--hidden");
-  $.ajax({
-      headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      },
-      type: type,
-      url: url,
-      data: data,
-      success: function (response, status) {
-        notificationMessage(response.msg);
-        console.log(response);
-        
-        let str = `
+    let lang = document.getElementsByTagName("html")[0].getAttribute("lang");
+    let moduleId = $(this).attr("data-module-id");
+    let testId = $(this).attr("data-test-id");
+    console.log(testId);
+
+    let $wrap = $(`.test-item[data-test-id=${testId}]`).find(".test-item-models__inner");
+    let url = "/profile/ajax-add-modules-for-test";
+    let type = "POST";
+    let data = {
+        "test_id": testId,
+        "module_id": moduleId,
+        "lang": lang,
+    };
+    $(".modal-modules").addClass("modal--hidden");
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: type,
+        url: url,
+        data: data,
+        success: function (response, status) {
+            notificationMessage(response.msg);
+            console.log(response);
+
+            let str = `
         <div class="test-item-models__item">
         <p class="test-item-models__text">
           <a href="/profile/module/${response.module.id}/step/">${response.module.title}</a>
@@ -285,46 +308,47 @@ $(".edit-test .modal-list-modules").on('click', '.modal-list-modules-item', func
         <button class="btn" type="button" data-module-id="${response.module.id}">Открепить</button>
       </div>
             `;
-                $wrap.append(str);
-      },
-      error: function (response, status) {
-          notificationMessage(response.msg, "error");
-      },
-  });
+            $wrap.append(str);
+        },
+        error: function (response, status) {
+            notificationMessage(response.msg, "error");
+        },
+    });
 });
 
 
 //Поиск модулей в модалке
 $(".edit-test .modal-modules .btn-search").on('click', function () {
 
-  let $wrap = $(".modal-modules .modal-list-modules");
-  let testId = $wrap.attr("data-test-id");
-  let text = $(this).siblings(".search").val();
+    let $wrap = $(".modal-modules .modal-list-modules");
+    let testId = $wrap.attr("data-test-id");
+    let text = $(this).siblings(".search").val();
 
-  let url = "/profile/ajax-search-modules-for-test";
-  let type = "GET";
-  let data = {
-      "test_id": testId,
-      "text": text
-  };
-  if (text != '') {
-      $.ajax({
-          headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          },
-          type: type,
-          url: url,
-          data: data,
-        success: function (response, status) {
-            renderModalListModules(response.modules, testId, $wrap);
-          },
-          error: function (response, status) {
-              notificationMessage(response.msg, "error");
-          },
-      });
-  }
+    let url = "/profile/ajax-search-modules-for-test";
+    let type = "GET";
+    let data = {
+        "test_id": testId,
+        "text": text
+    };
+    if (text != '') {
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type: type,
+            url: url,
+            data: data,
+            success: function (response, status) {
+                renderModalListModules(response.modules, testId, $wrap);
+            },
+            error: function (response, status) {
+                notificationMessage(response.msg, "error");
+            },
+        });
+    }
 
 });
+
 function renderModalListModules(arr, testId, $wrap) {
     let str = '';
     for (let i = 0; i < arr.length; i++) {
@@ -341,24 +365,34 @@ function renderModalListModules(arr, testId, $wrap) {
 }
 
 function getInputsAnswers() {
-    let $wrap = $(".edit-test .answers-list-inner");
-    let inputs = $wrap.find(".text");
+    let $wrap = $(".edit-test .answers-list-inner[data-lang='ru']");
+    let answers = $wrap.find(".answer");
     let arr = [];
     let isTrue = true;
-    let val, correct, sumCorrect = 0;
-    $(inputs).each(function (index, element) {
-        val = $(element).val();
+    let val, answerId, correct, sumCorrect = 0;
+    $(answers).each(function (index, answer) {
+        let obj = {};
+        let val = $(answer).find(".text").val();
+        answerId = answer.getAttribute("data-answer-id");
+
+        let arrayAnswersList = $(".answers-list-inner[data-lang!='ru']");
+        arrayAnswersList.each(function (index, answerList) {
+            let lang = answerList.getAttribute("data-lang");
+            let value = answerList.querySelector(`.answer[data-answer-id='${answerId}']`).querySelector(".text").value;
+          
+            obj["value_" + lang] = value;
+        });
+
         if (val == '') {
             isTrue = false;
         }
-        correct = $(element).siblings(".check").find("input").prop("checked");
+        correct = $(answer).find("input[type='checkbox']").prop("checked");
         if (correct) {
             sumCorrect++;
         }
-        arr.push({
-            "value": val,
-            "correct": correct
-        });
+        obj.value = val;
+        obj.correct = correct;
+        arr.push(obj);
     });
     if (!isTrue || sumCorrect == 0) {
         arr.length = 0;
@@ -369,30 +403,62 @@ function getInputsAnswers() {
 
 
 function renderQuerstion(arrTestSection, arrAnswers) {
+
     let $wrap = $(".edit-test .answers-list-inner");
+    $wrap.empty();
     let str = ``;
-    console.log(arrTestSection);
+
     $("#input-img").val("");
     $("#test-section-title").val(arrTestSection.title);
     $(".test-sections__img img").attr("src", arrTestSection.image);
     $(".btn-save-test-section").attr("data-test-section-id", arrTestSection.id);
     for (let i = 0; i < arrAnswers.length; i++) {
+        
+        
         const answer = arrAnswers[i];
-        str += `
-  <div class="answer">
-  <div class="answer-inner">
-  <div class="check"><input type="checkbox" name="checkbox" value=""`
-        if (answer.correct == 1) {
-            str += ` checked `;
-        }
-        str += `></div>
-      <input type="text" name="text" value="${answer.value}" class="input-control text">
-    </div>
-    <div class="answer-icon-wrap">
-      <div class="icon icon--delete"><i class="fas fa-times"></i></div>
-      <div class="icon icon--add"><i class="fas fa-plus"></i></div>
-    </div>
-  </div>`;
+       
+        $wrap.each(function (index, element) {
+            str = ``;
+            let lang = element.getAttribute("data-lang");
+            let value;
+            if (lang == "ru") {
+                value = answer.value;
+            } else{
+                value = (answer["value_"+lang] == null) ? `Answer ${i+1}` : answer["value_"+lang];
+            }
+
+            str += `
+            <div class="answer"'>
+            <div class="answer-inner">
+            <div class="check"><input type="checkbox" name="checkbox" value=""`
+            if (answer.correct == 1) {
+                str += ` checked `;
+            }
+            str += `></div>
+                <input type="text" name="text" value="${value}" class="input-control text">
+                </div>
+                <div class="answer-icon-wrap">
+                <div class="icon icon--delete"><i class="fas fa-times"></i></div>
+                <div class="icon icon--add"><i class="fas fa-plus"></i></div>
+                </div>
+            </div>`;
+
+            $(element).append(str);
+        });
+
     }
-    $wrap.html(str);
+    renderIdAnswers();
+}
+
+
+
+function renderIdAnswers() { 
+    let $tabs = $(".answers-list .answers-list-inner");
+    $tabs.each(function (index, element) {
+        let $answers = $(element).find(".answer");
+        $answers.each(function (index, element) {
+            element.setAttribute("data-answer-id", index);
+        });
+        
+    });
 }

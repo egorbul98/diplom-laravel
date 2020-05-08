@@ -36,6 +36,7 @@ return [
     'what_do_you_learn'=>'What do you learn',
     'new_first'=>'New first',
     'first_old'=>'First old',
+    'popular_first'=>'Popular first',
 
     'password'=>'Password',
     'username'=>'Username',
@@ -55,7 +56,7 @@ return [
     'assign_roles_to_user'=>'Assign Roles to User',
     'course_published'=>'Course published',
     'user'=>'User',
-    'a_list_of_users'=>'a list of users',
+    'a_list_of_users'=>'A list of users',
     'publishing_courses'=>'Publishing Courses',
     'name'=>'Name',
     'roles'=>'Roles',
@@ -84,6 +85,7 @@ return [
     'module_trees'=>'Module trees',
     'edit_course_sections'=>'Edit course sections',
     'secitions_modules'=>'module | module | modules',
+    'module'=>'Module',
     'short_description'=>'Short description',
     'about_the_course'=>'About the course',
     'select_a_category'=>'Select a category',
@@ -103,7 +105,7 @@ return [
     'your_created_modules'=>'Your created modules',
     'number_of_steps'=>'Number of steps',
     'date_of_change'=>'Date of change',
-    'come_back'=>'come back',
+    'come_back'=>'Come back',
     'back_to_the_list_of_modules'=>'Back to the list of modules',
     'list_of_competencies_in_this_section'=>'List of competencies in this section',
     'there_are_input_competencies'=>'There are input competencies',
@@ -148,6 +150,8 @@ return [
     'save_question'=>'Save Question',
     'delete_question'=>'Delete question',
     'add_next_question'=>'Add next question',
+    'new_question'=>'New question',
+    'repeat_module_after_learning_it'=>'Repeat module after learning it',
 
 
     'training'=>'Training',
@@ -180,7 +184,7 @@ return [
 
 
     'total_rating'=>'Overall rating',
-    'your_mark'=>'your mark',
+    'your_mark'=>'Your mark',
     'your_feedback'=>'your feedback',
     'course_reviews'=>'Course Reviews',
     'the_course_includes'=>'The course includes',

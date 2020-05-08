@@ -11,7 +11,7 @@ import {
 let competencesIn = [];
 let competencesOut = [];
 let competences = [];
-
+let lang = document.getElementsByTagName("html")[0].getAttribute("lang");
 //Проверка на наличие нажатых checkboxes
 $(document).ready(function () {
     $(".select-competences__right .checkboxes input").each(function (index, element) {
@@ -127,7 +127,9 @@ $(".module-header .btn-save-module").on("click", function () {
     let $parent = $(this).closest('.module-header');
     let moduleId = $parent.attr("data-module-id");
     let moduleTitle = $parent.find(".module-header-item__title-input").val();
-
+    let repeat = $parent.find("#repeat").prop("checked");
+    
+    
     let competencesOutArr = [];
     let competencesInArr = [];
 
@@ -155,6 +157,7 @@ $(".module-header .btn-save-module").on("click", function () {
         "competences_in": competencesInArr,
         "title": moduleTitle,
         "id": moduleId,
+        "repeat": repeat,
     };
 
     if (moduleTitle != '') {
@@ -186,7 +189,8 @@ $("#btn-attach-test").on("click", function () {
     let url = "/profile/ajax-get-tests-for-module";
     let type = "GET";
     let data = {
-        "module_id": moduleId
+        "module_id": moduleId,
+        "lang": lang,
     };
     $.ajax({
         headers: {
@@ -217,6 +221,7 @@ $(".edit-module .modal-list-modules").on('click', '.modal-list-modules-item', fu
     let data = {
         "test_id": testId,
         "module_id": moduleId,
+        "lang": lang,
     };
     $(".modal-modules").addClass("modal--hidden");
     $.ajax({
